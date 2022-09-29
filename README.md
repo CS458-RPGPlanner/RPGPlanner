@@ -6,4 +6,4 @@ npm install --save-dev electron
 # Start the electron application
 npm start
 
-# max
+# max and pierce
