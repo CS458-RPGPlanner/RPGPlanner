@@ -1,5 +1,8 @@
 // Modules to control application life and create native browser window
 const {app, BrowserWindow} = require('electron')
+const os = require('os');
+//JSON Storage for electron
+const storage = require('electron-json-storage');
 const path = require('path')
 
 function createWindow () {
