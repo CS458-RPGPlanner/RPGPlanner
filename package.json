@@ -4,18 +4,53 @@
   "description": "A minimal Electron application",
   "main": "js/main.js",
   "scripts": {
-    "start": "electron .",
+    "start": "electron-forge start",
     "test": "node js/test.js",
-    "drive": "chromedriver"
+    "drive": "chromedriver",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
   "author": "STOUT CS458",
   "license": "MIT",
   "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.67",
+    "@electron-forge/maker-deb": "^6.0.0-beta.67",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.67",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.67",
+    "@electron-forge/maker-zip": "^6.0.0-beta.67",
     "electron": "^21.0.1",
     "electron-chromedriver": "^21.0.0",
     "selenium-webdriver": "^4.5.0"
   },
   "dependencies": {
-    "electron-json-storage": "^4.5.0"
+    "electron-json-storage": "^4.5.0",
+    "electron-squirrel-startup": "^1.0.0"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "rpgplanner"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
   }
 }
