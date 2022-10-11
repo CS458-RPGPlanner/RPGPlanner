@@ -5,7 +5,8 @@
   "main": "js/main.js",
   "scripts": {
     "start": "electron .",
-    "test": "node js/test.js"
+    "test": "node js/test.js",
+    "drive": "chromedriver"
   },
   "author": "STOUT CS458",
   "license": "MIT",
