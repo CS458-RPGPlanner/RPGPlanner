@@ -1,166 +1,329 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap - Prebuilt Layout</title>
-    <!-- JSON javascript file -->
-    <script type = "text/javascript" src="js/JSON.js"></script> 
+<html>
+<head>
+	
+<style>
+    /*Boxes*/
+    .box{
+        border:ridge;
+	    border-color: black;
+    }
+.box.item1 { grid-area: DatedAssignment;
 
-    <!-- Bootstrap -->
-    <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+  height: 375px;
+	}
+.box.item2 { grid-area: UndatedAssignment;
+    height: 175px;
+	}
+.box.item3 { grid-area: DueToday; 
+        height: 200px;
+	}
+.box.item4 { grid-area: Viewport; 
+        height:350px;
+	}
+.box.item5 { grid-area: Tab; 
+    height:100px;
+	}
+	
+/*Grid*/
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'Tab Tab Tab Tab Tab Tab'
+    'DatedAssignment DatedAssignment  DueToday DueToday DueToday DueToday'
+    'DatedAssignment DatedAssignment  Viewport Viewport Viewport Viewport' 
+	 'DatedAssignment DatedAssignment  Viewport Viewport Viewport Viewport'
+	 'UndatedAssignment UndatedAssignment  Viewport Viewport Viewport Viewport';
+  gap: 20px; 
+  background-color: #365563;
+	margin: auto;
+	width: 1400px;
+	height: 750px;
+  padding: 20px;
+	border:ridge medium;
+	border-color: black;
+}
 
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-       <a class="navbar-brand" href="#">Navbar</a>
-       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-       <span class="navbar-toggler-icon"></span>
-       </button>
-       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-             <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-             </li>
-             <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-             </li>
-             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                   <a class="dropdown-item" href="#">Action</a>
-                   <a class="dropdown-item" href="#">Another action</a>
-                   <div class="dropdown-divider"></div>
-                   <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-             </li>
-             <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-             </li>
-          </ul>
-          <form class="form-inline my-2 my-lg-0">
-             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
-       </div>
-    </nav>
+.grid-container > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 20px;
+  font-size: 30px;
+}
+/* The sidebar menu */
+.sidebar {
+  height: 50%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0;
+  left: 0;
+  background-color: #111; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
+}
 
-    <div class="jumbotron jumbotron-fluid text-center">
-       <h1 class="display-4">Bootstrap with Dreamweaver</h1>
-       <p class="lead">Easily build your page using the Bootstrap components from the Insert panel.</p>
-       <hr class="my-4">
-       <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-       <p class="lead">
-          <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-       </p>
-    </div>
-    <div class="container">
-       <div class="row text-center">
-          <div class="col-lg-6 offset-lg-3">Click outside the blue container to select this <strong>row</strong>. Columns are always contained within a row. <strong>Rows are indicated by a dashed grey line and rounded corners</strong>. </div>
-       </div>
-       <br>
-       <hr>
-       <br>
-       <div class="row">
-          <div class="col-md-4">
-             <div class="card">
-                <img class="card-img-top" src="images/card-img.png" alt="Card image cap">
-                <div class="card-body">
-                   <h4 class="card-title">Card title</h4>
-                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                   <br><br>
-                   <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-             </div>
-          </div>
-          <div class="col-md-4">
-             <div class="card">
-                <div class="card-body">
-                   <h5 class="card-title">Card title</h5>
-                   <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                   <a href="#" class="card-link">Card link</a>
-                   <a href="#" class="card-link">Another link</a>
-                </div>
-             </div>
-             <br>
-             <br/>
-             <div class="card">
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+.createAssn {
+    display: inline-block;
+    padding: 15px 25px;
+    font-size: 80%;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+    position: relative;
+    top: 40%;  
+}
+
+.createAssn:hover {background-color: #3e8e41}
+
+.createAssn:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+    /*Accordion assignments/tasks*/ 
+#accordion {
+  margin: 2px;
+  overflow-y: scroll;
+  height: 300px;
+  max-height: 100%;
+  background-color: white;
+}
+	
+a:link {
+	text-decoration: none;
+	color: black;
+}
+	
+a:hover {
+  text-decoration: none;
+  color: black;
+}
+
+a:active {
+  text-decoration: none;
+  color: black;
+}
+	
+a:visited {
+  text-decoration: none;
+  color: black;
+}
+
+div .card-header:hover {
+     background-color: lightgrey;
+     transition: linear 0.5s;
+}
+    
+      /*Scroll bars*/
+  /* width */
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 5px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #686868; 
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #3B3B3B; 
+}
+</style>
+    <!--Accordian Links-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src=
+"https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+    </script>
+    <script src=
+"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
+    </script>
+    <script src=
+"https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+    </script>
+</head>
+<body style="background-color:darkcyan">
+<!-- Hamburger slider-->
+  <div class="parent">
+    <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="#">RPG View</a>
+    <a href="#">Settings</a>
+  </div>
+
+  <span style="font-size:35px;cursor:pointer" onclick="openNav()">&#9776;</span>
+
+  <script>
+  function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+  }
+
+  function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+  }
+  </script>
+      
+<div class="grid-container">
+  <div class="box item5">Tab</div>
+  <div class="box item1">
+    <div id="accordion">
+            <div class="card">
                 <div class="card-header">
-                   Featured
+                    <a class="card-link"
+                        data-toggle="collapse"
+                        href="#description1">
+                        Assignment 1
+                    </a>
                 </div>
-                <ul class="list-group list-group-flush">
-                   <li class="list-group-item">Cras justo odio</li>
-                   <li class="list-group-item">Dapibus ac facilisis in</li>
-                   <li class="list-group-item">Vestibulum at eros</li>
-                </ul>
-             </div>
-          </div>
-          <div class="col-md-4">
-             <div class="card">
-                <img class="card-img-top" src="images/card-img.png" alt="Card image cap">
-                <div class="card-body">
-                   <h5 class="card-title">Card title</h5>
-                   <p class="card-text">Some text to build on the card's content.</p>
+					<div id="description1"
+						class="collapse"
+						data-parent="#accordion">
+						<div class="card-header">
+							<a class="card-link"
+								href="#assignment1task1">
+								Task 1
+							</a>
+						</div>
+						<div class="card-header">
+							<a class="card-link"
+								href="#assignment1task2">
+								Task 2
+							</a>
+						</div>
+							<div class="card-header">
+							<a class="card-link"
+								href="#assignment1task3">
+								Task 3
+							</a>
+						</div>
                 </div>
-                <ul class="list-group list-group-flush">
-                   <li class="list-group-item">Cras justo odio</li>
-                   <li class="list-group-item">Dapibus ac facilisis in</li>
-                </ul>
-                <div class="card-body">
-                   <a href="#" class="card-link">Card link</a>
-                   <a href="#" class="card-link">Another link</a>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <a class="collapsed card-link"
+                        data-toggle="collapse"
+                        href="#description2">
+                        Assignment 2
+                    </a>
                 </div>
-             </div>
-          </div>
-       </div>
-       <br/>
-       <br/>
-       <div class="row">
-          <div class=" col-md-4"> Click here to select this<strong> column.</strong> Always place your content within a column. Columns are indicated by a dashed blue line. </div>
-          <div class="col-md-4 "> You can <strong>resize a column</strong> using the handle on the right. Drag it to increase or reduce the number of columns.</div>
-          <div class="col-md-4 "> You can <strong>offset a column</strong> using the handle on the left. Drag it to increase or reduce the offset. </div>
-       </div>
-       <br/>
-       <br/>
-       <div class="row">
-          <div class="col-md-6 text-center">
-             <div class="card">
-                <div class="card-body">
-                   <h3>Adding <strong>Buttons</strong></h3>
-                   <p>Quickly add buttons to your page by using the button component in the insert panel. </p>
-                   <button type="button" class="btn btn-info btn-md">Info Button</button>
-                   <button type="button" class="btn btn-success btn-md">Success Button</button>
+                <div id="description2"
+						class="collapse"
+						data-parent="#accordion">
+						<div class="card-header">
+							<a class="card-link"
+								href="#assignment2task1">
+								Task 1
+							</a>
+						</div>
+						<div class="card-header">
+							<a class="card-link"
+								href="#assignment2task2">
+								Task 2
+							</a>
+						</div>
+							<div class="card-header">
+							<a class="card-link"
+								href="#assignment2task3">
+								Task 3
+							</a>
+						</div>
                 </div>
-             </div>
-          </div>
-          <div class="text-center col-md-6">
-             <div class="card">
-                <div class="card-body">
-                   <h3>Adding <strong>Badges</strong></h3>
-                   <p>Using the insert panel, add badge to your page by using the badge component.</p>
-                   <span class="badge badge-info">Info Badge</span> <span class="badge badge-danger">Danger Badge</span>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <a class="collapsed card-link"
+                        data-toggle="collapse"
+                        href="#description3">
+                        Assignment 3
+                    </a>
                 </div>
-             </div>
-          </div>
-       </div>
-       <br>
-       <hr>
-       <div class="row">
-          <div class="text-center col-lg-6 offset-lg-3">
-             <h4>Footer </h4>
-             <p>Copyright &copy; 2021 &middot; All Rights Reserved &middot; <a href="#" >My Website</a></p>
-          </div>
-       </div>
+                <div id="description3"
+						class="collapse"
+						data-parent="#accordion">
+						<div class="card-header">
+							<a class="card-link"
+								href="#assignment3task1">
+								Task 1
+							</a>
+						</div>
+						<div class="card-header">
+							<a class="card-link"
+								href="#assignment3task2">
+								Task 2
+							</a>
+						</div>
+							<div class="card-header">
+							<a class="card-link"
+								href="#assignment3task3">
+								Task 3
+							</a>
+						</div>
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
-    <script src="js/jquery-3.4.1.min.js"></script>
-
-    <!-- Include all compiled plugins (below), or include individual files as needed --> 
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap-4.4.1.js"></script>
-  </body>
+  <div class="box item2">Undated Assignment</div>
+  <div class="box item3">Due Today</div>  
+  <div class="box item4">
+	<button class="createAssn" >Create Assignment</button>
+	</div>
+</div>
+</div>
+</body>
 </html>
+
