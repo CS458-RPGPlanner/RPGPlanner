@@ -93,13 +93,13 @@ function getAssignment(key, name) {
 }
 
 tempObj = [
-  {"assignment" : { name: "hello", date: "10/20/22" }},
-  {"assignment" : {name: 'hi', date: "11/20/22"}}
+  { name: "hello", date: "10/20/22" },
+  { name: 'hi', date: "11/20/22", tasks: {name: 'science project'}}
 ];
 
 booleanVal = createAssignment("Assignments", tempObj);
 //getObj = getAssignment("MOCK_DATA_ASSIGNMENTS", "Ciconia episcopus");
-getObj = getAssignment('Assignments', 'hello')
+getObj = getAssignment('Assignments', "hello")
 
 console.log(booleanVal);
 console.log(getObj);
