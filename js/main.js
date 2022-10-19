@@ -83,7 +83,6 @@ function createAssignment(key, object) {
 function getAssignment(key, name) {
   //grab the json information from the json with the key
   let tempObj = storage.getSync(key);
-  console.log(tempObj);
   for(let i = 0; i<tempObj.length; i++){
     if(tempObj[i].name == name){
       return tempObj[i];
@@ -92,14 +91,46 @@ function getAssignment(key, name) {
     return null;
 }
 
-tempObj = [
-  { name: "hello", date: "10/20/22" },
-  { name: 'hi', date: "11/20/22", tasks: {name: 'science project'}}
-];
+function createTask(key, object) {
+  //check to make sure task doesn't already exist returns null obj if doesn't exist
+    //if object doesn't exist in the json create a new task in JSON
+  storage.set(key, object, function (error) {
+    if (error) return 'false';
+  });
+  
+  return 'true';
+}
 
-booleanVal = createAssignment("Assignments", tempObj);
+// function to read tasks in JSON
+function getTask(key, name) {
+  //grab the json information from the json with the key
+  let taskObj = storage.getSync(key);
+  for(let i = 0; i < taskObj.length; i++){
+    if(taskObj[i].name == name){
+      return taskObj[i];
+    }}
+
+    return null;
+}
+
+taskObj = [
+  {name : "Aquire land", date: "2/3/1306"},
+]
+
+taskBooleanVal = createTask('Tasks', taskObj);
+getTaskObj = getTask('Tasks', "Aquire land")
+
+console.log(taskBooleanVal);
+console.log(getTaskObj);
+
+// tempObj = [
+//   { name: "hello", date: "10/20/22" },
+//   { name: 'hi', date: "11/20/22", tasks: {name: 'science project'}}
+// ];
+
+//booleanVal = createAssignment("Assignments", tempObj);
 //getObj = getAssignment("MOCK_DATA_ASSIGNMENTS", "Ciconia episcopus");
-getObj = getAssignment('Assignments', "hello")
+//getObj = getAssignment('Assignments', "hello");
 
-console.log(booleanVal);
-console.log(getObj);
+//console.log(booleanVal);
+//console.log(getObj);
