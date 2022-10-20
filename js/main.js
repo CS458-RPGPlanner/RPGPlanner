@@ -1,22 +1,23 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
-const os = require('os');
+const { app, BrowserWindow } = require("electron");
+const os = require("os");
 //JSON Storage for electron
-const storage = require('electron-json-storage');
-const path = require('path')
+const storage = require("electron-json-storage");
+const path = require("path");
+const { addConsoleHandler } = require("selenium-webdriver/lib/logging");
 
-function createWindow () {
+function createWindow() {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 1600,
     height: 1000,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
-    }
-  })
+      preload: path.join(__dirname, "preload.js"),
+    },
+  });
 
   // and load the index.html of the app.
-  mainWindow.loadFile('index.html')
+  mainWindow.loadFile("index.html");
 
   // Open the DevTools.
   //mainWindow.webContents.openDevTools()
@@ -26,21 +27,21 @@ function createWindow () {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
-  createWindow()
+  createWindow();
 
-  app.on('activate', function () {
+  app.on("activate", function () {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
-    if (BrowserWindow.getAllWindows().length === 0) createWindow()
-  })
-})
+    if (BrowserWindow.getAllWindows().length === 0) createWindow();
+  });
+});
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
-app.on('window-all-closed', function () {
-  if (process.platform !== 'darwin') app.quit()
-})
+app.on("window-all-closed", function () {
+  if (process.platform !== "darwin") app.quit();
+});
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
@@ -69,79 +70,170 @@ storage.set("test", { name: "hello", date: "10/20/22" }, function (error) {
  *
  */
 
-// Function to create an assignment in JSON
-// TODO: change get to has
-function createAssignment(key, object) {
-  //check to make sure assignment doesn't already exist returns null obj if doesn't exist
-    //if object doesn't exist in the json create a new assignment in JSON
-  storage.set(key, object, function (error) {
-    if (error) return 'false';
-  });
-  
-  return 'true';
+// Function to delete an assignment based on the id of the assignment
+function deleteAssignment(id) {
+  let key = "Assignments";
+  currentArray = storage.get;
 }
 
-// function to read assignments in JSON
-function getAssignment(key, name) {
+// Function to create an assignment in JSON and return true upon successful creation
+function createAssignment(assignment) {
+  //create the assignment in the json array of assignments
+  let key = "Assignments";
+
+  currentArray = storage.get(key, function (error, data) {
+    //check to see if there are more than 0 assignments
+    if (data.length > 0) {
+      //set the new assignment id to the last assignment id + 1
+      assignment.id = data[data.length - 1].id + 1;
+    } else {
+      //if no assignments are in the array set the new assignment id to 0
+      assignment.id = 0;
+    }
+    //push the new assignment to the temp data
+    data.push(assignment);
+
+    // TODO: double check that this can actually return a value outside
+    storage.set(key, data, function (error) {
+      if (error) throw error;
+    });
+  });
+  // TODO: double check to make sure it's not always returning true
+  return "true";
+}
+
+// function to get assignment using the id of the assignment
+function getAssignmentById(id) {
   //grab the json information from the json with the key
   let tempObj = storage.getSync(key);
-  for(let i = 0; i<tempObj.length; i++){
-    if(tempObj[i].name == name){
+  //loop over all the items in the json array
+  for (let i = 0; i < tempObj.length; i++) {
+    //check to see if item in array is what we are looking for
+    if (tempObj.id[i] == id) {
+      //return the json object in the json array with id = to input id
       return tempObj[i];
-    }}
+    }
+  }
 
-    return null;
+  //return null if not able to find the assignment
+  return null;
 }
 
-function getAllAssignments(){
-  let assignmentArr = storage.getSync()
+// edit assignment  by the id of the assignment
+function setAssignmentName(id, name) {
+  let key = "Assignments";
+  // grab the assignments to edit
+  let assignments = storage.getSync(key);
+  // iterate throughout the assignments array
+  for (let i = 0; i < assignments.length; i++) {
+    if (assignments[i].id == id) {
+      assignments[i].name = name;
+    }
+  }
+  //set the new data set with the new assignment name for the assignment by id
+  storage.set(key, assignments, function (error) {
+    if (error) throw error;
+  });
+}
+
+// edit assignment  by the id of the assignment
+function setAssignmentDescription(id, description) {
+  let key = "Assignments";
+  // grab the assignments to edit
+  let assignments = storage.getSync(key);
+  // iterate throughout the assignments array
+  for (let i = 0; i < assignments.length; i++) {
+    if (assignments[i].id == id) {
+      assignments[i].description = description;
+    }
+  }
+  //set the new data set with the new assignment name for the assignment by id
+  storage.set(key, assignments, function (error) {
+    if (error) throw error;
+  });
+}
+
+// edit assignment points by the id of the assignment
+function setAssignmentPoints(id, points) {
+  let key = "Assignments";
+  // grab the assignments to edit
+  let assignments = storage.getSync(key);
+  // iterate throughout the assignments array
+  for (let i = 0; i < assignments.length; i++) {
+    if (assignments[i].id == id) {
+      assignments[i].points = points;
+    }
+  }
+  //set the new data set with the new assignment name for the assignment by id
+  storage.set(key, assignments, function (error) {
+    if (error) throw error;
+  });
+}
+
+// edit assignment by the id of the assignment
+function setAssignmentDate(id, date) {
+  let key = "Assignments";
+  // grab the assignments to edit
+  let assignments = storage.getSync(key);
+  // iterate throughout the assignments array
+  for (let i = 0; i < assignments.length; i++) {
+    if (assignments[i].id == id) {
+      assignments[i].date = date;
+    }
+  }
+  //set the new data set with the new assignment name for the assignment by id
+  storage.set(key, assignments, function (error) {
+    if (error) throw error;
+  });
+}
+
+//  gets all the assignments that exist in the Assignments json
+function getAllAssignments() {
+  return (assignmentArr = storage.getSync("Assignments"));
 }
 
 function createTask(key, object) {
   //check to make sure task doesn't already exist returns null obj if doesn't exist
-    //if object doesn't exist in the json create a new task in JSON
+  //if object doesn't exist in the json create a new task in JSON
   storage.set(key, object, function (error) {
-    if (error) return 'false';
+    if (error) return "false";
   });
-  
-  return 'true';
+
+  return "true";
 }
 
 // function to read tasks in JSON
 function getTask(key, name) {
   //grab the json information from the json with the key
   let taskObj = storage.getSync(key);
-  for(let i = 0; i < taskObj.length; i++){
-    if(taskObj[i].name == name){
+  for (let i = 0; i < taskObj.length; i++) {
+    if (taskObj[i].name == name) {
       return taskObj[i];
-    }}
+    }
+  }
 
-    return null;
+  return null;
 }
 
-taskObj = [
-  {name : "Aquire land", date: "2/3/1306"},
-]
+taskObj = [{ name: "Aquire land", date: "2/3/1306" }];
 
-taskBooleanVal = createTask('Tasks', taskObj);
-getTaskObj = getTask('Tasks', "Aquire land")
+//Task Testing
+//taskBooleanVal = createTask('Tasks', taskObj);
+//getTaskObj = getTask('Tasks', "Aquire land")
 
-console.log(taskBooleanVal);
-console.log(getTaskObj);
+//console.log(taskBooleanVal);
+//console.log(getTaskObj);
 
-// tempObj = [
-//   { name: "hello", date: "10/20/22" },
-//   { name: 'hi', date: "11/20/22", tasks: {name: 'science project'}}
-// ];
-secondObject = {name: 'butt', date: '10/1/10'};
 
-tempObj.push(secondObject);
+//Assignment testing
+tempObj = { name: "hi", date: "11/20/22" };
+tempObj2 = { name: "hello", date: "11/2/22" };
+createAssignment(tempObj);
+createAssignment(tempObj2);
 
-console.log(tempObj);
-
-//booleanVal = createAssignment("Assignments", tempObj);
 //getObj = getAssignment("MOCK_DATA_ASSIGNMENTS", "Ciconia episcopus");
-//getObj = getAssignment('Assignments', "hello");
+console.log(getAllAssignments());
 
-//console.log(booleanVal);
-//console.log(getObj);
+setAssignmentName(1, "jeebus");
+
+console.log(getAllAssignments());
