@@ -5,12 +5,15 @@
     }
 .box.item1 { grid-area: DatedAssignment;
   height: 375px;
+  /*width: 600px;*/
 	}
 .box.item2 { grid-area: UndatedAssignment;
     height: 175px;
+    /*width: 600px;*/
 	}
 .box.item3 { grid-area: DueToday; 
         height: 200px;
+        /*width:700px;*/
 	}
 .box.item4 { grid-area: Viewport; 
         height:350px;
@@ -160,3 +163,9 @@ div .card-header:hover {
 		margin-top: 8%;
 		background-color:darkcyan;
 	}
+  .defaultBtn{
+    width: 100%;
+  }
+  .defaultBtn.task{
+    width: 80%;
+  }
