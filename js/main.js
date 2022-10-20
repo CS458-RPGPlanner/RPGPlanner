@@ -19,7 +19,7 @@ function createWindow () {
   mainWindow.loadFile('index.html')
 
   // Open the DevTools.
-   mainWindow.webContents.openDevTools()
+  //mainWindow.webContents.openDevTools()
 }
 
 // This method will be called when Electron has finished
@@ -91,6 +91,10 @@ function getAssignment(key, name) {
     return null;
 }
 
+function getAllAssignments(){
+  let assignmentArr = storage.getSync()
+}
+
 function createTask(key, object) {
   //check to make sure task doesn't already exist returns null obj if doesn't exist
     //if object doesn't exist in the json create a new task in JSON
@@ -127,6 +131,11 @@ console.log(getTaskObj);
 //   { name: "hello", date: "10/20/22" },
 //   { name: 'hi', date: "11/20/22", tasks: {name: 'science project'}}
 // ];
+secondObject = {name: 'butt', date: '10/1/10'};
+
+tempObj.push(secondObject);
+
+console.log(tempObj);
 
 //booleanVal = createAssignment("Assignments", tempObj);
 //getObj = getAssignment("MOCK_DATA_ASSIGNMENTS", "Ciconia episcopus");
