@@ -5,18 +5,22 @@
     }
 .box.item1 { grid-area: DatedAssignment;
   height: 375px;
+  width: 600px;
   /*width: 600px;*/
 	}
 .box.item2 { grid-area: UndatedAssignment;
     height: 175px;
+    width: 600px;
     /*width: 600px;*/
 	}
 .box.item3 { grid-area: DueToday; 
         height: 200px;
+        width: 735px;
         /*width:700px;*/
 	}
 .box.item4 { grid-area: Viewport; 
         height:350px;
+        width:735px;
 	}
 .box.item5 { grid-area: Tab; 
     height:100px;
@@ -48,10 +52,10 @@
 }
 #mySidenav a {
   position: absolute; /* Position them relative to the browser window */
-  left: -80px; /* Position them outside of the screen */
+  left: -120px; /* Position them outside of the screen */
   transition: 0.3s; /* Add transition on hover */
   padding: 15px; /* 15px padding */
-  width: 100px; /* Set a specific width */
+  width: 170px; /* Set a specific width */
   text-decoration: none; /* Remove underline */
   font-size: 20px; /* Increase font size */
   color: white; /* White text color */
@@ -65,15 +69,15 @@
 /* The about link: 20px from the top with a green background */
 #RPG {
   top: 155px;
-	height: 60px;
+	height: 80px;
   background-color:#365563;
 	border: ridge 2px;
 	border-color: darkslateblue;
 	}
 
 #profile {
-  top: 235px;
-	height: 60px;
+  top: 255px;
+	height: 80px;
   background-color: #365563;
 	
 	border: ridge 2px;
