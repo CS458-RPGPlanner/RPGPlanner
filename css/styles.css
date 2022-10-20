@@ -1,8 +1,66 @@
    /*Boxes*/
-   .box {
-     border: ridge;
-     border-color: black;
-   }
+    .box{
+        border:ridge;
+	    border-color: black;
+    }
+.box.item1 { grid-area: DatedAssignment;
+  height: 375px;
+  width: 600px;
+  /*width: 600px;*/
+	}
+.box.item2 { grid-area: UndatedAssignment;
+    height: 175px;
+    width: 600px;
+    /*width: 600px;*/
+	}
+.box.item3 { grid-area: DueToday; 
+        height: 200px;
+        width: 735px;
+        /*width:700px;*/
+	}
+.box.item4 { grid-area: Viewport; 
+        height:350px;
+        width:735px;
+	}
+.box.item5 { grid-area: Tab; 
+    height:100px;
+	}
+	
+/*Grid*/
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'Tab Tab Tab Tab Tab Tab'
+    'DatedAssignment DatedAssignment  DueToday DueToday DueToday DueToday'
+    'DatedAssignment DatedAssignment  Viewport Viewport Viewport Viewport' 
+	 'DatedAssignment DatedAssignment  Viewport Viewport Viewport Viewport'
+	 'UndatedAssignment UndatedAssignment  Viewport Viewport Viewport Viewport';
+  gap: 20px; 
+  background-color: #365563;
+	margin: auto;
+	width: 1400px;
+	height: 750px;
+  padding: 20px;
+	border:ridge medium;
+	border-color: black;
+}
+.grid-container > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 20px;
+  font-size: 30px;
+}
+#mySidenav a {
+  position: absolute; /* Position them relative to the browser window */
+  left: -120px; /* Position them outside of the screen */
+  transition: 0.3s; /* Add transition on hover */
+  padding: 15px; /* 15px padding */
+  width: 170px; /* Set a specific width */
+  text-decoration: none; /* Remove underline */
+  font-size: 20px; /* Increase font size */
+  color: white; /* White text color */
+  border-radius: 0 5px 5px 0; /* Rounded corners on the top right and bottom right side */
+}
 
    .box.item1 {
      grid-area: DatedAssignment;
@@ -165,6 +223,79 @@
    }
 
    div .card-header:hover {
+/* The about link: 20px from the top with a green background */
+#RPG {
+  top: 155px;
+	height: 80px;
+  background-color:#365563;
+	border: ridge 2px;
+	border-color: darkslateblue;
+	}
+
+#profile {
+  top: 255px;
+	height: 80px;
+  background-color: #365563;
+	
+	border: ridge 2px;
+	border-color: darkslateblue;/* Blue */
+}
+	
+	.body{
+		margin-top: 5%;
+		background-color:darkcyan;
+	}
+  
+.createAssn {
+    display: inline-block;
+    padding: 15px 25px;
+    font-size: 80%;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+    position: relative;
+    top: 40%;  
+}
+.createAssn:hover {background-color: #3e8e41}
+.createAssn:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+    /*Accordion assignments/tasks*/ 
+#accordion {
+  margin: 2px;
+  overflow-y: scroll;
+  height: 300px;
+  max-height: 100%;
+  background-color: white;
+}
+	
+a:link {
+	text-decoration: none;
+	color: black;
+}
+	
+a:hover {
+  text-decoration: none;
+  color: black;
+}
+a:active {
+  text-decoration: none;
+  color: black;
+}
+	
+a:visited {
+  text-decoration: none;
+  color: black;
+}
+div .card-header:hover {
      background-color: lightgrey;
      transition: linear 0.5s;
    }
