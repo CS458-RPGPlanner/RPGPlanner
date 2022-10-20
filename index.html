@@ -1,88 +1,92 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 
-    <!--Accordian Links-->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src=
-"https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
-    </script>
-    <script src=
-"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
-    </script>
-    <script src=
-"https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
-    </script>
-    <!--Connection to CSS styleSheet-->
-    <link rel="stylesheet" href="css\styles.css">
+	<!--Accordian Links-->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
+	</script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+	</script>
+	<!--Connection to CSS styleSheet-->
+	<link rel="stylesheet" href="css\styles.css">
 </head>
+
 <body class="body">
 
-  <div class="parent">
-    <!--Nav Tabs-->
-    <div id="mySidenav" class="sidenav">
-      <a href="#" id="RPG">RPG</a>
-      <a href="#" id="profile">Profile</a>
-      
-    </div>
-  
-      
-<div class="grid-container">
-  <div class="box item5">Tab</div>
-  <div class="box item1">
-    <div id="accordion">
-            <div class="card">
-                <div class="card-header">
-                    <button onclick="toggleButton();" class="defaultBtn"
-                        data-toggle="collapse"
-                        href="#description1">
-                        Assignment 1
-					</button>
-                </div>
-					<div id="description1"
-						class="collapse"
-						data-parent="#accordion">
+	<div class="parent">
+		<!--Nav Tabs-->
+		<div id="mySidenav" class="sidenav">
+			<a href="#" id="RPG">RPG</a>
+			<a href="#" id="profile">Profile</a>
+
+		</div>
+
+
+		<div class="grid-container">
+			<div class="box item5">Tab</div>
+			<div class="box item1">
+				<div id="accordion">
+					<div class="card">
 						<div class="card-header">
-							<button onclick="toggleButton();" class="defaultBtn task">
-								Task 1
+							<button onclick="toggleButton();" class="defaultBtn" data-toggle="collapse"
+								href="#description1">
+								<p class="assignment-name">Asignment 1</p>
+								<div class="due-tasks">
+									Due Date: Oct 31No space&emsp;Tasks: 0/3
+								</div>
 							</button>
+							<div class="check">
+								<p class="assignment-points">10 points</p>
+								<input type="checkbox" class="checkBox">
+							</div>
 						</div>
-						<div class="card-header">
-							<button onclick="toggleButton();" class="defaultBtn task">
-								Task 2
-						</button>
-						</div>
+						<div id="description1" class="collapse" data-parent="#accordion">
 							<div class="card-header">
-							<button onclick="toggleButton();" class="defaultBtn task">
-								Task 3
-							</button>
+								<button onclick="toggleButton();" class="defaultBtn task">
+									Task 1
+								</button>
+							</div>
+							<div class="card-header">
+								<button onclick="toggleButton();" class="defaultBtn task">
+									Task 2
+								</button>
+							</div>
+							<div class="card-header">
+								<button onclick="toggleButton();" class="defaultBtn task">
+									Task 3
+								</button>
+							</div>
 						</div>
-                </div>
-            </div>
-        </div>
-    </div>
-  <div class="box item2">Undated Assignment</div>
-  <div class="box item3">Due Today</div>  
-  <div class="box item4">
-	<button class="createAssn" id="createAssnBtn">Create Assignment</button>
+					</div>
+				</div>
+			</div>
+			<div class="box item2">Undated Assignment</div>
+			<div class="box item3">Due Today</div>
+			<div class="box item4">
+				<button class="createAssn" id="createAssnBtn">Create Assignment</button>
+			</div>
+		</div>
 	</div>
-</div>
-</div>
-<script>
-	function toggleButton(){
-		/*Add a get element for the back button or a double click from assn/task*/
-		console.log("Toggle Enter");
-	  	var x = document.getElementById("createAssnBtn");
-		var xhidden = x.getAttribute("hidden");
-	  if (xhidden) {
-		x.removeAttribute("hidden");
-		console.log("Visible");
-	  } else {
-		x.setAttribute("hidden", "hidden");
-		console.log("hidden");
-	  }
-	}
+	<script>
+		function toggleButton() {
+			/*Add a get element for the back button or a double click from assn/task*/
+			console.log("Toggle Enter");
+			var x = document.getElementById("createAssnBtn");
+			var xhidden = x.getAttribute("hidden");
+			if (xhidden) {
+				x.removeAttribute("hidden");
+				console.log("Visible");
+			} else {
+				x.setAttribute("hidden", "hidden");
+				console.log("hidden");
+			}
+		}
 	</script>
 </body>
-</html>
 
+</html>
