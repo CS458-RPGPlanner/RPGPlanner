@@ -53,13 +53,15 @@ storage.set("test", { name: "hello", date: "10/20/22" }, function (error) {
 */
 /**
  * JSON SCHEMA - ASSIGNMENTS
+ * id: int
  * name: STRING
  * date: STRING
  * points: INT
- * tasks: STRING ARRAY
  * description: STRING
  *
  * JSON SCHEMA - TASKS
+ * assnId: int
+ * id: int
  * name: STRING
  * date: STRING
  * points: INT
