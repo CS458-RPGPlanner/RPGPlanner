@@ -43,15 +43,6 @@ app.on("window-all-closed", function () {
   if (process.platform !== "darwin") app.quit();
 });
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
-
-// test set json
-/*
-storage.set("test", { name: "hello", date: "10/20/22" }, function (error) {
-  if (error) throw error;
-});
-*/
 /**
  * JSON SCHEMA - ASSIGNMENTS
  * id: int
@@ -119,7 +110,7 @@ function getAssignmentById(id) {
   return null;
 }
 
-// edit assignment  by the id of the assignment
+// edit assignment name by the id of the assignment
 function setAssignmentName(id, name) {
   let key = "Assignments";
   // grab the assignments to edit
@@ -136,7 +127,7 @@ function setAssignmentName(id, name) {
   });
 }
 
-// edit assignment  by the id of the assignment
+// edit assignment description by the id of the assignment
 function setAssignmentDescription(id, description) {
   let key = "Assignments";
   // grab the assignments to edit
@@ -147,7 +138,7 @@ function setAssignmentDescription(id, description) {
       assignments[i].description = description;
     }
   }
-  //set the new data set with the new assignment name for the assignment by id
+  // set the new data set with the new assignment description for the assignment by id
   storage.set(key, assignments, function (error) {
     if (error) throw error;
   });
@@ -164,13 +155,13 @@ function setAssignmentPoints(id, points) {
       assignments[i].points = points;
     }
   }
-  //set the new data set with the new assignment name for the assignment by id
+  //set the new data set with the new assignment points for the assignment by id
   storage.set(key, assignments, function (error) {
     if (error) throw error;
   });
 }
 
-// edit assignment by the id of the assignment
+// edit assignment date by the id of the assignment
 function setAssignmentDate(id, date) {
   let key = "Assignments";
   // grab the assignments to edit
@@ -181,7 +172,7 @@ function setAssignmentDate(id, date) {
       assignments[i].date = date;
     }
   }
-  //set the new data set with the new assignment name for the assignment by id
+  //set the new data set with the new assignment date for the assignment by id
   storage.set(key, assignments, function (error) {
     if (error) throw error;
   });
@@ -223,7 +214,6 @@ taskObj = [{ name: "Aquire land", date: "2/3/1306" }];
 
 //console.log(taskBooleanVal);
 //console.log(getTaskObj);
-
 
 //Assignment testing
 tempObj = { name: "hi", date: "11/20/22" };
