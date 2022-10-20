@@ -65,6 +65,7 @@
 				<!--Details are shown here-->
 				<div id="details" hidden>
 					<div>Title
+						<button onclick="closeDetail();">Close</button>
 						<div>Due Date: Sept 30th Tasks: 0/0
 							<p>Cool Description</p>
 							<div>Task list will go here</div>
@@ -84,10 +85,7 @@
 			var dDiv = document.getElementById("details");
 			var dDivHidden = dDiv.getAttribute("hidden");
 			/*Create button will hide/be visible so details can be shown*/
-			if (cbtnHidden) {
-				cbtn.removeAttribute("hidden");
-				dDiv.setAttribute("hidden", "hidden");
-			} else {
+			if (!cbtnHidden) {
 				dDiv.removeAttribute("hidden");
 				cbtn.setAttribute("hidden", "hidden");
 				/*Simulating the button being pressed and displaying details
@@ -97,6 +95,19 @@
 					console.log("assnBtn Clicked");
 					//Display details of selected assn/task
 				}
+			}
+		}
+		function closeDetail() {
+			/*Get CreateBtn info*/
+			var cbtn = document.getElementById("createAssnBtn");
+			var cbtnHidden = cbtn.getAttribute("hidden");
+			/*TEMP get details div info*/
+			var dDiv = document.getElementById("details");
+			var dDivHidden = dDiv.getAttribute("hidden");
+
+			if (cbtnHidden) {
+				cbtn.removeAttribute("hidden");
+				dDiv.setAttribute("hidden", "hidden");
 			}
 		}
 	</script>
