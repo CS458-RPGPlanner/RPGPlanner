@@ -77,14 +77,12 @@ function createAssignment(assignment) {
     if (data.length > 0) {
       //set the new assignment id to the last assignment id + 1
       assignment.id = data[data.length - 1].id + 1;
-      data.push(assignment);
     } else {
       //if no assignments are in the array set the new assignment id to 0
       assignment.id = 0;
-      //since there are no assignments we need to initialize the json array otherwise it will crash as .push will not execute correctly
-      data = [assignment];
     }
     //push the new assignment to the temp data
+    data.push(assignment);
 
     // TODO: double check that this can actually return a value outside
     storage.set(key, data, function (error) {
