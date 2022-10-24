@@ -18,96 +18,74 @@
 
 <body class="body">
 
-	<div class="parent">
-		<!--Nav Tabs-->
-		<div id="mySidenav" class="sidenav">
-			<a href="#" id="RPG">RPG</a>
-			<a href="#" id="profile">Profile</a>
+	<!--Nav Tabs-->
+	<div id="mySidenav" class="sidenav">
+		<a href="#" id="RPG">RPG</a>
+		<a href="#" id="profile">PROFILE</a>
+
+	</div>
+
+
+	<div class="grid-container">
+		<div class="box item5">Tab</div>
+		<div class="box item1">
+			<div id="accordion">
+				<div class="card">
+					<div class="card-header">
+						<button onclick="toggleButton();" class="defaultBtn" data-toggle="collapse"
+							href="#description1">
+							<p class="assignment-name">Asignment 1</p>
+							<div class="due-tasks">
+								Due Date: Oct 31&emsp;Tasks: 0/3
+							</div>
+						</button>
+						<div class="check">
+							<p class="assignment-points">10 points</p>
+							<input type="checkbox" class="checkBox">
+						</div>
+					</div>
+					<div id="description1" class="collapse" data-parent="#accordion">
+						<div class="card-header">
+							<button onclick="toggleButton();" class="defaultBtn task">
+								Task 1
+							</button>
+						</div>
+						<div class="card-header">
+							<button onclick="toggleButton();" class="defaultBtn task">
+								Task 2
+							</button>
+						</div>
+						<div class="card-header">
+							<button onclick="toggleButton();" class="defaultBtn task">
+								Task 3
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
 
 		</div>
-
-
-		<div class="grid-container">
-			<div class="box item5">Tab</div>
-			<div class="box item1">
-				<div id="accordion">
-					<div class="card">
-						<div class="parent">
-							<!--Nav Tabs-->
-							<div id="mySidenav" class="sidenav">
-								<a href="#" id="RPG">RPG</a>
-								<a href="#" id="profile">PROFILE</a>
-
-							</div>
-
-
-							<div class="grid-container">
-								<div class="box item5">Tab</div>
-								<div class="box item1">
-									<div id="accordion">
-										<div class="card">
-											<div class="card-header">
-												<button onclick="toggleButton();" class="defaultBtn"
-													data-toggle="collapse" href="#description1">
-													Assignment 1
-												</button>
-											</div>
-											<div id="description1" class="collapse" data-parent="#accordion">
-												<div class="card-header">
-													<button onclick="toggleButton();" class="defaultBtn"
-														data-toggle="collapse" href="#description1">
-														<p class="assignment-name">Asignment 1</p>
-														<div class="due-tasks">
-															Due Date: Oct 31No space&emsp;Tasks: 0/3
-														</div>
-													</button>
-													<div class="check">
-														<p class="assignment-points">10 points</p>
-														<input type="checkbox" class="checkBox">
-													</div>
-												</div>
-												<div id="description1" class="collapse" data-parent="#accordion">
-													<div class="card-header">
-														<button onclick="toggleButton();" class="defaultBtn task">
-															Task 1
-														</button>
-													</div>
-													<div class="card-header">
-														<button onclick="toggleButton();" class="defaultBtn task">
-															Task 2
-														</button>
-													</div>
-													<div class="card-header">
-														<button onclick="toggleButton();" class="defaultBtn task">
-															Task 3
-														</button>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="box item2">Undated Assignment</div>
-									<div class="box item3">Due Today</div>
-									<div class="box item4">
-										<button class="createAssn" id="createAssnBtn">Create Assignment</button>
-									</div>
-								</div>
-							</div>
-							<script>
-								function toggleButton() {
-									/*Add a get element for the back button or a double click from assn/task*/
-									console.log("Toggle Enter");
-									var x = document.getElementById("createAssnBtn");
-									var xhidden = x.getAttribute("hidden");
-									if (xhidden) {
-										x.removeAttribute("hidden");
-										console.log("Visible");
-									} else {
-										x.setAttribute("hidden", "hidden");
-										console.log("hidden");
-									}
-								}
-							</script>
+		<div class="box item2">Undated Assignment</div>
+		<div class="box item3">Due Today</div>
+		<div class="box item4">
+			<button class="createAssn" id="createAssnBtn">Create Assignment</button>
+		</div>
+	</div>
+	<script>
+		function toggleButton() {
+			/*Add a get element for the back button or a double click from assn/task*/
+			console.log("Toggle Enter");
+			var x = document.getElementById("createAssnBtn");
+			var xhidden = x.getAttribute("hidden");
+			if (xhidden) {
+				x.removeAttribute("hidden");
+				console.log("Visible");
+			} else {
+				x.setAttribute("hidden", "hidden");
+				console.log("hidden");
+			}
+		}
+	</script>
 </body>
 
 </html>
