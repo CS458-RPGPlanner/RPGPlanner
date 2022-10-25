@@ -31,9 +31,9 @@
 		<div class="box item1">
 			<div id="accordion">
 				<div class="card">
-					<div class="card-header">
-						<button onclick="toggleButton();" class="defaultBtn" data-toggle="collapse"
-							href="#description1">
+					<div id="assnHeader-001" class="card-header">
+						<button onclick="toggleButton(this.id);" id="assnBtn_001" class="defaultBtn"
+							data-toggle="collapse" href="#description1">
 							<p class="assignment-name">Asignment 1</p>
 							<div class="due-tasks">
 								Due Date: Oct 31&emsp;Tasks: 0/3
@@ -79,7 +79,7 @@
 		</div>
 	</div>
 	<script>
-		function toggleButton() {
+		function toggleButton(clickedID) {
 			/*Add a get element for the back button or a double click from assn/task*/
 			console.log("Toggle Enter");
 			var x = document.getElementById("createAssnBtn");
@@ -91,11 +91,18 @@
 				x.setAttribute("hidden", "hidden");
 				console.log("hidden");
 			}
-			darkenCard();
+			darkenCard(clickedID);
 		}
-		function darkenCard() {
-			console.log("enter darken");
+		//Makes card-header of clicked assn/task look selected
+		function darkenCard(clickedID) {
 			var cardBG = "lightgrey";
+			var card = document.getElementById(clickedID).parentNode;
+			if (card.style.backgroundColor == cardBG) {
+				card.style.backgroundColor = "white";
+			}
+			else {
+				card.style.backgroundColor = cardBG;
+			}
 		}
 	</script>
 
