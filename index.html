@@ -45,11 +45,23 @@
 						</div>
 					</div>
 					<div id="description1" class="collapse" data-parent="#accordion">
-						<div class="card-header">
-							<button onclick="toggleButton();" class="defaultBtn task">
+						<div id="taskHeader-001" class="card-header">
+							<button onclick="toggleButton(this.id);" id="taskBtn_001" class="defaultBtn task">
 								<p class="assignment-name">Task 1</p>
 								<div class="due-tasks">
 									Due Date: Oct 31&emsp;
+								</div>
+							</button>
+							<div class="check">
+								<p class="assignment-points">10 points</p>
+								<!-- <input type="checkbox" class="checkBox"> -->
+							</div>
+						</div>
+						<div class="card-header">
+							<button onclick="toggleButton(this.id);" id="taskBtn_002" class="defaultBtn task">
+								<p class="assignment-name">Task 2</p>
+								<div class="due-tasks">
+									Due Date: Nov 1&emsp;
 								</div>
 							</button>
 							<div class="check">
@@ -58,14 +70,16 @@
 							</div>
 						</div>
 						<div class="card-header">
-							<button onclick="toggleButton();" class="defaultBtn task">
-								Task 2
+							<button onclick="toggleButton(this.id);" id="taskBtn_003" class="defaultBtn task">
+								<p class="assignment-name">Task 3</p>
+								<div class="due-tasks">
+									Due Date: Nov 3&emsp;
+								</div>
 							</button>
-						</div>
-						<div class="card-header">
-							<button onclick="toggleButton();" class="defaultBtn task">
-								Task 3
-							</button>
+							<div class="check">
+								<p class="assignment-points">10 points</p>
+								<input type="checkbox" class="checkBox">
+							</div>
 						</div>
 					</div>
 				</div>
@@ -94,8 +108,9 @@
 			darkenCard(clickedID);
 		}
 		//Makes card-header of clicked assn/task look selected
+		//TODO: Hover seems to go away when setting the BG
 		function darkenCard(clickedID) {
-			var cardBG = "lightgrey";
+			var cardBG = "lightgrey"; //change if need be
 			var card = document.getElementById(clickedID).parentNode;
 			if (card.style.backgroundColor == cardBG) {
 				card.style.backgroundColor = "white";

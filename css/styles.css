@@ -203,12 +203,13 @@
    }
 
    .body {
+     font-family: 'Bahnschrift';
      margin-top: 8%;
      background-color: darkcyan;
    }
 
    .defaultBtn {
-     width: 75%;
+     width: 100%;
      float: left;
      border: none;
      outline: none;
@@ -223,11 +224,13 @@
    }
 
    .defaultBtn.task {
-     width: 80%;
+     margin-left: 5%;
+     width: 95%;
      float: none;
    }
 
    .assignment-name {
+     font-family: 'Bahnschrift SemiBold';
      font-size: 20px;
      text-align: left;
    }
@@ -248,7 +251,6 @@
    }
 
    .check {
-     top: auto;
      float: right;
      display: flex;
      justify-content: flex-start;
