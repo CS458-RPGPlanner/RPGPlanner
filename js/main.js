@@ -72,22 +72,23 @@ function createAssignment(assignment) {
   //create the assignment in the json array of assignments
   let key = "Assignments";
 
-  currentArray = storage.get(key, function (error, data) {
+  storage.get(key, function (error, data) {
     //check to see if there are more than 0 assignments
-    if (data.length > 0) {
+
+    if (data != null && data.length > 0) {
       //set the new assignment id to the last assignment id + 1
       assignment.id = data[data.length - 1].id + 1;
+      data.push(assignment);
+      storage.set(key, data, function (error) {
+        if (error) throw error;
+      });
     } else {
       //if no assignments are in the array set the new assignment id to 0
       assignment.id = 0;
+      storage.set(key, [assignment], function (error) {
+        if (error) throw error;
+      });
     }
-    //push the new assignment to the temp data
-    data.push(assignment);
-
-    // TODO: double check that this can actually return a value outside
-    storage.set(key, data, function (error) {
-      if (error) throw error;
-    });
   });
   // TODO: double check to make sure it's not always returning true
   return "true";
@@ -180,7 +181,12 @@ function setAssignmentDate(id, date) {
 
 //  gets all the assignments that exist in the Assignments json
 function getAllAssignments() {
-  return (assignmentArr = storage.getSync("Assignments"));
+  try {
+    let assns = storage.getSync("Assignments");
+    return assns;
+  } catch (error) {
+    return "";
+  }
 }
 
 function createTask(key, object) {
@@ -216,14 +222,4 @@ taskObj = [{ name: "Aquire land", date: "2/3/1306" }];
 //console.log(getTaskObj);
 
 //Assignment testing
-tempObj = { name: "hi", date: "11/20/22" };
-tempObj2 = { name: "hello", date: "11/2/22" };
-createAssignment(tempObj);
-createAssignment(tempObj2);
-
-//getObj = getAssignment("MOCK_DATA_ASSIGNMENTS", "Ciconia episcopus");
-console.log(getAllAssignments());
-
-setAssignmentName(1, "jeebus");
-
 console.log(getAllAssignments());
