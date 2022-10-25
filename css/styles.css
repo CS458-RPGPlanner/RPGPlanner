@@ -161,11 +161,17 @@
    a:active {
      text-decoration: none;
      color: black;
+     outline: none;
    }
 
    a:visited {
      text-decoration: none;
      color: black;
+     outline: none;
+   }
+
+   .card-header {
+     background-color: white;
    }
 
    div .card-header:hover {
@@ -204,6 +210,16 @@
    .defaultBtn {
      width: 75%;
      float: left;
+     border: none;
+     outline: none;
+     cursor: pointer;
+     display: block;
+     padding: 0;
+     background: none;
+   }
+
+   .defaultBtn:focus {
+     outline: none;
    }
 
    .defaultBtn.task {

@@ -47,8 +47,15 @@
 					<div id="description1" class="collapse" data-parent="#accordion">
 						<div class="card-header">
 							<button onclick="toggleButton();" class="defaultBtn task">
-								Task 1
+								<p class="assignment-name">Task 1</p>
+								<div class="due-tasks">
+									Due Date: Oct 31&emsp;
+								</div>
 							</button>
+							<div class="check">
+								<p class="assignment-points">10 points</p>
+								<input type="checkbox" class="checkBox">
+							</div>
 						</div>
 						<div class="card-header">
 							<button onclick="toggleButton();" class="defaultBtn task">
@@ -84,6 +91,11 @@
 				x.setAttribute("hidden", "hidden");
 				console.log("hidden");
 			}
+			darkenCard();
+		}
+		function darkenCard() {
+			console.log("enter darken");
+			var cardBG = "lightgrey";
 		}
 	</script>
 
