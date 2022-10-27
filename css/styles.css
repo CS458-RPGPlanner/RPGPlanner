@@ -172,6 +172,7 @@
 
    .card-header {
      background-color: white;
+     height: 100px;
    }
 
    div .card-header:hover {
@@ -225,6 +226,7 @@
 
    .defaultBtn.task {
      margin-left: 5%;
+     margin-top: 0;
      width: 95%;
      float: none;
    }
@@ -252,8 +254,11 @@
 
    .check {
      float: right;
+     position: relative;
+     bottom: 50px;
      display: flex;
      justify-content: flex-start;
+     height: 10px;
    }
 
    .assignment-points {
