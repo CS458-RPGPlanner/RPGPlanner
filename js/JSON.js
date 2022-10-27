@@ -159,18 +159,18 @@ createAssignment(testAssignment);
 console.log(getAllAssignments());
 */
 
-// TODO: set
-//html javascript function to get all assignments
-function getAssignments() {
-  ipcRenderer.invoke("getAllAssignments").then((result) => {
-    alert(JSON.stringify(result));
-  });
-}
-
 //TODO: assign html stuffs to actual json values
 //html function to create an assignment based off the values in html assignment
 function createAssignment() {
   ipcRenderer.invoke("createAssignment", obj).then((result) => {
     alert(result);
+  });
+}
+
+// TODO: set
+//html javascript function to get all assignments
+function getAssignments() {
+  ipcRenderer.invoke("getAllAssignments").then((result) => {
+    alert(JSON.stringify(result));
   });
 }

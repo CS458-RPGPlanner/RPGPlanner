@@ -60,17 +60,6 @@ ipcMain.handle("getAllAssignments", async (event) => {
   return result;
 });
 
-//  gets all the assignments that exist in the Assignments json
-function getAllAssignments() {
-  try {
-    let assns = storage.getSync("Assignments");
-    //stringify to make readable
-    return assns;
-  } catch (error) {
-    return "";
-  }
-}
-
 function createAssignment(assignment) {
   let key = "Assignments";
 
@@ -93,4 +82,15 @@ function createAssignment(assignment) {
     }
   });
   return true;
+}
+
+//  gets all the assignments that exist in the Assignments json
+function getAllAssignments() {
+  try {
+    let assns = storage.getSync("Assignments");
+    //stringify to make readable
+    return assns;
+  } catch (error) {
+    return "";
+  }
 }
