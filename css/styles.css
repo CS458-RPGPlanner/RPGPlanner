@@ -176,7 +176,7 @@
    }
 
    div .card-header:hover {
-     background-color: lightgrey;
+     background-color: lightgrey !important;
      transition: linear 0.5s;
    }
 

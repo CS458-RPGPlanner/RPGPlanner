@@ -112,22 +112,27 @@
 		function darkenCard(clickedID) {
 			var cardBG = "lightgrey"; //change if need be
 			var whiteBG = "white";
+			var sameBtn = false;
+			var card = document.getElementById(clickedID).parentNode;
 
 			//Unhighlight all other buttons
 			var assnTaskList = document.querySelectorAll('*[class^="card-header"]');
-			console.log(assnTaskList[0].style.backgroundColor);
 			if (assnTaskList != null) {
 				for (let i = 0; i < assnTaskList.length; i++) {
 					if (assnTaskList[i].style.backgroundColor == cardBG) {
 						assnTaskList[i].style.backgroundColor = whiteBG;
+						if (card == assnTaskList[i]) {
+							sameBtn = true;
+						}
 						i = assnTaskList.length;
 					}
 				}
 			}
 
 			//Darkns selected btn
-			var card = document.getElementById(clickedID).parentNode;
-			if (card.style.backgroundColor == cardBG) {
+
+			//console.log(sameBtn);
+			if (sameBtn) {
 				card.style.backgroundColor = whiteBG;
 			}
 			else {
