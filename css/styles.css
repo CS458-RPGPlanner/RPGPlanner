@@ -248,6 +248,8 @@
      border: 5px;
      margin-left: 5%
    }
+   
+   /* Style for createAssignment form field */
    body {font-family: Arial, Helvetica, sans-serif;}
    * {box-sizing: border-box;}
    
@@ -297,7 +299,7 @@
      outline: none;
    }
    
-   /* Set a style for the submit/login button */
+   /* Set a style for the submit button */
    .form-container .btn {
      background-color: #04AA6D;
      color: white;
