@@ -119,3 +119,67 @@ function saveAssignment() {
   // close the form of the new assignment
   closeForm();
 }
+
+function displayAssignments() {
+  let assignments = getAssignments();
+  alert(assignments);
+
+  var parent = document.getElementById("accordion");
+
+  for (let i = 0; i < assignments.length; i++) {
+    var card = document.createElement("div");
+    card.setAttribute("class", "card");
+    //card.setAttribute("id", "assignment-" + assignments[i].id);
+    card.setAttribute("id", "assignment-" + i);
+
+    var cardHeader = document.createElement("div");
+    cardHeader.setAttribute("class", "card-header");
+    //cardHeader.setAttribute("id", "assnHeader-" + assignments[i].id);
+    cardHeader.setAttribute("id", "assnHeader-" + i);
+
+    var assign = document.createElement("button");
+    assign.setAttribute("onclick", "toggleButton();");
+    assign.setAttribute("class", "defaultBtn");
+    assign.setAttribute("data-toggle", "collapse");
+    //assign.setAttribute("href", "#description-" + assignments[i].id);
+    assign.setAttribute("href", "#description-" + i);
+
+    var assignName = document.createElement("p");
+    assignName.setAttribute("class", "assignment-name");
+    //assignName.innerHTML = assignments[i].name;
+    assignName.innerHTML = ("Number " + i);
+
+    var dueTasks = document.createElement("div");
+    dueTasks.setAttribute("class", "due-tasks");
+    //dueTasks.innerHTML = ("Due Date: " + assignments[i].date + "&emsp;Tasks: ")
+    dueTasks.innerHTML = ("Number " + i);
+
+    var check = document.createElement("div");
+    check.setAttribute("class", "check");
+
+    var assignPoints = document.createElement("p");
+    assignPoints.setAttribute("class", "assignment-points");
+    //assignPoints.InnerHTML = assignments[i].points + " points";
+    assignPoints.innerHTML = ("Number " + i);
+
+    var checkbox = document.createElement("input");
+    checkbox.setAttribute("type", "checkbox");
+    checkbox.setAttribute("class", "checkBox");
+
+    check.appendChild(assignPoints);
+    check.appendChild(checkbox);
+
+    assign.appendChild(assignName);
+    assign.appendChild(dueTasks);
+
+    cardHeader.appendChild(assign);
+    cardHeader.appendChild(check);
+
+    card.append(cardHeader);
+
+    /*var test = document.createElement("p");
+    test.innerHTML = "Hello World!";
+    card.append(test);*/
+    parent.append(card);
+  }
+}
