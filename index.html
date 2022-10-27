@@ -18,26 +18,46 @@
 
 <body class="body">
 
-	<div class="parent">
-		<!--Nav Tabs-->
-		<div id="mySidenav" class="sidenav">
-			<a href="#" id="RPG">RPG</a>
-			<a href="#" id="profile">Profile</a>
 
+	<!--Nav Tabs-->
+	<div id="mySidenav" class="sidenav">
+		<a href="#" id="RPG">RPG</a>
+		<a href="#" id="profile">PROFILE</a>
+
+	</div>
+	
+	<div class="grid-container">
+		<div class="box item5">
+		<!--Tester Tabs-->
+			<button onclick="tabClicked()" class="tabButtons" id="allTag">All</button>
+			<button onclick="tabClicked()" class="tabButtons">Tag1</button>
 		</div>
+		
+		<div class="box item1">
+			<div id="accordion">
+				<div class="card">
+					<div class="card-header">
+						<button onclick="toggleButton();" class="defaultBtn" data-toggle="collapse"
+							href="#description1">
+							<p class="assignment-name">Asignment 1</p>
+							<div class="due-tasks">
+								Due Date: Oct 31&emsp;Tasks: 0/3
+							</div>
+						</button>
+						<div class="check">
+							<p class="assignment-points">10 points</p>
+							<input type="checkbox" class="checkBox">
+						</div>
+					</div>
+					<div id="description1" class="collapse" data-parent="#accordion">
 
-
-		<div class="grid-container">
-			<div class="box item5">Tab</div>
-			<div class="box item1">
-				<div id="accordion">
-					<div class="card">
 						<div class="card-header">
 							<button onclick="toggleButton(this.id);" id="assnBtn_001" class="defaultBtn"
 								data-toggle="collapse" href="#description1">
 								Assignment 1
 							</button>
 						</div>
+
 						<div id="description1" class="collapse" data-parent="#accordion">
 							<div class="card-header">
 								<button onclick="toggleButton(this.id);" class="defaultBtn task">
@@ -54,10 +74,12 @@
 									Task 3
 								</button>
 							</div>
+
 						</div>
 					</div>
 				</div>
 			</div>
+
 			<div class="box item2">Undated Assignment</div>
 			<div class="box item3">Due Today</div>
 			<div class="box item4">
@@ -136,9 +158,11 @@
 			if (cbtnHidden) {
 				cbtn.removeAttribute("hidden");
 				dDiv.setAttribute("hidden", "hidden");
+
 			}
 		}
 	</script>
+
 </body>
 
 </html>
