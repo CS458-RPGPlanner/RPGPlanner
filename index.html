@@ -12,6 +12,8 @@
 	</script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
 	</script>
+	<script src="js/JSON.js">
+	</script>
 	<!--Connection to CSS styleSheet-->
 	<link rel="stylesheet" href="css\styles.css">
 </head>
@@ -68,7 +70,78 @@
 		<div class="box item2">Undated Assignment</div>
 		<div class="box item3">Due Today</div>
 		<div class="box item4">
-			<button class="createAssn" id="createAssnBtn">Create Assignment</button>
+			<button class="createAssn" onclick="openForm()">Create Assignment</button>
+
+<div class="form-popup" id="myForm">
+    <form action="/action_page.php" class="form-container">
+      <h1>Create Assignment</h1>
+  
+      <label for="name"><b>Name</b></label>
+      <input type="text" placeholder="Enter Name" name="name" maxlength="50" required>
+
+	  <label for="description"><b>Description</b></label>
+      <input type="text" placeholder="Enter Description" name="description" maxlength="450" required>
+  
+      <label for="date"><b>Date</b></label>
+      <input type="date" placeholder="Enter Date" name="date" required>
+
+      <label for="points"><b>Points</b></label>
+      <input type="number" placeholder="Enter Points" name="points" required>
+  
+      <button type="button" class="btn" onclick="saveAssignment()">Save</button>
+      <button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
+    </form>
+  </div>
+
+	</div>
+</div>
+</div>
+
+<script>
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  	document.getElementById("myForm").style.display = "none";
+	document.getElementsByName('points')[0].value = "";
+	document.getElementsByName('name')[0].value = "";
+	document.getElementsByName('date')[0].value = "";
+	document.getElementsByName('description')[0].value = "";
+}
+function saveAssignment() {
+	var points = document.getElementsByName('points')[0].value;
+	var name = document.getElementsByName('name')[0].value;
+	var date = document.getElementsByName('date')[0].value;
+	var description = document.getElementsByName('description')[0].value;
+
+	if (points == null || points == "") {
+		alert("Points can't be blank");
+		return false;
+	} 
+	if (name == null || name == "") {
+		alert("Name can't be blank");
+		return false;
+	}
+	if (date == null || date == "") {
+		alert("Date can't be blank");
+		return false;
+	} 
+	if (description == null || description == "") {
+		alert("Description can't be blank");
+		return false;
+	} 
+
+	testAssignment = {
+    points,
+    date,
+    name,
+    description,
+  };
+	createAssignment(testAssignment);
+	closeForm();
+}
+</script>
 		</div>
 	</div>
 	<script>

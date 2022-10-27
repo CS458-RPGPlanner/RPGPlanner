@@ -161,7 +161,7 @@ console.log(getAllAssignments());
 
 //TODO: assign html stuffs to actual json values
 //html function to create an assignment based off the values in html assignment
-function createAssignment() {
+function createAssignment(obj) {
   ipcRenderer.invoke("createAssignment", obj).then((result) => {
     alert(result);
   });
