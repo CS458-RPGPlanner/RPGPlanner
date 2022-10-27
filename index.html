@@ -64,11 +64,39 @@
 				<button class="createAssn" id="createAssnBtn">Create Assignment</button>
 				<!--Details are shown here-->
 				<div id="details" hidden>
-					<div>Title
-						<button onclick="closeDetail();">Close</button>
-						<div>Due Date: Sept 30th Tasks: 0/0
-							<p>Cool Description</p>
-							<div>Task list will go here</div>
+					<div>
+						<div class="details-assignment-name" style="justify-content:flex-end;">
+							<button class="close-button">Edit</button>
+							<button class="close-button" onclick="closeDetail();">&times;</button>
+						</div>
+						<div class="details-title">Title</div>
+						<div>
+							<div class="details-due-date">
+								Due Date: September 30&emsp;Tasks: 0/3
+							</div>
+
+							<input type="checkbox" class="checkBox"></input>
+							<p class="checkBox" style="font-size: 10px">Assignment Points</p>
+							<p class="details-desc">Cool Description</p>
+							<div style="height:150px;overflow:auto;">
+								<div>
+									<div class="card-header">
+										<button onclick="toggleButton(this.id);" class="defaultBtn task">
+											Task 1
+										</button>
+									</div>
+									<div class="card-header">
+										<button onclick="toggleButton(this.id);" class="defaultBtn task">
+											Task 2
+										</button>
+									</div>
+									<div class="card-header">
+										<button onclick="toggleButton(this.id);" class="defaultBtn task">
+											Task 3
+										</button>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
