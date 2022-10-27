@@ -27,13 +27,9 @@
 
 	</div>
 
-	<div class="grid-container">
-		<div class="box item5">
-			<!--Tester Tabs-->
-			<button onclick="tabClicked()" class="tabButtons" id="allTag">All</button>
-			<button onclick="tabClicked()" class="tabButtons">Tag1</button>
-		</div>
 
+	<div class="grid-container">
+		<div class="box item5">Tab</div>
 		<div class="box item1">
 			<div id="accordion">
 				<div class="card">
@@ -77,34 +73,31 @@
 			<!--createAssignment button form-->
 			<button class="createAssn" onclick="openForm()">Create Assignment</button>
 
-			<div class="form-popup" id="myForm">
-				<form action="/action_page.php" class="form-container">
-					<h1>Create Assignment</h1>
+<div class="form-popup" id="myForm">
+    <form action="/action_page.php" class="form-container">
+      <h1>Create Assignment</h1>
+  
+      <label for="name"><b>Name</b></label>
+      <input type="text" placeholder="Enter Name" name="name" maxlength="50" required>
 
-					<label for="name"><b>Name</b></label>
-					<input type="text" placeholder="Enter Name" name="name" maxlength="50" required>
+	  <label for="description"><b>Description</b></label>
+      <input type="text" placeholder="Enter Description" name="description" maxlength="450" required>
+  
+      <label for="date"><b>Date</b></label>
+      <input type="date" placeholder="Enter Date" name="date" required>
 
-					<label for="description"><b>Description</b></label>
-					<input type="text" placeholder="Enter Description" name="description" maxlength="450" required>
+      <label for="points"><b>Points</b></label>
+      <input type="number" placeholder="Enter Points" name="points" required>
+  
+      <button type="button" class="btn" onclick="saveAssignment()">Save</button>
+      <button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
+    </form>
+  </div>
 
-					<label for="date"><b>Date</b></label>
-					<input type="date" placeholder="Enter Date" name="date" required>
-
-					<label for="points"><b>Points</b></label>
-					<input type="number" placeholder="Enter Points" name="points" required>
-
-					<button type="button" class="btn" onclick="saveAssignment()">Save</button>
-					<button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
-				</form>
-			</div>
-
+	</div>
+</div>
+</div>
 		</div>
-	</div>
-	</div>
-	</div>
-	</div>
-	<button class="createAssn" id="createAssnBtn">Create Assignment</button>
-	</div>
 	</div>
 	<script>
 		function toggleButton() {

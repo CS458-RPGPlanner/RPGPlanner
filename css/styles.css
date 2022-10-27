@@ -87,35 +87,6 @@
      left: 0;
      /* On mouse-over, make the elements appear as they should */
    }
-   /*Styling for tab buttons*/
-   .tabButtons 
-   {
-      height: 50px;
-      width: 10%;
-      background-color: darkcyan;
-      position: relative;
-      bottom: -25px;
-      gap: 5px;
-      float: left;
-      border: ridge 2px black;
-      border-radius: 5px 5px 0 0;
-   }
-    /* Styling on hovering over tabs */
-   .tabButtons:hover{
-    height: 75px;
-    bottom: 0px;
-   }
-   /* changes tab buttons on click
-   /* .tabButtons:focus{
-    height: 75px;
-    bottom: 0px;
-    font-size: 0px;
-   }
-   .tabButtons:active{
-    height: 75px;
-    bottom: 0px;
-   }
-   */ 
 
    /* The about link: 20px from the top with a green background */
    #RPG {
@@ -130,6 +101,7 @@
      top: 255px;
      height: 80px;
      background-color: #365563;
+
      border: ridge 2px;
      border-color: darkslateblue;
      /* Blue */
