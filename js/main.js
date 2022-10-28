@@ -51,8 +51,7 @@ app.on("window-all-closed", function () {
 
 // create assignment call back to the renderer
 ipcMain.handle("createAssignment", async (event, assignment) => {
-  const result = createAssignment(assignment);
-  //event.returnValue = result;
+  const result = await createAssignment(assignment);
   return result;
 });
 
@@ -64,13 +63,13 @@ ipcMain.handle("getAllAssignments", async (event) => {
 
 // ipc of getAssignmentById for renderer
 ipcMain.handle("getAssignmentById", async (event, id) => {
-  const result = getAssignmentById(id);
+  const result = await getAssignmentById(id);
   return result;
 });
 
 // ipc of editassignment for renderer
 ipcMain.handle("editAssignment", async (event, obj) => {
-  const result = editAssignment(obj);
+  const result = await editAssignment(obj);
   return result;
 });
 

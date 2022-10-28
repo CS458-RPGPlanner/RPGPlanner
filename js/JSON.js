@@ -42,28 +42,25 @@ function getTask(key, name) {
   return null;
 }
 
-taskObj = [{ name: "Aquire land", date: "2/3/1306" }];
-
 //html function to create an assignment based off the values in html assignment
-function createAssignment(obj) {
-  ipcRenderer.invoke("createAssignment", obj).then((result) => {
-    return result;
-  });
+async function createAssignment(obj) {
+  let result = await ipcRenderer.invoke("createAssignment", obj);
+  //return promise value after waiting
+  return result;
 }
 
 //html javascript function to get all assignments
 async function getAssignments() {
+  //return promise value after waiting
   let result = await ipcRenderer.invoke("getAllAssignments");
   return result;
 }
 
 //html function to get an assignment by the id
 async function getAssignmentById(id) {
-  let result = await ipcRenderer
-    .invoke("getAssignmentById", id)
-    .then((result) => {
-      return result;
-    });
+  // return promise value after waiting
+  let result = await ipcRenderer.invoke("getAssignmentById", id);
+  return result;
 }
 
 // opens html create assignment form
@@ -121,49 +118,51 @@ function saveAssignment() {
   closeForm();
 }
 
+//declared as async function so that race conditions don't apply for assignment retrieval
 async function displayAssignments() {
   let assignments = await getAssignments();
-  alert(assignments[0].name);
+  //testing to make sure that assignments are loaded correctly
+  //alert(assignments[0]);
 
   var parent = document.getElementById("accordion");
 
   for (let i = 0; i < assignments.length; i++) {
-    var card = document.createElement("div");
+    let card = document.createElement("div");
     card.setAttribute("class", "card");
     card.setAttribute("id", "assignment-" + assignments[i].id);
     card.setAttribute("id", "assignment-" + i);
 
-    var cardHeader = document.createElement("div");
+    let cardHeader = document.createElement("div");
     cardHeader.setAttribute("class", "card-header");
     cardHeader.setAttribute("id", "assnHeader-" + assignments[i].id);
     cardHeader.setAttribute("id", "assnHeader-" + i);
 
-    var assign = document.createElement("button");
+    let assign = document.createElement("button");
     assign.setAttribute("onclick", "toggleButton();");
     assign.setAttribute("class", "defaultBtn");
     assign.setAttribute("data-toggle", "collapse");
     assign.setAttribute("href", "#description-" + assignments[i].id);
     assign.setAttribute("href", "#description-" + i);
 
-    var assignName = document.createElement("p");
+    let assignName = document.createElement("p");
     assignName.setAttribute("class", "assignment-name");
     assignName.innerHTML = assignments[i].name;
     assignName.innerHTML = "Number " + i;
 
-    var dueTasks = document.createElement("div");
+    let dueTasks = document.createElement("div");
     dueTasks.setAttribute("class", "due-tasks");
     dueTasks.innerHTML = "Due Date: " + assignments[i].date + "&emsp;Tasks: ";
     dueTasks.innerHTML = "Number " + i;
 
-    var check = document.createElement("div");
+    let check = document.createElement("div");
     check.setAttribute("class", "check");
 
-    var assignPoints = document.createElement("p");
+    let assignPoints = document.createElement("p");
     assignPoints.setAttribute("class", "assignment-points");
     assignPoints.InnerHTML = assignments[i].points + " points";
     assignPoints.innerHTML = "Number " + i;
 
-    var checkbox = document.createElement("input");
+    let checkbox = document.createElement("input");
     checkbox.setAttribute("type", "checkbox");
     checkbox.setAttribute("class", "checkBox");
 
