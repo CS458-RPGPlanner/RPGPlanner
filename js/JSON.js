@@ -1,3 +1,7 @@
+/**
+ * @file JSON.js is the main file for the listeners and the html injection and manipulation
+ * @author Pierce Heeschen, Max Lampa, and Tiernan
+ */
 const { ipcRenderer } = require("electron");
 
 // Function to delete an assignment based on the id of the assignment
@@ -219,7 +223,7 @@ async function displayNewAssignment(newAssignment) {
   let assignments = await getAssignments();
   let id = assignments.length;
   var parent = document.getElementById("accordion");
-   
+
   // creating the necessary HTML elements for the new assignment
   var card = document.createElement("div");
   card.setAttribute("class", "card");
@@ -265,5 +269,5 @@ async function displayNewAssignment(newAssignment) {
 
   card.append(cardHeader);
 
-  parent.append(card); 
+  parent.append(card);
 }

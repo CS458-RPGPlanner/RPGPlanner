@@ -9,7 +9,7 @@
     "drive": "chromedriver",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "document": "jsdoc ./js/main.js -d documentation"
+    "document": "jsdoc ./js/main.js ./js/JSON.js -d documentation"
   },
   "author": "STOUT CS458",
   "license": "MIT",
