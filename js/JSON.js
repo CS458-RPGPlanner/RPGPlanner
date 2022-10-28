@@ -18,7 +18,13 @@ const { ipcRenderer } = require("electron");
 // deleteAssignment(4);
 
 // Renderer process
-
+/**
+ * @description create a new task in the system with incrementing task number
+ * @todo not completed yet
+ * @param {*} key for the file to store the json
+ * @param {*} object of json task to be created
+ * @returns none
+ */
 function createTask(key, object) {
   //check to make sure task doesn't already exist returns null obj if doesn't exist
   //if object doesn't exist in the json create a new task in JSON
@@ -29,7 +35,13 @@ function createTask(key, object) {
   return "true";
 }
 
-// function to read tasks in JSON
+/**
+ * @description get task from json
+ * @todo: not completed yet
+ * @param {*} key where to store the task in json
+ * @param {*} name name of the task to get
+ * @returns task that was gotten
+ */
 function getTask(key, name) {
   //grab the json information from the json with the key
   let taskObj = storage.getSync(key);
@@ -42,33 +54,48 @@ function getTask(key, name) {
   return null;
 }
 
-//html function to create an assignment based off the values in html assignment
+/**
+ * @description html function to create an assignment based off the values in html assignment object passed in
+ * @param {*} obj object passed in to place in the assignment json
+ * @returns object that was passed in
+ */
 async function createAssignment(obj) {
   let result = await ipcRenderer.invoke("createAssignment", obj);
   //return promise value after waiting
   return result;
 }
 
-//html javascript function to get all assignments
+/**
+ * @description html javascript function to get all assignments
+ * @returns returned array of all assignments
+ */
 async function getAssignments() {
   //return promise value after waiting
   let result = await ipcRenderer.invoke("getAllAssignments");
   return result;
 }
 
-//html function to get an assignment by the id
+/**
+ * @description html function to get an assignment by the id
+ * @param {*} id of the assignment to retrieve from the json
+ * @returns the assignment that matches the id passed in
+ */
 async function getAssignmentById(id) {
   // return promise value after waiting
   let result = await ipcRenderer.invoke("getAssignmentById", id);
   return result;
 }
 
-// opens html create assignment form
+/**
+ * @description opens html create assignment form
+ */
 function openForm() {
   document.getElementById("myForm").style.display = "block";
 }
 
-// clears data from create assignment form after submit or cancel
+/**
+ * @description clears data from create assignment form after submit or cancel
+ */
 function closeForm() {
   document.getElementById("myForm").style.display = "none";
   document.getElementsByName("points")[0].value = "";
@@ -77,7 +104,10 @@ function closeForm() {
   document.getElementsByName("description")[0].value = "";
 }
 
-// submits assignment data and calls createAssignment function
+/**
+ * @description submits assignment data and calls createAssignment function
+ * @returns false if everything is not filled out correctly in the form
+ */
 function saveAssignment() {
   // declare assignment fields for html form
   var points = document.getElementsByName("points")[0].value;
@@ -118,7 +148,10 @@ function saveAssignment() {
   closeForm();
 }
 
-//declared as async function so that race conditions don't apply for assignment retrieval
+/**
+ * @description display assignments in the ui
+ */
+// declared as async function so that race conditions don't apply for assignment retrieval
 async function displayAssignments() {
   let assignments = await getAssignments();
   //testing to make sure that assignments are loaded correctly
