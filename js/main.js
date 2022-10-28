@@ -7,6 +7,7 @@ const storage = require("electron-json-storage");
 const path = require("path");
 // selenium stuffs
 const { addConsoleHandler } = require("selenium-webdriver/lib/logging");
+const { resolve } = require("path");
 
 function createWindow() {
   // Create the browser window.
@@ -51,12 +52,13 @@ app.on("window-all-closed", function () {
 // create assignment call back to the renderer
 ipcMain.handle("createAssignment", async (event, assignment) => {
   const result = createAssignment(assignment);
+  //event.returnValue = result;
   return result;
 });
 
 // get assignment call back to the renderer
 ipcMain.handle("getAllAssignments", async (event) => {
-  const result = getAllAssignments();
+  const result = await getAllAssignments();
   return result;
 });
 
@@ -67,11 +69,10 @@ ipcMain.handle("getAssignmentById", async (event, id) => {
 });
 
 // ipc of editassignment for renderer
-ipcMain.handle("editAssignment", async (event, obj) =>{
+ipcMain.handle("editAssignment", async (event, obj) => {
   const result = editAssignment(obj);
   return result;
 });
-
 
 // Javascript regular functions
 // create assignment with input assignment object
@@ -135,7 +136,7 @@ function getAssignmentById(id) {
 function setAssignmentName(id, name) {
   let key = "Assignments";
   // grab the assignments to edit
-  storage.get(key, function(error, data){
+  storage.get(key, function (error, data) {
     // iterate throughout the assignments array
     for (let i = 0; i < assignments.length; i++) {
       if (data[i].id == id) {
@@ -147,25 +148,24 @@ function setAssignmentName(id, name) {
       if (error) throw error;
     });
   });
-  
 }
 
 // edit assignments by passing in the object to replace from the json array
-function editAssignment(obj){
+function editAssignment(obj) {
   let key = "Assignments";
 
   //get all of the assignments
-  storage.get(key, function(error, data){
+  storage.get(key, function (error, data) {
     //check for no data
-    if(data != null && data.length > 0){
-      //search through all of the data 
-      for(let i = 0; i<data.length; i++){
+    if (data != null && data.length > 0) {
+      //search through all of the data
+      for (let i = 0; i < data.length; i++) {
         //look for specific id
-        if(data[i].id == obj.id){
+        if (data[i].id == obj.id) {
           //set data index to object
           data[i] = obj;
           //replace the old data with the new data
-          storage.set("Assignments", data, function(error){
+          storage.set("Assignments", data, function (error) {
             if (error) throw error;
           });
           //return the object that was stored
@@ -176,5 +176,4 @@ function editAssignment(obj){
     //not able to get the assignment
     return null;
   });
-
 }
