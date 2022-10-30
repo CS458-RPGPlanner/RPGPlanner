@@ -79,7 +79,7 @@
 		<div class="box item3">Due Today</div>
 		<div class="box item4">
 			<!--createAssignment button form-->
-			<button class="createAssn" onclick="openForm()">Create Assignment</button>
+			<button id="createAssnBtn" class="createAssn" onclick="openForm()">Create Assignment</button>
 
 			<div class="form-popup" id="myForm">
 				<form action="/action_page.php" class="form-container">
@@ -110,15 +110,12 @@
 	<script>
 		function toggleButton() {
 			/*Add a get element for the back button or a double click from assn/task*/
-			console.log("Toggle Enter");
 			var x = document.getElementById("createAssnBtn");
 			var xhidden = x.getAttribute("hidden");
 			if (xhidden) {
 				x.removeAttribute("hidden");
-				console.log("Visible");
 			} else {
 				x.setAttribute("hidden", "hidden");
-				console.log("hidden");
 			}
 		}
 	</script>
