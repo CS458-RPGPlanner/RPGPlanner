@@ -87,24 +87,26 @@
      left: 0;
      /* On mouse-over, make the elements appear as they should */
    }
+
    /*Styling for tab buttons*/
-   .tabButtons 
-   {
-      height: 50px;
-      width: 10%;
-      background-color: darkcyan;
-      position: relative;
-      bottom: -25px;
-      gap: 5px;
-      float: left;
-      border: ridge 2px black;
-      border-radius: 5px 5px 0 0;
+   .tabButtons {
+     height: 50px;
+     width: 10%;
+     background-color: darkcyan;
+     position: relative;
+     bottom: -25px;
+     gap: 5px;
+     float: left;
+     border: ridge 2px black;
+     border-radius: 5px 5px 0 0;
    }
-    /* Styling on hovering over tabs */
-   .tabButtons:hover{
-    height: 75px;
-    bottom: 0px;
+
+   /* Styling on hovering over tabs */
+   .tabButtons:hover {
+     height: 75px;
+     bottom: 0px;
    }
+
    /* changes tab buttons on click
    /* .tabButtons:focus{
     height: 75px;
@@ -115,7 +117,7 @@
     height: 75px;
     bottom: 0px;
    }
-   */ 
+   */
 
    /* The about link: 20px from the top with a green background */
    #RPG {
@@ -300,4 +302,50 @@
      border: 5px;
      margin-left: 5%;
      cursor: pointer;
+     margin-left: 5%;
+   }
+
+   /*Formating for assignment details box*/
+   .details-assignment-name {
+     font-size: 20px;
+     text-align: left;
+     display: flex;
+     justify-content: space-between;
+   }
+
+   .details-title {
+     font-size: 40px;
+     text-align: left;
+     display: flex;
+     justify-content: flex-start;
+   }
+
+   .details-due-tasks {
+     display: flex;
+     justify-content: flex-start;
+     font-size: 15px;
+   }
+
+   .details-due-date {
+     font-size: 15px;
+     text-align: left;
+   }
+
+   .details-desc {
+     text-align: left;
+     font-size: 15px;
+   }
+
+   .close-button {
+     font-size: 15px;
+     font-weight: bold;
+     color: #000;
+     text-align: right;
+   }
+
+   .detailsCheckBox {
+     top: auto;
+     float: right;
+     display: flex;
+     justify-content: flex-end;
    }
