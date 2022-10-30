@@ -24,14 +24,14 @@
 		<a href="#" id="profile">PROFILE</a>
 
 	</div>
-	
+
 	<div class="grid-container">
 		<div class="box item5">
-		<!--Tester Tabs-->
+			<!--Tester Tabs-->
 			<button onclick="tabClicked()" class="tabButtons" id="allTag">All</button>
 			<button onclick="tabClicked()" class="tabButtons">Tag1</button>
 		</div>
-		
+
 		<div class="box item1">
 			<div id="accordion">
 				<div class="card">
@@ -73,20 +73,81 @@
 		<div class="box item3">Due Today</div>
 		<div class="box item4">
 			<button class="createAssn" id="createAssnBtn">Create Assignment</button>
+			<!--Assignment details popup-->
+			<div class="assnDetails_001" id="details" hidden>
+				<div>
+					<div class="details-assignment-name" style="justify-content:flex-end;">
+						<button class="close-button">Edit</button>
+						<button class="close-button" onclick="closeDetail();">&times;</button>
+					</div>
+					<div class="details-title">Title</div>
+					<div>
+						<div class="details-due-date">
+							Due Date: September 30&emsp;Tasks: 0/3
+						</div>
+
+						<input type="checkbox" class="detailsCheckBox"></input>
+						<p class="detailsCheckBox" style="font-size: 10px">Assignment Points</p>
+						<p class="details-desc">Cool Description</p>
+						<div style="height:150px;overflow:auto;">
+							<div>
+								<div class="card-header">
+									<button onclick="toggleButton(this.id);" class="defaultBtn task">
+										Task 1
+									</button>
+								</div>
+								<div class="card-header">
+									<button onclick="toggleButton(this.id);" class="defaultBtn task">
+										Task 2
+									</button>
+								</div>
+								<div class="card-header">
+									<button onclick="toggleButton(this.id);" class="defaultBtn task">
+										Task 3
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	<script>
-		function toggleButton() {
+		function toggleButton(clickedID) {
 			/*Add a get element for the back button or a double click from assn/task*/
-			console.log("Toggle Enter");
-			var x = document.getElementById("createAssnBtn");
-			var xhidden = x.getAttribute("hidden");
-			if (xhidden) {
-				x.removeAttribute("hidden");
-				console.log("Visible");
-			} else {
-				x.setAttribute("hidden", "hidden");
-				console.log("hidden");
+			/*Get CreateBtn info*/
+			var cbtn = document.getElementById("createAssnBtn");
+			var cbtnHidden = cbtn.getAttribute("hidden");
+			/*TEMP get details div info*/
+			var dDiv = document.getElementById("details");
+			var dDivHidden = dDiv.getAttribute("hidden");
+			/*Create button will hide/be visible so details can be shown*/
+			if (!cbtnHidden) {
+				dDiv.removeAttribute("hidden");
+				cbtn.setAttribute("hidden", "hidden");
+				/*Simulating the button being pressed and displaying details
+					Should trigger a function that looks for the Assn/task id, read
+					in the info saved and display it*/
+				if (clickedID === "assnBtn_001") {
+					console.log("assnBtn Clicked");
+					//Display details of selected assn/task
+				}
+			}
+		}
+
+
+		function closeDetail() {
+			/*Get CreateBtn info*/
+			var cbtn = document.getElementById("createAssnBtn");
+			var cbtnHidden = cbtn.getAttribute("hidden");
+			/*TEMP get details div info*/
+			var dDiv = document.getElementById("details");
+			var dDivHidden = dDiv.getAttribute("hidden");
+
+			if (cbtnHidden) {
+				cbtn.removeAttribute("hidden");
+				dDiv.setAttribute("hidden", "hidden");
 			}
 		}
 	</script>
