@@ -12,8 +12,6 @@
 	</script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
 	</script>
-	<script src="js/JSON.js">
-	</script>
 	<!--Connection to CSS styleSheet-->
 	<link rel="stylesheet" href="css\styles.css">
 	<!--Connection to JSON javascript-->
@@ -48,7 +46,7 @@
 					<div id="assnHeader-001" class="card-header">
 						<button onclick="toggleButton(this.id);" id="assnBtn_001" class="defaultBtn"
 							data-toggle="collapse" href="#description1">
-							<p class="assignment-name">Asignment 1</p>
+							<p class="assignment-name">Test Assignment Functionality</p>
 							<div class="due-tasks">
 								Due Date: Oct 31&emsp;Tasks: 0/3
 							</div>
@@ -177,8 +175,10 @@
 			var cbtn = document.getElementById("createAssnBtn");
 			var cbtnHidden = cbtn.getAttribute("hidden");
 			/*TEMP get details div info*/
-			var dDiv = document.getElementById("details");
-			var dDivHidden = dDiv.getAttribute("hidden");
+			if (clickedID == "assnBtn_001") {
+				var dDiv = document.getElementById("details");
+				var dDivHidden = dDiv.getAttribute("hidden");
+			}
 			/*Create button will hide/be visible so details can be shown*/
 			if (!cbtnHidden) {
 				dDiv.removeAttribute("hidden");
