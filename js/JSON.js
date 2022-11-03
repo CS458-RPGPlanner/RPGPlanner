@@ -114,10 +114,10 @@ function closeForm() {
  */
 function saveAssignment() {
   // declare assignment fields for html form
-  var points = document.getElementsByName("points")[0].value;
-  var name = document.getElementsByName("name")[0].value;
-  var date = document.getElementsByName("date")[0].value;
-  var description = document.getElementsByName("description")[0].value;
+  let points = document.getElementsByName("points")[0].value;
+  let name = document.getElementsByName("name")[0].value;
+  let date = document.getElementsByName("date")[0].value;
+  let description = document.getElementsByName("description")[0].value;
 
   // validation checks to see if fields have data
   if (points == null || points == "") {
@@ -165,7 +165,7 @@ async function displayAssignments() {
   //testing to make sure that assignments are loaded correctly
   //alert(assignments[0]);
 
-  var parent = document.getElementById("accordion");
+  let parent = document.getElementById("accordion");
 
   //iterates through the array and creates needed HTML elements for each of the assignments
   for (let i = 0; i < assignments.length; i++) {
@@ -222,39 +222,39 @@ async function displayNewAssignment(newAssignment) {
   // grabs the assignment array so that it can grab the newest assignment
   let assignments = await getAssignments();
   let id = assignments.length;
-  var parent = document.getElementById("accordion");
+  let parent = document.getElementById("accordion");
 
   // creating the necessary HTML elements for the new assignment
-  var card = document.createElement("div");
+  let card = document.createElement("div");
   card.setAttribute("class", "card");
   card.setAttribute("id", "assignment-" + id);
 
-  var cardHeader = document.createElement("div");
+  let cardHeader = document.createElement("div");
   cardHeader.setAttribute("class", "card-header");
   cardHeader.setAttribute("id", "assnHeader-" + id);
 
-  var assign = document.createElement("button");
+  let assign = document.createElement("button");
   assign.setAttribute("onclick", "toggleButton();");
   assign.setAttribute("class", "defaultBtn");
   assign.setAttribute("data-toggle", "collapse");
   assign.setAttribute("href", "#description-" + id);
 
-  var assignName = document.createElement("p");
+  let assignName = document.createElement("p");
   assignName.setAttribute("class", "assignment-name");
   assignName.innerHTML = newAssignment.name;
 
-  var dueTasks = document.createElement("div");
+  let dueTasks = document.createElement("div");
   dueTasks.setAttribute("class", "due-tasks");
   dueTasks.innerHTML = "Due Date: " + newAssignment.date + "&emsp;Tasks: ";
 
-  var check = document.createElement("div");
+  let check = document.createElement("div");
   check.setAttribute("class", "check");
 
-  var assignPoints = document.createElement("p");
+  let assignPoints = document.createElement("p");
   assignPoints.setAttribute("class", "assignment-points");
   assignPoints.innerHTML = newAssignment.points + " points";
 
-  var checkbox = document.createElement("input");
+  let checkbox = document.createElement("input");
   checkbox.setAttribute("type", "checkbox");
   checkbox.setAttribute("class", "checkBox");
 
