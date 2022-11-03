@@ -212,6 +212,10 @@ function editAssignment(obj) {
   });
 }
 
+/**
+ * @description delete an assignment by id 
+ * @param {*} id id of the assignment to delete
+ */
 function deleteAssignment(id) {
   let key = "Assignments";
 
@@ -219,6 +223,7 @@ function deleteAssignment(id) {
     // iterate throughout the assignments array
     for (let i = 0; i < data.length; i++) {
       if (data[i].id == id) {
+        // delete selected assignment by id
         data.splice(i, 1);
       }
     }
