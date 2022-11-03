@@ -81,6 +81,12 @@ ipcMain.handle("editAssignment", async (event, obj) => {
   return result;
 });
 
+// ipc of deleteAssignment for renderer
+ipcMain.handle("deleteAssignment", async (event, id) => {
+  const result = await deleteAssignment(id);
+  return result;
+});
+
 /**
  * @description creates an assignment from the object passed in
  * @param {*} assignment pass in assignment to create the assignment
@@ -140,7 +146,7 @@ function getAssignmentById(id) {
   //loop over all the items in the json array
   for (let i = 0; i < tempObj.length; i++) {
     //check to see if item in array is what we are looking for
-    if (tempObj.id[i] == id) {
+    if (tempObj[i].id == id) {
       //return the json object in the json array with id = to input id
       return tempObj[i];
     }
@@ -203,5 +209,22 @@ function editAssignment(obj) {
     }
     //not able to get the assignment
     return null;
+  });
+}
+
+function deleteAssignment(id) {
+  let key = "Assignments";
+
+  storage.get(key, function (error, data) {
+    // iterate throughout the assignments array
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].id == id) {
+        data.splice(i, 1);
+      }
+    }
+    //set the new data set with the new assignment name for the assignment by id
+    storage.set(key, data, function (error) {
+      if (error) throw error;
+    });
   });
 }

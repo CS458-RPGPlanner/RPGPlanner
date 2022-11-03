@@ -5,21 +5,6 @@
 const { ipcRenderer } = require("electron");
 
 // Function to delete an assignment based on the id of the assignment
-// function deleteAssignment(id) {
-//   let key = "Assignments";
-//   currentArray = storage.get;
-//   storage.get(key, function (error, data) {
-//     //check to see if there are more than 0 assignments
-//     if (data != null && data.length > 0) {
-//       //pop the assignment at location of id
-//       data.pop(id);
-//       storage.set(key, data, function (error) {
-//         if (error) throw error;
-//       });
-//     }
-//   });
-// }
-// deleteAssignment(4);
 
 // Renderer process
 /**
@@ -87,6 +72,12 @@ async function getAssignments() {
 async function getAssignmentById(id) {
   // return promise value after waiting
   let result = await ipcRenderer.invoke("getAssignmentById", id);
+  return result;
+}
+
+async function deleteAssignment(id) {
+  // return promise value after waiting
+  let result = await ipcRenderer.invoke("deleteAssignment", id);
   return result;
 }
 
