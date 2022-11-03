@@ -4,6 +4,9 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
+	<!-- Insert this line above script imports  -->
+	<script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
 	<!--Accordian Links-->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
 		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -23,6 +26,8 @@
 			displayAssignments();
 		});
 	</script>
+	<!-- Insert this line after script imports -->
+	<script>if (window.module) module = window.module;</script>
 </head>
 
 <body class="body">
@@ -173,12 +178,12 @@
 		function toggleButton(clickedID) {
 			/*Add a get element for the back button or a double click from assn/task*/
 			/*Get CreateBtn info*/
-			var cbtn = document.getElementById("createAssnBtn");
-			var cbtnHidden = cbtn.getAttribute("hidden");
+			let cbtn = document.getElementById("createAssnBtn");
+			let cbtnHidden = cbtn.getAttribute("hidden");
 			/*TEMP get details div info*/
 			if (clickedID == "assnBtn_001") {
-				var dDiv = document.getElementById("details");
-				var dDivHidden = dDiv.getAttribute("hidden");
+				let dDiv = document.getElementById("details");
+				let dDivHidden = dDiv.getAttribute("hidden");
 			}
 			/*Create button will hide/be visible so details can be shown*/
 			if (!cbtnHidden) {
@@ -197,11 +202,11 @@
 
 		function closeDetail() {
 			/*Get CreateBtn info*/
-			var cbtn = document.getElementById("createAssnBtn");
-			var cbtnHidden = cbtn.getAttribute("hidden");
+			let cbtn = document.getElementById("createAssnBtn");
+			let cbtnHidden = cbtn.getAttribute("hidden");
 			/*TEMP get details div info*/
-			var dDiv = document.getElementById("details");
-			var dDivHidden = dDiv.getAttribute("hidden");
+			let dDiv = document.getElementById("details");
+			let dDivHidden = dDiv.getAttribute("hidden");
 
 			if (cbtnHidden) {
 				cbtn.removeAttribute("hidden");
@@ -212,13 +217,13 @@
 		//Makes card-header of clicked assn/task look selected
 		//TODO: Hover seems to go away when setting the BG
 		function darkenCard(clickedID) {
-			var cardBG = "lightgrey"; //change if need be
-			var whiteBG = "white";
-			var sameBtn = false;
-			var card = document.getElementById(clickedID).parentNode;
+			let cardBG = "lightgrey"; //change if need be
+			let whiteBG = "white";
+			let sameBtn = false;
+			let card = document.getElementById(clickedID).parentNode;
 
 			//Unhighlight all other buttons
-			var assnTaskList = document.querySelectorAll('*[class^="card-header"]');
+			let assnTaskList = document.querySelectorAll('*[class^="card-header"]');
 			if (assnTaskList != null) {
 				for (let i = 0; i < assnTaskList.length; i++) {
 					if (assnTaskList[i].style.backgroundColor == cardBG) {
