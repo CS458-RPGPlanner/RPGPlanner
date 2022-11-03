@@ -22,40 +22,27 @@ const { ipcRenderer } = require("electron");
 // deleteAssignment(4);
 
 // Renderer process
-/**
- * @description create a new task in the system with incrementing task number
- * @todo not completed yet
- * @param {*} key for the file to store the json
- * @param {*} object of json task to be created
- * @returns none
- */
-function createTask(key, object) {
-  //check to make sure task doesn't already exist returns null obj if doesn't exist
-  //if object doesn't exist in the json create a new task in JSON
-  storage.set(key, object, function (error) {
-    if (error) return "false";
-  });
 
-  return "true";
+/**
+ * @description html function to create a task based off the values in html task object passed in
+ * @param {*} obj object passed in to place in the task json
+ * @returns object that was passed in
+ */
+async function createTask(obj) {
+  let result = await ipcRenderer.invoke("createTask", obj);
+  //return promise value after waiting
+  return result;
 }
 
 /**
- * @description get task from json
- * @todo: not completed yet
- * @param {*} key where to store the task in json
- * @param {*} name name of the task to get
- * @returns task that was gotten
+ * @description html function to create a task based off the values in html task object passed in
+ * @returns object that was passed in
  */
-function getTask(key, name) {
-  //grab the json information from the json with the key
-  let taskObj = storage.getSync(key);
-  for (let i = 0; i < taskObj.length; i++) {
-    if (taskObj[i].name == name) {
-      return taskObj[i];
-    }
-  }
-
-  return null;
+getAllTasks();
+async function getAllTasks() {
+  let result = await ipcRenderer.invoke("getAllTasks");
+  //return promise value after waiting
+  return result;
 }
 
 /**
@@ -84,7 +71,7 @@ async function getAssignments() {
  * @param {*} id of the assignment to retrieve from the json
  * @returns the assignment that matches the id passed in
  */
-async function getAssignmentById(id) {
+async function getAssignment(id) {
   // return promise value after waiting
   let result = await ipcRenderer.invoke("getAssignmentById", id);
   return result;
