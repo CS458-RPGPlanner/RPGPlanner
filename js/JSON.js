@@ -132,7 +132,6 @@ function saveAssignment() {
   // close the form of the new assignment
   closeForm();
 }
-
 /**
  * @description display assignments in the ui
  */
@@ -248,4 +247,13 @@ async function displayNewAssignment(newAssignment) {
   card.append(cardHeader);
 
   parent.append(card);
+}
+
+function deleteAssignmentClicked(id) {
+
+  let assignmentDiv = document.getElementById("assignment-" + id);
+  if (assignmentDiv) {
+    assignmentDiv.remove();
+  }
+  deleteAssignment(id);
 }
