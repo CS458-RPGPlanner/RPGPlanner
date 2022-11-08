@@ -22,40 +22,27 @@ const { ipcRenderer } = require("electron");
 // deleteAssignment(4);
 
 // Renderer process
-/**
- * @description create a new task in the system with incrementing task number
- * @todo not completed yet
- * @param {*} key for the file to store the json
- * @param {*} object of json task to be created
- * @returns none
- */
-function createTask(key, object) {
-  //check to make sure task doesn't already exist returns null obj if doesn't exist
-  //if object doesn't exist in the json create a new task in JSON
-  storage.set(key, object, function (error) {
-    if (error) return "false";
-  });
 
-  return "true";
+/**
+ * @description html function to create a task based off the values in html task object passed in
+ * @param {*} obj object passed in to place in the task json
+ * @returns object that was passed in
+ */
+async function createTask(obj) {
+  let result = await ipcRenderer.invoke("createTask", obj);
+  //return promise value after waiting
+  return result;
 }
 
 /**
- * @description get task from json
- * @todo: not completed yet
- * @param {*} key where to store the task in json
- * @param {*} name name of the task to get
- * @returns task that was gotten
+ * @description html function to create a task based off the values in html task object passed in
+ * @returns object that was passed in
  */
-function getTask(key, name) {
-  //grab the json information from the json with the key
-  let taskObj = storage.getSync(key);
-  for (let i = 0; i < taskObj.length; i++) {
-    if (taskObj[i].name == name) {
-      return taskObj[i];
-    }
-  }
-
-  return null;
+getAllTasks();
+async function getAllTasks() {
+  let result = await ipcRenderer.invoke("getAllTasks");
+  //return promise value after waiting
+  return result;
 }
 
 /**
@@ -84,9 +71,9 @@ async function getAssignments() {
  * @param {*} id of the assignment to retrieve from the json
  * @returns the assignment that matches the id passed in
  */
-async function getAssignmentById(id) {
+async function getAssignment(id) {
   // return promise value after waiting
-  let result = await ipcRenderer.invoke("getAssignmentById", id);
+  let result = await ipcRenderer.invoke("getAssignment", id);
   return result;
 }
 
@@ -114,10 +101,10 @@ function closeForm() {
  */
 function saveAssignment() {
   // declare assignment fields for html form
-  var points = document.getElementsByName("points")[0].value;
-  var name = document.getElementsByName("name")[0].value;
-  var date = document.getElementsByName("date")[0].value;
-  var description = document.getElementsByName("description")[0].value;
+  let points = document.getElementsByName("points")[0].value;
+  let name = document.getElementsByName("name")[0].value;
+  let date = document.getElementsByName("date")[0].value;
+  let description = document.getElementsByName("description")[0].value;
 
   // validation checks to see if fields have data
   if (points == null || points == "") {
@@ -165,7 +152,7 @@ async function displayAssignments() {
   //testing to make sure that assignments are loaded correctly
   //alert(assignments[0]);
 
-  var parent = document.getElementById("accordion");
+  let parent = document.getElementById("accordion");
 
   //iterates through the array and creates needed HTML elements for each of the assignments
   for (let i = 0; i < assignments.length; i++) {
@@ -222,39 +209,39 @@ async function displayNewAssignment(newAssignment) {
   // grabs the assignment array so that it can grab the newest assignment
   let assignments = await getAssignments();
   let id = assignments.length;
-  var parent = document.getElementById("accordion");
+  let parent = document.getElementById("accordion");
 
   // creating the necessary HTML elements for the new assignment
-  var card = document.createElement("div");
+  let card = document.createElement("div");
   card.setAttribute("class", "card");
   card.setAttribute("id", "assignment-" + id);
 
-  var cardHeader = document.createElement("div");
+  let cardHeader = document.createElement("div");
   cardHeader.setAttribute("class", "card-header");
   cardHeader.setAttribute("id", "assnHeader-" + id);
 
-  var assign = document.createElement("button");
+  let assign = document.createElement("button");
   assign.setAttribute("onclick", "toggleButton();");
   assign.setAttribute("class", "defaultBtn");
   assign.setAttribute("data-toggle", "collapse");
   assign.setAttribute("href", "#description-" + id);
 
-  var assignName = document.createElement("p");
+  let assignName = document.createElement("p");
   assignName.setAttribute("class", "assignment-name");
   assignName.innerHTML = newAssignment.name;
 
-  var dueTasks = document.createElement("div");
+  let dueTasks = document.createElement("div");
   dueTasks.setAttribute("class", "due-tasks");
   dueTasks.innerHTML = "Due Date: " + newAssignment.date + "&emsp;Tasks: ";
 
-  var check = document.createElement("div");
+  let check = document.createElement("div");
   check.setAttribute("class", "check");
 
-  var assignPoints = document.createElement("p");
+  let assignPoints = document.createElement("p");
   assignPoints.setAttribute("class", "assignment-points");
   assignPoints.innerHTML = newAssignment.points + " points";
 
-  var checkbox = document.createElement("input");
+  let checkbox = document.createElement("input");
   checkbox.setAttribute("type", "checkbox");
   checkbox.setAttribute("class", "checkBox");
 
