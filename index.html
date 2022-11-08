@@ -128,20 +128,21 @@
 			<!--Assignment details popup-->
 			<div class="assnDetails_001" id="details" hidden>
 				<div>
-					<div class="details-assignment-name" style="justify-content:flex-end;">
-						<button class="close-button">Edit</button>
-						<button class="close-button" onclick="closeDetail();">&times;</button>
+					<div class="details-assignment-name">
+						<button class="edit-button">Edit</button>
 					</div>
-					<div class="details-title">Title</div>
+				</div>	
+
 					<div>
+						<div class="details-title">Title</div>
 						<div class="details-due-date">
 							Due Date: September 30&emsp;Tasks: 0/3
 						</div>
 
 						<input type="checkbox" class="detailsCheckBox"></input>
-						<p class="detailsCheckBox" style="font-size: 10px">Assignment Points</p>
+						<p class="details-points">10</p>
 						<p class="details-desc">Cool Description</p>
-						<div style="height:150px;overflow:auto;">
+						<div class="details-tasks-window">
 							<div>
 								<div class="card-header">
 									<button onclick="toggleButton(this.id);" class="defaultBtn task">
@@ -158,8 +159,11 @@
 										Task 3
 									</button>
 								</div>
-							</div>
 						</div>
+
+						
+						</div>
+						<button class="close-button" onclick="closeDetail();">&#8249;</button>
 					</div>
 				</div>
 			</div>
