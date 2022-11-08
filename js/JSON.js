@@ -58,7 +58,7 @@ async function getAssignments() {
  */
 async function getAssignment(id) {
   // return promise value after waiting
-  let result = await ipcRenderer.invoke("getAssignmentById", id);
+  let result = await ipcRenderer.invoke("getAssignment", id);
   return result;
 }
 
@@ -155,7 +155,8 @@ async function displayAssignments() {
     cardHeader.setAttribute("id", "assnHeader-" + assignments[i].id);
 
     let assign = document.createElement("button");
-    assign.setAttribute("onclick", "toggleButton();");
+    assign.setAttribute("id", "assignmentBtn-" + assignments[i].id);
+    assign.setAttribute("onclick", "toggleButton(this.id)");
     assign.setAttribute("class", "defaultBtn");
     assign.setAttribute("data-toggle", "collapse");
     assign.setAttribute("href", "#description-" + assignments[i].id);
@@ -211,7 +212,7 @@ async function displayNewAssignment(newAssignment) {
   cardHeader.setAttribute("id", "assnHeader-" + id);
 
   let assign = document.createElement("button");
-  assign.setAttribute("onclick", "toggleButton();");
+  assign.setAttribute("onclick", "displayDetails(" + 0 + ");");
   assign.setAttribute("class", "defaultBtn");
   assign.setAttribute("data-toggle", "collapse");
   assign.setAttribute("href", "#description-" + id);
@@ -256,4 +257,70 @@ function deleteAssignmentClicked(id) {
     assignmentDiv.remove();
   }
   deleteAssignment(id);
+}
+
+async function displayDetails(id) {
+  //Get the assignment data based on assignment id
+  let assignment = await getAssignment(id);
+  console.log(assignment);
+
+  //Creating HTML elements to display assignment data
+  let parent = document.getElementById("details");
+
+  let containerDiv = document.createElement("div");
+  containerDiv.setAttribute("id", "containerDiv")
+
+  let controlBtns = document.createElement("div");
+  controlBtns.setAttribute("class", "details-assignment-name");
+  controlBtns.setAttribute("style", "justify-content:flex-end;");
+
+  let editBtn = document.createElement("button");
+  editBtn.setAttribute("class", "close-button");
+  editBtn.setAttribute("id", "editBtn");
+  editBtn.innerHTML = "Edit";
+
+  let closeBtn = document.createElement("button");
+  closeBtn.setAttribute("class", "close-button");
+  closeBtn.setAttribute("id", "closeBtn");
+  closeBtn.setAttribute("onclick", "closeDetail();");
+  closeBtn.innerHTML = "&times";
+
+  let assnName = document.createElement("div");
+  assnName.setAttribute("class", "details-title");
+  assnName.innerHTML = assignment.name;
+
+  let dueDate = document.createElement("div");
+  dueDate.setAttribute("class", "details-due-date");
+  dueDate.innerHTML = "Due Date: " + assignment.date + "&emsp;Tasks: ";
+
+  let checkBox = document.createElement("input");
+  checkBox.setAttribute("type", "checkbox");
+  checkBox.setAttribute("class", "detailsCheckBox");
+  checkBox.setAttribute("id", "detailsPointsBox");
+
+  let points = document.createElement("p");
+  points.setAttribute("class", "detailsCheckBox");
+  points.setAttribute("class", "detailsCheckBox");
+  points.setAttribute("id", "detailsPoints");
+  points.innerHTML = assignment.points + " points";
+
+  let desc = document.createElement("p");
+  desc.setAttribute("class", "details-desc");
+  desc.innerHTML = assignment.description;
+
+  parent.append(containerDiv);
+
+  containerDiv.append(controlBtns);
+
+  //appending to parent the controlbtns
+  controlBtns.append(editBtn);
+  controlBtns.append(closeBtn);
+
+  //appending to the parent the assignment stuff
+  containerDiv.append(assnName);
+  containerDiv.append(dueDate);
+  containerDiv.append(checkBox);
+  containerDiv.append(points);
+  containerDiv.append(desc);
+
 }
