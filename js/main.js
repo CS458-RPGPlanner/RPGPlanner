@@ -71,7 +71,7 @@ ipcMain.handle("getAllAssignments", async (event) => {
 
 // ipc of getAssignmentById for renderer
 ipcMain.handle("getAssignment", async (event, id) => {
-  const result = await getAssignmentById(id);
+  const result = await getAssignment(id);
   return result;
 });
 

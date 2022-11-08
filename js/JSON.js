@@ -73,7 +73,7 @@ async function getAssignments() {
  */
 async function getAssignment(id) {
   // return promise value after waiting
-  let result = await ipcRenderer.invoke("getAssignmentById", id);
+  let result = await ipcRenderer.invoke("getAssignment", id);
   return result;
 }
 
