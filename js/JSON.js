@@ -274,6 +274,12 @@ async function displayDetails(id) {
   controlBtns.setAttribute("class", "details-assignment-name");
   controlBtns.setAttribute("style", "justify-content:flex-end;");
 
+  let deleteBtn = document.createElement("button");
+  deleteBtn.setAttribute("class", "close-button");
+  deleteBtn.setAttribute("id", "deleteBtn");
+  deleteBtn.setAttribute("onclick", "deleteAssignmentClicked("+ id +"); closeDetail();");
+  deleteBtn.innerHTML = "Delete";
+
   let editBtn = document.createElement("button");
   editBtn.setAttribute("class", "close-button");
   editBtn.setAttribute("id", "editBtn");
@@ -313,6 +319,7 @@ async function displayDetails(id) {
   containerDiv.append(controlBtns);
 
   //appending to parent the controlbtns
+  controlBtns.append(deleteBtn);
   controlBtns.append(editBtn);
   controlBtns.append(closeBtn);
 
