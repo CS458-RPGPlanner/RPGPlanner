@@ -197,6 +197,8 @@ function getAllAssignments() {
  */
 // function to get assignment using the id of the assignment
 function getAssignment(id) {
+  let key = "Assignments";
+
   //grab the json information from the json with the key
   let tempObj = storage.getSync(key);
   //loop over all the items in the json array
