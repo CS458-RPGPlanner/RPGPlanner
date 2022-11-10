@@ -271,20 +271,29 @@ async function displayDetails(id) {
   let containerDiv = document.createElement("div");
   containerDiv.setAttribute("id", "containerDiv")
 
+  //assignment name 
   let controlBtns = document.createElement("div");
   controlBtns.setAttribute("class", "details-assignment-name");
-  controlBtns.setAttribute("style", "justify-content:flex-end;");
+  //controlBtns.setAttribute("style", "justify-content:flex-end;");
 
   let editBtn = document.createElement("button");
-  editBtn.setAttribute("class", "close-button");
+  editBtn.setAttribute("class", "edit-button");
   editBtn.setAttribute("id", "editBtn");
-  editBtn.innerHTML = "Edit";
+  editBtn.innerHTML = "<i class='fas fa-pencil-alt'></i>";
 
-  let closeBtn = document.createElement("button");
+  let deleteBtn = document.createElement("button");
+  deleteBtn.setAttribute("class","delete-button");
+  deleteBtn.setAttribute("id","deleteBtn");
+  deleteBtn.setAttribute("onclick","deleteAssignment()");
+  deleteBtn.innerHTML = "<i class='far fa-trash-alt'></i>";
+
+  
+  
+let closeBtn = document.createElement("button");
   closeBtn.setAttribute("class", "close-button");
   closeBtn.setAttribute("id", "closeBtn");
   closeBtn.setAttribute("onclick", "closeDetail();");
-  closeBtn.innerHTML = "&times";
+  closeBtn.innerHTML = "&#8249";
 
   let assnName = document.createElement("div");
   assnName.setAttribute("class", "details-title");
@@ -309,13 +318,15 @@ async function displayDetails(id) {
   desc.setAttribute("class", "details-desc");
   desc.innerHTML = assignment.description;
 
+
+
   parent.append(containerDiv);
 
   containerDiv.append(controlBtns);
 
   //appending to parent the controlbtns
   controlBtns.append(editBtn);
-  controlBtns.append(closeBtn);
+  controlBtns.append(deleteBtn);
 
   //appending to the parent the assignment stuff
   containerDiv.append(assnName);
@@ -323,5 +334,6 @@ async function displayDetails(id) {
   containerDiv.append(checkBox);
   containerDiv.append(points);
   containerDiv.append(desc);
+  containerDiv.append(closeBtn);
 
 }
