@@ -412,7 +412,6 @@ async function displayDetails(id) {
   containerDiv.append(checkBox);
   containerDiv.append(points);
   containerDiv.append(desc);
-
 }
 
 async function updateArrows() {
