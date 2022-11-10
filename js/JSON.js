@@ -418,6 +418,7 @@ let closeBtn = document.createElement("button");
   containerDiv.append(checkBox);
   containerDiv.append(points);
   containerDiv.append(desc);
+  containerDiv.append(closeBtn);
 }
 
 async function updateArrows() {
