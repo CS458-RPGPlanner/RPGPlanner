@@ -135,42 +135,7 @@
 
 			<!--Assignment details popup-->
 			<div class="detailsPopup" id="details">
-				<!--<div>
-
-					<div class="details-assignment-name" style="justify-content:flex-end;">
-						<button class="close-button" id="editBtn">Edit</button>
-						<button class="close-button" id="closeBtn" onclick="closeDetail();">&times;</button>
-					</div>
-					<div class="details-title">Title</div>
-					<div>
-						<div class="details-due-date">
-							Due Date: September 30&emsp;Tasks: 0/3
-						</div>
-
-						<input type="checkbox" class="detailsCheckBox" id="detailsPointsBox"></input>
-						<p class="detailsCheckBox" id="detailsPoints">Assignment Points</p>
-						<p class="details-desc">Cool Description</p>
-						<div style="height:150px;overflow:auto;">
-							<div>
-								<div class="card-header">
-									<button onclick="toggleButton(this.id);" class="defaultBtn task">
-										Task 1
-									</button>
-								</div>
-								<div class="card-header">
-									<button onclick="toggleButton(this.id);" class="defaultBtn task">
-										Task 2
-									</button>
-								</div>
-								<div class="card-header">
-									<button onclick="toggleButton(this.id);" class="defaultBtn task">
-										Task 3
-									</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>-->
+				<!--Details go here-->
 			</div>
 		</div>
 	</div>
@@ -179,20 +144,22 @@
 	</div>
 	<script>
 		function toggleButton(clickedID) {
-			/*Add a get element for the back button or a double click from assn/task*/
-			/*Get CreateBtn info*/
-			//div that holds both create assignment and details div
+			//get div that holds both create assignment and details div and parse the clickedID for the assignment ID
 			let assnId = clickedID.substring(14);
-
 			let dDiv = document.getElementById("details");
 
 			if (document.getElementById("assignmentDiv")) {
+				//Remove create assignment and display details
 				let assignmentDiv = document.getElementById("assignmentDiv");
 				console.log(assignmentDiv);
 				assignmentDiv.remove();
 				displayDetails(assnId);
-			}
-			else {
+			} else if (containerDiv) {
+				//If details already displayed, display newly clicked details
+				assnId = clickedID.substring(14);
+				containerDiv.remove();
+				displayDetails(assnId);
+			} else {
 				//remove the containerDiv
 				let containerDiv = document.getElementById("containerDiv");
 				console.log(containerDiv);
