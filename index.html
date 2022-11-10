@@ -156,7 +156,6 @@
 				displayDetails(assnId);
 			} else if (containerDiv) {
 				//If details already displayed, display newly clicked details
-				assnId = clickedID.substring(14);
 				containerDiv.remove();
 				displayDetails(assnId);
 			} else {
@@ -168,7 +167,6 @@
 				//creating div for create assignment 
 				let createDiv = document.createElement("div");
 				createDiv.setAttribute("id", "assignmentDiv");
-
 
 				let createBtn = document.createElement("button")
 				createBtn.setAttribute("id", "createAssnBtn");
