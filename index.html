@@ -9,14 +9,14 @@
 	<script>if (typeof module === 'object') { window.module = module; module = undefined; }
 	</script>
 	<!--Accordian Links-->
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
-	</script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
-	</script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
-	</script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+    </script>
 	<!--Connection to CSS styleSheet-->
 	<link rel="stylesheet" href="css\styles.css">
 	<!--Connection to JSON javascript-->
@@ -49,61 +49,7 @@
 
 		<div class="box item1">
 			<div id="accordion">
-				<div class="card">
-					<div id="assnHeader-001" class="card-header">
-						<button onclick="toggleButton(this.id)" id="assnBtn_001" class="defaultBtn"
-							data-toggle="collapse" href="#description1">
-							<p class="assignment-name">Test Assignment Functionality</p>
-							<div class="due-tasks">
-								Due Date: Oct 31&emsp;Tasks: 0/3
-							</div>
-						</button>
-						<div class="check">
-							<p class="assignment-points">10 points</p>
-							<input type="checkbox" class="checkBox">
-						</div>
-					</div>
-					<div id="description1" class="collapse" data-parent="#accordion">
-						<div id="taskHeader-001" class="card-header">
-							<button onclick="toggleButton(this.id);" id="taskBtn_001" class="defaultBtn task">
-								<p class="assignment-name">Task 1</p>
-								<div class="due-tasks">
-									Due Date: Oct 31&emsp;
-								</div>
-							</button>
-							<div class="check">
-								<p class="assignment-points">10 points</p>
-								<input type="checkbox" class="checkBox">
-							</div>
-						</div>
-						<div class="card-header">
-							<button onclick="toggleButton(this.id);" id="taskBtn_002" class="defaultBtn task">
-								<p class="assignment-name">Task 2</p>
-								<div class="due-tasks">
-									Due Date: Nov 1&emsp;
-								</div>
-							</button>
-							<div class="check">
-								<p class="assignment-points">10 points</p>
-								<input type="checkbox" class="checkBox">
-							</div>
-						</div>
-						<div class="card-header">
-							<button onclick="toggleButton(this.id);" id="taskBtn_003" class="defaultBtn task">
-								<p class="assignment-name">Task 3</p>
-								<div class="due-tasks">
-									Due Date: Nov 3&emsp;
-								</div>
-							</button>
-							<div class="check">
-								<p class="assignment-points">10 points</p>
-								<input type="checkbox" class="checkBox">
-							</div>
-						</div>
-					</div>
-				</div>
 			</div>
-
 		</div>
 		<div class="box item2">Undated Assignment</div>
 		<div class="box item3">Due Today</div>

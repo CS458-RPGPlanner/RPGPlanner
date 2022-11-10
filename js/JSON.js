@@ -156,10 +156,14 @@ async function displayAssignments() {
 
     let assign = document.createElement("button");
     assign.setAttribute("id", "assignmentBtn-" + assignments[i].id);
-    assign.setAttribute("onclick", "toggleButton(this.id)");
+    assign.setAttribute("onclick", "toggleButton(this.id); updateArrows()");
     assign.setAttribute("class", "defaultBtn");
     assign.setAttribute("data-toggle", "collapse");
     assign.setAttribute("href", "#description-" + assignments[i].id);
+
+    // let arrow = document.createElement("i");
+    // arrow.setAttribute("class", "fa fa-chevron-up");
+    // arrow.setAttribute("id", "arrow-" + assignments[i].id);
 
     let assignName = document.createElement("p");
     assignName.setAttribute("class", "assignment-name");
@@ -183,23 +187,32 @@ async function displayAssignments() {
     check.appendChild(assignPoints);
     check.appendChild(checkbox);
 
+    //assign.appendChild(arrow);
     assign.appendChild(assignName);
     assign.appendChild(dueTasks);
 
     cardHeader.appendChild(assign);
     cardHeader.appendChild(check);
 
-    card.append(cardHeader);
+    let desc = document.createElement("div");
+	  desc.setAttribute("class", "collapse");
+	  desc.setAttribute("id", "description-" + assignments[i].id);
+	  desc.setAttribute("data-parent", "#accordion");
+    
+    card.appendChild(cardHeader);
+    card.appendChild(desc);
 
     parent.append(card);
   }
+
+  displayTasks();
 }
 
 // displays a newly created assignment
 async function displayNewAssignment(newAssignment) {
   // grabs the assignment array so that it can grab the newest assignment
   let assignments = await getAssignments();
-  let id = assignments.length;
+  let id = assignments[assignments.length-1].id + 1;
   let parent = document.getElementById("accordion");
 
   // creating the necessary HTML elements for the new assignment
@@ -212,10 +225,15 @@ async function displayNewAssignment(newAssignment) {
   cardHeader.setAttribute("id", "assnHeader-" + id);
 
   let assign = document.createElement("button");
-  assign.setAttribute("onclick", "displayDetails(" + 0 + ");");
+  assign.setAttribute("id", "assignmentBtn-" + id);
+  assign.setAttribute("onclick", "toggleButton(this.id); updateArrows()");
   assign.setAttribute("class", "defaultBtn");
   assign.setAttribute("data-toggle", "collapse");
   assign.setAttribute("href", "#description-" + id);
+
+  // let arrow = document.createElement("i");
+  // arrow.setAttribute("class", "fa fa-chevron-up");
+  // arrow.setAttribute("id", "arrow-" + id);
 
   let assignName = document.createElement("p");
   assignName.setAttribute("class", "assignment-name");
@@ -239,17 +257,82 @@ async function displayNewAssignment(newAssignment) {
   check.appendChild(assignPoints);
   check.appendChild(checkbox);
 
+  //assign.appendChild(arrow);
   assign.appendChild(assignName);
   assign.appendChild(dueTasks);
 
   cardHeader.appendChild(assign);
   cardHeader.appendChild(check);
 
-  card.append(cardHeader);
+  let desc = document.createElement("div");
+	desc.setAttribute("class", "collapse");
+	desc.setAttribute("id", "description-" + id);
+	desc.setAttribute("data-parent", "#accordion");
+  
+  card.appendChild(cardHeader);
+  card.appendChild(desc);
 
   parent.append(card);
 }
 
+// displays stored tasks to assignments
+async function displayTasks() {
+  let tasks = await getAllTasks();
+
+  for (let i = 0; i < tasks.length; i++) {
+    let parent = document.getElementById("description-" + tasks[i].assignmentId);
+
+    let exists = document.getElementById("arrow-" + tasks[i].assignmentId);
+    if(typeof(exists) == 'undefined' || exists == null){      
+    let arrow = document.createElement("i");
+    arrow.setAttribute("class", "fa fa-chevron-up");
+    arrow.setAttribute("id", "arrow-" + tasks[i].assignmentId);
+
+    let subParent = document.getElementById("assignmentBtn-" + tasks[i].assignmentId);
+    subParent.insertBefore(arrow, subParent.firstChild);
+    }
+
+    let taskHeader = document.createElement("div");
+    taskHeader.setAttribute("id", "taskHeader-" + tasks[i].id);
+    taskHeader.setAttribute("class", "card-header");
+
+    let task = document.createElement("button");
+    task.setAttribute("class", "defaultBtn task");
+    task.setAttribute("id", "taskBtn-" + tasks[i].id);
+    task.setAttribute("data-toggle", "collapse");
+
+    let taskName = document.createElement("p");
+    taskName.setAttribute("class", "assignment-name");
+    taskName.innerHTML = tasks[i].name;
+
+    let due = document.createElement("div");
+    due.setAttribute("class", "due-tasks");
+    due.innerHTML = "Due Date: " + tasks[i].date;
+
+    let check = document.createElement("div");
+    check.setAttribute("class", "check");
+
+    let taskPoints = document.createElement("p");
+    taskPoints.setAttribute("class", "assignment-points");
+    taskPoints.innerHTML = tasks[i].points + " points";
+
+    let checkbox = document.createElement("input");
+    checkbox.setAttribute("type", "checkbox");
+    checkbox.setAttribute("class", "checkBox");
+
+    check.appendChild(taskPoints);
+    check.appendChild(checkbox);
+
+    task.appendChild(taskName);
+    task.appendChild(due);
+
+    taskHeader.appendChild(task);
+    taskHeader.appendChild(check);
+
+    parent.append(taskHeader);
+  }
+}
+  
 function deleteAssignmentClicked(id) {
 
   let assignmentDiv = document.getElementById("assignment-" + id);
@@ -329,5 +412,22 @@ async function displayDetails(id) {
   containerDiv.append(checkBox);
   containerDiv.append(points);
   containerDiv.append(desc);
+}
 
+async function updateArrows() {
+  // Add up down arrow for collapse element which
+  // is open by default
+  $(".collapse.show").each(function () {
+      $(this).prev(".card-header").find(".fa")
+          .addClass("fa-chevron-down").removeClass("fa-chevron-up");
+  });
+  // Toggle up down arrow icon on show hide
+  // of collapse element
+  $(".collapse").on('show.bs.collapse', function () {
+      $(this).prev(".card-header").find(".fa")
+          .removeClass("fa-chevron-up").addClass("fa-chevron-down");
+  }).on('hide.bs.collapse', function () {
+      $(this).prev(".card-header").find(".fa")
+          .removeClass("fa-chevron-down").addClass("fa-chevron-up");
+  });
 }
