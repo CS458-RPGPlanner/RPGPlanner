@@ -432,3 +432,18 @@
      display: flex;
      justify-content: flex-end;
    }
+
+   div#assignmentDiv {
+     height: 100%;
+     width: 100%;
+   }
+
+   div#containerDiv {
+     height: 100%;
+     width: 100%;
+   }
+
+   #details {
+     height: 100%;
+     width: 100%;
+   }
