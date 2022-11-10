@@ -1,7 +1,7 @@
    /*Boxes*/
    .box {
      border: ridge;
-     border-color: black;
+     border-color:  rgb(64, 5, 106);
    }
 
    .box.item1 {
@@ -47,12 +47,12 @@
        'UndatedAssignment UndatedAssignment  Viewport Viewport Viewport Viewport';
      gap: 20px;
      background-color: #365563;
-     margin: auto;
      width: 1400px;
      height: 750px;
+     margin: auto;
      padding: 20px;
      border: ridge medium;
-     border-color: black;
+     border-color: rgb(64, 5, 106);
    }
 
    .grid-container>div {
@@ -107,17 +107,17 @@
      bottom: 0px;
    }
 
-   /* changes tab buttons on click
-   /* .tabButtons:focus{
-    height: 75px;
-    bottom: 0px;
-    font-size: 0px;
+    .tabButtons:focus{
+    /*height: 75px;
+    bottom: 0px; */
+    outline: none;
+    /*font-size: 0px; */
    }
    .tabButtons:active{
     height: 75px;
     bottom: 0px;
    }
-   */
+   
 
    /* The about link: 20px from the top with a green background */
    #RPG {
@@ -125,22 +125,15 @@
      height: 80px;
      background-color: #365563;
      border: ridge 2px;
-     border-color: darkslateblue;
+     border-color: rgb(64, 5, 106);
    }
 
    #profile {
      top: 255px;
      height: 80px;
      background-color: #365563;
-
      border: ridge 2px;
-     border-color: darkslateblue;
-     /* Blue */
-   }
-
-   .body {
-     margin-top: 5%;
-     background-color: darkcyan;
+     border-color: rgb(64, 5, 106);
    }
 
    .createAssn {
@@ -151,8 +144,8 @@
      text-align: center;
      text-decoration: none;
      outline: none;
-     color: #fff;
-     background-color: #4CAF50;
+     color: black;
+     background-color: #18f0c8;
      border: none;
      border-radius: 15px;
      box-shadow: 0 9px #999;
@@ -161,11 +154,13 @@
    }
 
    .createAssn:hover {
-     background-color: #3e8e41
+     background-color: #40f1dfa9;
    }
-
+   .createAssn:focus{
+    outline: none;
+   }
    .createAssn:active {
-     background-color: #3e8e41;
+     background-color: #40f1df;
      box-shadow: 0 5px #666;
      transform: translateY(4px);
    }
@@ -236,7 +231,10 @@
 
    .body {
      font-family: 'Bahnschrift';
-     margin-top: 8%;
+     height: 100%;
+     margin-top: 5%;
+     place-content: center;
+     padding: 0;
      background-color: darkcyan;
    }
 
@@ -265,7 +263,8 @@
    .assignment-name {
      font-family: 'Bahnschrift SemiBold';
      font-size: 20px;
-     text-align: left;
+     text-align:left;
+     
    }
 
    .due-tasks {
@@ -300,6 +299,7 @@
    .checkBox {
      width: 50px;
      height: 50px;
+     cursor: pointer;
      border: 5px;
      margin-left: 5%
    }
@@ -326,7 +326,6 @@
      right: 28px;
      width: 280px;
    }
-
    /* The popup form - hidden by default */
    .form-popup {
      display: none;
@@ -336,14 +335,12 @@
      border: 3px solid #f1f1f1;
      z-index: 9;
    }
-
    /* Add styles to the form container */
    .form-container {
      max-width: 500px;
      padding: 10px;
      background-color: white;
    }
-
    /* Full-width input fields */
    .form-container input[type=text],
    .form-container input[type=password] {
@@ -392,16 +389,31 @@
      font-size: 20px;
      text-align: left;
      display: flex;
-     justify-content: space-between;
+     float: right;
+     /*justify-content: space-between; */
    }
 
+   .details-tasks-window
+   {
+    height:125px;
+    width: 550px;
+    margin-left: 5%;
+    overflow:auto;
+    
+   }
    .details-title {
      font-size: 40px;
      text-align: left;
      display: flex;
      justify-content: flex-start;
    }
+   .details-points
+   {
+    font-size: 10px;
+    display: flex;
+    justify-content: right;
 
+   }
    .details-due-tasks {
      display: flex;
      justify-content: flex-start;
@@ -411,24 +423,84 @@
    .details-due-date {
      font-size: 15px;
      text-align: left;
+     text-indent: 5%;
    }
 
    .details-desc {
      text-align: left;
      font-size: 15px;
+     text-indent: 5%;
    }
 
+   .edit-button
+   {
+    font-size: 25px;
+    font-weight: bold;
+    height:35px;
+    width:35px;
+    margin:3%;
+    cursor: pointer;
+    background-color:#d7dde0;
+    border:none;
+    color: #000;
+    justify-content: flex-end;
+    top: 0px;
+    float: right;
+    text-align: left;
+   }
+   .edit-button:focus{
+    outline: none;
+   }
    .close-button {
-     font-size: 15px;
+     font-size: 40px;
      font-weight: bold;
+     background-color:#d7dde0;
      color: #000;
+     cursor: pointer;
+     height: 35px;
+     width: 20px;
+     justify-content: flex-start;
+     top: 0px;
+     float:left;
+     border:none;
      text-align: right;
    }
+   .close-button:focus
+   {
+    outline: none;
+   }
+
+   .delete-button
+   {
+    font-size: 25px;
+    font-weight: bold;
+    height:35px;
+    width:35px;
+    cursor: pointer;
+    background-color:#d7dde0;
+    border:none;
+    color: #000;
+    justify-content: flex-end;
+    top: 0px;
+    float: right;
+    text-align: left;
+   }
+
+  .delete-button:focus
+  {
+    outline: none;
+  }
 
    .detailsCheckBox {
-     top: auto;
+     border: 5px;
+     cursor: pointer;
+     margin-right: 2%;
+     margin-left: 2%;
      float: right;
-     display: flex;
+     height: 40px;
+     width: 40px;
+     font-size: 25px;
+     display:flex;
      justify-content: flex-end;
    }
 

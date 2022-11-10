@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -19,6 +18,8 @@
     </script>
 	<!--Connection to CSS styleSheet-->
 	<link rel="stylesheet" href="css\styles.css">
+
+	<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 	<!--Connection to JSON javascript-->
 	<script src="js\JSON.js"></script>
 	<script>
@@ -88,8 +89,10 @@
 						<button class="close-button" id="editBtn">Edit</button>
 						<button class="close-button" id="closeBtn" onclick="closeDetail();">&times;</button>
 					</div>
-					<div class="details-title">Title</div>
+				</div>	
+
 					<div>
+						<div class="details-title">Title</div>
 						<div class="details-due-date">
 							Due Date: September 30&emsp;Tasks: 0/3
 						</div>
@@ -97,7 +100,7 @@
 						<input type="checkbox" class="detailsCheckBox" id="detailsPointsBox"></input>
 						<p class="detailsCheckBox" id="detailsPoints">Assignment Points</p>
 						<p class="details-desc">Cool Description</p>
-						<div style="height:150px;overflow:auto;">
+						<div class="details-tasks-window">
 							<div>
 								<div class="card-header">
 									<button onclick="toggleButton(this.id);" class="defaultBtn task">
@@ -114,8 +117,12 @@
 										Task 3
 									</button>
 								</div>
-							</div>
+
 						</div>
+
+						
+						</div>
+						<button class="close-button" onclick="closeDetail();">&#8249;</button>
 					</div>
 				</div>-->
 			</div>
