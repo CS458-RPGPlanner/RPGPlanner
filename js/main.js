@@ -93,6 +93,12 @@ ipcMain.handle("getAllTasks", async (event) => {
   return result;
 });
 
+// ipc of deleteAssignment for renderer
+ipcMain.handle("deleteAssignment", async (event, id) => {
+  const result = await deleteAssignment(id);
+  return result;
+});
+
 /**
  * @description create a new task in the system with incrementing task number
  * @todo not completed yet
@@ -142,12 +148,6 @@ function getAllTasks(name) {
     return "";
   }
 }
-
-// ipc of deleteAssignment for renderer
-ipcMain.handle("deleteAssignment", async (event, id) => {
-  const result = await deleteAssignment(id);
-  return result;
-});
 
 /**
  * @description creates an assignment from the object passed in
