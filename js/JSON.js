@@ -222,7 +222,7 @@ async function displayNewAssignment(newAssignment) {
   cardHeader.setAttribute("id", "assnHeader-" + id);
 
   let assign = document.createElement("button");
-  assign.setAttribute("onclick", "displayDetails(" + 0 + ");");
+  assign.setAttribute("onclick", "toggleButton(this.id)");
   assign.setAttribute("class", "defaultBtn");
   assign.setAttribute("data-toggle", "collapse");
   assign.setAttribute("href", "#description-" + id);
