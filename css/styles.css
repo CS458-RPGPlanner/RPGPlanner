@@ -504,6 +504,13 @@
      justify-content: flex-end;
    }
 
+   .fa-chevron-up, .fa-chevron-down {
+     position: sticky;
+     float: left;
+     margin-top: 20px;
+     padding-right: 10px;
+   }
+   
    div#assignmentDiv {
      height: 100%;
      width: 100%;
