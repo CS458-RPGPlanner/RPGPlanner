@@ -5,21 +5,6 @@
 const { ipcRenderer } = require("electron");
 
 // Function to delete an assignment based on the id of the assignment
-// function deleteAssignment(id) {
-//   let key = "Assignments";
-//   currentArray = storage.get;
-//   storage.get(key, function (error, data) {
-//     //check to see if there are more than 0 assignments
-//     if (data != null && data.length > 0) {
-//       //pop the assignment at location of id
-//       data.pop(id);
-//       storage.set(key, data, function (error) {
-//         if (error) throw error;
-//       });
-//     }
-//   });
-// }
-// deleteAssignment(4);
 
 // Renderer process
 
@@ -74,6 +59,12 @@ async function getAssignments() {
 async function getAssignment(id) {
   // return promise value after waiting
   let result = await ipcRenderer.invoke("getAssignment", id);
+  return result;
+}
+
+async function deleteAssignment(id) {
+  // return promise value after waiting
+  let result = await ipcRenderer.invoke("deleteAssignment", id);
   return result;
 }
 
@@ -141,7 +132,6 @@ function saveAssignment() {
   // close the form of the new assignment
   closeForm();
 }
-
 /**
  * @description display assignments in the ui
  */
@@ -260,6 +250,15 @@ async function displayNewAssignment(newAssignment) {
   parent.append(card);
 }
 
+function deleteAssignmentClicked(id) {
+
+  let assignmentDiv = document.getElementById("assignment-" + id);
+  if (assignmentDiv) {
+    assignmentDiv.remove();
+  }
+  deleteAssignment(id);
+}
+
 async function displayDetails(id) {
   //Get the assignment data based on assignment id
   let assignment = await getAssignment(id);
@@ -274,6 +273,12 @@ async function displayDetails(id) {
   let controlBtns = document.createElement("div");
   controlBtns.setAttribute("class", "details-assignment-name");
   controlBtns.setAttribute("style", "justify-content:flex-end;");
+
+  let deleteBtn = document.createElement("button");
+  deleteBtn.setAttribute("class", "close-button");
+  deleteBtn.setAttribute("id", "deleteBtn");
+  deleteBtn.setAttribute("onclick", "deleteAssignmentClicked("+ id +"); closeDetail();");
+  deleteBtn.innerHTML = "Delete";
 
   let editBtn = document.createElement("button");
   editBtn.setAttribute("class", "close-button");
@@ -314,6 +319,7 @@ async function displayDetails(id) {
   containerDiv.append(controlBtns);
 
   //appending to parent the controlbtns
+  controlBtns.append(deleteBtn);
   controlBtns.append(editBtn);
   controlBtns.append(closeBtn);
 

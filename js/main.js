@@ -69,7 +69,7 @@ ipcMain.handle("getAllAssignments", async (event) => {
   return result;
 });
 
-// ipc of getAssignmentById for renderer
+// ipc of getAssignment for renderer
 ipcMain.handle("getAssignment", async (event, id) => {
   const result = await getAssignment(id);
   return result;
@@ -90,6 +90,12 @@ ipcMain.handle("createTask", async (event, obj) => {
 // ipc of getAllAssignments for renderer
 ipcMain.handle("getAllTasks", async (event) => {
   const result = await getAllTasks();
+  return result;
+});
+
+// ipc of deleteAssignment for renderer
+ipcMain.handle("deleteAssignment", async (event, id) => {
+  const result = await deleteAssignment(id);
   return result;
 });
 
@@ -248,6 +254,27 @@ function editAssignment(obj) {
   });
 }
 
+/**
+ * @description delete an assignment by id 
+ * @param {*} id id of the assignment to delete
+ */
+function deleteAssignment(id) {
+  let key = "Assignments";
+
+  storage.get(key, function (error, data) {
+    // iterate throughout the assignments array
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].id == id) {
+        // delete selected assignment by id
+        data.splice(i, 1);
+      }
+    }
+    //set the new data set with the new assignment name for the assignment by id
+    storage.set(key, data, function (error) {
+      if (error) throw error;
+    });
+  });
+}
 /**
  * @todo testing to make sure everything works
  * @description edits a task by the object passed in
