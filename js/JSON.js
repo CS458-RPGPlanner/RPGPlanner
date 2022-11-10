@@ -2,7 +2,7 @@
  * @file JSON.js is the main file for the listeners and the html injection and manipulation
  * @author Pierce Heeschen, Max Lampa, and Tiernan
  */
-const { ipcRenderer } = require("electron");
+const { ipcRenderer, systemPreferences } = require("electron");
 
 // Function to delete an assignment based on the id of the assignment
 // function deleteAssignment(id) {
@@ -116,43 +116,67 @@ function saveAssignment() {
   // declare assignment fields for html form
   let points = document.getElementsByName("points")[0].value;
   let name = document.getElementsByName("name")[0].value;
-  let date = document.getElementsByName("date")[0].value;
+  let date = new Date(document.getElementsByName("date")[0].value);
   let description = document.getElementsByName("description")[0].value;
+  let validated = false;
 
-  // validation checks to see if fields have data
+  validated = validateAssignment(points,name,date,description);
+
+  if (validated == true) {
+    // new assignment to be created in the json
+    newAssignment = {
+      points,
+      date,
+      name,
+      description,
+    };
+
+    // create the actual assignment with the ipc
+    createAssignment(newAssignment);
+
+    // display the new assignment
+    displayNewAssignment(newAssignment);
+
+    // close the form of the new assignment
+    closeForm();
+}
+
+}
+
+function validateAssignment(points, name, date, description) {
+  let currentDate = new Date();
+  let testsFailed= 0;
+
+
   if (points == null || points == "") {
-    alert("Points can't be blank");
-    return false;
-  }
+    testsFailed++;
+    
+  } 
   if (name == null || name == "") {
-    alert("Name can't be blank");
-    return false;
-  }
+    testsFailed++;
+    
+  } 
   if (date == null || date == "") {
-    alert("Date can't be blank");
-    return false;
+    testsFailed++;
+    
+  } 
+  if (date < currentDate) {
+    testsFailed++;
+    
   }
   if (description == null || description == "") {
-    alert("Description can't be blank");
+    testsFailed++;
+  }
+  
+  if (testsFailed == 0) {
+    return true;
+  }
+
+  else {
     return false;
   }
 
-  // new assignment to be created in the json
-  newAssignment = {
-    points,
-    date,
-    name,
-    description,
-  };
 
-  // create the actual assignment with the ipc
-  createAssignment(newAssignment);
-
-  // display the new assignment
-  displayNewAssignment(newAssignment);
-
-  // close the form of the new assignment
-  closeForm();
 }
 
 /**
@@ -165,7 +189,7 @@ async function displayAssignments() {
   //testing to make sure that assignments are loaded correctly
   //alert(assignments[0]);
 
-  let parent = document.getElementById("accordion");
+  var parent = document.getElementById("accordion");
 
   //iterates through the array and creates needed HTML elements for each of the assignments
   for (let i = 0; i < assignments.length; i++) {
@@ -222,39 +246,39 @@ async function displayNewAssignment(newAssignment) {
   // grabs the assignment array so that it can grab the newest assignment
   let assignments = await getAssignments();
   let id = assignments.length;
-  let parent = document.getElementById("accordion");
+  var parent = document.getElementById("accordion");
 
   // creating the necessary HTML elements for the new assignment
-  let card = document.createElement("div");
+  var card = document.createElement("div");
   card.setAttribute("class", "card");
   card.setAttribute("id", "assignment-" + id);
 
-  let cardHeader = document.createElement("div");
+  var cardHeader = document.createElement("div");
   cardHeader.setAttribute("class", "card-header");
   cardHeader.setAttribute("id", "assnHeader-" + id);
 
-  let assign = document.createElement("button");
+  var assign = document.createElement("button");
   assign.setAttribute("onclick", "toggleButton();");
   assign.setAttribute("class", "defaultBtn");
   assign.setAttribute("data-toggle", "collapse");
   assign.setAttribute("href", "#description-" + id);
 
-  let assignName = document.createElement("p");
+  var assignName = document.createElement("p");
   assignName.setAttribute("class", "assignment-name");
   assignName.innerHTML = newAssignment.name;
 
-  let dueTasks = document.createElement("div");
+  var dueTasks = document.createElement("div");
   dueTasks.setAttribute("class", "due-tasks");
   dueTasks.innerHTML = "Due Date: " + newAssignment.date + "&emsp;Tasks: ";
 
-  let check = document.createElement("div");
+  var check = document.createElement("div");
   check.setAttribute("class", "check");
 
-  let assignPoints = document.createElement("p");
+  var assignPoints = document.createElement("p");
   assignPoints.setAttribute("class", "assignment-points");
   assignPoints.innerHTML = newAssignment.points + " points";
 
-  let checkbox = document.createElement("input");
+  var checkbox = document.createElement("input");
   checkbox.setAttribute("type", "checkbox");
   checkbox.setAttribute("class", "checkBox");
 

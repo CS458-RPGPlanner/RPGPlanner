@@ -2,8 +2,6 @@
 <html>
 
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 	<!--Accordian Links-->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
 		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -23,17 +21,39 @@
 			displayAssignments();
 		});
 	</script>
+	<script>
+		var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+		var toastList = toastElList.map(function (toastEl) {
+  		return new boosted.Toast(toastEl, option)
+})
+	</script>
+
+
 </head>
 
 <body class="body">
-
+	<div aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;" id="toast">
+		<div class="toast" style="position: absolute; top: 0; right: 0;">
+		  <div class="toast-header">
+			<img src="..." class="rounded mr-2" alt="...">
+			<strong class="mr-auto">Bootstrap</strong>
+			<small>11 mins ago</small>
+			<button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+			  <span aria-hidden="true">&times;</span>
+			</button>
+		  </div>
+		  <div class="toast-body">
+			Hello, world! This is a toast message.
+		  </div>
+		</div>
+	  </div>
 	<!--Nav Tabs-->
 	<div id="mySidenav" class="sidenav">
 		<a href="#" id="RPG">RPG</a>
 		<a href="#" id="profile">PROFILE</a>
 
 	</div>
-
+	
 	<div class="grid-container">
 		<div class="box item5">
 			<!--Tester Tabs-->
@@ -104,11 +124,11 @@
 		<div class="box item4">
 			<!--createAssignment button form-->
 			<button id="createAssnBtn" class="createAssn" onclick="openForm()">Create Assignment</button>
-
+			
 			<div class="form-popup" id="myForm">
 				<form action="/action_page.php" class="form-container">
 					<h1>Create Assignment</h1>
-
+					<p hidden></p>
 					<label for="name"><b>Name</b></label>
 					<input type="text" placeholder="Enter Name" name="name" maxlength="50" required>
 
@@ -168,7 +188,7 @@
 	</div>
 	</div>
 	</div>
-	</div>
+	
 	<script>
 		function toggleButton(clickedID) {
 			/*Add a get element for the back button or a double click from assn/task*/
