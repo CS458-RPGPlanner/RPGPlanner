@@ -11,7 +11,6 @@ const os = require("os");
 const storage = require("electron-json-storage");
 const path = require("path");
 // selenium stuffs
-const { addConsoleHandler } = require("selenium-webdriver/lib/logging");
 const { resolve } = require("path");
 
 /**
