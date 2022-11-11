@@ -1,527 +1,518 @@
-   /*Boxes*/
-   .box {
-     border: ridge;
-     border-color:  rgb(64, 5, 106);
-   }
+/*Boxes*/
+.box {
+  border: ridge;
+  border-color: rgb(64, 5, 106);
+}
 
-   .box.item1 {
-     grid-area: DatedAssignment;
-     height: 375px;
-     width: 600px;
-     /*width: 600px;*/
-   }
+.box.item1 {
+  grid-area: DatedAssignment;
+  height: 375px;
+  width: 600px;
+  /*width: 600px;*/
+}
 
-   .box.item2 {
-     grid-area: UndatedAssignment;
-     height: 175px;
-     width: 600px;
-     /*width: 600px;*/
-   }
+.box.item2 {
+  grid-area: UndatedAssignment;
+  height: 175px;
+  width: 600px;
+  /*width: 600px;*/
+}
 
-   .box.item3 {
-     grid-area: DueToday;
-     height: 200px;
-     width: 735px;
-     /*width:700px;*/
-   }
+.box.item3 {
+  grid-area: DueToday;
+  height: 200px;
+  width: 735px;
+  /*width:700px;*/
+}
 
-   .box.item4 {
-     grid-area: Viewport;
-     height: 350px;
-     width: 735px;
-   }
+.box.item4 {
+  grid-area: Viewport;
+  height: 350px;
+  width: 735px;
+}
 
-   .box.item5 {
-     grid-area: Tab;
-     height: 100px;
-   }
+.box.item5 {
+  grid-area: Tab;
+  height: 100px;
+}
 
-   /*Grid*/
-   .grid-container {
-     display: grid;
-     grid-template-areas:
-       'Tab Tab Tab Tab Tab Tab'
-       'DatedAssignment DatedAssignment  DueToday DueToday DueToday DueToday'
-       'DatedAssignment DatedAssignment  Viewport Viewport Viewport Viewport'
-       'DatedAssignment DatedAssignment  Viewport Viewport Viewport Viewport'
-       'UndatedAssignment UndatedAssignment  Viewport Viewport Viewport Viewport';
-     gap: 20px;
-     background-color: #365563;
-     width: 1400px;
-     height: 750px;
-     margin: auto;
-     padding: 20px;
-     border: ridge medium;
-     border-color: rgb(64, 5, 106);
-   }
+/*Grid*/
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    "Tab Tab Tab Tab Tab Tab"
+    "DatedAssignment DatedAssignment  DueToday DueToday DueToday DueToday"
+    "DatedAssignment DatedAssignment  Viewport Viewport Viewport Viewport"
+    "DatedAssignment DatedAssignment  Viewport Viewport Viewport Viewport"
+    "UndatedAssignment UndatedAssignment  Viewport Viewport Viewport Viewport";
+  gap: 20px;
+  background-color: #365563;
+  width: 1400px;
+  height: 750px;
+  margin: auto;
+  padding: 20px;
+  border: ridge medium;
+  border-color: rgb(64, 5, 106);
+}
 
-   .grid-container>div {
-     background-color: rgba(255, 255, 255, 0.8);
-     text-align: center;
-     padding: 20px;
-     font-size: 30px;
-   }
+.grid-container > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 20px;
+  font-size: 30px;
+}
 
-   #mySidenav a {
-     position: absolute;
-     /* Position them relative to the browser window */
-     left: -120px;
-     /* Position them outside of the screen */
-     transition: 0.3s;
-     /* Add transition on hover */
-     padding: 15px;
-     /* 15px padding */
-     width: 170px;
-     /* Set a specific width */
-     text-decoration: none;
-     /* Remove underline */
-     font-size: 20px;
-     /* Increase font size */
-     color: white;
-     /* White text color */
-     border-radius: 0 5px 5px 0;
-     /* Rounded corners on the top right and bottom right side */
-   }
+#mySidenav a {
+  position: absolute;
+  /* Position them relative to the browser window */
+  left: -120px;
+  /* Position them outside of the screen */
+  transition: 0.3s;
+  /* Add transition on hover */
+  padding: 15px;
+  /* 15px padding */
+  width: 170px;
+  /* Set a specific width */
+  text-decoration: none;
+  /* Remove underline */
+  font-size: 20px;
+  /* Increase font size */
+  color: white;
+  /* White text color */
+  border-radius: 0 5px 5px 0;
+  /* Rounded corners on the top right and bottom right side */
+}
 
-   #mySidenav a:hover {
-     left: 0;
-     /* On mouse-over, make the elements appear as they should */
-   }
+#mySidenav a:hover {
+  left: 0;
+  /* On mouse-over, make the elements appear as they should */
+}
 
-   /*Styling for tab buttons*/
-   .tabButtons {
-     height: 50px;
-     width: 10%;
-     background-color: darkcyan;
-     position: relative;
-     bottom: -25px;
-     gap: 5px;
-     float: left;
-     border: ridge 2px black;
-     border-radius: 5px 5px 0 0;
-   }
+/*Styling for tab buttons*/
+.tabButtons {
+  height: 50px;
+  width: 10%;
+  background-color: darkcyan;
+  position: relative;
+  bottom: -25px;
+  gap: 5px;
+  float: left;
+  border: ridge 2px black;
+  border-radius: 5px 5px 0 0;
+}
 
-   /* Styling on hovering over tabs */
-   .tabButtons:hover {
-     height: 75px;
-     bottom: 0px;
-   }
+/* Styling on hovering over tabs */
+.tabButtons:hover {
+  height: 75px;
+  bottom: 0px;
+}
 
-    .tabButtons:focus{
-    /*height: 75px;
+.tabButtons:focus {
+  /*height: 75px;
     bottom: 0px; */
-    outline: none;
-    /*font-size: 0px; */
-   }
-   .tabButtons:active{
-    height: 75px;
-    bottom: 0px;
-   }
-   
+  outline: none;
+  /*font-size: 0px; */
+}
+.tabButtons:active {
+  height: 75px;
+  bottom: 0px;
+}
 
-   /* The about link: 20px from the top with a green background */
-   #RPG {
-     top: 155px;
-     height: 80px;
-     background-color: #365563;
-     border: ridge 2px;
-     border-color: rgb(64, 5, 106);
-   }
+/* The about link: 20px from the top with a green background */
+#RPG {
+  top: 155px;
+  height: 80px;
+  background-color: #365563;
+  border: ridge 2px;
+  border-color: rgb(64, 5, 106);
+}
 
-   #profile {
-     top: 255px;
-     height: 80px;
-     background-color: #365563;
-     border: ridge 2px;
-     border-color: rgb(64, 5, 106);
-   }
+#profile {
+  top: 255px;
+  height: 80px;
+  background-color: #365563;
+  border: ridge 2px;
+  border-color: rgb(64, 5, 106);
+}
 
-   .createAssn {
-     display: inline-block;
-     padding: 15px 25px;
-     font-size: 80%;
-     cursor: pointer;
-     text-align: center;
-     text-decoration: none;
-     outline: none;
-     color: black;
-     background-color: #18f0c8;
-     border: none;
-     border-radius: 15px;
-     box-shadow: 0 9px #999;
-     position: relative;
-     top: 40%;
-   }
+.createAssn {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 80%;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: black;
+  background-color: #18f0c8;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  position: relative;
+  top: 40%;
+}
 
-   .createAssn:hover {
-     background-color: #40f1dfa9;
-   }
-   .createAssn:focus{
-    outline: none;
-   }
-   .createAssn:active {
-     background-color: #40f1df;
-     box-shadow: 0 5px #666;
-     transform: translateY(4px);
-   }
+.createAssn:hover {
+  background-color: #40f1dfa9;
+}
+.createAssn:focus {
+  outline: none;
+}
+.createAssn:active {
+  background-color: #40f1df;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
 
-   /*Accordion assignments/tasks*/
-   #accordion {
-     margin: 2px;
-     overflow-y: scroll;
-     height: 300px;
-     max-height: 100%;
-     background-color: white;
-   }
+/*Accordion assignments/tasks*/
+#accordion {
+  margin: 2px;
+  overflow-y: scroll;
+  height: 300px;
+  max-height: 100%;
+  background-color: white;
+}
 
-   a:link {
-     text-decoration: none;
-     color: black;
-   }
+a:link {
+  text-decoration: none;
+  color: black;
+}
 
-   a:hover {
-     text-decoration: none;
-     color: black;
-   }
+a:hover {
+  text-decoration: none;
+  color: black;
+}
 
-   a:active {
-     text-decoration: none;
-     color: black;
-     outline: none;
-   }
+a:active {
+  text-decoration: none;
+  color: black;
+  outline: none;
+}
 
-   a:visited {
-     text-decoration: none;
-     color: black;
-     outline: none;
-   }
+a:visited {
+  text-decoration: none;
+  color: black;
+  outline: none;
+}
 
-   .card-header {
-     background-color: white;
-     height: 100px;
-   }
+.card-header {
+  background-color: white;
+  height: 100px;
+}
 
-   div .card-header:hover {
-     background-color: lightgrey !important;
-     transition: linear 0.5s;
-   }
+div .card-header:hover {
+  background-color: lightgrey !important;
+  transition: linear 0.5s;
+}
 
-   /*Scroll bars*/
-   /* width */
-   ::-webkit-scrollbar {
-     width: 20px;
-   }
+/*Scroll bars*/
+/* width */
+::-webkit-scrollbar {
+  width: 20px;
+}
 
-   /* Track */
-   ::-webkit-scrollbar-track {
-     box-shadow: inset 0 0 5px grey;
-     border-radius: 5px;
-   }
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 5px;
+}
 
-   /* Handle */
-   ::-webkit-scrollbar-thumb {
-     background: #686868;
-     border-radius: 5px;
-   }
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #686868;
+  border-radius: 5px;
+}
 
-   /* Handle on hover */
-   ::-webkit-scrollbar-thumb:hover {
-     background: #3B3B3B;
-   }
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #3b3b3b;
+}
 
-   .body {
-     font-family: 'Bahnschrift';
-     height: 100%;
-     margin-top: 5%;
-     place-content: center;
-     padding: 0;
-     background-color: darkcyan;
-   }
+.body {
+  font-family: "Bahnschrift";
+  height: 100%;
+  margin-top: 5%;
+  place-content: center;
+  padding: 0;
+  background-color: darkcyan;
+}
 
-   .defaultBtn {
-     width: 100%;
-     float: left;
-     border: none;
-     outline: none;
-     cursor: pointer;
-     display: block;
-     padding: 0;
-     background: none;
-   }
+.defaultBtn {
+  width: 100%;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: block;
+  padding: 0;
+  background: none;
+}
 
-   .defaultBtn:focus {
-     outline: none;
-   }
+.defaultBtn:focus {
+  outline: none;
+}
 
-   .defaultBtn.task {
-     margin-left: 5%;
-     margin-top: 0;
-     width: 95%;
-     float: none;
-   }
+.defaultBtn.task {
+  margin-left: 5%;
+  margin-top: 0;
+  width: 95%;
+  float: none;
+}
 
-   .assignment-name {
-     font-family: 'Bahnschrift SemiBold';
-     font-size: 20px;
-     text-align:left;
-     
-   }
+.assignment-name {
+  font-family: "Bahnschrift SemiBold";
+  font-size: 20px;
+  text-align: left;
+}
 
-   .due-tasks {
-     display: flex;
-     justify-content: flex-start;
-     font-size: 15px;
-   }
+.due-tasks {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 15px;
+}
 
-   .due-date {
-     font-size: 15px;
-   }
+.due-date {
+  font-size: 15px;
+}
 
-   .tasks-completed {
-     font-size: 15px;
-     margin-left: 10%
-   }
+.tasks-completed {
+  font-size: 15px;
+  margin-left: 10%;
+}
 
-   .check {
-     float: right;
-     position: relative;
-     bottom: 50px;
-     display: flex;
-     justify-content: flex-start;
-     height: 10px;
-   }
+.check {
+  float: right;
+  position: relative;
+  bottom: 50px;
+  display: flex;
+  justify-content: flex-start;
+  height: 10px;
+}
 
-   .assignment-points {
-     font-size: 17px;
-     cursor: default;
-   }
+.assignment-points {
+  font-size: 17px;
+  cursor: default;
+}
 
-   .checkBox {
-     width: 50px;
-     height: 50px;
-     cursor: pointer;
-     border: 5px;
-     margin-left: 5%
-   }
+.checkBox {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  border: 5px;
+  margin-left: 5%;
+}
 
-   /* Style for createAssignment form field */
-   body {
-     font-family: Arial, Helvetica, sans-serif;
-   }
+/* Style for createAssignment form field */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
 
-   * {
-     box-sizing: border-box;
-   }
+* {
+  box-sizing: border-box;
+}
 
-   /* Button used to open the contact form - fixed at the bottom of the page */
-   .open-button {
-     background-color: #555;
-     color: white;
-     padding: 16px 20px;
-     border: none;
-     cursor: pointer;
-     opacity: 0.8;
-     position: fixed;
-     bottom: 23px;
-     right: 28px;
-     width: 280px;
-   }
-   /* The popup form - hidden by default */
-   .form-popup {
-     display: none;
-     position: fixed;
-     bottom: 0;
-     right: 15px;
-     border: 3px solid #f1f1f1;
-     z-index: 9;
-   }
-   /* Add styles to the form container */
-   .form-container {
-     max-width: 500px;
-     padding: 10px;
-     background-color: white;
-   }
-   /* Full-width input fields */
-   .form-container input[type=text],
-   .form-container input[type=password] {
-     width: 100%;
-     padding: 15px;
-     margin: 5px 0 22px 0;
-     border: none;
-     background: #f1f1f1;
-   }
+/* Button used to open the contact form - fixed at the bottom of the page */
+.open-button {
+  background-color: #555;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  position: fixed;
+  bottom: 23px;
+  right: 28px;
+  width: 280px;
+}
+/* The popup form - hidden by default */
+.form-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 15px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
+/* Add styles to the form container */
+.form-container {
+  max-width: 500px;
+  padding: 10px;
+  background-color: white;
+}
+/* Full-width input fields */
+.form-container input[type="text"],
+.form-container input[type="password"] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
 
-   /* When the inputs get focus, do something */
-   .form-container input[type=text]:focus,
-   .form-container input[type=password]:focus {
-     background-color: #ddd;
-     outline: none;
-   }
+/* When the inputs get focus, do something */
+.form-container input[type="text"]:focus,
+.form-container input[type="password"]:focus {
+  background-color: #ddd;
+  outline: none;
+}
 
-   /* Set a style for the submit button */
-   .form-container .btn {
-     background-color: #04AA6D;
-     color: white;
-     padding: 16px 20px;
-     border: none;
-     cursor: pointer;
-     width: 100%;
-     margin-bottom: 10px;
-     opacity: 0.8;
-   }
+/* Set a style for the submit button */
+.form-container .btn {
+  background-color: #04aa6d;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 10px;
+  opacity: 0.8;
+}
 
-   /* Add a red background color to the cancel button */
-   .form-container .cancel {
-     background-color: red;
-   }
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
 
-   /* Add some hover effects to buttons */
-   .form-container .btn:hover,
-   .open-button:hover {
-     opacity: 1;
-     margin-left: 5%;
-     cursor: pointer;
-     margin-left: 5%;
-   }
+/* Add some hover effects to buttons */
+.form-container .btn:hover,
+.open-button:hover {
+  opacity: 1;
+  margin-left: 5%;
+  cursor: pointer;
+  margin-left: 5%;
+}
 
-   /*Formating for assignment details box*/
-   .details-assignment-name {
-     font-size: 20px;
-     text-align: left;
-     display: flex;
-     float: right;
-     /*justify-content: space-between; */
-   }
+/*Formating for assignment details box*/
+.details-assignment-name {
+  font-size: 20px;
+  text-align: left;
+  display: flex;
+  float: right;
+  /*justify-content: space-between; */
+}
 
-   .details-tasks-window
-   {
-    height:125px;
-    width: 550px;
-    margin-left: 5%;
-    overflow:auto;
-    
-   }
-   .details-title {
-     font-size: 40px;
-     text-align: left;
-     display: flex;
-     justify-content: flex-start;
-   }
-   .details-points
-   {
-    font-size: 10px;
-    display: flex;
-    justify-content: right;
+.details-tasks-window {
+  height: 125px;
+  width: 550px;
+  margin-left: 5%;
+  overflow: auto;
+}
+.details-title {
+  font-size: 40px;
+  text-align: left;
+  display: flex;
+  justify-content: flex-start;
+}
+.details-points {
+  font-size: 10px;
+  display: flex;
+  justify-content: right;
+}
+.details-due-tasks {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 15px;
+}
 
-   }
-   .details-due-tasks {
-     display: flex;
-     justify-content: flex-start;
-     font-size: 15px;
-   }
+.details-due-date {
+  font-size: 15px;
+  text-align: left;
+  text-indent: 5%;
+}
 
-   .details-due-date {
-     font-size: 15px;
-     text-align: left;
-     text-indent: 5%;
-   }
+.details-desc {
+  text-align: left;
+  font-size: 15px;
+  text-indent: 5%;
+}
 
-   .details-desc {
-     text-align: left;
-     font-size: 15px;
-     text-indent: 5%;
-   }
+.edit-button {
+  font-size: 25px;
+  font-weight: bold;
+  height: 35px;
+  width: 35px;
+  margin: 3%;
+  cursor: pointer;
+  background-color: #d7dde0;
+  border: none;
+  color: #000;
+  justify-content: flex-end;
+  top: 0px;
+  float: right;
+  text-align: left;
+}
+.edit-button:focus {
+  outline: none;
+}
+.close-button {
+  font-size: 40px;
+  font-weight: bold;
+  background-color: #d7dde0;
+  color: #000;
+  cursor: pointer;
+  height: 35px;
+  width: 20px;
+  justify-content: flex-start;
+  top: 0px;
+  float: left;
+  border: none;
+  text-align: right;
+}
+.close-button:focus {
+  outline: none;
+}
 
-   .edit-button
-   {
-    font-size: 25px;
-    font-weight: bold;
-    height:35px;
-    width:35px;
-    margin:3%;
-    cursor: pointer;
-    background-color:#d7dde0;
-    border:none;
-    color: #000;
-    justify-content: flex-end;
-    top: 0px;
-    float: right;
-    text-align: left;
-   }
-   .edit-button:focus{
-    outline: none;
-   }
-   .close-button {
-     font-size: 40px;
-     font-weight: bold;
-     background-color:#d7dde0;
-     color: #000;
-     cursor: pointer;
-     height: 35px;
-     width: 20px;
-     justify-content: flex-start;
-     top: 0px;
-     float:left;
-     border:none;
-     text-align: right;
-   }
-   .close-button:focus
-   {
-    outline: none;
-   }
+.delete-button {
+  font-size: 25px;
+  font-weight: bold;
+  height: 35px;
+  width: 35px;
+  cursor: pointer;
+  background-color: #d7dde0;
+  border: none;
+  color: #000;
+  justify-content: flex-end;
+  top: 0px;
+  float: right;
+  text-align: left;
+}
 
-   .delete-button
-   {
-    font-size: 25px;
-    font-weight: bold;
-    height:35px;
-    width:35px;
-    cursor: pointer;
-    background-color:#d7dde0;
-    border:none;
-    color: #000;
-    justify-content: flex-end;
-    top: 0px;
-    float: right;
-    text-align: left;
-   }
+.delete-button:focus {
+  outline: none;
+}
 
-  .delete-button:focus
-  {
-    outline: none;
-  }
+.detailsCheckBox {
+  border: 5px;
+  cursor: pointer;
+  margin-right: 2%;
+  margin-left: 2%;
+  float: right;
+  height: 40px;
+  width: 40px;
+  font-size: 25px;
+  display: flex;
+  justify-content: flex-end;
+}
 
-   .detailsCheckBox {
-     border: 5px;
-     cursor: pointer;
-     margin-right: 2%;
-     margin-left: 2%;
-     float: right;
-     height: 40px;
-     width: 40px;
-     font-size: 25px;
-     display:flex;
-     justify-content: flex-end;
-   }
+.fa-chevron-up,
+.fa-chevron-down {
+  position: sticky;
+  float: left;
+  margin-top: 20px;
+  padding-right: 10px;
+}
 
-   .fa-chevron-up, .fa-chevron-down {
-     position: sticky;
-     float: left;
-     margin-top: 20px;
-     padding-right: 10px;
-   }
-   
-   div#assignmentDiv {
-     height: 100%;
-     width: 100%;
-   }
+div#assignmentDiv {
+  height: 100%;
+  width: 100%;
+}
 
-   div#containerDiv {
-     height: 100%;
-     width: 100%;
-   }
+div#containerDiv {
+  height: 100%;
+  width: 100%;
+}
 
-   #details {
-     height: 100%;
-     width: 100%;
-   }
+#details {
+  height: 100%;
+  width: 100%;
+}

@@ -254,7 +254,7 @@ function editAssignment(obj) {
 }
 
 /**
- * @description delete an assignment by id 
+ * @description delete an assignment by id
  * @param {*} id id of the assignment to delete
  */
 function deleteAssignment(id) {

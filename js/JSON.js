@@ -195,10 +195,10 @@ async function displayAssignments() {
     cardHeader.appendChild(check);
 
     let desc = document.createElement("div");
-	  desc.setAttribute("class", "collapse");
-	  desc.setAttribute("id", "description-" + assignments[i].id);
-	  desc.setAttribute("data-parent", "#accordion");
-    
+    desc.setAttribute("class", "collapse");
+    desc.setAttribute("id", "description-" + assignments[i].id);
+    desc.setAttribute("data-parent", "#accordion");
+
     card.appendChild(cardHeader);
     card.appendChild(desc);
 
@@ -212,7 +212,7 @@ async function displayAssignments() {
 async function displayNewAssignment(newAssignment) {
   // grabs the assignment array so that it can grab the newest assignment
   let assignments = await getAssignments();
-  let id = assignments[assignments.length-1].id + 1;
+  let id = assignments[assignments.length - 1].id + 1;
   let parent = document.getElementById("accordion");
 
   // creating the necessary HTML elements for the new assignment
@@ -265,10 +265,10 @@ async function displayNewAssignment(newAssignment) {
   cardHeader.appendChild(check);
 
   let desc = document.createElement("div");
-	desc.setAttribute("class", "collapse");
-	desc.setAttribute("id", "description-" + id);
-	desc.setAttribute("data-parent", "#accordion");
-  
+  desc.setAttribute("class", "collapse");
+  desc.setAttribute("id", "description-" + id);
+  desc.setAttribute("data-parent", "#accordion");
+
   card.appendChild(cardHeader);
   card.appendChild(desc);
 
@@ -280,16 +280,20 @@ async function displayTasks() {
   let tasks = await getAllTasks();
 
   for (let i = 0; i < tasks.length; i++) {
-    let parent = document.getElementById("description-" + tasks[i].assignmentId);
+    let parent = document.getElementById(
+      "description-" + tasks[i].assignmentId
+    );
 
     let exists = document.getElementById("arrow-" + tasks[i].assignmentId);
-    if(typeof(exists) == 'undefined' || exists == null){      
-    let arrow = document.createElement("i");
-    arrow.setAttribute("class", "fa fa-chevron-up");
-    arrow.setAttribute("id", "arrow-" + tasks[i].assignmentId);
+    if (typeof exists == "undefined" || exists == null) {
+      let arrow = document.createElement("i");
+      arrow.setAttribute("class", "fa fa-chevron-up");
+      arrow.setAttribute("id", "arrow-" + tasks[i].assignmentId);
 
-    let subParent = document.getElementById("assignmentBtn-" + tasks[i].assignmentId);
-    subParent.insertBefore(arrow, subParent.firstChild);
+      let subParent = document.getElementById(
+        "assignmentBtn-" + tasks[i].assignmentId
+      );
+      subParent.insertBefore(arrow, subParent.firstChild);
     }
 
     let taskHeader = document.createElement("div");
@@ -332,9 +336,8 @@ async function displayTasks() {
     parent.append(taskHeader);
   }
 }
-  
-function deleteAssignmentClicked(id) {
 
+function deleteAssignmentClicked(id) {
   let assignmentDiv = document.getElementById("assignment-" + id);
   if (assignmentDiv) {
     assignmentDiv.remove();
@@ -351,13 +354,12 @@ async function displayDetails(id) {
   let parent = document.getElementById("details");
 
   let containerDiv = document.createElement("div");
-  containerDiv.setAttribute("id", "containerDiv")
+  containerDiv.setAttribute("id", "containerDiv");
 
-  //assignment name 
+  //assignment name
   let controlBtns = document.createElement("div");
   controlBtns.setAttribute("class", "details-assignment-name");
   //controlBtns.setAttribute("style", "justify-content:flex-end;");
-
 
   let editBtn = document.createElement("button");
   editBtn.setAttribute("class", "edit-button");
@@ -365,14 +367,15 @@ async function displayDetails(id) {
   editBtn.innerHTML = "<i class='fas fa-pencil-alt'></i>";
 
   let deleteBtn = document.createElement("button");
-  deleteBtn.setAttribute("class","delete-button");
-  deleteBtn.setAttribute("id","deleteBtn");
-  deleteBtn.setAttribute("onclick","deleteAssignmentClicked("+ id +");closeDetail();");
+  deleteBtn.setAttribute("class", "delete-button");
+  deleteBtn.setAttribute("id", "deleteBtn");
+  deleteBtn.setAttribute(
+    "onclick",
+    "deleteAssignmentClicked(" + id + ");closeDetail();"
+  );
   deleteBtn.innerHTML = "<i class='far fa-trash-alt'></i>";
 
-  
-  
-let closeBtn = document.createElement("button");
+  let closeBtn = document.createElement("button");
   closeBtn.setAttribute("class", "close-button");
   closeBtn.setAttribute("id", "closeBtn");
   closeBtn.setAttribute("onclick", "closeDetail();");
@@ -401,8 +404,6 @@ let closeBtn = document.createElement("button");
   desc.setAttribute("class", "details-desc");
   desc.innerHTML = assignment.description;
 
-
-
   parent.append(containerDiv);
 
   containerDiv.append(controlBtns);
@@ -410,7 +411,6 @@ let closeBtn = document.createElement("button");
   //appending to parent the controlbtns
   controlBtns.append(deleteBtn);
   controlBtns.append(editBtn);
-  
 
   //appending to the parent the assignment stuff
   containerDiv.append(assnName);
@@ -425,16 +425,27 @@ async function updateArrows() {
   // Add up down arrow for collapse element which
   // is open by default
   $(".collapse.show").each(function () {
-      $(this).prev(".card-header").find(".fa")
-          .addClass("fa-chevron-down").removeClass("fa-chevron-up");
+    $(this)
+      .prev(".card-header")
+      .find(".fa")
+      .addClass("fa-chevron-down")
+      .removeClass("fa-chevron-up");
   });
   // Toggle up down arrow icon on show hide
   // of collapse element
-  $(".collapse").on('show.bs.collapse', function () {
-      $(this).prev(".card-header").find(".fa")
-          .removeClass("fa-chevron-up").addClass("fa-chevron-down");
-  }).on('hide.bs.collapse', function () {
-      $(this).prev(".card-header").find(".fa")
-          .removeClass("fa-chevron-down").addClass("fa-chevron-up");
-  });
+  $(".collapse")
+    .on("show.bs.collapse", function () {
+      $(this)
+        .prev(".card-header")
+        .find(".fa")
+        .removeClass("fa-chevron-up")
+        .addClass("fa-chevron-down");
+    })
+    .on("hide.bs.collapse", function () {
+      $(this)
+        .prev(".card-header")
+        .find(".fa")
+        .removeClass("fa-chevron-down")
+        .addClass("fa-chevron-up");
+    });
 }
