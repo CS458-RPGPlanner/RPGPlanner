@@ -1,13 +1,14 @@
 #documentation
-./documentation/font
-./documentation/scripts
-./documentation/styles
+**/documentation/font/*
+**/documentation/scripts/*
+**/documentation/styles/*
 
 #css
-./css/bootstrap-4.4.1.css
+**/css/bootstrap-4.4.1.css
 
 #folders
 node_modules
+mock data
 out
 
 #home directory files
