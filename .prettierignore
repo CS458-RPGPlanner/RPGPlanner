@@ -1,0 +1,17 @@
+#documentation
+./documentation/font
+./documentation/scripts
+./documentation/styles
+
+#css
+./css/bootstrap-4.4.1.css
+
+#folders
+node_modules
+out
+
+#home directory files
+.gitignore
+package-lock.json
+package.json
+README.md
