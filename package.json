@@ -10,7 +10,8 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "document": "jsdoc ./js/main.js ./js/JSON.js -d documentation",
-    "format": "prettier -w ."
+    "format": "prettier -w .",
+    "docs": "light-server -o -s ./documentation/ index.html"
   },
   "author": "STOUT CS458",
   "license": "MIT",
@@ -21,6 +22,9 @@
     "@electron-forge/maker-squirrel": "^6.0.0-beta.67",
     "@electron-forge/maker-zip": "^6.0.0-beta.67",
     "electron": "^21.0.1",
+    "electron-reload": "^2.0.0-alpha.1",
+    "electron-reloader": "^1.2.3",
+    "light-server": "^2.9.1",
     "prettier": "2.7.1"
   },
   "dependencies": {

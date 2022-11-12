@@ -10,8 +10,11 @@ const os = require("os");
 //JSON Storage for electron
 const storage = require("electron-json-storage");
 const path = require("path");
-// selenium stuffs
 const { resolve } = require("path");
+
+try {
+  require("electron-reloader")(module);
+} catch {}
 
 /**
  * @description default electron window creation
