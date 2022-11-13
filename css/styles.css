@@ -2,6 +2,7 @@
 .box {
   border: ridge;
   border-color: rgb(64, 5, 106);
+  overflow-y: hidden;
 }
 
 .box.item1 {
@@ -334,6 +335,18 @@ div .card-header:hover {
   bottom: 23px;
   right: 28px;
   width: 280px;
+}
+
+.form-popup-background {
+  position: fixed;
+  background-color: #365563;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  opacity: .8;
+
 }
 
 /* The popup form - hidden by default */
