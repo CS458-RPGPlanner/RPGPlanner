@@ -305,6 +305,23 @@ div .card-header:hover {
   margin-left: 5%;
 }
 
+.checkBox.create {
+  margin-left: auto;
+}
+
+.checkBox-text {
+  padding-right: 5%;
+  margin-top: 5%;
+
+}
+
+.checkBox-createDiv {
+  display: flex;
+  float: right;
+  margin-right: 5%;
+  margin-top: 1%;
+}
+
 /* Button used to open the contact form - fixed at the bottom of the page */
 .open-button {
   background-color: #555;
@@ -403,7 +420,6 @@ div .card-header:hover {
   cursor: pointer;
   width: 100 px;
   margin-bottom: 10px;
-  opacity: 0.8;
   float: right;
   margin-right: 1%;
 }
