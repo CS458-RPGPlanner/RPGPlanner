@@ -1,231 +1,211 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-
-	<!-- Insert this line above script imports  -->
-	<script>if (typeof module === 'object') { window.module = module; module = undefined; }
-	</script>
-	<!--Accordian Links-->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+    <!-- Insert this line above script imports  -->
+    <script>
+      if (typeof module === "object") {
+        window.module = module;
+        module = undefined;
+      }
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
+    <!--Accordian Links-->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!--Connection to CSS styleSheet-->
+    <link rel="stylesheet" href="css\styles.css" />
+
+    <script
+      src="https://kit.fontawesome.com/a076d05399.js"
+      crossorigin="anonymous"
+    ></script>
+    <!--Connection to JSON javascript-->
+    <script src="js\JSON.js"></script>
+    <script>
+      // load the student when the page loads
+      window.addEventListener("load", function () {
+        displayAssignments();
+      });
     </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+    <!-- Insert this line after script imports -->
+    <script>
+      if (window.module) module = window.module;
     </script>
-	<!--Connection to CSS styleSheet-->
-	<link rel="stylesheet" href="css\styles.css">
+  </head>
 
-	<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-	<!--Connection to JSON javascript-->
-	<script src="js\JSON.js"></script>
-	<script>
-		// load the student when the page loads
-		window.addEventListener("load", function () {
-			displayAssignments();
-		});
-	</script>
-	<!-- Insert this line after script imports -->
-	<script>if (window.module) module = window.module;</script>
-</head>
+  <body class="body">
+    <!--Nav Tabs-->
+    <div id="mySidenav" class="sidenav">
+      <a href="#" id="RPG">RPG</a>
+      <a href="#" id="profile">PROFILE</a>
+    </div>
 
-<body class="body">
+    <div class="grid-container">
+      <div class="box item5">
+        <!--Tester Tabs-->
+        <button onclick="tabClicked()" class="tabButtons" id="allTag">
+          All
+        </button>
+        <button onclick="tabClicked()" class="tabButtons">Tag1</button>
+      </div>
 
-	<!--Nav Tabs-->
-	<div id="mySidenav" class="sidenav">
-		<a href="#" id="RPG">RPG</a>
-		<a href="#" id="profile">PROFILE</a>
+      <div class="box item1">
+        <div id="accordion"></div>
+      </div>
+      <div class="box item2">Undated Assignment</div>
+      <div class="box item3">Due Today</div>
+      <div class="box item4">
+        <!--createAssignment button form-->
+        <div id="assignmentDiv">
+          <button id="createAssnBtn" class="createAssn" onclick="openForm()">
+            Create Assignment
+          </button>
+        </div>
 
-	</div>
+        <div class="form-popup" id="myForm">
+          <form action="/action_page.php" class="form-container">
+            <h1>Create Assignment</h1>
 
-	<div class="grid-container">
-		<div class="box item5">
-			<!--Tester Tabs-->
-			<button onclick="tabClicked()" class="tabButtons" id="allTag">All</button>
-			<button onclick="tabClicked()" class="tabButtons">Tag1</button>
-		</div>
+            <label for="name"><b>Name</b></label>
+            <input
+              type="text"
+              placeholder="Enter Name"
+              name="name"
+              maxlength="50"
+              required
+            />
 
-		<div class="box item1">
-			<div id="accordion">
-			</div>
-		</div>
-		<div class="box item2">Undated Assignment</div>
-		<div class="box item3">Due Today</div>
-		<div class="box item4">
-			<!--createAssignment button form-->
-			<div id="assignmentDiv">
-				<button id="createAssnBtn" class="createAssn" onclick="openForm()">Create Assignment</button>
-			</div>
+            <label for="description"><b>Description</b></label>
+            <input
+              type="text"
+              placeholder="Enter Description"
+              name="description"
+              maxlength="450"
+              required
+            />
 
-			<div class="form-popup" id="myForm">
-				<form action="/action_page.php" class="form-container">
-					<h1>Create Assignment</h1>
+            <label for="date"><b>Date</b></label>
+            <input type="date" placeholder="Enter Date" name="date" required />
 
-					<label for="name"><b>Name</b></label>
-					<input type="text" placeholder="Enter Name" name="name" maxlength="50" required>
+            <label for="points"><b>Points</b></label>
+            <input
+              type="number"
+              placeholder="Enter Points"
+              name="points"
+              required
+            />
 
-					<label for="description"><b>Description</b></label>
-					<input type="text" placeholder="Enter Description" name="description" maxlength="450" required>
+            <button type="button" class="btn" onclick="saveAssignment()">
+              Save
+            </button>
+            <button type="button" class="btn cancel" onclick="closeForm()">
+              Cancel
+            </button>
+          </form>
+        </div>
 
-					<label for="date"><b>Date</b></label>
-					<input type="date" placeholder="Enter Date" name="date" required>
+        <!--Assignment details popup-->
+        <div class="detailsPopup" id="details"></div>
+      </div>
+    </div>
+    <script>
+      function toggleButton(clickedID) {
+        /*Add a get element for the back button or a double click from assn/task*/
+        /*Get CreateBtn info*/
+        //div that holds both create assignment and details div
+        let assnId = clickedID.substring(14);
 
-					<label for="points"><b>Points</b></label>
-					<input type="number" placeholder="Enter Points" name="points" required>
+        let dDiv = document.getElementById("details");
 
-					<button type="button" class="btn" onclick="saveAssignment()">Save</button>
-					<button type="button" class="btn cancel" onclick="closeForm()">Cancel</button>
-				</form>
-			</div>
+        if (document.getElementById("assignmentDiv")) {
+          let assignmentDiv = document.getElementById("assignmentDiv");
+          console.log(assignmentDiv);
+          assignmentDiv.remove();
+          displayDetails(assnId);
+        } else {
+          //remove the containerDiv
+          let containerDiv = document.getElementById("containerDiv");
+          console.log(containerDiv);
+          containerDiv.remove();
 
-			<!--Assignment details popup-->
-			<div class="detailsPopup" id="details">
-				<!--<div>
+          //creating div for create assignment
+          let createDiv = document.createElement("div");
+          createDiv.setAttribute("id", "assignmentDiv");
 
-					<div class="details-assignment-name" style="justify-content:flex-end;">
-						<button class="close-button" id="editBtn">Edit</button>
-						<button class="close-button" id="closeBtn" onclick="closeDetail();">&times;</button>
-					</div>
-				</div>	
+          let createBtn = document.createElement("button");
+          createBtn.setAttribute("id", "createAssnBtn");
+          createBtn.setAttribute("class", "createAssn");
+          createBtn.setAttribute("onclick", "openForm()");
+          createBtn.innerHTML = "Create Assignment";
 
-					<div>
-						<div class="details-title">Title</div>
-						<div class="details-due-date">
-							Due Date: September 30&emsp;Tasks: 0/3
-						</div>
+          dDiv.append(createDiv);
+          createDiv.append(createBtn);
+        }
+      }
 
-						<input type="checkbox" class="detailsCheckBox" id="detailsPointsBox"></input>
-						<p class="detailsCheckBox" id="detailsPoints">Assignment Points</p>
-						<p class="details-desc">Cool Description</p>
-						<div class="details-tasks-window">
-							<div>
-								<div class="card-header">
-									<button onclick="toggleButton(this.id);" class="defaultBtn task">
-										Task 1
-									</button>
-								</div>
-								<div class="card-header">
-									<button onclick="toggleButton(this.id);" class="defaultBtn task">
-										Task 2
-									</button>
-								</div>
-								<div class="card-header">
-									<button onclick="toggleButton(this.id);" class="defaultBtn task">
-										Task 3
-									</button>
-								</div>
+      function closeDetail() {
+        let dDiv = document.getElementById("details");
+        //remove the containerDiv
+        let containerDiv = document.getElementById("containerDiv");
+        console.log(containerDiv);
+        containerDiv.remove();
 
-						</div>
+        //creating div for create assignment
+        let createDiv = document.createElement("div");
+        createDiv.setAttribute("id", "assignmentDiv");
 
-						
-						</div>
-						<button class="close-button" onclick="closeDetail();">&#8249;</button>
-					</div>
-				</div>-->
-			</div>
-		</div>
-	</div>
-	</div>
-	</div>
-	</div>
-	<script>
-		function toggleButton(clickedID) {
-			/*Add a get element for the back button or a double click from assn/task*/
-			/*Get CreateBtn info*/
-			//div that holds both create assignment and details div
-			let assnId = clickedID.substring(14);
+        let createBtn = document.createElement("button");
+        createBtn.setAttribute("id", "createAssnBtn");
+        createBtn.setAttribute("class", "createAssn");
+        createBtn.setAttribute("onclick", "openForm()");
+        createBtn.innerHTML = "Create Assignment";
 
-			let dDiv = document.getElementById("details");
+        dDiv.append(createDiv);
+        createDiv.append(createBtn);
 
-			if (document.getElementById("assignmentDiv")) {
-				let assignmentDiv = document.getElementById("assignmentDiv");
-				console.log(assignmentDiv);
-				assignmentDiv.remove();
-				displayDetails(assnId);
-			}
-			else {
-				//remove the containerDiv
-				let containerDiv = document.getElementById("containerDiv");
-				console.log(containerDiv);
-				containerDiv.remove();
+        //darkenCard(clickedID);
+      }
+      //Makes card-header of clicked assn/task look selected
+      //TODO: Hover seems to go away when setting the BG
+      function darkenCard(clickedID) {
+        let cardBG = "lightgrey"; //change if need be
+        let whiteBG = "white";
+        let sameBtn = false;
+        let card = document.getElementById(clickedID).parentNode;
 
-				//creating div for create assignment 
-				let createDiv = document.createElement("div");
-				createDiv.setAttribute("id", "assignmentDiv");
+        //Unhighlight all other buttons
+        let assnTaskList = document.querySelectorAll('*[class^="card-header"]');
+        if (assnTaskList != null) {
+          for (let i = 0; i < assnTaskList.length; i++) {
+            if (assnTaskList[i].style.backgroundColor == cardBG) {
+              assnTaskList[i].style.backgroundColor = whiteBG;
+              if (card == assnTaskList[i]) {
+                sameBtn = true;
+              }
+              i = assnTaskList.length;
+            }
+          }
+        }
 
+        //Darkns selected btn
 
-				let createBtn = document.createElement("button")
-				createBtn.setAttribute("id", "createAssnBtn");
-				createBtn.setAttribute("class", "createAssn");
-				createBtn.setAttribute("onclick", "openForm()");
-				createBtn.innerHTML = "Create Assignment";
-
-				dDiv.append(createDiv);
-				createDiv.append(createBtn);
-
-			}
-		}
-
-
-		function closeDetail() {
-			let dDiv = document.getElementById("details");
-			//remove the containerDiv
-			let containerDiv = document.getElementById("containerDiv");
-			console.log(containerDiv);
-			containerDiv.remove();
-
-			//creating div for create assignment 
-			let createDiv = document.createElement("div");
-			createDiv.setAttribute("id", "assignmentDiv")
-
-			let createBtn = document.createElement("button")
-			createBtn.setAttribute("id", "createAssnBtn");
-			createBtn.setAttribute("class", "createAssn");
-			createBtn.setAttribute("onclick", "openForm()");
-			createBtn.innerHTML = "Create Assignment";
-
-			dDiv.append(createDiv);
-			createDiv.append(createBtn);
-
-			//darkenCard(clickedID);
-		}
-		//Makes card-header of clicked assn/task look selected
-		//TODO: Hover seems to go away when setting the BG
-		function darkenCard(clickedID) {
-			let cardBG = "lightgrey"; //change if need be
-			let whiteBG = "white";
-			let sameBtn = false;
-			let card = document.getElementById(clickedID).parentNode;
-
-			//Unhighlight all other buttons
-			let assnTaskList = document.querySelectorAll('*[class^="card-header"]');
-			if (assnTaskList != null) {
-				for (let i = 0; i < assnTaskList.length; i++) {
-					if (assnTaskList[i].style.backgroundColor == cardBG) {
-						assnTaskList[i].style.backgroundColor = whiteBG;
-						if (card == assnTaskList[i]) {
-							sameBtn = true;
-						}
-						i = assnTaskList.length;
-					}
-				}
-			}
-
-			//Darkns selected btn
-
-			//console.log(sameBtn);
-			if (sameBtn) {
-				card.style.backgroundColor = whiteBG;
-			}
-			else {
-				card.style.backgroundColor = cardBG;
-			}
-		}
-	</script>
-
-</body>
-
+        //console.log(sameBtn);
+        if (sameBtn) {
+          card.style.backgroundColor = whiteBG;
+        } else {
+          card.style.backgroundColor = cardBG;
+        }
+      }
+    </script>
+  </body>
 </html>

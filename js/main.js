@@ -10,8 +10,11 @@ const os = require("os");
 //JSON Storage for electron
 const storage = require("electron-json-storage");
 const path = require("path");
-// selenium stuffs
 const { resolve } = require("path");
+
+try {
+  require("electron-reloader")(module);
+} catch {}
 
 /**
  * @description default electron window creation
@@ -254,7 +257,7 @@ function editAssignment(obj) {
 }
 
 /**
- * @description delete an assignment by id 
+ * @description delete an assignment by id
  * @param {*} id id of the assignment to delete
  */
 function deleteAssignment(id) {
