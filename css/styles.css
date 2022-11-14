@@ -1,7 +1,7 @@
 /*Boxes*/
 .box {
   border: ridge;
-  border-color: rgb(64, 5, 106);
+  border-color: #042e38;
   overflow-y: hidden;
 }
 
@@ -47,17 +47,17 @@
     "DatedAssignment DatedAssignment  Viewport Viewport Viewport Viewport"
     "UndatedAssignment UndatedAssignment  Viewport Viewport Viewport Viewport";
   gap: 20px;
-  background-color: #365563;
+  background-color: #076275;
   width: 1400px;
   height: 750px;
   margin: auto;
   padding: 20px;
   border: ridge medium;
-  border-color: rgb(64, 5, 106);
+  border-color: #042e38;
 }
 
 .grid-container>div {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: #7ec4d1;
   text-align: center;
   padding: 20px;
   font-size: 30px;
@@ -146,16 +146,17 @@
   text-decoration: none;
   outline: none;
   color: black;
-  background-color: #18f0c8;
-  border: none;
+  background-color: #b9fff0;
+  border: solid;
+  border-width: 5px;
   border-radius: 15px;
-  box-shadow: 0 9px #999;
+  border-color: #042e38;
   position: relative;
   top: 40%;
 }
 
 .createAssn:hover {
-  background-color: #40f1dfa9;
+  background-color: #076275;
 }
 
 .createAssn:focus {
@@ -163,8 +164,7 @@
 }
 
 .createAssn:active {
-  background-color: #40f1df;
-  box-shadow: 0 5px #666;
+  background-color: #054b58;
   transform: translateY(4px);
 }
 
@@ -238,7 +238,7 @@ div .card-header:hover {
   margin-top: 5%;
   place-content: center;
   padding: 0;
-  background-color: darkcyan;
+  background-color: #042e38;
 }
 
 .defaultBtn {
@@ -347,6 +347,17 @@ div .card-header:hover {
   z-index: -1;
   opacity: .8;
 
+}
+
+.darken-overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #042e38;
+  opacity: .8;
+  z-index: -1;
 }
 
 /* The popup form - hidden by default */
