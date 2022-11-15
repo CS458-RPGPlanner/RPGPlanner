@@ -9,7 +9,7 @@
     "drive": "chromedriver",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "document": "jsdoc ./js/main.js ./js/JSON.js -d documentation",
+    "document": "jsdoc js/main.js js/JSON.js -d documentation",
     "format": "prettier -w .",
     "docs": "light-server -o -s ./documentation/ index.html"
   },

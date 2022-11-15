@@ -138,10 +138,9 @@ function createTask(task) {
 /**
  * @description get task from json
  * @todo: not completed yet
- * @param {*} name name of the task to get
  * @returns task that was gotten
  */
-function getAllTasks(name) {
+function getAllTasks() {
   try {
     //get assignments and return assignment array
     let tasks = storage.getSync("Tasks");
