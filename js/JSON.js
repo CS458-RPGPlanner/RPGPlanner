@@ -169,7 +169,20 @@ async function displayAssignments() {
 
     let dueTasks = document.createElement("div");
     dueTasks.setAttribute("class", "due-tasks");
-    dueTasks.innerHTML = "Due Date: " + assignment.date + "&emsp;Tasks: ";
+    let taskCounter = 0;
+    for (let i = 0; i < allTasks.length; i++) {
+      if (allTasks[i].assignmentId == assignment.id) {
+        taskCounter++;
+      }
+    }
+    dueTasks.innerHTML =
+      "Due Date: " +
+      assignment.date +
+      "&emsp;Tasks: " +
+      taskCounter +
+      "/" +
+      taskCounter;
+    //dueTasks.innerHTML = "Due Date: " + assignment.date + "&emsp;Tasks: ";
 
     let check = document.createElement("div");
     check.setAttribute("class", "check");
@@ -229,11 +242,31 @@ function createTaskList(assignmentId, assignmentTasks) {
     taskButton.setAttribute("class", "defaultBtn task");
     taskHeader.appendChild(taskButton);
 
-    //<p class="assignment-name">Task 1</p>
     let taskName = document.createElement("p");
     taskName.setAttribute("class", "assignment-name");
     taskName.innerHTML = task.name;
     taskButton.appendChild(taskName);
+
+    let dueTasks = document.createElement("div");
+    dueTasks.setAttribute("class", "due-tasks");
+    dueTasks.innerHTML = "Due Date: " + task.date;
+    taskButton.appendChild(dueTasks);
+
+    let check = document.createElement("div");
+    check.setAttribute("class", "check");
+    taskHeader.appendChild(check);
+
+    let taskPoints = document.createElement("p");
+    taskPoints.setAttribute("class", "assignment-points");
+    taskPoints.innerHTML = task.points + " points";
+    check.appendChild(taskPoints);
+
+    let checkbox = document.createElement("input");
+    checkbox.setAttribute("type", "checkbox");
+    checkbox.setAttribute("class", "checkBox");
+    check.appendChild(checkbox);
+
+    tasksDiv.append(taskHeader);
   }
 
   return tasksDiv;
