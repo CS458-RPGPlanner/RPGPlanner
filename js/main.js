@@ -12,6 +12,7 @@ const storage = require("electron-json-storage");
 const path = require("path");
 const { resolve } = require("path");
 
+//catch so that the electron reloader works without issue
 try {
   require("electron-reloader")(module);
 } catch {}

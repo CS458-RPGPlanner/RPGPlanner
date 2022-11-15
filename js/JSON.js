@@ -23,7 +23,6 @@ async function createTask(obj) {
  * @description html function to create a task based off the values in html task object passed in
  * @returns object that was passed in
  */
-getAllTasks();
 async function getAllTasks() {
   let result = await ipcRenderer.invoke("getAllTasks");
   //return promise value after waiting
@@ -208,7 +207,10 @@ async function displayAssignments() {
   displayTasks();
 }
 
-// displays a newly created assignment
+/**
+ * @description displays a newly created assignment
+ * @param {*} newAssignment passed in to add to the stack of assignments
+ */
 async function displayNewAssignment(newAssignment) {
   // grabs the assignment array so that it can grab the newest assignment
   let assignments = await getAssignments();
@@ -275,7 +277,9 @@ async function displayNewAssignment(newAssignment) {
   parent.append(card);
 }
 
-// displays stored tasks to assignments
+/**
+ * @description displays stored tasks to assignments
+ */
 async function displayTasks() {
   let tasks = await getAllTasks();
 
@@ -337,6 +341,10 @@ async function displayTasks() {
   }
 }
 
+/**
+ * @description delete the assignment that was clicked
+ * @param {*} id the id of the assignment that is being deleted
+ */
 function deleteAssignmentClicked(id) {
   let assignmentDiv = document.getElementById("assignment-" + id);
   if (assignmentDiv) {
@@ -345,6 +353,10 @@ function deleteAssignmentClicked(id) {
   deleteAssignment(id);
 }
 
+/**
+ * @description display the details of the assignment on the page
+ * @param {*} id of the assignment to be displayed
+ */
 async function displayDetails(id) {
   //Get the assignment data based on assignment id
   let assignment = await getAssignment(id);
@@ -421,6 +433,9 @@ async function displayDetails(id) {
   containerDiv.append(closeBtn);
 }
 
+/**
+ * @description update the arrows by putting in the opposite position when clicked
+ */
 async function updateArrows() {
   // Add up down arrow for collapse element which
   // is open by default
