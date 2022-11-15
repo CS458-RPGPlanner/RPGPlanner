@@ -1,8 +1,22 @@
 /*Boxes*/
 .box {
+  position: relative;
   border: ridge;
   border-color: #042e38;
   overflow-y: hidden;
+}
+
+.box.points {
+  grid-area: Point;
+  width: 80%;
+  right: 20%;
+  border-radius: 25px;
+}
+
+.box.extras {
+  grid-area: Extra;
+  width: 134%;
+  right: 40%;
 }
 
 .box.item1 {
@@ -28,24 +42,29 @@
 
 .box.item4 {
   grid-area: Viewport;
-  height: 350px;
-  width: 735px;
+  height: 388px;
+  width: 758px;
+  border-bottom: none;
+  border-right: none;
+  background-color: #042e38;
 }
 
 .box.item5 {
   grid-area: Tab;
   height: 100px;
+  width: 88%;
 }
 
 /*Grid*/
 .grid-container {
   display: grid;
   grid-template-areas:
-    "Tab Tab Tab Tab Tab Tab"
+    "Tab Tab Point Point Extra Extra"
     "DatedAssignment DatedAssignment  DueToday DueToday DueToday DueToday"
     "DatedAssignment DatedAssignment  Viewport Viewport Viewport Viewport"
     "DatedAssignment DatedAssignment  Viewport Viewport Viewport Viewport"
-    "UndatedAssignment UndatedAssignment  Viewport Viewport Viewport Viewport";
+    "UndatedAssignment UndatedAssignment  Viewport Viewport Viewport Viewport"
+    "Empty Empty  Viewport Viewport Viewport Viewport";
   gap: 20px;
   background-color: #076275;
   width: 1400px;
@@ -82,6 +101,7 @@
   /* White text color */
   border-radius: 0 5px 5px 0;
   /* Rounded corners on the top right and bottom right side */
+  z-index: 1;
 }
 
 #mySidenav a:hover {
@@ -148,9 +168,9 @@
   color: black;
   background-color: #b9fff0;
   border: solid;
-  border-width: 5px;
+  border-width: 8px;
   border-radius: 15px;
-  border-color: #042e38;
+  border-color: #076275;
   position: relative;
   top: 40%;
 }
