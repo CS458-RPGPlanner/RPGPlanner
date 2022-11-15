@@ -25,7 +25,7 @@
     "electron-reload": "^2.0.0-alpha.1",
     "electron-reloader": "^1.2.3",
     "light-server": "^2.9.1",
-    "prettier": "2.7.1"
+    "prettier": "^2.7.1"
   },
   "dependencies": {
     "electron-json-storage": "^4.5.0",
