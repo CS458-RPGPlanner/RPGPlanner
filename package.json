@@ -1,7 +1,7 @@
 {
   "name": "rpgplanner",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "A task planner created with rpg game elements for UWSTOUT CS458 Fall 2022.",
   "main": "js/main.js",
   "scripts": {
     "start": "electron-forge start",
