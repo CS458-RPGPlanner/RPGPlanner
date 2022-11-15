@@ -602,11 +602,12 @@ div .card-header:hover {
 }
 
 .fa-chevron-up,
-.fa-chevron-down {
+.fa-chevron-down,
+.fa-minus {
   position: sticky;
   float: left;
   margin-top: 20px;
-  padding-right: 10px;
+  padding-right: 15px;
 }
 
 div#assignmentDiv {
@@ -622,4 +623,20 @@ div#containerDiv {
 #details {
   height: 100%;
   width: 100%;
+}
+
+.createCard {
+  height: 10px;
+}
+
+.createPlus {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+#createAssignmentList:hover {
+  background-color: lightgrey !important;
+  transition: linear 0.5s;
 }
