@@ -124,17 +124,61 @@
 		</div>
 	</div>
 	<script>
-		function toggleButton(clickedID) {
+		async function toggleButton(clickedID) {
 			//get div that holds both create assignment and details div and parse the clickedID for the assignment ID
 			let assnId = clickedID.substring(14);
 			let dDiv = document.getElementById("details");
+			let assignmentDiv = document.getElementById("assignmentDiv");
+			let containerDiv = document.getElementById("containerDiv");
 
+			if (containerDiv) {
+				let currentId = assnId;
+			}
+
+			if (assignmentDiv) {
+				//Remove create assignment button and display details
+				assignmentDiv.remove();
+				await displayDetails(assnId);
+				containerDiv = document.getElementById("containerDiv");
+				currentId = containerDiv.dataset.containerId;
+			} else if (currentId != assnId) {
+				// if different assignment clicked, display new assignment
+				containerDiv.remove();
+				await displayDetails(assnId);
+				containerDiv = document.getElementById("containerDiv");
+				currentId = containerDiv.dataset.containerId;
+			} else if (currentId == assnId) {
+				// if assignment clicked againS, close details and redraw create assn btn
+				containerDiv = document.getElementById("containerDiv");
+				containerDiv.remove();
+
+				//creating div for create assignment
+				let createDiv = document.createElement("div");
+				createDiv.setAttribute("id", "assignmentDiv");
+
+				let createBtn = document.createElement("button")
+				createBtn.setAttribute("id", "createAssnBtn");
+				createBtn.setAttribute("class", "createAssn");
+				createBtn.setAttribute("onclick", "openForm()");
+				createBtn.innerHTML = "Create Assignment";
+
+				dDiv.append(createDiv);
+				createDiv.append(createBtn);
+			}
+			/*
 			if (document.getElementById("assignmentDiv")) {
 				//Remove create assignment and display details
 				let assignmentDiv = document.getElementById("assignmentDiv");
 				console.log(assignmentDiv);
 				assignmentDiv.remove();
 				displayDetails(assnId);
+				let cDivId = containerDiv.getAttribute("data-").substring(13);
+			}
+			else if (containerDiv.getAttribute("data-").substring(13) != cDivId) {
+				let newId = containerDiv.getAttribute("data-").substring(13);
+				console.log(newId);
+				containerDiv.remove();
+				displayDetails();
 			}
 			else {
 				//remove the containerDiv
@@ -156,6 +200,7 @@
 				dDiv.append(createDiv);
 				createDiv.append(createBtn);
 			}
+			*/
 		}
 
 		function closeDetail() {
