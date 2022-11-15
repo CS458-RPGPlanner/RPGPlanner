@@ -139,6 +139,7 @@ function saveAssignment() {
 async function displayAssignments() {
   // creates an array of the saved assignments
   let assignments = await getAssignments();
+  let allTasks = await getAllTasks();
   //testing to make sure that assignments are loaded correctly
   //alert(assignments[0]);
 
@@ -148,33 +149,34 @@ async function displayAssignments() {
   for (let i = 0; i < assignments.length; i++) {
     let card = document.createElement("div");
     card.setAttribute("class", "card");
-    card.setAttribute("id", "assignment-" + assignments[i].id);
+    const assignment = assignments[i];
+    card.setAttribute("id", "assignment-" + assignment.id);
 
     let cardHeader = document.createElement("div");
     cardHeader.setAttribute("class", "card-header");
-    cardHeader.setAttribute("id", "assnHeader-" + assignments[i].id);
+    cardHeader.setAttribute("id", "assnHeader-" + assignment.id);
 
     let assign = document.createElement("button");
-    assign.setAttribute("id", "assignmentBtn-" + assignments[i].id);
-    assign.setAttribute("onclick", "toggleButton(this.id)");
+    assign.setAttribute("id", "assignmentBtn-" + assignment.id);
+    assign.setAttribute("onclick", "toggleButton("+ assignment.id +")");
     assign.setAttribute("class", "defaultBtn");
     assign.setAttribute("data-toggle", "collapse");
-    assign.setAttribute("href", "#description-" + assignments[i].id);
+    assign.setAttribute("href", "#tasks-" + assignment.id);
 
     let assignName = document.createElement("p");
     assignName.setAttribute("class", "assignment-name");
-    assignName.innerHTML = assignments[i].name;
+    assignName.innerHTML = assignment.name;
 
     let dueTasks = document.createElement("div");
     dueTasks.setAttribute("class", "due-tasks");
-    dueTasks.innerHTML = "Due Date: " + assignments[i].date + "&emsp;Tasks: ";
+    dueTasks.innerHTML = "Due Date: " + assignment.date + "&emsp;Tasks: ";
 
     let check = document.createElement("div");
     check.setAttribute("class", "check");
 
     let assignPoints = document.createElement("p");
     assignPoints.setAttribute("class", "assignment-points");
-    assignPoints.innerHTML = assignments[i].points + " points";
+    assignPoints.innerHTML = assignment.points + " points";
 
     let checkbox = document.createElement("input");
     checkbox.setAttribute("type", "checkbox");
@@ -191,8 +193,50 @@ async function displayAssignments() {
 
     card.append(cardHeader);
 
+    let assignmentTasks = [];
+    for (let j = 0; j < allTasks.length; j++) {
+      let task = allTasks[j];
+      console.log(task);
+      if (task.assignmentId === assignment.id) {
+        assignmentTasks.push(task);
+      }
+    }
+    let tasksDiv = createTaskList(assignment.id, assignmentTasks);
+    card.append(tasksDiv);
+    //console.log(tasksDiv);
     parent.append(card);
   }
+}
+
+function createTaskList(assignmentId, assignmentTasks) {
+  let tasksDiv = document.createElement("div");
+  tasksDiv.setAttribute("id", "tasks-" + assignmentId);
+  tasksDiv.setAttribute("class", "collapse");
+  tasksDiv.setAttribute("data-parent", "#accordion");
+
+  for (let j = 0; j < assignmentTasks.length; j++) {
+    
+    let task = assignmentTasks[j];
+    console.log(task.name);
+    let taskHeader = document.createElement("div");
+    taskHeader.setAttribute("id", "taskHeader-", + task.id);
+    taskHeader.setAttribute("class", "card-header");
+    tasksDiv.appendChild(taskHeader);
+  
+    let taskButton = document.createElement("button");
+    taskButton.setAttribute("id", "taskBtn-" + task.id);
+    //taskButton.setAttribute("onclick", "toggleButton(this.id)");
+    taskButton.setAttribute("class", "defaultBtn task");
+    taskHeader.appendChild(taskButton);
+
+    //<p class="assignment-name">Task 1</p>
+    let taskName = document.createElement("p");
+    taskName.setAttribute("class", "assignment-name");
+    taskName.innerHTML = task.name;
+    taskButton.appendChild(taskName);
+  }
+
+  return tasksDiv;
 }
 
 // displays a newly created assignment

@@ -34,7 +34,7 @@ function createWindow() {
   mainWindow.loadFile("index.html");
 
   // Open the DevTools.
-  //mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 }
 
 // This method will be called when Electron has finished
@@ -141,7 +141,7 @@ function createTask(task) {
 function getAllTasks(name) {
   try {
     //get assignments and return assignment array
-    let tasks = storage.getSync("Tasks");
+    let tasks = storage.getSync("Mock_Task");
     return tasks;
   } catch (error) {
     //return empty string if no assignments
