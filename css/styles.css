@@ -46,7 +46,7 @@
   width: 758px;
   border-bottom: none;
   border-right: none;
-  background-color: #7ec4d1;
+  background-color: #042e38;
 }
 
 .box.item5 {
@@ -80,6 +80,15 @@
   text-align: center;
   padding: 20px;
   font-size: 30px;
+}
+
+.viewport-grid {
+  background-color: #7ec4d1;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  border: solid;
+  border-color: black;
 }
 
 #mySidenav a {
@@ -500,16 +509,18 @@ div .card-header:hover {
 }
 
 .details-title {
-  font-size: 40px;
+  font-size: 30px;
+  font-weight: bold;
   text-align: left;
   display: flex;
   justify-content: flex-start;
 }
 
 .details-points {
-  font-size: 10px;
+  font-size: 20px;
+  margin-top: 4%;
   display: flex;
-  justify-content: right;
+  float: right;
 }
 
 .details-due-tasks {
@@ -520,30 +531,36 @@ div .card-header:hover {
 
 .details-due-date {
   font-size: 15px;
+  font-weight: bold;
   text-align: left;
   text-indent: 5%;
 }
 
 .details-desc {
   text-align: left;
+  max-width: 70%;
+  margin-top: 2%;
+  max-height: 75px;
+  height: 75px;
+  overflow-y: auto;
   font-size: 15px;
-  text-indent: 5%;
 }
 
 .edit-button {
+  margin-left: 3%;
   font-size: 25px;
   font-weight: bold;
-  height: 35px;
-  width: 35px;
-  margin: 3%;
+  height: 45px;
+  width: 45px;
   cursor: pointer;
-  background-color: #d7dde0;
-  border: none;
+  background-color: #7ec4d1;
+  border: solid;
+  border-radius: 25%;
   color: #000;
   justify-content: flex-end;
   top: 0px;
   float: right;
-  text-align: left;
+  text-align: center;
 }
 
 .edit-button:focus {
@@ -551,15 +568,17 @@ div .card-header:hover {
 }
 
 .close-button {
-  font-size: 40px;
+  position: relative;
+  top: 18%;
+  right: 4%;
+  font-size: 80px;
   font-weight: bold;
-  background-color: #d7dde0;
+  background-color: transparent;
   color: #000;
   cursor: pointer;
   height: 35px;
   width: 20px;
   justify-content: flex-start;
-  top: 0px;
   float: left;
   border: none;
   text-align: right;
@@ -572,16 +591,17 @@ div .card-header:hover {
 .delete-button {
   font-size: 25px;
   font-weight: bold;
-  height: 35px;
-  width: 35px;
+  height: 45px;
+  width: 45px;
   cursor: pointer;
-  background-color: #d7dde0;
-  border: none;
+  background-color: #7ec4d1;
+  border: solid;
+  border-radius: 25%;
   color: #000;
   justify-content: flex-end;
   top: 0px;
   float: right;
-  text-align: left;
+  text-align: center;
 }
 
 .delete-button:focus {
@@ -593,6 +613,7 @@ div .card-header:hover {
   cursor: pointer;
   margin-right: 2%;
   margin-left: 2%;
+  margin-top: 3%;
   float: right;
   height: 40px;
   width: 40px;
@@ -615,8 +636,14 @@ div#assignmentDiv {
 }
 
 div#containerDiv {
+  position: relative;
+  padding: 5%;
+  padding-top: 3%;
   height: 100%;
   width: 100%;
+  background-color: #b9fff0;
+  border: solid;
+  border-color: black;
 }
 
 #details {

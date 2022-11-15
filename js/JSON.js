@@ -395,8 +395,7 @@ async function displayDetails(id) {
   checkBox.setAttribute("id", "detailsPointsBox");
 
   let points = document.createElement("p");
-  points.setAttribute("class", "detailsCheckBox");
-  points.setAttribute("class", "detailsCheckBox");
+  points.setAttribute("class", "details-points");
   points.setAttribute("id", "detailsPoints");
   points.innerHTML = assignment.points + " points";
 
