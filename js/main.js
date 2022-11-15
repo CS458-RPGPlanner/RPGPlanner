@@ -10,7 +10,7 @@ const os = require("os");
 //JSON Storage for electron
 const storage = require("electron-json-storage");
 const path = require("path");
-const { resolve } = require("path");
+const { resolve, format } = require("path");
 
 //catch so that the electron reloader works without issue
 try {
