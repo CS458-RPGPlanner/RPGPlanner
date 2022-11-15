@@ -386,13 +386,14 @@ function deleteAssignmentClicked(id) {
 async function displayDetails(id) {
   //Get the assignment data based on assignment id
   let assignment = await getAssignment(id);
-  console.log(assignment);
+  //console.log(assignment);
 
   //Creating HTML elements to display assignment data
   let parent = document.getElementById("details");
 
   let containerDiv = document.createElement("div");
   containerDiv.setAttribute("id", "containerDiv");
+  containerDiv.setAttribute("data-container-id", id);
 
   //assignment name
   let controlBtns = document.createElement("div");
