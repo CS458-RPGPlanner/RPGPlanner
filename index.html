@@ -137,30 +137,39 @@
 		</div>
 	</div>
 	<script>
-		function toggleButton(clickedID) {
-			/*Add a get element for the back button or a double click from assn/task*/
-			/*Get CreateBtn info*/
-			//div that holds both create assignment and details div
+		async function toggleButton(clickedID) {
+			//get div that holds both create assignment and details div and parse the clickedID for the assignment ID
 			let assnId = clickedID.substring(14);
-
 			let dDiv = document.getElementById("details");
+			let assignmentDiv = document.getElementById("assignmentDiv");
+			let containerDiv = document.getElementById("containerDiv");
 
-			if (document.getElementById("assignmentDiv")) {
-				let assignmentDiv = document.getElementById("assignmentDiv");
-				console.log(assignmentDiv);
+			if (containerDiv) {
+				let currentId = assnId;
+			}
+
+			if (assignmentDiv) {
+				//Remove create assignment button and display details
 				assignmentDiv.remove();
-				displayDetails(assnId);
-			} else {
-				//remove the containerDiv
-				let containerDiv = document.getElementById("containerDiv");
-				console.log(containerDiv);
+				await displayDetails(assnId);
+				containerDiv = document.getElementById("containerDiv");
+				currentId = containerDiv.dataset.containerId;
+			} else if (currentId != assnId) {
+				// if different assignment clicked, display new assignment
+				containerDiv.remove();
+				await displayDetails(assnId);
+				containerDiv = document.getElementById("containerDiv");
+				currentId = containerDiv.dataset.containerId;
+			} else if (currentId == assnId) {
+				// if assignment clicked againS, close details and redraw create assn btn
+				containerDiv = document.getElementById("containerDiv");
 				containerDiv.remove();
 
 				//creating div for create assignment
 				let createDiv = document.createElement("div");
 				createDiv.setAttribute("id", "assignmentDiv");
 
-				let createBtn = document.createElement("button");
+				let createBtn = document.createElement("button")
 				createBtn.setAttribute("id", "createAssnBtn");
 				createBtn.setAttribute("class", "createAssn");
 				createBtn.setAttribute("onclick", "openForm()");
