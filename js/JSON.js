@@ -396,22 +396,24 @@ async function displayTasks() {
  * @description delete the assignment that was clicked
  * @param {*} id the id of the assignment that is being deleted
  */
-function deleteAssignmentClicked(id) {
+function deleteAssignmentClicked(id, assignmentId) {
   let assignmentDiv = document.getElementById("assignment-" + id);
+
   if (assignmentDiv) {
     assignmentDiv.remove();
   }
   deleteAssignment(id);
+  deleteTasks(assignmentId);
 }
 
 /**
  * @description display the details of the assignment on the page
  * @param {*} id of the assignment to be displayed
  */
-async function displayDetails(id) {
+async function displayDetails(id, assignmentId) {
   //Get the assignment data based on assignment id
   let assignment = await getAssignment(id);
-  let allTasks = await getAllTasks();
+  let allTasks = await getAllTasks(assignmentId);
   //console.log(assignment);
 
   //Creating HTML elements to display assignment data
@@ -436,7 +438,7 @@ async function displayDetails(id) {
   deleteBtn.setAttribute("id", "deleteBtn");
   deleteBtn.setAttribute(
     "onclick",
-    "deleteAssignmentClicked(" + id + ");closeDetail();"
+    "deleteAssignmentClicked(" + id + "," + assignmentId +");closeDetail();"
   );
   deleteBtn.innerHTML = "<i class='far fa-trash-alt'></i>";
 
@@ -474,7 +476,7 @@ async function displayDetails(id) {
   let assignmentTasks = [];
   for (let i = 0; i < allTasks.length; i++) {
     let task = allTasks[i];
-    console.log(task);
+    //console.log(task);
     if (task.assignmentId === assignment.id) {
       assignmentTasks.push(task);
     }

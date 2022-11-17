@@ -37,7 +37,7 @@ function createWindow() {
   mainWindow.loadFile("index.html");
 
   // Open the DevTools.
-  //mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 }
 
 // This method will be called when Electron has finished
@@ -272,6 +272,24 @@ function deleteAssignment(id) {
       }
     }
     //set the new data set with the new assignment name for the assignment by id
+    storage.set(key, data, function (error) {
+      if (error) throw error;
+    });
+  });
+}
+
+function deleteTasks(assignmentId) {
+  let key = "MOCK_DATA_TASKS";
+  console.log(assignmentId);
+  storage.get(key, function (error, data) {
+    // iterate throughout the task array
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].assignmentId === assignmentId) {
+        // delete selected task by id
+        data.splice(i, 1);
+      }
+    }
+    //set the new data set with the new task name for the task by id
     storage.set(key, data, function (error) {
       if (error) throw error;
     });
