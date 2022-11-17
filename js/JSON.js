@@ -307,7 +307,7 @@ async function displayTasks() {
 
     let arrow = document.getElementById("arrow-" + tasks[i].assignmentId);
     arrow.setAttribute("class", "fa fa-chevron-up");
-    
+
     let taskHeader = document.createElement("div");
     taskHeader.setAttribute("id", "taskHeader-" + tasks[i].id);
     taskHeader.setAttribute("class", "card-header");
@@ -361,7 +361,7 @@ async function displayTasks() {
       let createName = document.createElement("p");
       createName.setAttribute("class", "createPlus");
       createName.innerHTML = "+";
-      
+
       createButton.append(createName);
 
       createHeader.append(createButton);
@@ -377,10 +377,13 @@ async function displayTasks() {
 
 function deleteAssignmentClicked(id) {
   let assignmentDiv = document.getElementById("assignment-" + id);
-  if (assignmentDiv) {
-    assignmentDiv.remove();
+  if (confirm("Are you sure you want to delete this assignment?") == true) {
+    if (assignmentDiv) {
+      assignmentDiv.remove();
+    }
+    closeDetail();
+    deleteAssignment(id);
   }
-  deleteAssignment(id);
 }
 
 async function displayDetails(id) {
@@ -410,7 +413,7 @@ async function displayDetails(id) {
   deleteBtn.setAttribute("id", "deleteBtn");
   deleteBtn.setAttribute(
     "onclick",
-    "deleteAssignmentClicked(" + id + ");closeDetail();"
+    "deleteAssignmentClicked(" + id + ");"
   );
   deleteBtn.innerHTML = "<i class='far fa-trash-alt'></i>";
 
