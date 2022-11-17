@@ -10,8 +10,9 @@ const os = require("os");
 //JSON Storage for electron
 const storage = require("electron-json-storage");
 const path = require("path");
-const { resolve } = require("path");
+const { resolve, format } = require("path");
 
+//catch so that the electron reloader works without issue
 try {
   require("electron-reloader")(module);
 } catch {}
@@ -137,13 +138,12 @@ function createTask(task) {
 /**
  * @description get task from json
  * @todo: not completed yet
- * @param {*} name name of the task to get
  * @returns task that was gotten
  */
-function getAllTasks(name) {
+function getAllTasks() {
   try {
     //get assignments and return assignment array
-    let tasks = storage.getSync("Tasks");
+    let tasks = storage.getSync("MOCK_DATA_TASKS");
     return tasks;
   } catch (error) {
     //return empty string if no assignments
