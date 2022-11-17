@@ -169,6 +169,7 @@ async function displayAssignments() {
 
     let dueTasks = document.createElement("div");
     dueTasks.setAttribute("class", "due-tasks");
+
     let taskCounter = 0;
     for (let i = 0; i < allTasks.length; i++) {
       if (allTasks[i].assignmentId == assignment.id) {
@@ -209,7 +210,7 @@ async function displayAssignments() {
     let assignmentTasks = [];
     for (let j = 0; j < allTasks.length; j++) {
       let task = allTasks[j];
-      console.log(task);
+      //console.log(task);
       if (task.assignmentId === assignment.id) {
         assignmentTasks.push(task);
       }
@@ -339,7 +340,8 @@ function deleteAssignmentClicked(id) {
 async function displayDetails(id) {
   //Get the assignment data based on assignment id
   let assignment = await getAssignment(id);
-  console.log(assignment);
+  let allTasks = await getAllTasks();
+  //console.log(assignment);
 
   //Creating HTML elements to display assignment data
   let parent = document.getElementById("details");
@@ -390,6 +392,35 @@ async function displayDetails(id) {
   let desc = document.createElement("p");
   desc.setAttribute("class", "details-desc");
   desc.innerHTML = assignment.description;
+  //<div style="height:150px;overflow:auto;"></div>
+  let tasks = document.createElement("div");
+  tasks.setAttribute("style", "height:150px;overflow:auto;");
+
+  let assignmentTasks = [];
+  for (let i = 0; i < allTasks.length; i++) {
+    let task = allTasks[i];
+    console.log(task);
+    if (task.assignmentId === assignment.id) {
+      assignmentTasks.push(task);
+    }
+  }
+
+  assignmentTasks.forEach(task => {
+    // <div class="card-header">
+		// 							<button onclick="toggleButton(this.id);" class="defaultBtn task">
+		// 								Task 1
+		// 							</button>
+		// 						</div>
+    let taskDiv = document.createElement("div");
+    taskDiv.setAttribute("class", "card-header");
+    tasks.append(taskDiv);
+
+    let taskButton = document.createElement("button");
+    taskButton.setAttribute("class", "defaultBtn task");
+    taskButton.setAttribute("onclick", "");
+    taskButton.innerText = task.name;
+    taskDiv.append(taskButton);
+  });
 
   parent.append(containerDiv);
 
@@ -406,5 +437,6 @@ async function displayDetails(id) {
   containerDiv.append(checkBox);
   containerDiv.append(points);
   containerDiv.append(desc);
+  containerDiv.append(tasks);
 
 }
