@@ -155,7 +155,7 @@
   height: 80px;
   background-color: #365563;
   border: ridge 2px;
-  border-color: rgb(64, 5, 106);
+  border-color: #042e38;
 }
 
 #profile {
@@ -163,7 +163,7 @@
   height: 80px;
   background-color: #365563;
   border: ridge 2px;
-  border-color: rgb(64, 5, 106);
+  border-color: #042e38;
 }
 
 .createAssn {
@@ -404,8 +404,8 @@ div .card-header:hover {
   position: fixed;
   width: 80%;
   right: 10%;
-  bottom: 820px;
-  background-color: #365563;
+  bottom: 830px;
+  background-color: #076275;
   border: solid;
   border-color: black;
   border-width: 5px;
@@ -425,7 +425,7 @@ div .card-header:hover {
   max-height: 800px;
   max-width: 100%;
   padding: 5%;
-  background-color: white;
+  background-color: #7ec4d1;
   border: solid;
   border-color: black;
   border-width: 5px;
@@ -438,6 +438,11 @@ div .card-header:hover {
   font-size: xx-large;
 }
 
+.enterPoints {
+  border: none;
+  outline: none;
+}
+
 /* Full-width input fields */
 .form-container input[type=text],
 .form-container input[type=password] {
@@ -447,23 +452,30 @@ div .card-header:hover {
   background: #f1f1f1;
 }
 
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus,
+.form-container input[type=password]:focus {
+  background-color: #ddd;
+  border: none;
+  outline: none;
+}
+
+.form-container textarea {
+  outline: none;
+}
+
 .createTitle {
-  width: 30%;
+  width: 25%;
 }
 
 .createDesc {
   width: 95%;
   height: 300px;
   max-height: 300px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
-/* When the inputs get focus, do something */
-.form-container input[type=text]:focus,
-.form-container input[type=password]:focus {
-  background-color: #ddd;
-  outline: none;
-}
+
 
 /* Set a style for the submit button */
 .form-container .btn {
@@ -490,6 +502,25 @@ div .card-header:hover {
 .form-container .btn:hover,
 .open-button:hover {
   cursor: pointer;
+}
+
+.tab-createlist {
+  height: 50px;
+}
+
+.tab-createlist:focus {
+  outline: none;
+}
+
+.tab-createbtn {
+  overflow-y: auto;
+  border: solid 1px;
+  height: 50px;
+  width: 50px;
+}
+
+.tab-createbtn:focus {
+  outline: none;
 }
 
 /*Formating for assignment details box*/
