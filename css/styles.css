@@ -365,6 +365,7 @@ div .card-header:hover {
   right: 28px;
   width: 280px;
 }
+
 .form-popup-background {
   position: fixed;
   background-color: #365563;
@@ -403,7 +404,7 @@ div .card-header:hover {
   position: fixed;
   width: 80%;
   right: 10%;
-  bottom: 820px;
+  bottom: 830px;
   background-color: #076275;
   border: solid;
   border-color: black;
@@ -436,10 +437,10 @@ div .card-header:hover {
   color: white;
   font-size: xx-large;
 }
-.enterPoints
-{
+
+.enterPoints {
   border: none;
-  outline:none;
+  outline: none;
 }
 
 /* Full-width input fields */
@@ -450,16 +451,19 @@ div .card-header:hover {
   border: none;
   background: #f1f1f1;
 }
+
 /* When the inputs get focus, do something */
 .form-container input[type=text]:focus,
 .form-container input[type=password]:focus {
   background-color: #ddd;
-  border:none;
+  border: none;
   outline: none;
 }
-.form-container textarea{
-  outline:none;
+
+.form-container textarea {
+  outline: none;
 }
+
 .createTitle {
   width: 25%;
 }
@@ -500,23 +504,23 @@ div .card-header:hover {
   cursor: pointer;
 }
 
-.tab-createlist
-{
+.tab-createlist {
   height: 50px;
 }
-.tab-createlist:focus
-{
-  outline:none;
+
+.tab-createlist:focus {
+  outline: none;
 }
-.tab-createbtn
-{
+
+.tab-createbtn {
   overflow-y: auto;
   border: solid 1px;
-  height:50px;
-  width:50px;
+  height: 50px;
+  width: 50px;
 }
-.tab-createbtn:focus{
-  outline:none;
+
+.tab-createbtn:focus {
+  outline: none;
 }
 
 /*Formating for assignment details box*/
@@ -694,4 +698,3 @@ div#containerDiv {
   background-color: lightgrey !important;
   transition: linear 0.5s;
 }
-
