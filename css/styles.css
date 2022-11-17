@@ -1,3 +1,21 @@
+@media (-webkit-min-device-pixel-ratio: 1.25) {
+  body {
+    zoom: 75%;
+  }
+}
+
+@media (-webkit-min-device-pixel-ratio: 1.5) {
+  body {
+    zoom: 66%;
+  }
+}
+
+@media (-webkit-min-device-pixel-ratio: 1.75) {
+  body {
+    zoom: 50%;
+  }
+}
+
 /*Boxes*/
 .box {
   position: relative;

@@ -138,6 +138,7 @@ function saveAssignment() {
 async function displayAssignments() {
   // creates an array of the saved assignments
   let assignments = await getAssignments();
+  let allTasks = await getAllTasks();
   //testing to make sure that assignments are loaded correctly
   //alert(assignments[0]);
 
@@ -170,7 +171,19 @@ async function displayAssignments() {
 
     let dueTasks = document.createElement("div");
     dueTasks.setAttribute("class", "due-tasks");
-    dueTasks.innerHTML = "Due Date: " + assignments[i].date + "&emsp;Tasks: ";
+    let taskCounter = 0;
+    for (let j = 0; j < allTasks.length; j++) {
+      if (allTasks[j].assignmentId == assignments[i].id) {
+        taskCounter++;
+      }
+    }
+    dueTasks.innerHTML =
+      "Due Date: " +
+      assignments.date +
+      "&emsp;Tasks: " +
+      taskCounter +
+      "/" +
+      taskCounter;
 
     let check = document.createElement("div");
     check.setAttribute("class", "check");
@@ -398,6 +411,7 @@ function deleteAssignmentClicked(id) {
 async function displayDetails(id) {
   //Get the assignment data based on assignment id
   let assignment = await getAssignment(id);
+  let allTasks = await getAllTasks();
   //console.log(assignment);
 
   //Creating HTML elements to display assignment data
@@ -454,6 +468,30 @@ async function displayDetails(id) {
   desc.setAttribute("class", "details-desc");
   desc.innerHTML = assignment.description;
 
+  let tasks = document.createElement("div");
+  tasks.setAttribute("style", "height:150px;overflow:auto;");
+
+  let assignmentTasks = [];
+  for (let i = 0; i < allTasks.length; i++) {
+    let task = allTasks[i];
+    console.log(task);
+    if (task.assignmentId === assignment.id) {
+      assignmentTasks.push(task);
+    }
+  }
+
+  assignmentTasks.forEach(task => {
+    let taskDiv = document.createElement("div");
+    taskDiv.setAttribute("class", "card-header");
+    tasks.append(taskDiv);
+
+    let taskButton = document.createElement("button");
+    taskButton.setAttribute("class", "defaultBtn task");
+    taskButton.setAttribute("onclick", "");
+    taskButton.innerText = task.name;
+    taskDiv.append(taskButton);
+  });
+
   parent.append(containerDiv);
 
   containerDiv.append(controlBtns);
@@ -469,6 +507,7 @@ async function displayDetails(id) {
   containerDiv.append(points);
   containerDiv.append(desc);
   containerDiv.append(closeBtn);
+  containerDiv.append(tasks);
 }
 
 /**
