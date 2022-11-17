@@ -3,11 +3,13 @@
     zoom: 75%;
   }
 }
+
 @media (-webkit-min-device-pixel-ratio: 1.5) {
   body {
     zoom: 66%;
   }
 }
+
 @media (-webkit-min-device-pixel-ratio: 1.75) {
   body {
     zoom: 50%;
@@ -91,7 +93,7 @@
   border-color: #042e38;
 }
 
-.grid-container > div {
+.grid-container>div {
   background-color: #7ec4d1;
   text-align: center;
   padding: 20px;
@@ -105,6 +107,15 @@
   position: relative;
   border: solid;
   border-color: black;
+}
+
+.body {
+  font-family: "Bahnschrift";
+  height: 100%;
+  margin-top: 5%;
+  place-content: center;
+  padding: 0;
+  background-color: #042e38;
 }
 
 #mySidenav a {
@@ -213,46 +224,6 @@
   transform: translateY(4px);
 }
 
-/*Accordion assignments/tasks*/
-#accordion {
-  margin: 2px;
-  overflow-y: scroll;
-  height: 300px;
-  max-height: 100%;
-  background-color: white;
-}
-
-a:link {
-  text-decoration: none;
-  color: black;
-}
-
-a:hover {
-  text-decoration: none;
-  color: black;
-}
-
-a:active {
-  text-decoration: none;
-  color: black;
-  outline: none;
-}
-
-a:visited {
-  text-decoration: none;
-  color: black;
-  outline: none;
-}
-
-.card-header {
-  background-color: white;
-  height: 100px;
-}
-
-div .card-header:hover {
-  background-color: lightgrey !important;
-  transition: linear 0.5s;
-}
 
 /*Scroll bars*/
 /* width */
@@ -277,95 +248,6 @@ div .card-header:hover {
   background: #3b3b3b;
 }
 
-.body {
-  font-family: "Bahnschrift";
-  height: 100%;
-  margin-top: 5%;
-  place-content: center;
-  padding: 0;
-  background-color: #042e38;
-}
-
-.defaultBtn {
-  width: 100%;
-  float: left;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  display: block;
-  padding: 0;
-  background: none;
-}
-
-.defaultBtn:focus {
-  outline: none;
-}
-
-.defaultBtn.task {
-  margin-left: 5%;
-  margin-top: 0;
-  width: 95%;
-  float: none;
-}
-
-.assignment-name {
-  font-family: "Bahnschrift SemiBold";
-  font-size: 20px;
-  text-align: left;
-}
-
-.due-tasks {
-  display: flex;
-  justify-content: flex-start;
-  font-size: 15px;
-}
-
-.due-date {
-  font-size: 15px;
-}
-
-.tasks-completed {
-  font-size: 15px;
-  margin-left: 10%;
-}
-
-.check {
-  float: right;
-  position: relative;
-  bottom: 50px;
-  display: flex;
-  justify-content: flex-start;
-  height: 10px;
-}
-
-.assignment-points {
-  font-size: 17px;
-  cursor: default;
-}
-
-.checkBox {
-  width: 50px;
-  height: 50px;
-  cursor: pointer;
-  border: 5px;
-  margin-left: 5%;
-}
-
-.checkBox.create {
-  margin-left: auto;
-}
-
-.checkBox-text {
-  padding-right: 5%;
-  margin-top: 5%;
-}
-
-.checkBox-createDiv {
-  display: flex;
-  float: right;
-  margin-right: 5%;
-  margin-top: 1%;
-}
 
 /* Button used to open the contact form - fixed at the bottom of the page */
 .open-button {
@@ -379,333 +261,4 @@ div .card-header:hover {
   bottom: 23px;
   right: 28px;
   width: 280px;
-}
-
-.form-popup-background {
-  position: fixed;
-  background-color: #365563;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
-  z-index: -1;
-  opacity: 0.8;
-}
-
-.darken-overlay {
-  position: fixed;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  background-color: #042e38;
-  opacity: 0.8;
-  z-index: -1;
-}
-
-/* The popup form - hidden by default */
-.form-popup {
-  display: none;
-  position: fixed;
-  max-height: 900px;
-  right: 10%;
-  left: 10%;
-  bottom: 125px;
-  z-index: 9;
-}
-
-.create-header {
-  position: fixed;
-  width: 80%;
-  right: 10%;
-  bottom: 830px;
-  background-color: #076275;
-  border: solid;
-  border-color: black;
-  border-width: 5px;
-  text-align: center;
-}
-
-.create-form {
-  margin-top: 20px;
-  max-height: 600px;
-  height: 600px;
-  overflow-y: scroll;
-}
-
-/* Add styles to the form container */
-.form-container {
-  max-height: 800px;
-  max-width: 100%;
-  padding: 5%;
-  background-color: #7ec4d1;
-  border: solid;
-  border-color: black;
-  border-width: 5px;
-  text-align: left;
-}
-
-.create {
-  margin-top: 1%;
-  color: white;
-  font-size: xx-large;
-}
-
-.enterPoints {
-  border: none;
-  outline: none;
-}
-
-/* Full-width input fields */
-.form-container input[type="text"],
-.form-container input[type="password"] {
-  padding: 15px;
-  margin: 5px 0 22px 0;
-  border: none;
-  background: #f1f1f1;
-}
-
-/* When the inputs get focus, do something */
-.form-container input[type="text"]:focus,
-.form-container input[type="password"]:focus {
-  background-color: #ddd;
-  border: none;
-  outline: none;
-}
-
-.form-container textarea {
-  outline: none;
-}
-
-.createTitle {
-  width: 25%;
-}
-
-.createDesc {
-  width: 95%;
-  height: 300px;
-  max-height: 300px;
-  overflow-y: auto;
-}
-
-/* Set a style for the submit button */
-.form-container .btn {
-  color: white;
-  padding: 16px 20px;
-  border: none;
-  cursor: pointer;
-  width: 100 px;
-  margin-bottom: 10px;
-  float: right;
-  margin-right: 1%;
-}
-
-/* Add a red background color to the cancel button */
-.form-container .cancel {
-  background-color: red;
-}
-
-.form-container .save {
-  background-color: #04aa6d;
-}
-
-/* Add some hover effects to buttons */
-.form-container .btn:hover,
-.open-button:hover {
-  cursor: pointer;
-}
-
-.tab-createlist {
-  height: 50px;
-}
-
-.tab-createlist:focus {
-  outline: none;
-}
-
-.tab-createbtn {
-  overflow-y: auto;
-  border: solid 1px;
-  height: 50px;
-  width: 50px;
-}
-
-.tab-createbtn:focus {
-  outline: none;
-}
-
-/*Formating for assignment details box*/
-.details-assignment-name {
-  font-size: 20px;
-  text-align: left;
-  display: flex;
-  float: right;
-  /*justify-content: space-between; */
-}
-
-.details-tasks-window {
-  height: 125px;
-  width: 550px;
-  margin-left: 5%;
-  overflow: auto;
-}
-
-.details-title {
-  font-size: 30px;
-  font-weight: bold;
-  text-align: left;
-  display: flex;
-  justify-content: flex-start;
-}
-
-.details-points {
-  font-size: 20px;
-  margin-top: 4%;
-  display: flex;
-  float: right;
-}
-
-.details-due-tasks {
-  display: flex;
-  justify-content: flex-start;
-  font-size: 15px;
-}
-
-.details-due-date {
-  font-size: 15px;
-  font-weight: bold;
-  text-align: left;
-  text-indent: 5%;
-}
-
-.details-desc {
-  text-align: left;
-  max-width: 70%;
-  margin-top: 2%;
-  max-height: 75px;
-  height: 75px;
-  overflow-y: auto;
-  font-size: 15px;
-}
-
-.edit-button {
-  margin-left: 3%;
-  font-size: 25px;
-  font-weight: bold;
-  height: 45px;
-  width: 45px;
-  cursor: pointer;
-  background-color: #7ec4d1;
-  border: solid;
-  border-radius: 25%;
-  color: #000;
-  justify-content: flex-end;
-  top: 0px;
-  float: right;
-  text-align: center;
-}
-
-.edit-button:focus {
-  outline: none;
-}
-
-.close-button {
-  position: relative;
-  top: 18%;
-  right: 4%;
-  font-size: 80px;
-  font-weight: bold;
-  background-color: transparent;
-  color: #000;
-  cursor: pointer;
-  height: 35px;
-  width: 20px;
-  justify-content: flex-start;
-  float: left;
-  border: none;
-  text-align: right;
-}
-
-.close-button:focus {
-  outline: none;
-}
-
-.delete-button {
-  font-size: 25px;
-  font-weight: bold;
-  height: 45px;
-  width: 45px;
-  cursor: pointer;
-  background-color: #7ec4d1;
-  border: solid;
-  border-radius: 25%;
-  color: #000;
-  justify-content: flex-end;
-  top: 0px;
-  float: right;
-  text-align: center;
-}
-
-.delete-button:focus {
-  outline: none;
-}
-
-.detailsCheckBox {
-  border: 5px;
-  cursor: pointer;
-  margin-right: 2%;
-  margin-left: 2%;
-  margin-top: 3%;
-  float: right;
-  height: 40px;
-  width: 40px;
-  font-size: 25px;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.fa-chevron-up,
-.fa-chevron-down,
-.fa-minus {
-  position: sticky;
-  float: left;
-  margin-top: 20px;
-  padding-right: 15px;
-}
-
-div#assignmentDiv {
-  height: 100%;
-  width: 100%;
-}
-
-div#containerDiv {
-  position: relative;
-  padding: 5%;
-  padding-top: 3%;
-  height: 100%;
-  width: 100%;
-  background-color: #b9fff0;
-  border: solid;
-  border-color: black;
-}
-
-#details {
-  height: 100%;
-  width: 100%;
-}
-
-.createCard {
-  height: 10px;
-}
-
-.createPlus {
-  margin-top: 0px;
-  margin-bottom: 0px;
-  padding-top: 0px;
-  padding-bottom: 0px;
-}
-
-#createAssignmentList:hover {
-  background-color: lightgrey !important;
-  transition: linear 0.5s;
 }
