@@ -56,10 +56,11 @@
   
   /* Formatting for task buttons */
   .defaultBtn.task {
-    margin-left: 5%;
+    margin-left: 0;
     margin-top: 0;
-    width: 95%;
-    float: none;
+    width: 85%;
+    background-color: white;
+    float: right;
   }
   
   /* Formatting for assignment name in button */
