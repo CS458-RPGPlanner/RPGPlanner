@@ -139,6 +139,7 @@ function saveAssignment() {
 async function displayAssignments() {
   // creates an array of the saved assignments
   let assignments = await getAssignments();
+  let allTasks = await getAllTasks();
   //testing to make sure that assignments are loaded correctly
   //alert(assignments[0]);
 
@@ -171,7 +172,19 @@ async function displayAssignments() {
 
     let dueTasks = document.createElement("div");
     dueTasks.setAttribute("class", "due-tasks");
-    dueTasks.innerHTML = "Due Date: " + assignments[i].date + "&emsp;Tasks: ";
+    let taskCounter = 0;
+    for (let j = 0; j < allTasks.length; j++) {
+      if (allTasks[j].assignmentId == assignments[i].id) {
+        taskCounter++;
+      }
+    }
+    dueTasks.innerHTML =
+      "Due Date: " +
+      assignments.date +
+      "&emsp;Tasks: " +
+      taskCounter +
+      "/" +
+      taskCounter;
 
     let check = document.createElement("div");
     check.setAttribute("class", "check");
