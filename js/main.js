@@ -10,9 +10,11 @@ const os = require("os");
 //JSON Storage for electron
 const storage = require("electron-json-storage");
 const path = require("path");
-// selenium stuffs
-const { addConsoleHandler } = require("selenium-webdriver/lib/logging");
 const { resolve } = require("path");
+
+try {
+  require("electron-reloader")(module);
+} catch {}
 
 /**
  * @description default electron window creation
@@ -69,9 +71,9 @@ ipcMain.handle("getAllAssignments", async (event) => {
   return result;
 });
 
-// ipc of getAssignmentById for renderer
-ipcMain.handle("getAssignmentById", async (event, id) => {
-  const result = await getAssignmentById(id);
+// ipc of getAssignment for renderer
+ipcMain.handle("getAssignment", async (event, id) => {
+  const result = await getAssignment(id);
   return result;
 });
 
@@ -80,6 +82,74 @@ ipcMain.handle("editAssignment", async (event, obj) => {
   const result = await editAssignment(obj);
   return result;
 });
+
+// ipc of createAssignment for renderer
+ipcMain.handle("createTask", async (event, obj) => {
+  const result = await createTask(obj);
+  return result;
+});
+
+// ipc of getAllAssignments for renderer
+ipcMain.handle("getAllTasks", async (event) => {
+  const result = await getAllTasks();
+  return result;
+});
+
+// ipc of deleteAssignment for renderer
+ipcMain.handle("deleteAssignment", async (event, id) => {
+  const result = await deleteAssignment(id);
+  return result;
+});
+
+/**
+ * @description create a new task in the system with incrementing task number
+ * @todo not completed yet
+ * @param {*} object of json task to be created
+ * @returns none
+ */
+function createTask(task) {
+  let key = "Tasks";
+
+  storage.get(key, function (error, data) {
+    //check to see if there are more than 0 assignments
+
+    if (data != null && data.length > 0) {
+      //set the new assignment id to the last assignment id + 1
+      task.id = data[data.length - 1].id + 1;
+      //push assignment onto the data array
+      data.push(task);
+      // replace the old data with the new data
+      storage.set(key, data, function (error) {
+        if (error) throw error;
+      });
+    } else {
+      //if no assignments are in the array set the new assignment id to 0
+      task.id = 0;
+      // replace the old data with the new data
+      storage.set(key, [task], function (error) {
+        if (error) throw error;
+      });
+    }
+  });
+  return true;
+}
+
+/**
+ * @description get task from json
+ * @todo: not completed yet
+ * @param {*} name name of the task to get
+ * @returns task that was gotten
+ */
+function getAllTasks(name) {
+  try {
+    //get assignments and return assignment array
+    let tasks = storage.getSync("Tasks");
+    return tasks;
+  } catch (error) {
+    //return empty string if no assignments
+    return "";
+  }
+}
 
 /**
  * @description creates an assignment from the object passed in
@@ -134,13 +204,15 @@ function getAllAssignments() {
  * @returns assignment that matches the id or null if not found
  */
 // function to get assignment using the id of the assignment
-function getAssignmentById(id) {
+function getAssignment(id) {
+  let key = "Assignments";
+
   //grab the json information from the json with the key
   let tempObj = storage.getSync(key);
   //loop over all the items in the json array
   for (let i = 0; i < tempObj.length; i++) {
     //check to see if item in array is what we are looking for
-    if (tempObj.id[i] == id) {
+    if (tempObj[i].id == id) {
       //return the json object in the json array with id = to input id
       return tempObj[i];
     }
@@ -151,29 +223,7 @@ function getAssignmentById(id) {
 }
 
 /**
- * @description changes the name of an assignment by id
- * @param {*} id id of the assignment to set name of
- * @param {*} name name to replace
- */
-// edit assignment name by the id of the assignment
-function setAssignmentName(id, name) {
-  let key = "Assignments";
-  // grab the assignments to edit
-  storage.get(key, function (error, data) {
-    // iterate throughout the assignments array
-    for (let i = 0; i < assignments.length; i++) {
-      if (data[i].id == id) {
-        data[i].name = name;
-      }
-    }
-    //set the new data set with the new assignment name for the assignment by id
-    storage.set(key, data, function (error) {
-      if (error) throw error;
-    });
-  });
-}
-
-/**
+ * @todo testing to make sure everything works
  * @description edits an assignment by the object passed in
  * @param {*} obj passed in assignment
  * @return passed in assignment
@@ -194,6 +244,61 @@ function editAssignment(obj) {
           data[i] = obj;
           //replace the old data with the new data
           storage.set("Assignments", data, function (error) {
+            if (error) throw error;
+          });
+          //return the object that was stored
+          return obj;
+        }
+      }
+    }
+    //not able to get the assignment
+    return null;
+  });
+}
+
+/**
+ * @description delete an assignment by id
+ * @param {*} id id of the assignment to delete
+ */
+function deleteAssignment(id) {
+  let key = "Assignments";
+
+  storage.get(key, function (error, data) {
+    // iterate throughout the assignments array
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].id == id) {
+        // delete selected assignment by id
+        data.splice(i, 1);
+      }
+    }
+    //set the new data set with the new assignment name for the assignment by id
+    storage.set(key, data, function (error) {
+      if (error) throw error;
+    });
+  });
+}
+/**
+ * @todo testing to make sure everything works
+ * @description edits a task by the object passed in
+ * @param {*} obj passed in task
+ * @return passed in task
+ */
+// edit tasks by passing in the object to replace from the json array
+function editTask(obj) {
+  let key = "Tasks";
+
+  //get all of the assignments
+  storage.get(key, function (error, data) {
+    //check for no data
+    if (data != null && data.length > 0) {
+      //search through all of the data
+      for (let i = 0; i < data.length; i++) {
+        //look for specific id
+        if (data[i].id == obj.id) {
+          //set data index to object
+          data[i] = obj;
+          //replace the old data with the new data
+          storage.set("Tasks", data, function (error) {
             if (error) throw error;
           });
           //return the object that was stored

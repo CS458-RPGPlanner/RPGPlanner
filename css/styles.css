@@ -1,425 +1,669 @@
-   /*Boxes*/
-   .box {
-     border: ridge;
-     border-color: black;
-   }
+/*Boxes*/
+.box {
+  position: relative;
+  border: ridge;
+  border-color: #042e38;
+  overflow-y: hidden;
+}
 
-   .box.item1 {
-     grid-area: DatedAssignment;
-     height: 375px;
-     width: 600px;
-     /*width: 600px;*/
-   }
+.box.points {
+  grid-area: Point;
+  width: 80%;
+  right: 20%;
+  border-radius: 25px;
+}
 
-   .box.item2 {
-     grid-area: UndatedAssignment;
-     height: 175px;
-     width: 600px;
-     /*width: 600px;*/
-   }
+.box.extras {
+  grid-area: Extra;
+  width: 134%;
+  right: 40%;
+}
 
-   .box.item3 {
-     grid-area: DueToday;
-     height: 200px;
-     width: 735px;
-     /*width:700px;*/
-   }
+.box.item1 {
+  grid-area: DatedAssignment;
+  height: 375px;
+  width: 600px;
+  /*width: 600px;*/
+}
 
-   .box.item4 {
-     grid-area: Viewport;
-     height: 350px;
-     width: 735px;
-   }
+.box.item2 {
+  grid-area: UndatedAssignment;
+  height: 175px;
+  width: 600px;
+  /*width: 600px;*/
+}
 
-   .box.item5 {
-     grid-area: Tab;
-     height: 100px;
-   }
+.box.item3 {
+  grid-area: DueToday;
+  height: 200px;
+  width: 735px;
+  /*width:700px;*/
+}
 
-   /*Grid*/
-   .grid-container {
-     display: grid;
-     grid-template-areas:
-       'Tab Tab Tab Tab Tab Tab'
-       'DatedAssignment DatedAssignment  DueToday DueToday DueToday DueToday'
-       'DatedAssignment DatedAssignment  Viewport Viewport Viewport Viewport'
-       'DatedAssignment DatedAssignment  Viewport Viewport Viewport Viewport'
-       'UndatedAssignment UndatedAssignment  Viewport Viewport Viewport Viewport';
-     gap: 20px;
-     background-color: #365563;
-     margin: auto;
-     width: 1400px;
-     height: 750px;
-     padding: 20px;
-     border: ridge medium;
-     border-color: black;
-   }
+.box.item4 {
+  grid-area: Viewport;
+  height: 388px;
+  width: 758px;
+  border-bottom: none;
+  border-right: none;
+  background-color: #042e38;
+}
 
-   .grid-container>div {
-     background-color: rgba(255, 255, 255, 0.8);
-     text-align: center;
-     padding: 20px;
-     font-size: 30px;
-   }
+.box.item5 {
+  grid-area: Tab;
+  height: 100px;
+  width: 88%;
+}
 
-   #mySidenav a {
-     position: absolute;
-     /* Position them relative to the browser window */
-     left: -120px;
-     /* Position them outside of the screen */
-     transition: 0.3s;
-     /* Add transition on hover */
-     padding: 15px;
-     /* 15px padding */
-     width: 170px;
-     /* Set a specific width */
-     text-decoration: none;
-     /* Remove underline */
-     font-size: 20px;
-     /* Increase font size */
-     color: white;
-     /* White text color */
-     border-radius: 0 5px 5px 0;
-     /* Rounded corners on the top right and bottom right side */
-   }
+/*Grid*/
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    "Tab Tab Point Point Extra Extra"
+    "DatedAssignment DatedAssignment  DueToday DueToday DueToday DueToday"
+    "DatedAssignment DatedAssignment  Viewport Viewport Viewport Viewport"
+    "DatedAssignment DatedAssignment  Viewport Viewport Viewport Viewport"
+    "UndatedAssignment UndatedAssignment  Viewport Viewport Viewport Viewport"
+    "Empty Empty  Viewport Viewport Viewport Viewport";
+  gap: 20px;
+  background-color: #076275;
+  width: 1400px;
+  height: 750px;
+  margin: auto;
+  padding: 20px;
+  border: ridge medium;
+  border-color: #042e38;
+}
 
-   #mySidenav a:hover {
-     left: 0;
-     /* On mouse-over, make the elements appear as they should */
-   }
+.grid-container>div {
+  background-color: #7ec4d1;
+  text-align: center;
+  padding: 20px;
+  font-size: 30px;
+}
 
-   /*Styling for tab buttons*/
-   .tabButtons {
-     height: 50px;
-     width: 10%;
-     background-color: darkcyan;
-     position: relative;
-     bottom: -25px;
-     gap: 5px;
-     float: left;
-     border: ridge 2px black;
-     border-radius: 5px 5px 0 0;
-   }
+.viewport-grid {
+  background-color: #7ec4d1;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  border: solid;
+  border-color: black;
+}
 
-   /* Styling on hovering over tabs */
-   .tabButtons:hover {
-     height: 75px;
-     bottom: 0px;
-   }
+#mySidenav a {
+  position: absolute;
+  /* Position them relative to the browser window */
+  left: -120px;
+  /* Position them outside of the screen */
+  transition: 0.3s;
+  /* Add transition on hover */
+  padding: 15px;
+  /* 15px padding */
+  width: 170px;
+  /* Set a specific width */
+  text-decoration: none;
+  /* Remove underline */
+  font-size: 20px;
+  /* Increase font size */
+  color: white;
+  /* White text color */
+  border-radius: 0 5px 5px 0;
+  /* Rounded corners on the top right and bottom right side */
+  z-index: 1;
+}
 
-   /* changes tab buttons on click
-   /* .tabButtons:focus{
-    height: 75px;
-    bottom: 0px;
-    font-size: 0px;
-   }
-   .tabButtons:active{
-    height: 75px;
-    bottom: 0px;
-   }
-   */
+#mySidenav a:hover {
+  left: 0;
+  /* On mouse-over, make the elements appear as they should */
+}
 
-   /* The about link: 20px from the top with a green background */
-   #RPG {
-     top: 155px;
-     height: 80px;
-     background-color: #365563;
-     border: ridge 2px;
-     border-color: darkslateblue;
-   }
+/*Styling for tab buttons*/
+.tabButtons {
+  height: 50px;
+  width: 10%;
+  background-color: darkcyan;
+  position: relative;
+  bottom: -25px;
+  gap: 5px;
+  float: left;
+  border: ridge 2px black;
+  border-radius: 5px 5px 0 0;
+}
 
-   #profile {
-     top: 255px;
-     height: 80px;
-     background-color: #365563;
+/* Styling on hovering over tabs */
+.tabButtons:hover {
+  height: 75px;
+  bottom: 0px;
+}
 
-     border: ridge 2px;
-     border-color: darkslateblue;
-     /* Blue */
-   }
+.tabButtons:focus {
+  /*height: 75px;
+    bottom: 0px; */
+  outline: none;
+  /*font-size: 0px; */
+}
 
-   .body {
-     margin-top: 5%;
-     background-color: darkcyan;
-   }
+.tabButtons:active {
+  height: 75px;
+  bottom: 0px;
+}
 
-   .createAssn {
-     display: inline-block;
-     padding: 15px 25px;
-     font-size: 80%;
-     cursor: pointer;
-     text-align: center;
-     text-decoration: none;
-     outline: none;
-     color: #fff;
-     background-color: #4CAF50;
-     border: none;
-     border-radius: 15px;
-     box-shadow: 0 9px #999;
-     position: relative;
-     top: 40%;
-   }
+/* The about link: 20px from the top with a green background */
+#RPG {
+  top: 155px;
+  height: 80px;
+  background-color: #365563;
+  border: ridge 2px;
+  border-color: rgb(64, 5, 106);
+}
 
-   .createAssn:hover {
-     background-color: #3e8e41
-   }
+#profile {
+  top: 255px;
+  height: 80px;
+  background-color: #365563;
+  border: ridge 2px;
+  border-color: rgb(64, 5, 106);
+}
 
-   .createAssn:active {
-     background-color: #3e8e41;
-     box-shadow: 0 5px #666;
-     transform: translateY(4px);
-   }
+.createAssn {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 80%;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: black;
+  background-color: #b9fff0;
+  border: solid;
+  border-width: 8px;
+  border-radius: 15px;
+  border-color: #076275;
+  position: relative;
+  top: 40%;
+}
 
-   /*Accordion assignments/tasks*/
-   #accordion {
-     margin: 2px;
-     overflow-y: scroll;
-     height: 300px;
-     max-height: 100%;
-     background-color: white;
-   }
+.createAssn:hover {
+  background-color: #076275;
+}
 
-   a:link {
-     text-decoration: none;
-     color: black;
-   }
+.createAssn:focus {
+  outline: none;
+}
 
-   a:hover {
-     text-decoration: none;
-     color: black;
-   }
+.createAssn:active {
+  background-color: #054b58;
+  transform: translateY(4px);
+}
 
-   a:active {
-     text-decoration: none;
-     color: black;
-     outline: none;
-   }
+/*Accordion assignments/tasks*/
+#accordion {
+  margin: 2px;
+  overflow-y: scroll;
+  height: 300px;
+  max-height: 100%;
+  background-color: white;
+}
 
-   a:visited {
-     text-decoration: none;
-     color: black;
-     outline: none;
-   }
+a:link {
+  text-decoration: none;
+  color: black;
+}
 
-   .card-header {
-     background-color: white;
-     height: 100px;
-   }
+a:hover {
+  text-decoration: none;
+  color: black;
+}
 
-   div .card-header:hover {
-     background-color: lightgrey !important;
-     transition: linear 0.5s;
-   }
+a:active {
+  text-decoration: none;
+  color: black;
+  outline: none;
+}
 
-   /*Scroll bars*/
-   /* width */
-   ::-webkit-scrollbar {
-     width: 20px;
-   }
+a:visited {
+  text-decoration: none;
+  color: black;
+  outline: none;
+}
 
-   /* Track */
-   ::-webkit-scrollbar-track {
-     box-shadow: inset 0 0 5px grey;
-     border-radius: 5px;
-   }
+.card-header {
+  background-color: white;
+  height: 100px;
+}
 
-   /* Handle */
-   ::-webkit-scrollbar-thumb {
-     background: #686868;
-     border-radius: 5px;
-   }
+div .card-header:hover {
+  background-color: lightgrey !important;
+  transition: linear 0.5s;
+}
 
-   /* Handle on hover */
-   ::-webkit-scrollbar-thumb:hover {
-     background: #3B3B3B;
-   }
+/*Scroll bars*/
+/* width */
+::-webkit-scrollbar {
+  width: 20px;
+}
 
-   .body {
-     font-family: 'Bahnschrift';
-     margin-top: 8%;
-     background-color: darkcyan;
-   }
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 5px;
+}
 
-   .defaultBtn {
-     width: 100%;
-     float: left;
-     border: none;
-     outline: none;
-     cursor: pointer;
-     display: block;
-     padding: 0;
-     background: none;
-   }
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #686868;
+  border-radius: 5px;
+}
 
-   .defaultBtn:focus {
-     outline: none;
-   }
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #3b3b3b;
+}
 
-   .defaultBtn.task {
-     margin-left: 5%;
-     margin-top: 0;
-     width: 95%;
-     float: none;
-   }
+.body {
+  font-family: "Bahnschrift";
+  height: 100%;
+  margin-top: 5%;
+  place-content: center;
+  padding: 0;
+  background-color: #042e38;
+}
 
-   .assignment-name {
-     font-family: 'Bahnschrift SemiBold';
-     font-size: 20px;
-     text-align: left;
-   }
+.defaultBtn {
+  width: 100%;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: block;
+  padding: 0;
+  background: none;
+}
 
-   .due-tasks {
-     display: flex;
-     justify-content: flex-start;
-     font-size: 15px;
-   }
+.defaultBtn:focus {
+  outline: none;
+}
 
-   .due-date {
-     font-size: 15px;
-   }
+.defaultBtn.task {
+  margin-left: 5%;
+  margin-top: 0;
+  width: 95%;
+  float: none;
+}
 
-   .tasks-completed {
-     font-size: 15px;
-     margin-left: 10%
-   }
+.assignment-name {
+  font-family: "Bahnschrift SemiBold";
+  font-size: 20px;
+  text-align: left;
+}
 
-   .check {
-     float: right;
-     position: relative;
-     bottom: 50px;
-     display: flex;
-     justify-content: flex-start;
-     height: 10px;
-   }
+.due-tasks {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 15px;
+}
 
-   .assignment-points {
-     font-size: 17px;
-     cursor: default;
-   }
+.due-date {
+  font-size: 15px;
+}
 
-   .checkBox {
-     width: 50px;
-     height: 50px;
-     border: 5px;
-     margin-left: 5%
-   }
-   
-   /* Style for createAssignment form field */
-   body {font-family: Arial, Helvetica, sans-serif;}
-   * {box-sizing: border-box;}
-   
-   /* Button used to open the contact form - fixed at the bottom of the page */
-   .open-button {
-     background-color: #555;
-     color: white;
-     padding: 16px 20px;
-     border: none;
-     cursor: pointer;
-     opacity: 0.8;
-     position: fixed;
-     bottom: 23px;
-     right: 28px;
-     width: 280px;
-   }
-   
-   /* The popup form - hidden by default */
-   .form-popup {
-     display: none;
-     position: fixed;
-     bottom: 0;
-     right: 15px;
-     border: 3px solid #f1f1f1;
-     z-index: 9;
-   }
-   
-   /* Add styles to the form container */
-   .form-container {
-     max-width: 500px;
-     padding: 10px;
-     background-color: white;
-   }
-   
-   /* Full-width input fields */
-   .form-container input[type=text], .form-container input[type=password] {
-     width: 100%;
-     padding: 15px;
-     margin: 5px 0 22px 0;
-     border: none;
-     background: #f1f1f1;
-   }
-   
-   /* When the inputs get focus, do something */
-   .form-container input[type=text]:focus, .form-container input[type=password]:focus {
-     background-color: #ddd;
-     outline: none;
-   }
-   
-   /* Set a style for the submit button */
-   .form-container .btn {
-     background-color: #04AA6D;
-     color: white;
-     padding: 16px 20px;
-     border: none;
-     cursor: pointer;
-     width: 100%;
-     margin-bottom:10px;
-     opacity: 0.8;
-   }
-   
-   /* Add a red background color to the cancel button */
-   .form-container .cancel {
-     background-color: red;
-   }
-   
-   /* Add some hover effects to buttons */
-   .form-container .btn:hover, .open-button:hover {
-     opacity: 1;
-     margin-left: 5%;
-     cursor: pointer;
-     margin-left: 5%;
-   }
+.tasks-completed {
+  font-size: 15px;
+  margin-left: 10%;
+}
 
-   /*Formating for assignment details box*/
-   .details-assignment-name {
-     font-size: 20px;
-     text-align: left;
-     display: flex;
-     justify-content: space-between;
-   }
+.check {
+  float: right;
+  position: relative;
+  bottom: 50px;
+  display: flex;
+  justify-content: flex-start;
+  height: 10px;
+}
 
-   .details-title {
-     font-size: 40px;
-     text-align: left;
-     display: flex;
-     justify-content: flex-start;
-   }
+.assignment-points {
+  font-size: 17px;
+  cursor: default;
+}
 
-   .details-due-tasks {
-     display: flex;
-     justify-content: flex-start;
-     font-size: 15px;
-   }
+.checkBox {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  border: 5px;
+  margin-left: 5%;
+}
 
-   .details-due-date {
-     font-size: 15px;
-     text-align: left;
-   }
+.checkBox.create {
+  margin-left: auto;
+}
 
-   .details-desc {
-     text-align: left;
-     font-size: 15px;
-   }
+.checkBox-text {
+  padding-right: 5%;
+  margin-top: 5%;
 
-   .close-button {
-     font-size: 15px;
-     font-weight: bold;
-     color: #000;
-     text-align: right;
-   }
+}
 
-   .detailsCheckBox {
-     top: auto;
-     float: right;
-     display: flex;
-     justify-content: flex-end;
-   }
+.checkBox-createDiv {
+  display: flex;
+  float: right;
+  margin-right: 5%;
+  margin-top: 1%;
+}
+
+/* Button used to open the contact form - fixed at the bottom of the page */
+.open-button {
+  background-color: #555;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  position: fixed;
+  bottom: 23px;
+  right: 28px;
+  width: 280px;
+}
+
+.form-popup-background {
+  position: fixed;
+  background-color: #365563;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  opacity: .8;
+
+}
+
+.darken-overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #042e38;
+  opacity: .8;
+  z-index: -1;
+}
+
+/* The popup form - hidden by default */
+.form-popup {
+  display: none;
+  position: fixed;
+  max-height: 900px;
+  right: 10%;
+  left: 10%;
+  bottom: 125px;
+  z-index: 9;
+}
+
+.create-header {
+  position: fixed;
+  width: 80%;
+  right: 10%;
+  bottom: 820px;
+  background-color: #365563;
+  border: solid;
+  border-color: black;
+  border-width: 5px;
+  text-align: center;
+}
+
+.create-form {
+  margin-top: 20px;
+  max-height: 600px;
+  height: 600px;
+  overflow-y: scroll;
+
+}
+
+/* Add styles to the form container */
+.form-container {
+  max-height: 800px;
+  max-width: 100%;
+  padding: 5%;
+  background-color: white;
+  border: solid;
+  border-color: black;
+  border-width: 5px;
+  text-align: left;
+}
+
+.create {
+  margin-top: 1%;
+  color: white;
+  font-size: xx-large;
+}
+
+/* Full-width input fields */
+.form-container input[type=text],
+.form-container input[type=password] {
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+.createTitle {
+  width: 30%;
+}
+
+.createDesc {
+  width: 95%;
+  height: 300px;
+  max-height: 300px;
+  overflow-y: scroll;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus,
+.form-container input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit button */
+.form-container .btn {
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100 px;
+  margin-bottom: 10px;
+  float: right;
+  margin-right: 1%;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+.form-container .save {
+  background-color: #04AA6D;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover,
+.open-button:hover {
+  cursor: pointer;
+}
+
+/*Formating for assignment details box*/
+.details-assignment-name {
+  font-size: 20px;
+  text-align: left;
+  display: flex;
+  float: right;
+  /*justify-content: space-between; */
+}
+
+.details-tasks-window {
+  height: 125px;
+  width: 550px;
+  margin-left: 5%;
+  overflow: auto;
+}
+
+.details-title {
+  font-size: 30px;
+  font-weight: bold;
+  text-align: left;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.details-points {
+  font-size: 20px;
+  margin-top: 4%;
+  display: flex;
+  float: right;
+}
+
+.details-due-tasks {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 15px;
+}
+
+.details-due-date {
+  font-size: 15px;
+  font-weight: bold;
+  text-align: left;
+  text-indent: 5%;
+}
+
+.details-desc {
+  text-align: left;
+  max-width: 70%;
+  margin-top: 2%;
+  max-height: 75px;
+  height: 75px;
+  overflow-y: auto;
+  font-size: 15px;
+}
+
+.edit-button {
+  margin-left: 3%;
+  font-size: 25px;
+  font-weight: bold;
+  height: 45px;
+  width: 45px;
+  cursor: pointer;
+  background-color: #7ec4d1;
+  border: solid;
+  border-radius: 25%;
+  color: #000;
+  justify-content: flex-end;
+  top: 0px;
+  float: right;
+  text-align: center;
+}
+
+.edit-button:focus {
+  outline: none;
+}
+
+.close-button {
+  position: relative;
+  top: 18%;
+  right: 4%;
+  font-size: 80px;
+  font-weight: bold;
+  background-color: transparent;
+  color: #000;
+  cursor: pointer;
+  height: 35px;
+  width: 20px;
+  justify-content: flex-start;
+  float: left;
+  border: none;
+  text-align: right;
+}
+
+.close-button:focus {
+  outline: none;
+}
+
+.delete-button {
+  font-size: 25px;
+  font-weight: bold;
+  height: 45px;
+  width: 45px;
+  cursor: pointer;
+  background-color: #7ec4d1;
+  border: solid;
+  border-radius: 25%;
+  color: #000;
+  justify-content: flex-end;
+  top: 0px;
+  float: right;
+  text-align: center;
+}
+
+.delete-button:focus {
+  outline: none;
+}
+
+.detailsCheckBox {
+  border: 5px;
+  cursor: pointer;
+  margin-right: 2%;
+  margin-left: 2%;
+  margin-top: 3%;
+  float: right;
+  height: 40px;
+  width: 40px;
+  font-size: 25px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.fa-chevron-up,
+.fa-chevron-down,
+.fa-minus {
+  position: sticky;
+  float: left;
+  margin-top: 20px;
+  padding-right: 15px;
+}
+
+div#assignmentDiv {
+  height: 100%;
+  width: 100%;
+}
+
+div#containerDiv {
+  position: relative;
+  padding: 5%;
+  padding-top: 3%;
+  height: 100%;
+  width: 100%;
+  background-color: #b9fff0;
+  border: solid;
+  border-color: black;
+}
+
+#details {
+  height: 100%;
+  width: 100%;
+}
+
+.createCard {
+  height: 10px;
+}
+
+.createPlus {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+#createAssignmentList:hover {
+  background-color: lightgrey !important;
+  transition: linear 0.5s;
+}
