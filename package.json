@@ -1,7 +1,7 @@
 {
   "name": "rpgplanner",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "A task planner created with rpg game elements for UWSTOUT CS458 Fall 2022.",
   "main": "js/main.js",
   "scripts": {
     "start": "electron-forge start",
@@ -9,7 +9,7 @@
     "drive": "chromedriver",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "document": "jsdoc ./js/main.js ./js/JSON.js -d documentation",
+    "document": "jsdoc js/main.js js/JSON.js -d documentation",
     "format": "prettier -w .",
     "docs": "light-server -o -s ./documentation/ index.html"
   },
@@ -25,7 +25,7 @@
     "electron-reload": "^2.0.0-alpha.1",
     "electron-reloader": "^1.2.3",
     "light-server": "^2.9.1",
-    "prettier": "2.7.1"
+    "prettier": "^2.7.1"
   },
   "dependencies": {
     "electron-json-storage": "^4.5.0",

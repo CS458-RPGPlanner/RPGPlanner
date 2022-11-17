@@ -1,18 +1,18 @@
-#documentation
-**/documentation/font/*
-**/documentation/scripts/*
-**/documentation/styles/*
-
 #css
-**/css/bootstrap-4.4.1.css
+css/bootstrap-4.4.1.css
 
 #folders
 node_modules
 mock data
 out
+documentation
+
 
 #home directory files
 .gitignore
 package-lock.json
 package.json
 README.md
+
+#html files because prettier is ugly for html for some reason
+**/*.html
