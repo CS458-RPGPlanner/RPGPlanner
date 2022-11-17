@@ -19,7 +19,6 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<!--Connection to CSS styleSheet-->
 	<link rel="stylesheet" href="css\styles.css" />
-
 	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 	<!--Connection to JSON javascript-->
 	<script src="js\JSON.js"></script>
@@ -88,7 +87,7 @@
 								required>
 
 							<label for="points"><b>Points</b></label>
-							<input type="number" placeholder="Enter Points" name="points" required>
+							<input type="number" class="enterPoints" placeholder="Enter Points" name="points" required>
 
 							<div class="checkBox-createDiv">
 								<label for="complete" class="checkBox-text"><b>Complete:</b></label>
@@ -97,15 +96,15 @@
 						</div>
 
 						<label for="description"></label>
-						<input type="text" class="createDesc" placeholder="Enter Description" name="description"
-							maxlength="450" required>
+						<textarea class="createDesc" placeholder="Enter Description" name="description"
+							maxlength="450" required></textarea>
 
 						<label for="date"><b>Due Date:</b></label>
 						<input type="date" placeholder="Enter Date" name="date" required>
 
 						<div class="tab-creatediv">
 							<label for="tabs" class="tab-createlist"><b>Tabs:</b></label>
-							<select id="tabs" name="tabs">
+							<select class="tab-createlist" id="tabs" name="tabs">
 								<option value="future tab">future tab</option>
 								<option value="future tab">future tab</option>
 								<option value="future tab">future tab</option>
