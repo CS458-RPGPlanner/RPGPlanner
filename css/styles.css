@@ -1,3 +1,19 @@
+@media (-webkit-min-device-pixel-ratio: 1.25) {
+  body {
+    zoom: 75%;
+  }
+}
+@media (-webkit-min-device-pixel-ratio: 1.5) {
+  body {
+    zoom: 66%;
+  }
+}
+@media (-webkit-min-device-pixel-ratio: 1.75) {
+  body {
+    zoom: 50%;
+  }
+}
+
 /*Boxes*/
 .box {
   position: relative;
@@ -75,7 +91,7 @@
   border-color: #042e38;
 }
 
-.grid-container>div {
+.grid-container > div {
   background-color: #7ec4d1;
   text-align: center;
   padding: 20px;
@@ -342,7 +358,6 @@ div .card-header:hover {
 .checkBox-text {
   padding-right: 5%;
   margin-top: 5%;
-
 }
 
 .checkBox-createDiv {
@@ -374,8 +389,7 @@ div .card-header:hover {
   left: 0;
   top: 0;
   z-index: -1;
-  opacity: .8;
-
+  opacity: 0.8;
 }
 
 .darken-overlay {
@@ -385,7 +399,7 @@ div .card-header:hover {
   height: 100%;
   width: 100%;
   background-color: #042e38;
-  opacity: .8;
+  opacity: 0.8;
   z-index: -1;
 }
 
@@ -417,7 +431,6 @@ div .card-header:hover {
   max-height: 600px;
   height: 600px;
   overflow-y: scroll;
-
 }
 
 /* Add styles to the form container */
@@ -444,8 +457,8 @@ div .card-header:hover {
 }
 
 /* Full-width input fields */
-.form-container input[type=text],
-.form-container input[type=password] {
+.form-container input[type="text"],
+.form-container input[type="password"] {
   padding: 15px;
   margin: 5px 0 22px 0;
   border: none;
@@ -453,8 +466,8 @@ div .card-header:hover {
 }
 
 /* When the inputs get focus, do something */
-.form-container input[type=text]:focus,
-.form-container input[type=password]:focus {
+.form-container input[type="text"]:focus,
+.form-container input[type="password"]:focus {
   background-color: #ddd;
   border: none;
   outline: none;
@@ -475,8 +488,6 @@ div .card-header:hover {
   overflow-y: auto;
 }
 
-
-
 /* Set a style for the submit button */
 .form-container .btn {
   color: white;
@@ -495,7 +506,7 @@ div .card-header:hover {
 }
 
 .form-container .save {
-  background-color: #04AA6D;
+  background-color: #04aa6d;
 }
 
 /* Add some hover effects to buttons */
