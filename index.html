@@ -76,32 +76,36 @@
 
 				<form action="/action_page.php" class="form-container">
 					<div class="create-header">
-						<div class="create">Create Assignment
-							<button type="button" class="btn cancel" onclick="closeForm()">x</button>
-							<button type="button" class="btn save" onclick="saveAssignment()">Save</button>
+						<div class="create">
+							Create Assignment
+							<button type="button" class="btn cancel" onclick="closeForm()">
+								x
+							</button>
+							<button type="button" class="btn save" onclick="saveAssignment()">
+								Save
+							</button>
 						</div>
 					</div>
 					<div class="create-form">
 						<div>
 							<label for="name"></label>
-							<input type="text" class="createTitle" placeholder="Enter Title" name="name" maxlength="50"
-								required>
+							<input type="text" class="createTitle" placeholder="Enter Title" name="name" maxlength="50" required />
 
 							<label for="points"><b>Points</b></label>
-							<input type="number" placeholder="Enter Points" name="points" required>
+							<input type="number" placeholder="Enter Points" name="points" required />
 
 							<div class="checkBox-createDiv">
 								<label for="complete" class="checkBox-text"><b>Complete:</b></label>
-								<input type="checkbox" class="checkBox create" name="complete">
+								<input type="checkbox" class="checkBox create" name="complete" />
 							</div>
 						</div>
 
 						<label for="description"></label>
-						<input type="text" class="createDesc" placeholder="Enter Description" name="description"
-							maxlength="450" required>
+						<input type="text" class="createDesc" placeholder="Enter Description" name="description" maxlength="450"
+							required />
 
 						<label for="date"><b>Due Date:</b></label>
-						<input type="date" placeholder="Enter Date" name="date" required>
+						<input type="date" placeholder="Enter Date" name="date" required />
 
 						<div class="tab-creatediv">
 							<label for="tabs" class="tab-createlist"><b>Tabs:</b></label>
@@ -113,13 +117,15 @@
 							<button class="tab-createbtn"><b>+</b></button>
 						</div>
 						<div>
-							<p style="background-color:aquamarine">
-								This is where the user can create a task right off of the create assignment, OR this
-								will show a list of associated tasks with the assignment the user is editing.
-								This should look similar to the assn detail view task list. It should drop down into a
-								similar form as the create assn.
-								This is also the area where if a user wants to edit a task if they click the edit button
-								on the task detail view they will be redirected here.
+							<p style="background-color: aquamarine">
+								This is where the user can create a task right off of the
+								create assignment, OR this will show a list of associated
+								tasks with the assignment the user is editing. This should
+								look similar to the assn detail view task list. It should drop
+								down into a similar form as the create assn. This is also the
+								area where if a user wants to edit a task if they click the
+								edit button on the task detail view they will be redirected
+								here.
 							</p>
 						</div>
 					</div>
