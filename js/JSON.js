@@ -225,7 +225,7 @@ async function displayAssignments() {
 
   let createButton = document.createElement("button");
   createButton.setAttribute("id", "createAssignmentList");
-  createButton.setAttribute("class", "defaultBtn");
+  createButton.setAttribute("class", "defaultBtn add");
   createButton.setAttribute("onclick", "openForm()");
 
   let createName = document.createElement("p");
@@ -324,7 +324,7 @@ async function displayTasks() {
 
     let arrow = document.getElementById("arrow-" + tasks[i].assignmentId);
     arrow.setAttribute("class", "fa fa-chevron-up");
-    
+
     let taskHeader = document.createElement("div");
     taskHeader.setAttribute("id", "taskHeader-" + tasks[i].id);
     taskHeader.setAttribute("class", "card-header");
@@ -373,12 +373,12 @@ async function displayTasks() {
 
       let createButton = document.createElement("button");
       createButton.setAttribute("id", "createAssignmentList");
-      createButton.setAttribute("class", "defaultBtn");
+      createButton.setAttribute("class", "defaultBtn add");
 
       let createName = document.createElement("p");
       createName.setAttribute("class", "createPlus");
       createName.innerHTML = "+";
-      
+
       createButton.append(createName);
 
       createHeader.append(createButton);
