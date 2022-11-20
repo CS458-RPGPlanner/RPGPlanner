@@ -148,10 +148,10 @@
 /*Styling for tab buttons*/
 .tabButtons {
   height: 50px;
-  width: 10%;
+  width: 15%;
   background-color: darkcyan;
   position: relative;
-  bottom: -25px;
+  bottom: -30px;
   gap: 5px;
   float: left;
   border: ridge 2px black;
@@ -161,7 +161,7 @@
 /* Styling on hovering over tabs */
 .tabButtons:hover {
   height: 75px;
-  bottom: 0px;
+  bottom: -10px;
 }
 
 .tabButtons:focus {
