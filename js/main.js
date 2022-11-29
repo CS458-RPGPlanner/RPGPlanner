@@ -102,6 +102,12 @@ ipcMain.handle("deleteAssignment", async (event, id) => {
   return result;
 });
 
+// ipc of deleteTask for renderer
+ipcMain.handle("deleteTasks", async (event, id) => {
+  const result = await deleteTasks(id);
+  return result;
+});
+
 /**
  * @description create a new task in the system with incrementing task number
  * @todo not completed yet
@@ -278,13 +284,13 @@ function deleteAssignment(id) {
   });
 }
 
-function deleteTasks(assignmentId) {
+function deleteTasks(id) {
   let key = "MOCK_DATA_TASKS";
-  console.log(assignmentId);
+  console.log(id);
   storage.get(key, function (error, data) {
     // iterate throughout the task array
     for (let i = 0; i < data.length; i++) {
-      if (data[i].assignmentId === assignmentId) {
+      if (data[i].id === id) {
         // delete selected task by id
         data.splice(i, 1);
       }

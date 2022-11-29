@@ -67,6 +67,12 @@ async function deleteAssignment(id) {
   return result;
 }
 
+async function deleteTasks(id) {
+  // return promise value after waiting
+  let result = await ipcRenderer.invoke("deleteTasks", id);
+  return result;
+}
+
 /**
  * @description opens html create assignment form
  */
@@ -396,24 +402,24 @@ async function displayTasks() {
  * @description delete the assignment that was clicked
  * @param {*} id the id of the assignment that is being deleted
  */
-function deleteAssignmentClicked(id, assignmentId) {
+function deleteAssignmentClicked(id) {
   let assignmentDiv = document.getElementById("assignment-" + id);
 
   if (assignmentDiv) {
     assignmentDiv.remove();
   }
   deleteAssignment(id);
-  deleteTasks(assignmentId);
+  deleteTasks(id);
 }
 
 /**
  * @description display the details of the assignment on the page
  * @param {*} id of the assignment to be displayed
  */
-async function displayDetails(id, assignmentId) {
+async function displayDetails(id) {
   //Get the assignment data based on assignment id
   let assignment = await getAssignment(id);
-  let allTasks = await getAllTasks(assignmentId);
+  let allTasks = await getAllTasks();
   //console.log(assignment);
 
   //Creating HTML elements to display assignment data
@@ -438,7 +444,7 @@ async function displayDetails(id, assignmentId) {
   deleteBtn.setAttribute("id", "deleteBtn");
   deleteBtn.setAttribute(
     "onclick",
-    "deleteAssignmentClicked(" + id + "," + assignmentId +");closeDetail();"
+    "deleteAssignmentClicked(" + id + ");closeDetail();"
   );
   deleteBtn.innerHTML = "<i class='far fa-trash-alt'></i>";
 
