@@ -179,7 +179,7 @@ async function displayAssignments() {
     }
     dueTasks.innerHTML =
       "Due Date: " +
-      assignments.date +
+      assignments[i].date +
       "&emsp;Tasks: " +
       taskCounter +
       "/" +
