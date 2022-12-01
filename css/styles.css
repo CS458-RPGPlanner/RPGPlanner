@@ -284,3 +284,16 @@
   border-width: 5px;
   text-align: center;
 }
+
+/*Total points*/
+.totalPoints {
+  position: absolute;
+  top: 15px;
+  left: 5%;
+  width: 90%;
+  max-width: 90%;
+  text-align: center;
+  color: white;
+  font-weight: 700;
+  font-size: 50px;
+}
