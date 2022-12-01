@@ -179,7 +179,7 @@ async function displayAssignments() {
     }
     dueTasks.innerHTML =
       "Due Date: " +
-      assignments.date +
+      assignments[i].date +
       "&emsp;Tasks: " +
       taskCounter +
       "/" +
@@ -225,7 +225,7 @@ async function displayAssignments() {
 
   let createButton = document.createElement("button");
   createButton.setAttribute("id", "createAssignmentList");
-  createButton.setAttribute("class", "defaultBtn");
+  createButton.setAttribute("class", "defaultBtn add");
   createButton.setAttribute("onclick", "openForm()");
 
   let createName = document.createElement("p");
@@ -373,7 +373,7 @@ async function displayTasks() {
 
       let createButton = document.createElement("button");
       createButton.setAttribute("id", "createAssignmentList");
-      createButton.setAttribute("class", "defaultBtn");
+      createButton.setAttribute("class", "defaultBtn add");
 
       let createName = document.createElement("p");
       createName.setAttribute("class", "createPlus");
