@@ -263,6 +263,28 @@
   width: 280px;
 }
 
+/*Delete Assignment Confirmation Popup*/
+.delete-confirm {
+  display: none;
+  position: fixed;
+  max-height: 450px;
+  right: 10%;
+  left: 10%;
+  bottom: 250px;
+  z-index: 9;
+}
+
+.confirm-container {
+  max-height: 800px;
+  max-width: 100%;
+  padding: 5%;
+  background-color: #7ec4d1;
+  border: solid;
+  border-color: black;
+  border-width: 5px;
+  text-align: center;
+}
+
 /*Total points*/
 .totalPoints {
   position: absolute;

@@ -138,6 +138,11 @@
 
 			<!--Assignment details popup-->
 			<div class="detailsPopup" id="details"></div>
+
+			<!--Delete confirmation popup-->
+			<div class="delete-confirm" id="confirmDiv">
+				<!--Are you sure you want to delete this assignment?-->
+			</div>
 		</div>
 	</div>
 	<script>
@@ -188,7 +193,6 @@
 			let dDiv = document.getElementById("details");
 			//remove the containerDiv
 			let containerDiv = document.getElementById("containerDiv");
-			console.log(containerDiv);
 			containerDiv.remove();
 
 			//creating div for create assignment
