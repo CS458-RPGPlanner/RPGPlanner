@@ -1,0 +1,164 @@
+/* Formatting for accordian view of task */
+#accordion {
+  margin: 2px;
+  overflow-y: scroll;
+  height: 300px;
+  max-height: 100%;
+  background-color: transparent;
+}
+
+.collapse {
+  background-color: transparent;
+  position: sticky;
+  margin-left: 10%;
+  width: 90%;
+}
+
+.collapsing {
+  position: sticky;
+  margin-left: 10%;
+  width: 90%;
+}
+
+a:link {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  text-decoration: none;
+  color: black;
+}
+
+a:active {
+  text-decoration: none;
+  color: black;
+  outline: none;
+}
+
+a:visited {
+  text-decoration: none;
+  color: black;
+  outline: none;
+}
+
+.card {
+  background-color: transparent;
+}
+
+.card-header {
+  background-color: white;
+  height: 100px;
+}
+
+div .card-header:hover {
+  background-color: lightgrey !important;
+  transition: linear 0.5s;
+}
+
+/* Formatting for assignment buttons */
+.defaultBtn {
+  width: 100%;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: block;
+  padding: 0;
+  background: none;
+}
+
+.defaultBtn.add {
+  background-color: white;
+}
+
+.defaultBtn:focus {
+  outline: none;
+}
+
+/* Formatting for task buttons */
+.defaultBtn.task {
+  margin-left: 5%;
+  margin-top: 0;
+  width: 95%;
+  float: none;
+}
+
+/* Formatting for assignment name in button */
+.assignment-name {
+  font-family: "Bahnschrift SemiBold";
+  font-size: 20px;
+  text-align: left;
+}
+
+/* Formatting for due tasks in assignment button */
+.due-tasks {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 15px;
+}
+
+/* Formatting for due date in assignment button */
+.due-date {
+  font-size: 15px;
+}
+
+/* FOrmatting for tasks complete in assignment button */
+.tasks-completed {
+  font-size: 15px;
+  margin-left: 10%;
+}
+
+/* Formatting for checkbox div */
+.check {
+  float: right;
+  position: relative;
+  bottom: 50px;
+  display: flex;
+  justify-content: flex-start;
+  height: 10px;
+}
+
+/* Formatting for points in assignment button */
+.assignment-points {
+  font-size: 17px;
+  cursor: default;
+}
+
+/* Hover functionailty of assignment buttons */
+#createAssignmentList:hover {
+  background-color: lightgrey !important;
+  transition: linear 0.5s;
+}
+
+/* Formatting for tasks under assignments */
+.createCard {
+  height: 10px;
+  background-color: transparent;
+}
+
+.createPlus {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+/* Formatting for checkbox in assignment button */
+.checkBox {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  border: 5px;
+  margin-left: 5%;
+}
+
+/* Formatting for chevrons in assignment buttons */
+.fa-chevron-up,
+.fa-chevron-down,
+.fa-minus {
+  position: sticky;
+  float: left;
+  margin-top: 20px;
+  padding-right: 15px;
+}
