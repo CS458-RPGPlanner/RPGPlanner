@@ -332,6 +332,7 @@ async function displayTasks() {
     let task = document.createElement("button");
     task.setAttribute("class", "defaultBtn task");
     task.setAttribute("id", "taskBtn-" + tasks[i].id);
+    task.setAttribute("onclick", "toggleButton(this.id);");
     task.setAttribute("data-toggle", "collapse");
 
     let taskName = document.createElement("p");
@@ -508,6 +509,90 @@ async function displayDetails(id) {
   containerDiv.append(desc);
   containerDiv.append(closeBtn);
   containerDiv.append(tasks);
+}
+
+/**
+ * @description display the details of the task on the page
+ * @param {*} id of the task to be displayed
+ */
+ async function displayTaskDetails(id) {
+  //Get the task data based on the task id
+  let tasks = await getAllTasks();
+  for (let i = 0; i < tasks.length; i++) 
+  {
+    if (tasks[i].id == id)
+    {
+      //Creating HTML elements to display task data
+      let parent = document.getElementById("details");
+
+      let containerDiv = document.createElement("div");
+      containerDiv.setAttribute("id", "containerDiv");
+      containerDiv.setAttribute("data-container-id", id);
+
+      //assignment name
+      let controlBtns = document.createElement("div");
+      controlBtns.setAttribute("class", "details-task-name");
+      //controlBtns.setAttribute("style", "justify-content:flex-end;");
+
+      let editBtn = document.createElement("button");
+      editBtn.setAttribute("class", "edit-button");
+      editBtn.setAttribute("id", "editBtn");
+      editBtn.innerHTML = "<i class='fas fa-pencil-alt'></i>";
+
+      let deleteBtn = document.createElement("button");
+      deleteBtn.setAttribute("class", "delete-button");
+      deleteBtn.setAttribute("id", "deleteBtn");
+      /*deleteBtn.setAttribute(
+        "onclick",
+        "deleteTaskClicked(" + id + ");closeDetail();"
+      );*/
+      deleteBtn.innerHTML = "<i class='far fa-trash-alt'></i>";
+
+      let closeBtn = document.createElement("button");
+      closeBtn.setAttribute("class", "close-button");
+      closeBtn.setAttribute("id", "closeBtn");
+      closeBtn.setAttribute("onclick", "closeDetail();");
+      closeBtn.innerHTML = "&#8249";
+
+      let assnName = document.createElement("div");
+      assnName.setAttribute("class", "details-title");
+      assnName.innerHTML = tasks[i].name;
+
+      let dueDate = document.createElement("div");
+      dueDate.setAttribute("class", "details-due-date");
+      dueDate.innerHTML = "Due Date: " + tasks[i].date;
+
+      let checkBox = document.createElement("input");
+      checkBox.setAttribute("type", "checkbox");
+      checkBox.setAttribute("class", "detailsCheckBox");
+      checkBox.setAttribute("id", "detailsPointsBox");
+
+      let points = document.createElement("p");
+      points.setAttribute("class", "details-points");
+      points.setAttribute("id", "detailsPoints");
+      points.innerHTML = tasks[i].points + " points";
+
+      let desc = document.createElement("p");
+      desc.setAttribute("class", "details-desc");
+      desc.innerHTML = tasks[i].description;
+
+      parent.append(containerDiv);
+
+      containerDiv.append(controlBtns);
+
+      //appending to parent the controlbtns
+      controlBtns.append(deleteBtn);
+      controlBtns.append(editBtn);
+
+      //appending to the parent the assignment stuff
+      containerDiv.append(assnName);
+      containerDiv.append(dueDate);
+      containerDiv.append(checkBox);
+      containerDiv.append(points);
+      containerDiv.append(desc);
+      containerDiv.append(closeBtn);
+    }
+  }
 }
 
 /**

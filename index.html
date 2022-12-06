@@ -141,7 +141,15 @@
 	<script>
 		async function toggleButton(clickedID) {
 			//get div that holds both create assignment and details div and parse the clickedID for the assignment ID
-			let assnId = clickedID.substring(14);
+			let assnId;
+			let isTask = false;
+			if (clickedID.substring(0, 8) === 'taskBtn-') {
+				assnId = clickedID.substring(8);
+				isTask = true;
+			}
+			else {
+				assnId = clickedID.substring(14);
+			}
 			let dDiv = document.getElementById("details");
 			let assignmentDiv = document.getElementById("assignmentDiv");
 			let containerDiv = document.getElementById("containerDiv");
@@ -153,13 +161,23 @@
 			if (assignmentDiv) {
 				//Remove create assignment button and display details
 				assignmentDiv.remove();
-				await displayDetails(assnId);
+				if (isTask) {
+					await displayTaskDetails(assnId);
+				}
+				else {
+					await displayDetails(assnId);
+				}
 				containerDiv = document.getElementById("containerDiv");
 				currentId = containerDiv.dataset.containerId;
 			} else if (currentId != assnId) {
 				// if different assignment clicked, display new assignment
 				containerDiv.remove();
-				await displayDetails(assnId);
+				if (isTask) {
+					await displayTaskDetails(assnId.substring(0, assnId.length));
+				}
+				else {
+					await displayDetails(assnId);
+				}
 				containerDiv = document.getElementById("containerDiv");
 				currentId = containerDiv.dataset.containerId;
 			} else if (currentId == assnId) {
