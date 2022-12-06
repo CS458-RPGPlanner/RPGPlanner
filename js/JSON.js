@@ -68,6 +68,12 @@ async function deleteAssignment(id) {
   return result;
 }
 
+async function deleteAssignmentTasks(id) {
+  // return promise value after waiting
+  let result = await ipcRenderer.invoke("deleteAssignmentTasks", id);
+  return result;
+}
+
 async function deleteTask(id) {
   // return promise value after waiting
   let result = await ipcRenderer.invoke("deleteTask", id);
@@ -412,6 +418,20 @@ async function deleteAssignmentClicked(id) {
   }
   closeDetail();
   deleteAssignment(id);
+  deleteAssignmentTasks(id);
+}
+
+/**
+ * @description delete the task that was clicked
+ * @param {*} id the id of the task that is being deleted
+ */
+ async function deleteTaskClicked(id) {
+  let taskDiv = document.getElementById("taskHeader-" + id);
+
+  if (taskDiv) {
+    taskDiv.remove();
+  }
+  closeDetail();
   deleteTask(id);
 }
 
@@ -419,8 +439,19 @@ async function deleteAssignmentClicked(id) {
  * @description Deletes the selected assignment when user clicks "yes"
  * @param {*} id the id of the assignment to be deleted
  */
-function confirmDelete(id) {
+function confirmAssignmentDelete(id) {
   deleteAssignmentClicked(id);
+  document.getElementById("confirmDiv").style.display = "none";
+  document.getElementById("confirmContainer").remove();
+  document.getElementById("deleteOverlay").remove();
+}
+
+/**
+ * @description Deletes the selected task when user clicks "yes"
+ * @param {*} id the id of the task to be deleted
+ */
+ function confirmTaskDelete(id) {
+  deleteTaskClicked(id);
   document.getElementById("confirmDiv").style.display = "none";
   document.getElementById("confirmContainer").remove();
   document.getElementById("deleteOverlay").remove();
@@ -439,7 +470,7 @@ function cancelDelete() {
  * @description Creates a popup that asks the user to confirm assignment deletion
  * @param {*} id the id of the assignment that is being deleted
  */
-async function deleteConfirm(id) {
+async function deleteAssignmentPopup(id) {
   let parent = document.getElementById("confirmDiv");
   //display the popup
   parent.style.display = "block";
@@ -458,7 +489,7 @@ async function deleteConfirm(id) {
 
   let yesBtn = document.createElement("button");
   yesBtn.setAttribute("id", "deleteYes");
-  yesBtn.setAttribute("onclick", "confirmDelete(" + id + ")");
+  yesBtn.setAttribute("onclick", "confirmAssignmentDelete(" + id + ")");
   yesBtn.innerHTML = "Yes";
 
   let noBtn = document.createElement("button");
@@ -475,30 +506,10 @@ async function deleteConfirm(id) {
 }
 
 /**
- * @description Deletes the selected assignment when user clicks "yes"
- * @param {*} id the id of the assignment to be deleted
+ * @description Creates a popup that asks the user to confirm task deletion
+ * @param {*} id the id of the task that is being deleted
  */
-function confirmDelete(id) {
-  deleteAssignmentClicked(id);
-  document.getElementById("confirmDiv").style.display = "none";
-  document.getElementById("confirmContainer").remove();
-  document.getElementById("deleteOverlay").remove();
-}
-
-/**
- * @description Cancels assignment deletion when the user clicks "no"
- */
-function cancelDelete() {
-  document.getElementById("confirmDiv").style.display = "none";
-  document.getElementById("confirmContainer").remove();
-  document.getElementById("deleteOverlay").remove();
-}
-
-/**
- * @description Creates a popup that asks the user to confirm assignment deletion
- * @param {*} id the id of the assignment that is being deleted
- */
-async function deleteConfirm(id) {
+ async function deleteTaskPopup(id) {
   let parent = document.getElementById("confirmDiv");
   //display the popup
   parent.style.display = "block";
@@ -513,11 +524,11 @@ async function deleteConfirm(id) {
 
   let btnText = document.createElement("p");
   btnText.setAttribute("id", "deleteBtnTxt");
-  btnText.innerHTML = "Are you sure you want to delete this assignment?";
+  btnText.innerHTML = "Are you sure you want to delete this task?";
 
   let yesBtn = document.createElement("button");
   yesBtn.setAttribute("id", "deleteYes");
-  yesBtn.setAttribute("onclick", "confirmDelete(" + id + ")");
+  yesBtn.setAttribute("onclick", "confirmTaskDelete(" + id + ")");
   yesBtn.innerHTML = "Yes";
 
   let noBtn = document.createElement("button");
@@ -530,7 +541,6 @@ async function deleteConfirm(id) {
   containerDiv.append(btnText);
   containerDiv.append(yesBtn);
   containerDiv.append(noBtn);
-
 }
 
 /**
@@ -566,7 +576,7 @@ async function displayDetails(id) {
   deleteBtn.setAttribute("id", "deleteBtn");
   deleteBtn.setAttribute(
     "onclick",
-    "deleteConfirm(" + id + ");"
+    "deleteAssignmentPopup(" + id + ");"
   );
   deleteBtn.innerHTML = "<i class='far fa-trash-alt'></i>";
 
@@ -674,10 +684,10 @@ async function displayDetails(id) {
       let deleteBtn = document.createElement("button");
       deleteBtn.setAttribute("class", "delete-button");
       deleteBtn.setAttribute("id", "deleteBtn");
-      /*deleteBtn.setAttribute(
+      deleteBtn.setAttribute(
         "onclick",
-        "deleteTaskClicked(" + id + ");closeDetail();"
-      );*/
+        "deleteTaskPopup(" + id + ");"
+      );
       deleteBtn.innerHTML = "<i class='far fa-trash-alt'></i>";
 
       let closeBtn = document.createElement("button");
