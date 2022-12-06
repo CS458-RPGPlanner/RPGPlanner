@@ -75,10 +75,28 @@ function openForm() {
 }
 
 /**
+ * @description opens html create task form
+ */
+function openTaskForm() {
+  document.getElementById("myTaskForm").style.display = "block";
+}
+
+/**
  * @description clears data from create assignment form after submit or cancel
  */
 function closeForm() {
   document.getElementById("myForm").style.display = "none";
+  document.getElementsByName("points")[0].value = "";
+  document.getElementsByName("name")[0].value = "";
+  document.getElementsByName("date")[0].value = "";
+  document.getElementsByName("description")[0].value = "";
+}
+
+/**
+ * @description clears data from create task form after submit or cancel
+ */
+function closeTaskForm() {
+  document.getElementById("myTaskForm").style.display = "none";
   document.getElementsByName("points")[0].value = "";
   document.getElementsByName("name")[0].value = "";
   document.getElementsByName("date")[0].value = "";
