@@ -168,15 +168,45 @@
   background-color: red;
 }
 
+div .form-container .cancel:hover {
+  background-color: darkred !important;
+  transition: linear 0.1s;
+}
+
 /* Add green background to save button */
 .form-container .save {
   background-color: #04AA6D;
+}
+
+div .form-container .save:hover {
+  background-color: darkgreen !important;
+  transition: linear 0.1s;
 }
 
 /* Add some hover effects to buttons */
 .form-container .btn:hover,
 .open-button:hover {
   cursor: pointer;
+}
+
+.createTask {
+  color: black;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  width: 15%;
+  margin-top: .5%;
+  margin-bottom: .5%;
+}
+
+.createTask:focus {
+  outline: none;
+}
+
+.createTask:hover {
+
+  background-color: lightgrey !important;
+  transition: linear 0.1s;
 }
 
 /* Formatting for tags dropdown */

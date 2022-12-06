@@ -509,15 +509,18 @@ async function deleteConfirm(id) {
 
   let btnText = document.createElement("p");
   btnText.setAttribute("id", "deleteBtnTxt");
+  btnText.setAttribute("class", "deleteBtnTxt");
   btnText.innerHTML = "Are you sure you want to delete this assignment?";
 
   let yesBtn = document.createElement("button");
   yesBtn.setAttribute("id", "deleteYes");
+  yesBtn.setAttribute("class", "general-btn confirm-yes")
   yesBtn.setAttribute("onclick", "confirmDelete(" + id + ")");
   yesBtn.innerHTML = "Yes";
 
   let noBtn = document.createElement("button");
   noBtn.setAttribute("id", "deleteNo");
+  noBtn.setAttribute("class", "general-btn confirm-no")
   noBtn.setAttribute("onclick", "cancelDelete()");
   noBtn.innerHTML = "No";
   //append to confirmDiv
@@ -640,13 +643,11 @@ async function displayDetails(id) {
  * @description display the details of the task on the page
  * @param {*} id of the task to be displayed
  */
- async function displayTaskDetails(id) {
+async function displayTaskDetails(id) {
   //Get the task data based on the task id
   let tasks = await getAllTasks();
-  for (let i = 0; i < tasks.length; i++) 
-  {
-    if (tasks[i].id == id)
-    {
+  for (let i = 0; i < tasks.length; i++) {
+    if (tasks[i].id == id) {
       let assignment = await getAssignment(tasks[i].assignmentId);
 
       //Creating HTML elements to display task data
