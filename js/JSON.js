@@ -3,6 +3,7 @@
  * @author Pierce Heeschen, Max Lampa, and Tiernan
  */
 const { ipcRenderer } = require("electron");
+const { doc } = require("prettier");
 
 // Function to delete an assignment based on the id of the assignment
 
@@ -397,12 +398,73 @@ async function displayTasks() {
  * @description delete the assignment that was clicked
  * @param {*} id the id of the assignment that is being deleted
  */
-function deleteAssignmentClicked(id) {
+async function deleteAssignmentClicked(id) {
   let assignmentDiv = document.getElementById("assignment-" + id);
+
   if (assignmentDiv) {
     assignmentDiv.remove();
   }
+  closeDetail();
   deleteAssignment(id);
+}
+
+/**
+ * @description Deletes the selected assignment when user clicks "yes"
+ * @param {*} id the id of the assignment to be deleted
+ */
+function confirmDelete(id) {
+  deleteAssignmentClicked(id);
+  document.getElementById("confirmDiv").style.display = "none";
+  document.getElementById("confirmContainer").remove();
+  document.getElementById("deleteOverlay").remove();
+}
+
+/**
+ * @description Cancels assignment deletion when the user clicks "no"
+ */
+function cancelDelete() {
+  document.getElementById("confirmDiv").style.display = "none";
+  document.getElementById("confirmContainer").remove();
+  document.getElementById("deleteOverlay").remove();
+}
+
+/**
+ * @description Creates a popup that asks the user to confirm assignment deletion
+ * @param {*} id the id of the assignment that is being deleted
+ */
+async function deleteConfirm(id) {
+  let parent = document.getElementById("confirmDiv");
+  //display the popup
+  parent.style.display = "block";
+  //draw the background overlay
+  let overlay = document.createElement("div");
+  overlay.setAttribute("class", "darken-overlay");
+  overlay.setAttribute("id", "deleteOverlay");
+  //draw the contents of the popup
+  let containerDiv = document.createElement("div");
+  containerDiv.setAttribute("id", "confirmContainer");
+  containerDiv.setAttribute("class", "confirm-container");
+
+  let btnText = document.createElement("p");
+  btnText.setAttribute("id", "deleteBtnTxt");
+  btnText.innerHTML = "Are you sure you want to delete this assignment?";
+
+  let yesBtn = document.createElement("button");
+  yesBtn.setAttribute("id", "deleteYes");
+  yesBtn.setAttribute("onclick", "confirmDelete(" + id + ")");
+  yesBtn.innerHTML = "Yes";
+
+  let noBtn = document.createElement("button");
+  noBtn.setAttribute("id", "deleteNo");
+  noBtn.setAttribute("onclick", "cancelDelete()");
+  noBtn.innerHTML = "No";
+  //append to confirmDiv
+  parent.append(overlay);
+  parent.append(containerDiv);
+  containerDiv.append(btnText);
+  containerDiv.append(yesBtn);
+  containerDiv.append(noBtn);
+
 }
 
 /**
@@ -437,7 +499,7 @@ async function displayDetails(id) {
   deleteBtn.setAttribute("id", "deleteBtn");
   deleteBtn.setAttribute(
     "onclick",
-    "deleteAssignmentClicked(" + id + ");closeDetail();"
+    "deleteConfirm(" + id + ");"
   );
   deleteBtn.innerHTML = "<i class='far fa-trash-alt'></i>";
 

@@ -52,7 +52,9 @@
 			</button>
 		</div>
 		<!--Points-->
-		<div class="box points"></div>
+		<div class="box points">
+			<div id="totalPoints" class="totalPoints">999,999,999</div>
+		</div>
 		<!--Quick edit/delete?-->
 		<div class="box extras"></div>
 		<!--Dated Assignment List organized-->
@@ -136,6 +138,11 @@
 
 			<!--Assignment details popup-->
 			<div class="detailsPopup" id="details"></div>
+
+			<!--Delete confirmation popup-->
+			<div class="delete-confirm" id="confirmDiv">
+				<!--Are you sure you want to delete this assignment?-->
+			</div>
 		</div>
 	</div>
 	<script>
@@ -204,7 +211,6 @@
 			let dDiv = document.getElementById("details");
 			//remove the containerDiv
 			let containerDiv = document.getElementById("containerDiv");
-			console.log(containerDiv);
 			containerDiv.remove();
 
 			//creating div for create assignment
