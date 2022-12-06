@@ -74,7 +74,6 @@
 				</button>
 			</div>
 
-			<!-- Assignment creation form -->
 			<div class="form-popup" id="myForm">
 				<div class="darken-overlay"></div>
 
@@ -85,7 +84,7 @@
 							<button type="button" class="btn cancel" onclick="closeForm()">
 								x
 							</button>
-							<button type="button" class="btn save" id="form-save" onclick="saveAssignment()">
+							<button type="button" class="btn save" onclick="saveAssignment()">
 								Save
 							</button>
 						</div>
@@ -94,11 +93,10 @@
 						<div>
 							<label for="name"></label>
 							<input type="text" class="createTitle" placeholder="Enter Title" name="name" maxlength="50"
-								id="form-name" required />
+								required />
 
 							<label for="points"><b>Points</b></label>
-							<input type="number" class="enterPoints" placeholder="Enter Points" name="points"
-								id="form-points" required>
+							<input type="number" class="enterPoints" placeholder="Enter Points" name="points" required>
 
 							<div class="checkBox-createDiv">
 								<label for="complete" class="checkBox-text"><b>Complete:</b></label>
@@ -108,62 +106,35 @@
 
 						<label for="description"></label>
 						<textarea class="createDesc" placeholder="Enter Description" name="description" maxlength="450"
-							id="form-desc" required></textarea>
+							required></textarea>
 
 						<label for="date"><b>Due Date:</b></label>
-						<input type="date" placeholder="Enter Date" name="date" id="form-date" required />
-						<div>
-							<button type="button" class="createTask" onclick="openTaskForm()">Create Task</button>
+						<input type="date" placeholder="Enter Date" name="date" required />
+
+						<div class="tab-creatediv">
+							<label for="tabs" class="tab-createlist"><b>Tabs:</b></label>
+							<select class="tab-createlist" id="tabs" name="tabs">
+								<option value="future tab">future tab</option>
+								<option value="future tab">future tab</option>
+								<option value="future tab">future tab</option>
+							</select>
+							<button class="tab-createbtn"><b>+</b></button>
 						</div>
 						<div>
 							<p style="background-color: aquamarine">
-								This is where you can 1) see a list of current tasks and 2) press a create task btn
+								This is where the user can create a task right off of the
+								create assignment, OR this will show a list of associated
+								tasks with the assignment the user is editing. This should
+								look similar to the assn detail view task list. It should drop
+								down into a similar form as the create assn. This is also the
+								area where if a user wants to edit a task if they click the
+								edit button on the task detail view they will be redirected
+								here.
 							</p>
 						</div>
 					</div>
 				</form>
 			</div>
-			<!-- Task creation form -->
-			<div class="form-popup-task" id="myTaskForm">
-				<div class="darken-overlay task"></div>
-
-				<form class="form-container task">
-					<div class="create-header task">
-						<div class="create">
-							Create Task
-							<button type="button" class="btn cancel" onclick="closeTaskForm()">
-								x
-							</button>
-							<button type="button" class="btn save" onclick="saveTask()">
-								Save
-							</button>
-						</div>
-					</div>
-					<div class="create-form">
-						<div>
-							<label for="name"></label>
-							<input type="text" class="createTitle" placeholder="Enter Title" name="nameT" maxlength="50"
-								required />
-
-							<label for="points"><b>Points</b></label>
-							<input type="number" class="enterPoints" placeholder="Enter Points" name="pointsT" required>
-
-							<div class="checkBox-createDiv">
-								<label for="complete" class="checkBox-text"><b>Complete:</b></label>
-								<input type="checkbox" class="checkBox create" name="completeT" />
-							</div>
-						</div>
-
-						<label for="description"></label>
-						<textarea class="createDesc" placeholder="Enter Description" name="descriptionT" maxlength="450"
-							required></textarea>
-
-						<label for="date"><b>Due Date:</b></label>
-						<input type="date" placeholder="Enter Date" name="dateT" required />
-					</div>
-				</form>
-			</div>
-
 
 			<!--Assignment details popup-->
 			<div class="detailsPopup" id="details"></div>
@@ -192,7 +163,7 @@
 			let dDiv = document.getElementById("details");
 			let assignmentDiv = document.getElementById("assignmentDiv");
 			let containerDiv = document.getElementById("containerDiv");
-
+			
 			if (containerDiv) {
 				let currentId = assnId;
 				currentClass = containerDiv.getAttribute("class");

@@ -68,24 +68,11 @@ async function deleteAssignment(id) {
   return result;
 }
 
-async function editAssignment(id) {
-  let result = await ipcRenderer.invoke("editAssignment", id);
-  return result;
-}
-
 /**
  * @description opens html create assignment form
  */
 function openForm() {
-  document.getElementById("form-save").setAttribute("onclick", "saveAssignment()");
   document.getElementById("myForm").style.display = "block";
-}
-
-/**
- * @description opens html create task form
- */
-function openTaskForm() {
-  document.getElementById("myTaskForm").style.display = "block";
 }
 
 /**
@@ -97,17 +84,6 @@ function closeForm() {
   document.getElementsByName("name")[0].value = "";
   document.getElementsByName("date")[0].value = "";
   document.getElementsByName("description")[0].value = "";
-}
-
-/**
- * @description clears data from create task form after submit or cancel
- */
-function closeTaskForm() {
-  document.getElementById("myTaskForm").style.display = "none";
-  document.getElementsByName("pointsT")[0].value = "";
-  document.getElementsByName("nameT")[0].value = "";
-  document.getElementsByName("dateT")[0].value = "";
-  document.getElementsByName("descriptionT")[0].value = "";
 }
 
 /**
@@ -156,90 +132,6 @@ function saveAssignment() {
   // close the form of the new assignment
   closeForm();
 }
-
-<<<<<<< Updated upstream
-/**
- * @description submits assignment data and calls createAssignment function
- * @returns false if everything is not filled out correctly in the form
- */
-function saveTask() {
-  // declare assignment fields for html form
-  let points = document.getElementsByName("pointsT")[0].value;
-  let name = document.getElementsByName("nameT")[0].value;
-  let date = document.getElementsByName("dateT")[0].value;
-  let description = document.getElementsByName("descriptionT")[0].value;
-=======
-async function openEditForm(id) {
-  let assnToEdit = await getAssignment(id);
-
-  let points = assnToEdit.points;
-  let name = assnToEdit.name;
-  let date = assnToEdit.date;
-  let desc = assnToEdit.description;
-
-  document.getElementById("form-points").value = points;
-  document.getElementById("form-name").value = name;
-  document.getElementById("form-date").value = date;
-  document.getElementById("form-desc").value = desc;
-  document.getElementById("form-save").setAttribute("onclick", "saveEditAssignment(" + id + ")");
-
-  document.getElementById("myForm").style.display = "block";
-}
-
-async function saveEditAssignment(id) {
-  let assnToEdit = await getAssignment(id);
-  // declare assignment fields for html form
-  let points = document.getElementsByName("points")[0].value;
-  let name = document.getElementsByName("name")[0].value;
-  let date = document.getElementsByName("date")[0].value;
-  let description = document.getElementsByName("description")[0].value;
->>>>>>> Stashed changes
-
-  // validation checks to see if fields have data
-  if (points == null || points == "") {
-    alert("Points can't be blank");
-    return false;
-  }
-  if (name == null || name == "") {
-    alert("Name can't be blank");
-    return false;
-  }
-  if (date == null || date == "") {
-    alert("Date can't be blank");
-    return false;
-  }
-  if (description == null || description == "") {
-    alert("Description can't be blank");
-    return false;
-  }
-
-<<<<<<< Updated upstream
-  // new assignment to be created in the json
-  newAssignment = {
-    points,
-    date,
-    name,
-    description,
-  };
-
-  //SAVE TASKS
-
-  // close the form of the new assignment
-  closeTaskForm();
-=======
-  assnToEdit.points = points;
-  assnToEdit.name = name;
-  assnToEdit.date = date;
-  assnToEdit.description = description;
-
-  editAssignment(assnToEdit);
-
-  location.reload();
-
-  closeForm();
->>>>>>> Stashed changes
-}
-
 /**
  * @description display assignments in the ui
  */
@@ -276,7 +168,6 @@ async function displayAssignments() {
 
     let assignName = document.createElement("p");
     assignName.setAttribute("class", "assignment-name");
-    assignName.setAttribute("id", "name-" + assignments[i].id);
     assignName.innerHTML = assignments[i].name;
 
     let dueTasks = document.createElement("div");
@@ -300,7 +191,6 @@ async function displayAssignments() {
 
     let assignPoints = document.createElement("p");
     assignPoints.setAttribute("class", "assignment-points");
-    assignPoints.setAttribute("id", "points-" + assignments[i].id);
     assignPoints.innerHTML = assignments[i].points + " points";
 
     let checkbox = document.createElement("input");
@@ -603,7 +493,6 @@ async function displayDetails(id) {
   let editBtn = document.createElement("button");
   editBtn.setAttribute("class", "edit-button");
   editBtn.setAttribute("id", "editBtn");
-  editBtn.setAttribute("onclick", "openEditForm(" + id + ");")
   editBtn.innerHTML = "<i class='fas fa-pencil-alt'></i>";
 
   let deleteBtn = document.createElement("button");
