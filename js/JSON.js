@@ -97,10 +97,10 @@ function closeForm() {
  */
 function closeTaskForm() {
   document.getElementById("myTaskForm").style.display = "none";
-  document.getElementsByName("points")[0].value = "";
-  document.getElementsByName("name")[0].value = "";
-  document.getElementsByName("date")[0].value = "";
-  document.getElementsByName("description")[0].value = "";
+  document.getElementsByName("pointsT")[0].value = "";
+  document.getElementsByName("nameT")[0].value = "";
+  document.getElementsByName("dateT")[0].value = "";
+  document.getElementsByName("descriptionT")[0].value = "";
 }
 
 /**
@@ -149,6 +149,50 @@ function saveAssignment() {
   // close the form of the new assignment
   closeForm();
 }
+
+/**
+ * @description submits assignment data and calls createAssignment function
+ * @returns false if everything is not filled out correctly in the form
+ */
+function saveTask() {
+  // declare assignment fields for html form
+  let points = document.getElementsByName("pointsT")[0].value;
+  let name = document.getElementsByName("nameT")[0].value;
+  let date = document.getElementsByName("dateT")[0].value;
+  let description = document.getElementsByName("descriptionT")[0].value;
+
+  // validation checks to see if fields have data
+  if (points == null || points == "") {
+    alert("Points can't be blank");
+    return false;
+  }
+  if (name == null || name == "") {
+    alert("Name can't be blank");
+    return false;
+  }
+  if (date == null || date == "") {
+    alert("Date can't be blank");
+    return false;
+  }
+  if (description == null || description == "") {
+    alert("Description can't be blank");
+    return false;
+  }
+
+  // new assignment to be created in the json
+  newAssignment = {
+    points,
+    date,
+    name,
+    description,
+  };
+
+  //SAVE TASKS
+
+  // close the form of the new assignment
+  closeTaskForm();
+}
+
 /**
  * @description display assignments in the ui
  */
