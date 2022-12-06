@@ -290,9 +290,10 @@ function deleteTask(id) {
   storage.get(key, function (error, data) {
     // iterate throughout the task array
     for (let i = 0; i < data.length; i++) {
-      if (data[i].id == id) {
+      if (data[i].assignmentId == id) {
         // delete selected task by id
         data.splice(i, 1);
+        i--;
       }
     }
     //set the new data set with the new task name for the task by id
