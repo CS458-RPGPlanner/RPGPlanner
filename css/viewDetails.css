@@ -8,11 +8,8 @@
   
   /* Formatting for task window */
   .details-tasks-window {
-    height: 150px;
+    height: 125px;
     width: 550px;
-    position: relative;
-    bottom: 8%;
-    border-color: #042e38;
     margin-left: 5%;
     overflow: auto;
   }
