@@ -471,6 +471,29 @@ async function displayDetails(id) {
   let taskwind = document.createElement("div");
   taskwind.setAttribute("class", "details-tasks-window");
 
+  let createCard = document.createElement("div");
+        createCard.setAttribute("class", "createTaskBtnDiv");
+        createCard.setAttribute("id", "addTasksAssign-" + assignment.id);
+
+        let createHeader = document.createElement("div");
+        createHeader.setAttribute("id", "createHeader)");
+
+        let createButton = document.createElement("button");
+        createButton.setAttribute("id", "createAssignmentList");
+        createButton.setAttribute("class", "defaultBtn add details");
+
+        let createName = document.createElement("p");
+        createName.setAttribute("class", "createPlus");
+        createName.innerHTML = "+";
+
+        createButton.appendChild(createName);
+
+        createHeader.appendChild(createButton);
+
+        createCard.appendChild(createHeader);
+
+        taskwind.appendChild(createCard);
+      
   for (let i = 0; i < tasks.length; i++) {
     if(tasks[i].assignmentId === assignment.id)
     {
@@ -514,9 +537,12 @@ async function displayDetails(id) {
     taskHeader.appendChild(check);
 
     taskwind.appendChild(taskHeader);
+
+    
+      
+    
     }
   }
-
   
   parent.append(containerDiv);
 
