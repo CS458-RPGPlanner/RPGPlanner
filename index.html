@@ -150,19 +150,23 @@
 			//get div that holds both create assignment and details div and parse the clickedID for the assignment ID
 			let assnId;
 			let isTask = false;
+			let assnClass;
 			if (clickedID.substring(0, 8) === 'taskBtn-') {
 				assnId = clickedID.substring(8);
 				isTask = true;
+				assnClass = "conTask";
 			}
 			else {
 				assnId = clickedID.substring(14);
+				assnClass = "conAssign";
 			}
 			let dDiv = document.getElementById("details");
 			let assignmentDiv = document.getElementById("assignmentDiv");
 			let containerDiv = document.getElementById("containerDiv");
-
+			
 			if (containerDiv) {
 				let currentId = assnId;
+				currentClass = containerDiv.getAttribute("class");
 			}
 
 			if (assignmentDiv) {
@@ -176,18 +180,20 @@
 				}
 				containerDiv = document.getElementById("containerDiv");
 				currentId = containerDiv.dataset.containerId;
-			} else if (currentId != assnId) {
+				currentClass = containerDiv.getAttribute("class");
+			} else if (currentId != assnId || (currentId == assnId && currentClass != assnClass)) {
 				// if different assignment clicked, display new assignment
 				containerDiv.remove();
 				if (isTask) {
-					await displayTaskDetails(assnId.substring(0, assnId.length));
+					await displayTaskDetails(assnId);
 				}
 				else {
 					await displayDetails(assnId);
 				}
 				containerDiv = document.getElementById("containerDiv");
 				currentId = containerDiv.dataset.containerId;
-			} else if (currentId == assnId) {
+				currentClass = containerDiv.getAttribute("class");
+			} else if (currentId == assnId && currentClass == assnClass) {
 				// if assignment clicked againS, close details and redraw create assn btn
 				containerDiv = document.getElementById("containerDiv");
 				containerDiv.remove();

@@ -482,6 +482,7 @@ async function displayDetails(id) {
 
   let containerDiv = document.createElement("div");
   containerDiv.setAttribute("id", "containerDiv");
+  containerDiv.setAttribute("class", "conAssign");
   containerDiv.setAttribute("data-container-id", id);
 
   //assignment name
@@ -584,11 +585,14 @@ async function displayDetails(id) {
   {
     if (tasks[i].id == id)
     {
+      let assignment = await getAssignment(tasks[i].assignmentId);
+
       //Creating HTML elements to display task data
       let parent = document.getElementById("details");
 
       let containerDiv = document.createElement("div");
       containerDiv.setAttribute("id", "containerDiv");
+      containerDiv.setAttribute("class", "conTask");
       containerDiv.setAttribute("data-container-id", id);
 
       //assignment name
@@ -612,9 +616,13 @@ async function displayDetails(id) {
 
       let closeBtn = document.createElement("button");
       closeBtn.setAttribute("class", "close-button");
-      closeBtn.setAttribute("id", "closeBtn");
-      closeBtn.setAttribute("onclick", "closeDetail();");
+      closeBtn.setAttribute("id", "assignmentBtn-" + assignment.id);
+      closeBtn.setAttribute("onclick", "toggleButton(this.id)");
       closeBtn.innerHTML = "&#8249";
+
+      let assn = document.createElement("div");
+      assn.setAttribute("class", "taskAssign");
+      assn.innerHTML = "Return to " + assignment.name;
 
       let assnName = document.createElement("div");
       assnName.setAttribute("class", "details-title");
@@ -653,6 +661,7 @@ async function displayDetails(id) {
       containerDiv.append(points);
       containerDiv.append(desc);
       containerDiv.append(closeBtn);
+      containerDiv.append(assn);
     }
   }
 }
