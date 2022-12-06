@@ -149,7 +149,7 @@ function createTask(task) {
 function getAllTasks() {
   try {
     //get assignments and return assignment array
-    let tasks = storage.getSync("MOCK_DATA_TASKS");
+    let tasks = storage.getSync("Tasks");
     return tasks;
   } catch (error) {
     //return empty string if no assignments
