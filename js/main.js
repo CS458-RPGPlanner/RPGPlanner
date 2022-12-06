@@ -103,8 +103,8 @@ ipcMain.handle("deleteAssignment", async (event, id) => {
 });
 
 // ipc of deleteTask for renderer
-ipcMain.handle("deleteTasks", async (event, id) => {
-  const result = await deleteTasks(id);
+ipcMain.handle("deleteTask", async (event, id) => {
+  const result = await deleteTask(id);
   return result;
 });
 
@@ -149,7 +149,7 @@ function createTask(task) {
 function getAllTasks() {
   try {
     //get assignments and return assignment array
-    let tasks = storage.getSync("Tasks");
+    let tasks = storage.getSync("MOCK_DATA_TASKS");
     return tasks;
   } catch (error) {
     //return empty string if no assignments
@@ -284,13 +284,13 @@ function deleteAssignment(id) {
   });
 }
 
-function deleteTasks(id) {
+function deleteTask(id) {
   let key = "MOCK_DATA_TASKS";
   console.log(id);
   storage.get(key, function (error, data) {
     // iterate throughout the task array
     for (let i = 0; i < data.length; i++) {
-      if (data[i].id === id) {
+      if (data[i].id == id) {
         // delete selected task by id
         data.splice(i, 1);
       }

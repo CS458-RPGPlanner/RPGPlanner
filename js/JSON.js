@@ -67,9 +67,9 @@ async function deleteAssignment(id) {
   return result;
 }
 
-async function deleteTasks(id) {
+async function deleteTask(id) {
   // return promise value after waiting
-  let result = await ipcRenderer.invoke("deleteTasks", id);
+  let result = await ipcRenderer.invoke("deleteTask", id);
   return result;
 }
 
@@ -409,7 +409,7 @@ function deleteAssignmentClicked(id) {
     assignmentDiv.remove();
   }
   deleteAssignment(id);
-  deleteTasks(id);
+  deleteTask(id);
 }
 
 /**
