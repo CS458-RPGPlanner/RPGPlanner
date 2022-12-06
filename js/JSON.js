@@ -68,11 +68,27 @@ async function deleteAssignment(id) {
   return result;
 }
 
+async function editAssignment(id) {
+  let result = await ipcRenderer.invoke("editAssignment", id);
+  return result;
+}
+
 /**
  * @description opens html create assignment form
  */
 function openForm() {
+  document.getElementById("form-save").setAttribute("onclick", "saveAssignment()");
   document.getElementById("myForm").style.display = "block";
+}
+function openEditForm() {
+  document.getElementById("form-save").setAttribute("onclick", "saveEditAssignment()");
+  document.getElementById("myForm").style.display = "block";
+}
+/**
+ * @description opens html create task form
+ */
+function openTaskForm() {
+  document.getElementById("myTaskForm").style.display = "block";
 }
 
 /**
@@ -84,6 +100,17 @@ function closeForm() {
   document.getElementsByName("name")[0].value = "";
   document.getElementsByName("date")[0].value = "";
   document.getElementsByName("description")[0].value = "";
+}
+
+/**
+ * @description clears data from create task form after submit or cancel
+ */
+function closeTaskForm() {
+  document.getElementById("myTaskForm").style.display = "none";
+  document.getElementsByName("pointsT")[0].value = "";
+  document.getElementsByName("nameT")[0].value = "";
+  document.getElementsByName("dateT")[0].value = "";
+  document.getElementsByName("descriptionT")[0].value = "";
 }
 
 /**
@@ -132,6 +159,62 @@ function saveAssignment() {
   // close the form of the new assignment
   closeForm();
 }
+
+async function openEditForm(id) {
+  let assnToEdit = await getAssignment(id);
+  console.log(assnToEdit);
+  let points = assnToEdit.points;
+  let name = assnToEdit.name;
+  let date = assnToEdit.date;
+  let desc = assnToEdit.description;
+
+  document.getElementById("form-points").value = points;
+  document.getElementById("form-name").value = name;
+  document.getElementById("form-date").value = date;
+  document.getElementById("form-desc").value = desc;
+  document.getElementById("form-save").setAttribute("onclick", "saveEditAssignment(" + id + ")");
+
+  document.getElementById("myForm").style.display = "block";
+}
+
+async function saveEditAssignment(id) {
+  let assnToEdit = await getAssignment(id);
+  // declare assignment fields for html form
+  let points = document.getElementsByName("points")[0].value;
+  let name = document.getElementsByName("name")[0].value;
+  let date = document.getElementsByName("date")[0].value;
+  let description = document.getElementsByName("description")[0].value;
+
+  // validation checks to see if fields have data
+  if (points == null || points == "") {
+    alert("Points can't be blank");
+    return false;
+  }
+  if (name == null || name == "") {
+    alert("Name can't be blank");
+    return false;
+  }
+  if (date == null || date == "") {
+    alert("Date can't be blank");
+    return false;
+  }
+  if (description == null || description == "") {
+    alert("Description can't be blank");
+    return false;
+  }
+
+  assnToEdit.points = points;
+  assnToEdit.name = name;
+  assnToEdit.date = date;
+  assnToEdit.description = description;
+
+  editAssignment(assnToEdit);
+
+  location.reload();
+
+  closeForm();
+}
+
 /**
  * @description display assignments in the ui
  */
@@ -493,6 +576,7 @@ async function displayDetails(id) {
   let editBtn = document.createElement("button");
   editBtn.setAttribute("class", "edit-button");
   editBtn.setAttribute("id", "editBtn");
+  editBtn.setAttribute("onclick", "openEditForm(" + id + ");")
   editBtn.innerHTML = "<i class='fas fa-pencil-alt'></i>";
 
   let deleteBtn = document.createElement("button");
@@ -578,13 +662,11 @@ async function displayDetails(id) {
  * @description display the details of the task on the page
  * @param {*} id of the task to be displayed
  */
- async function displayTaskDetails(id) {
+async function displayTaskDetails(id) {
   //Get the task data based on the task id
   let tasks = await getAllTasks();
-  for (let i = 0; i < tasks.length; i++) 
-  {
-    if (tasks[i].id == id)
-    {
+  for (let i = 0; i < tasks.length; i++) {
+    if (tasks[i].id == id) {
       let assignment = await getAssignment(tasks[i].assignmentId);
 
       //Creating HTML elements to display task data

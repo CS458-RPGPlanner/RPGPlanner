@@ -84,7 +84,7 @@
 							<button type="button" class="btn cancel" onclick="closeForm()">
 								x
 							</button>
-							<button type="button" class="btn save" onclick="saveAssignment()">
+							<button type="button" class="btn save" id="form-save" onclick="saveAssignment()">
 								Save
 							</button>
 						</div>
@@ -93,10 +93,11 @@
 						<div>
 							<label for="name"></label>
 							<input type="text" class="createTitle" placeholder="Enter Title" name="name" maxlength="50"
-								required />
+								id="form-name" required />
 
 							<label for="points"><b>Points</b></label>
-							<input type="number" class="enterPoints" placeholder="Enter Points" name="points" required>
+							<input type="number" class="enterPoints" placeholder="Enter Points" name="points"
+								id="form-points" required>
 
 							<div class="checkBox-createDiv">
 								<label for="complete" class="checkBox-text"><b>Complete:</b></label>
@@ -106,10 +107,10 @@
 
 						<label for="description"></label>
 						<textarea class="createDesc" placeholder="Enter Description" name="description" maxlength="450"
-							required></textarea>
+							id="form-desc" required></textarea>
 
 						<label for="date"><b>Due Date:</b></label>
-						<input type="date" placeholder="Enter Date" name="date" required />
+						<input type="date" placeholder="Enter Date" name="date" id="form-date" required />
 
 						<div class="tab-creatediv">
 							<label for="tabs" class="tab-createlist"><b>Tabs:</b></label>
@@ -163,7 +164,7 @@
 			let dDiv = document.getElementById("details");
 			let assignmentDiv = document.getElementById("assignmentDiv");
 			let containerDiv = document.getElementById("containerDiv");
-			
+
 			if (containerDiv) {
 				let currentId = assnId;
 				currentClass = containerDiv.getAttribute("class");
