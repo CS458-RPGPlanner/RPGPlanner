@@ -91,8 +91,6 @@ function openTaskForm() {
   document.getElementById("myTaskForm").style.display = "block";
 }
 
-
-
 /**
  * @description opens html create task form
  */
