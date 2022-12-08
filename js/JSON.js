@@ -101,12 +101,13 @@ async function closeForm() {
   //check if tasks saved for a canceled assignments creation exists
   let assignments = await getAssignments();
   let assignmentId = assignments[assignments.length - 1].id + 1;
+
   let tasks = await getAllTasks();
-  /*for (let i = 0; i < tasks.length, i++) {
+  for (let i = 0; i < tasks.length; i++) {
     if (tasks[i].assignmentId == assignmentId) {
-      
+      deleteTask(tasks[i].id);
     }
-  }*/
+  }
 
   document.getElementById("myForm").style.display = "none";
   document.getElementsByName("points")[0].value = "";
@@ -340,7 +341,7 @@ async function displayAssignments() {
  * @description displays a newly created assignment
  * @param {*} newAssignment passed in to add to the stack of assignments
  */
-/*async function displayNewAssignment(newAssignment) {
+async function displayNewAssignment(newAssignment) {
   // grabs the assignment array so that it can grab the newest assignment
   let assignments = await getAssignments();
   let id = assignments[assignments.length - 1].id + 1;
@@ -404,7 +405,7 @@ async function displayAssignments() {
   card.appendChild(desc);
 
   parent.insertBefore(card, parent.lastChild);
-}*/
+}
 
 /**
  * @description displays stored tasks to assignments
