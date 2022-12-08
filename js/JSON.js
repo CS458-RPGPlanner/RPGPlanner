@@ -85,7 +85,17 @@ function openTaskForm() {
 /**
  * @description clears data from create assignment form after submit or cancel
  */
-function closeForm() {
+async function closeForm() {
+  //check if tasks saved for a canceled assignments creation exists
+  let assignments = await getAssignments();
+  let assignmentId = assignments[assignments.length - 1].id + 1;
+  let tasks = await getAllTasks();
+  /*for (let i = 0; i < tasks.length, i++) {
+    if (tasks[i].assignmentId == assignmentId) {
+      
+    }
+  }*/
+
   document.getElementById("myForm").style.display = "none";
   document.getElementsByName("points")[0].value = "";
   document.getElementsByName("name")[0].value = "";
@@ -152,11 +162,15 @@ function saveAssignment() {
 }
 
 /**
- * @description submits assignment data and calls createAssignment function
+ * @description submits task data and calls createTask function
  * @returns false if everything is not filled out correctly in the form
  */
-function saveTask() {
-  // declare assignment fields for html form
+async function saveTask() {
+  //get the id of the assignment to be created
+  let assignments = await getAssignments();
+  let assignmentId = assignments[assignments.length - 1].id + 1;
+
+  // declare task fields for html form
   let points = document.getElementsByName("pointsT")[0].value;
   let name = document.getElementsByName("nameT")[0].value;
   let date = document.getElementsByName("dateT")[0].value;
@@ -180,15 +194,17 @@ function saveTask() {
     return false;
   }
 
-  // new assignment to be created in the json
-  newAssignment = {
+  // new task to be created in the json
+  newTask = {
     points,
     date,
     name,
     description,
+    assignmentId
   };
 
   //SAVE TASKS
+  createTask(newTask);
 
   // close the form of the new assignment
   closeTaskForm();
