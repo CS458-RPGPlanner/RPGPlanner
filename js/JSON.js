@@ -90,6 +90,12 @@ function openEditForm() {
 function openTaskForm() {
   document.getElementById("myTaskForm").style.display = "block";
 }
+/**
+ * @description opens html create task form
+ */
+function openTaskForm() {
+  document.getElementById("myTaskForm").style.display = "block";
+}
 
 /**
  * @description opens html create task form
@@ -166,6 +172,7 @@ function saveAssignment() {
   // close the form of the new assignment
   closeForm();
 }
+
 
 /**
  * @description submits assignment data and calls createAssignment function
@@ -581,15 +588,18 @@ async function deleteConfirm(id) {
 
   let btnText = document.createElement("p");
   btnText.setAttribute("id", "deleteBtnTxt");
+  btnText.setAttribute("class", "deleteBtnTxt");
   btnText.innerHTML = "Are you sure you want to delete this assignment?";
 
   let yesBtn = document.createElement("button");
   yesBtn.setAttribute("id", "deleteYes");
+  yesBtn.setAttribute("class", "general-btn confirm-yes")
   yesBtn.setAttribute("onclick", "confirmDelete(" + id + ")");
   yesBtn.innerHTML = "Yes";
 
   let noBtn = document.createElement("button");
   noBtn.setAttribute("id", "deleteNo");
+  noBtn.setAttribute("class", "general-btn confirm-no")
   noBtn.setAttribute("onclick", "cancelDelete()");
   noBtn.innerHTML = "No";
   //append to confirmDiv
@@ -608,7 +618,7 @@ async function deleteConfirm(id) {
 async function displayDetails(id) {
   //Get the assignment data based on assignment id
   let assignment = await getAssignment(id);
-  let allTasks = await getAllTasks();
+  let tasks = await getAllTasks();
   //console.log(assignment);
 
   //Creating HTML elements to display assignment data
@@ -667,8 +677,8 @@ async function displayDetails(id) {
   desc.setAttribute("class", "details-desc");
   desc.innerHTML = assignment.description;
 
-  let tasks = document.createElement("div");
-  tasks.setAttribute("style", "height:150px;overflow:auto;");
+  let tasksDiv = document.createElement("div");
+  tasksDiv.setAttribute("style", "height:150px;overflow:auto;");
 
   let assignmentTasks = [];
   for (let i = 0; i < allTasks.length; i++) {
@@ -706,7 +716,7 @@ async function displayDetails(id) {
   containerDiv.append(points);
   containerDiv.append(desc);
   containerDiv.append(closeBtn);
-  containerDiv.append(tasks);
+  containerDiv.append(taskwind);
 }
 
 /**
