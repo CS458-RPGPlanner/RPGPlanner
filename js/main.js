@@ -120,6 +120,14 @@ ipcMain.handle("deleteTask", async (event, id) => {
   return result;
 });
 
+ipcMain.handle("getUser", async (event) => {
+  return await getUser();
+});
+
+ipcMain.handle("addUserPoints", async (event, points) => {
+  addUserPoints(points);
+});
+
 /**
  * @description create a new task in the system with incrementing task number
  * @todo not completed yet

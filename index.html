@@ -29,6 +29,7 @@
 		// load the student when the page loads
 		window.addEventListener("load", function () {
 			displayAssignments();
+			refreshUserPoints();
 		});
 	</script>
 	<!-- Insert this line after script imports -->
@@ -53,7 +54,7 @@
 		</div>
 		<!--Points-->
 		<div class="box points">
-			<div id="totalPoints" class="totalPoints">999,999,999</div>
+			<div id="totalPoints" class="totalPoints"></div>
 		</div>
 		<!--Quick edit/delete?-->
 		<div class="box extras"></div>
@@ -93,12 +94,12 @@
 					<div class="create-form">
 						<div>
 							<label for="name"></label>
-							<input type="text" class="createTitle" placeholder="Enter Title" name="name" maxlength="50"
-								id="form-name" required />
+							<input type="text" class="createTitle" placeholder="Enter Title" name="name" maxlength="50" id="form-name"
+								required />
 
 							<label for="points"><b>Points</b></label>
-							<input type="number" class="enterPoints" placeholder="Enter Points" name="points"
-								id="form-points" required>
+							<input type="number" class="enterPoints" placeholder="Enter Points" name="points" id="form-points"
+								required>
 
 							<div class="checkBox-createDiv">
 								<label for="complete" class="checkBox-text"><b>Complete:</b></label>
@@ -146,8 +147,8 @@
 								id="formT-name" required />
 
 							<label for="points"><b>Points</b></label>
-							<input type="number" class="enterPoints" placeholder="Enter Points" name="pointsT"
-								id="formT-points" required>
+							<input type="number" class="enterPoints" placeholder="Enter Points" name="pointsT" id="formT-points"
+								required>
 
 							<div class="checkBox-createDiv">
 								<label for="complete" class="checkBox-text"><b>Complete:</b></label>

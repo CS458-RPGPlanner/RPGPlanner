@@ -90,6 +90,14 @@ async function deleteTask(id) {
   return result;
 }
 
+async function getUser() {
+  return await ipcRenderer.invoke("getUser");
+}
+
+async function addUserPoints(points) {
+  return await ipcRenderer.invoke("addUserPoints", points);
+}
+
 /**
  * @description opens html create assignment form
  */
@@ -162,6 +170,7 @@ function saveAssignment() {
   let name = document.getElementsByName("name")[0].value;
   let date = document.getElementsByName("date")[0].value;
   let description = document.getElementsByName("description")[0].value;
+  let isComplete = false;
 
   // validation checks to see if fields have data
   if (points == null || points == "") {
@@ -187,6 +196,7 @@ function saveAssignment() {
     date,
     name,
     description,
+    isComplete,
   };
 
   // create the actual assignment with the ipc
