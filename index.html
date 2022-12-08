@@ -38,6 +38,8 @@
 </head>
 
 <body class="body">
+
+	<div id="alertDiv"></div>
 	<!--Nav Tabs-->
 	<div id="mySidenav" class="sidenav">
 		<a href="#" id="RPG">RPG</a>
@@ -66,6 +68,7 @@
 		<!--Due Today Assignments-->
 		<div class="box item3">Due Today</div>
 		<!--Create Assignment/Detail view-->
+		
 		<div class="box item4">
 			<!--createAssignment button form-->
 			<div id="assignmentDiv">
@@ -73,7 +76,7 @@
 					Create Assignment
 				</button>
 			</div>
-
+			
 			<!-- Assignment creation form -->
 			<div class="form-popup" id="myForm">
 				<div class="darken-overlay"></div>
@@ -91,6 +94,7 @@
 						</div>
 					</div>
 					<div class="create-form">
+						
 						<div>
 							<label for="name"></label>
 							<input type="text" class="createTitle" placeholder="Enter Title" name="name" maxlength="50"
@@ -120,7 +124,7 @@
 							</p>
 						</div>
 					</div>
-				</form>
+				</form>	
 			</div>
 			<!-- Task creation form -->
 			<div class="form-popup-task" id="myTaskForm">
@@ -161,16 +165,18 @@
 						<input type="date" placeholder="Enter Date" name="dateT" required />
 					</div>
 				</form>
+				<div class="delete-confirm" id="alertDiv"></div>
 			</div>
-
+			
 
 			<!--Assignment details popup-->
 			<div class="detailsPopup" id="details"></div>
-
+			
 			<!--Delete confirmation popup-->
 			<div class="delete-confirm" id="confirmDiv">
 				<!--Are you sure you want to delete this assignment?-->
 			</div>
+			<div class="valid-alert" id="alertDiv"></div>
 		</div>
 	</div>
 	<script>

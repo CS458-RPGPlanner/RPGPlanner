@@ -116,21 +116,16 @@ function saveAssignment() {
   let description = document.getElementsByName("description")[0].value;
 
   // validation checks to see if fields have data
-  if (points == null || points == "") {
-    alert("Points can't be blank");
+  if (points == null || points == "" || name == null || name == "") {
+    ValidationAlert();
     return false;
   }
-  if (name == null || name == "") {
-    alert("Name can't be blank");
-    return false;
+  
+  if (date == null) {
+    date = "";
   }
-  if (date == null || date == "") {
-    alert("Date can't be blank");
-    return false;
-  }
-  if (description == null || description == "") {
-    alert("Description can't be blank");
-    return false;
+  if (description == null) {
+    description = "";
   }
 
   // new assignment to be created in the json
@@ -189,7 +184,7 @@ function saveTask() {
   };
 
   //SAVE TASKS
-
+  
   // close the form of the new assignment
   closeTaskForm();
 }
@@ -489,7 +484,31 @@ function cancelDelete() {
   document.getElementById("confirmContainer").remove();
   document.getElementById("deleteOverlay").remove();
 }
+ function ValidationAlert()
+{
+  let parent = document.getElementById("alertDiv");
+  //display the popup
+  parent.style.display = "block";
+  //draw the background overlay
+  let overlay = document.createElement("div");
+  overlay.setAttribute("class", "darken-overlay");
+  overlay.setAttribute("id", "alertOverlay");
+  //draw the contents of the popup
+  let containerDiv = document.createElement("div");
+  containerDiv.setAttribute("id", "alertContainer");
+  containerDiv.setAttribute("class", "confirm-container");
 
+  let btnText = document.createElement("p");
+  btnText.setAttribute("id", "deleteBtnTxt");
+  btnText.setAttribute("class", "deleteBtnTxt");
+  btnText.innerHTML = "Are you sure you want to delete this assignment?";
+
+  //append to confirmDiv
+  parent.append(overlay);
+  parent.append(containerDiv);
+  containerDiv.append(btnText);
+  
+}
 /**
  * @description Creates a popup that asks the user to confirm assignment deletion
  * @param {*} id the id of the assignment that is being deleted
