@@ -891,7 +891,7 @@ async function displayDetails(id) {
     taskHeader.appendChild(task);
     taskHeader.appendChild(check);
 
-    taskwind.appendChild(taskHeader);s
+    taskwind.appendChild(taskHeader);
     }
   }
   
