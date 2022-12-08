@@ -157,7 +157,8 @@ function saveAssignment() {
   createAssignment(newAssignment);
 
   // display the new assignment
-  displayNewAssignment(newAssignment);
+  refreshDisplayList();
+  //displayNewAssignment(newAssignment);
 
   // close the form of the new assignment
   closeForm();
@@ -294,6 +295,7 @@ async function displayAssignments() {
 
   let createCard = document.createElement("div");
   createCard.setAttribute("class", "createCard");
+  createCard.setAttribute("id", "createCard");
 
   let createHeader = document.createElement("div");
   createHeader.setAttribute("id", "createHeader");
@@ -322,7 +324,7 @@ async function displayAssignments() {
  * @description displays a newly created assignment
  * @param {*} newAssignment passed in to add to the stack of assignments
  */
-async function displayNewAssignment(newAssignment) {
+/*async function displayNewAssignment(newAssignment) {
   // grabs the assignment array so that it can grab the newest assignment
   let assignments = await getAssignments();
   let id = assignments[assignments.length - 1].id + 1;
@@ -386,7 +388,7 @@ async function displayNewAssignment(newAssignment) {
   card.appendChild(desc);
 
   parent.insertBefore(card, parent.lastChild);
-}
+}*/
 
 /**
  * @description displays stored tasks to assignments
@@ -466,6 +468,18 @@ async function displayTasks() {
 
     parent.insertBefore(taskHeader, parent.lastChild);
   }
+}
+
+function refreshDisplayList() {
+  const assignments = document.querySelectorAll('.card')
+  assignments.forEach(assign => {
+    assign.remove();
+  })
+
+  let createCard = document.getElementById("createCard");
+  createCard.remove();
+
+  displayAssignments();
 }
 
 /**
@@ -834,6 +848,94 @@ async function displayDetails(id) {
   {
     if (tasks[i].id == id)
     {
+      let assignment = await getAssignment(tasks[i].assignmentId);
+
+      //Creating HTML elements to display task data
+      let parent = document.getElementById("details");
+
+      let containerDiv = document.createElement("div");
+      containerDiv.setAttribute("id", "containerDiv");
+      containerDiv.setAttribute("class", "conTask");
+      containerDiv.setAttribute("data-container-id", id);
+
+      //assignment name
+      let controlBtns = document.createElement("div");
+      controlBtns.setAttribute("class", "details-task-name");
+      //controlBtns.setAttribute("style", "justify-content:flex-end;");
+
+      let editBtn = document.createElement("button");
+      editBtn.setAttribute("class", "edit-button");
+      editBtn.setAttribute("id", "editBtn");
+      editBtn.innerHTML = "<i class='fas fa-pencil-alt'></i>";
+
+      let deleteBtn = document.createElement("button");
+      deleteBtn.setAttribute("class", "delete-button");
+      deleteBtn.setAttribute("id", "deleteBtn");
+      /*deleteBtn.setAttribute(
+        "onclick",
+        "deleteTaskClicked(" + id + ");closeDetail();"
+      );*/
+      deleteBtn.innerHTML = "<i class='far fa-trash-alt'></i>";
+
+      let closeBtn = document.createElement("button");
+      closeBtn.setAttribute("class", "close-button");
+      closeBtn.setAttribute("id", "assignmentBtn-" + assignment.id);
+      closeBtn.setAttribute("onclick", "toggleButton(this.id)");
+      closeBtn.innerHTML = "&#8249";
+
+      let assn = document.createElement("div");
+      assn.setAttribute("class", "taskAssign");
+      assn.innerHTML = "Return to " + assignment.name;
+
+      let assnName = document.createElement("div");
+      assnName.setAttribute("class", "details-title");
+      assnName.innerHTML = tasks[i].name;
+
+      let dueDate = document.createElement("div");
+      dueDate.setAttribute("class", "details-due-date");
+      dueDate.innerHTML = "Due Date: " + tasks[i].date;
+
+      let checkBox = document.createElement("input");
+      checkBox.setAttribute("type", "checkbox");
+      checkBox.setAttribute("class", "detailsCheckBox");
+      checkBox.setAttribute("id", "detailsPointsBox");
+
+      let points = document.createElement("p");
+      points.setAttribute("class", "details-points");
+      points.setAttribute("id", "detailsPoints");
+      points.innerHTML = tasks[i].points + " points";
+
+      let desc = document.createElement("p");
+      desc.setAttribute("class", "details-desc");
+      desc.innerHTML = tasks[i].description;
+
+      parent.append(containerDiv);
+
+      containerDiv.append(controlBtns);
+
+      //appending to parent the controlbtns
+      controlBtns.append(deleteBtn);
+      controlBtns.append(editBtn);
+
+  //appending to the parent the assignment stuff
+  containerDiv.append(assnName);
+  containerDiv.append(dueDate);
+  containerDiv.append(checkBox);
+  containerDiv.append(points);
+  containerDiv.append(desc);
+  containerDiv.append(closeBtn);
+  containerDiv.append(taskwind);
+}
+
+/**
+ * @description display the details of the task on the page
+ * @param {*} id of the task to be displayed
+ */
+async function displayTaskDetails(id) {
+  //Get the task data based on the task id
+  let tasks = await getAllTasks();
+  for (let i = 0; i < tasks.length; i++) {
+    if (tasks[i].id == id) {
       let assignment = await getAssignment(tasks[i].assignmentId);
 
       //Creating HTML elements to display task data
