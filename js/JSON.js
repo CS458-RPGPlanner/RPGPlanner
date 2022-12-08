@@ -145,7 +145,8 @@ function saveAssignment() {
   createAssignment(newAssignment);
 
   // display the new assignment
-  displayNewAssignment(newAssignment);
+  refreshDisplayList();
+  //displayNewAssignment(newAssignment);
 
   // close the form of the new assignment
   closeForm();
@@ -282,6 +283,7 @@ async function displayAssignments() {
 
   let createCard = document.createElement("div");
   createCard.setAttribute("class", "createCard");
+  createCard.setAttribute("id", "createCard");
 
   let createHeader = document.createElement("div");
   createHeader.setAttribute("id", "createHeader");
@@ -310,7 +312,7 @@ async function displayAssignments() {
  * @description displays a newly created assignment
  * @param {*} newAssignment passed in to add to the stack of assignments
  */
-async function displayNewAssignment(newAssignment) {
+/*async function displayNewAssignment(newAssignment) {
   // grabs the assignment array so that it can grab the newest assignment
   let assignments = await getAssignments();
   let id = assignments[assignments.length - 1].id + 1;
@@ -374,7 +376,7 @@ async function displayNewAssignment(newAssignment) {
   card.appendChild(desc);
 
   parent.insertBefore(card, parent.lastChild);
-}
+}*/
 
 /**
  * @description displays stored tasks to assignments
@@ -454,6 +456,18 @@ async function displayTasks() {
 
     parent.insertBefore(taskHeader, parent.lastChild);
   }
+}
+
+function refreshDisplayList() {
+  const assignments = document.querySelectorAll('.card')
+  assignments.forEach(assign => {
+    assign.remove();
+  })
+
+  let createCard = document.getElementById("createCard");
+  createCard.remove();
+
+  displayAssignments();
 }
 
 /**
