@@ -276,52 +276,13 @@
 
 .confirm-container {
   max-height: 800px;
-  max-width: 50%;
-  margin-left: 25%;
-  margin-bottom: 50%;
+  max-width: 100%;
   padding: 5%;
   background-color: #7ec4d1;
   border: solid;
   border-color: black;
   border-width: 5px;
   text-align: center;
-}
-
-.general-btn {
-  color: white;
-  padding: 16px 20px;
-  width: 20%;
-  border: none;
-  outline: none;
-  cursor: pointer;
-}
-
-.general-btn:focus {
-  outline: none;
-}
-
-.general-btn.confirm-yes {
-  background-color: #04AA6D;
-  margin-right: 5%;
-}
-
-div .general-btn.confirm-yes:hover {
-  background-color: darkgreen !important;
-  transition: linear 0.1s;
-}
-
-.general-btn.confirm-no {
-  background-color: red;
-  margin-left: 5%;
-}
-
-div .general-btn.confirm-no:hover {
-  background-color: darkred !important;
-  transition: linear 0.1s;
-}
-
-.deleteBtnTxt {
-  padding-bottom: 5%;
 }
 
 /*Total points*/

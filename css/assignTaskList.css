@@ -71,22 +71,6 @@ div .card-header:hover {
 .defaultBtn.add {
   background-color: white;
 }
-.createTaskBtnDiv{
-  background-color: white;
-  height: 50px;
-}
-.defaultBtn.add.details
-{
-  height: 50px;
-  background-color: #7ec4d1;
-  border:solid 2px;
-  border-color: #042e38;
-}
-
-.defaultBtn.add.details:hover
-{
-  background-color:#7ec5d1c1;
-}
 
 .defaultBtn:focus {
   outline: none;
