@@ -501,7 +501,7 @@ async function deleteAssignmentClicked(id) {
  * @description delete the task that was clicked
  * @param {*} id the id of the task that is being deleted
  */
- async function deleteTaskClicked(id) {
+async function deleteTaskClicked(id) {
   let taskDiv = document.getElementById("taskHeader-" + id);
 
   if (taskDiv) {
@@ -526,7 +526,7 @@ function confirmAssignmentDelete(id) {
  * @description Deletes the selected task when user clicks "yes"
  * @param {*} id the id of the task to be deleted
  */
- function confirmTaskDelete(id) {
+function confirmTaskDelete(id) {
   deleteTaskClicked(id);
   document.getElementById("confirmDiv").style.display = "none";
   document.getElementById("confirmContainer").remove();
@@ -561,15 +561,18 @@ async function deleteAssignmentPopup(id) {
 
   let btnText = document.createElement("p");
   btnText.setAttribute("id", "deleteBtnTxt");
+  btnText.setAttribute("class", "deleteBtnTxt");
   btnText.innerHTML = "Are you sure you want to delete this assignment?";
 
   let yesBtn = document.createElement("button");
   yesBtn.setAttribute("id", "deleteYes");
+  yesBtn.setAttribute("class", "general-btn confirm-yes");
   yesBtn.setAttribute("onclick", "confirmAssignmentDelete(" + id + ")");
   yesBtn.innerHTML = "Yes";
 
   let noBtn = document.createElement("button");
   noBtn.setAttribute("id", "deleteNo");
+  noBtn.setAttribute("class", "general-btn confirm-no");
   noBtn.setAttribute("onclick", "cancelDelete()");
   noBtn.innerHTML = "No";
   //append to confirmDiv
@@ -585,7 +588,7 @@ async function deleteAssignmentPopup(id) {
  * @description Creates a popup that asks the user to confirm task deletion
  * @param {*} id the id of the task that is being deleted
  */
- async function deleteTaskPopup(id) {
+async function deleteTaskPopup(id) {
   let parent = document.getElementById("confirmDiv");
   //display the popup
   parent.style.display = "block";
@@ -809,77 +812,76 @@ async function displayDetails(id) {
   taskwind.setAttribute("class", "details-tasks-window");
 
   let createCard = document.createElement("div");
-        createCard.setAttribute("class", "createTaskBtnDiv");
-        createCard.setAttribute("id", "addTasksAssign-" + assignment.id);
+  createCard.setAttribute("class", "createTaskBtnDiv");
+  createCard.setAttribute("id", "addTasksAssign-" + assignment.id);
 
-        let createHeader = document.createElement("div");
-        createHeader.setAttribute("id", "createHeader)");
+  let createHeader = document.createElement("div");
+  createHeader.setAttribute("id", "createHeader)");
 
-        let createButton = document.createElement("button");
-        createButton.setAttribute("id", "createAssignmentList");
-        createButton.setAttribute("class", "defaultBtn add details");
+  let createButton = document.createElement("button");
+  createButton.setAttribute("id", "createAssignmentList");
+  createButton.setAttribute("class", "defaultBtn add details");
 
-        let createName = document.createElement("p");
-        createName.setAttribute("class", "createPlus");
-        createName.innerHTML = "+";
+  let createName = document.createElement("p");
+  createName.setAttribute("class", "createPlus");
+  createName.innerHTML = "+";
 
-        createButton.appendChild(createName);
+  createButton.appendChild(createName);
 
-        createHeader.appendChild(createButton);
+  createHeader.appendChild(createButton);
 
-        createCard.appendChild(createHeader);
+  createCard.appendChild(createHeader);
 
-        taskwind.appendChild(createCard);
-      
+  taskwind.appendChild(createCard);
+
   for (let i = 0; i < tasks.length; i++) {
-    if(tasks[i].assignmentId === assignment.id)
-    {
-    //let parent = document.getElementById("description-" + tasks[i].assignmentId);
+    if (tasks[i].assignmentId === assignment.id) {
+      //let parent = document.getElementById("description-" + tasks[i].assignmentId);
 
-    let taskHeader = document.createElement("div");
-    taskHeader.setAttribute("id", "taskHeader-" + tasks[i].id);
-    taskHeader.setAttribute("class", "card-header");
-    let task = document.createElement("button");
-    task.setAttribute("class", "defaultBtn task");
-    task.setAttribute("id", "taskBtn-" + tasks[i].id);
-    task.setAttribute("data-toggle", "collapse");
+      let taskHeader = document.createElement("div");
+      taskHeader.setAttribute("id", "taskHeader-" + tasks[i].id);
+      taskHeader.setAttribute("class", "card-header");
+      let task = document.createElement("button");
+      task.setAttribute("class", "defaultBtn task");
+      task.setAttribute("id", "taskBtn-" + tasks[i].id);
+      task.setAttribute("data-toggle", "collapse");
 
-    let taskName = document.createElement("p");
-    taskName.setAttribute("class", "assignment-name");
-    taskName.innerHTML = tasks[i].name;
+      let taskName = document.createElement("p");
+      taskName.setAttribute("class", "assignment-name");
+      taskName.innerHTML = tasks[i].name;
 
-    let due = document.createElement("div");
-    due.setAttribute("class", "due-tasks");
-    due.innerHTML = "Due Date: " + tasks[i].date;
+      let due = document.createElement("div");
+      due.setAttribute("class", "due-tasks");
+      due.innerHTML = "Due Date: " + tasks[i].date;
 
-    let check = document.createElement("div");
-    check.setAttribute("class", "check");
+      let check = document.createElement("div");
+      check.setAttribute("class", "check");
 
-    let taskPoints = document.createElement("p");
-    taskPoints.setAttribute("class", "assignment-points");
-    taskPoints.innerHTML = tasks[i].points + " points";
+      let taskPoints = document.createElement("p");
+      taskPoints.setAttribute("class", "assignment-points");
+      taskPoints.innerHTML = tasks[i].points + " points";
 
-    let checkbox = document.createElement("input");
-    checkbox.setAttribute("type", "checkbox");
-    checkbox.setAttribute("class", "checkBox");
+      let checkbox = document.createElement("input");
+      checkbox.setAttribute("type", "checkbox");
+      checkbox.setAttribute("class", "checkBox");
 
-    check.appendChild(taskPoints);
-    check.appendChild(checkbox);
+      check.appendChild(taskPoints);
+      check.appendChild(checkbox);
 
-    task.appendChild(taskName);
-    task.appendChild(due);
+      task.appendChild(taskName);
+      task.appendChild(due);
 
-    taskHeader.appendChild(task);
-    taskHeader.appendChild(check);
+      taskHeader.appendChild(task);
+      taskHeader.appendChild(check);
 
-    taskwind.appendChild(taskHeader);
+      taskwind.appendChild(taskHeader);
 
-    
-      
-    
+
+
+
     }
   }
-  
+
   parent.append(containerDiv);
 
   containerDiv.append(controlBtns);
@@ -902,13 +904,11 @@ async function displayDetails(id) {
  * @description display the details of the task on the page
  * @param {*} id of the task to be displayed
  */
- async function displayTaskDetails(id) {
+async function displayTaskDetails(id) {
   //Get the task data based on the task id
   let tasks = await getAllTasks();
-  for (let i = 0; i < tasks.length; i++) 
-  {
-    if (tasks[i].id == id)
-    {
+  for (let i = 0; i < tasks.length; i++) {
+    if (tasks[i].id == id) {
       let assignment = await getAssignment(tasks[i].assignmentId);
 
       //Creating HTML elements to display task data
