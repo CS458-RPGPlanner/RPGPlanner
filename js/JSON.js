@@ -760,6 +760,68 @@ async function deleteConfirm(id) {
 }
 
 /**
+ * @description Deletes the selected assignment when user clicks "yes"
+ * @param {*} id the id of the assignment to be deleted
+ */
+function confirmDelete(id) {
+  deleteAssignmentClicked(id);
+  document.getElementById("confirmDiv").style.display = "none";
+  document.getElementById("confirmContainer").remove();
+  document.getElementById("deleteOverlay").remove();
+}
+
+/**
+ * @description Cancels assignment deletion when the user clicks "no"
+ */
+function cancelDelete() {
+  document.getElementById("confirmDiv").style.display = "none";
+  document.getElementById("confirmContainer").remove();
+  document.getElementById("deleteOverlay").remove();
+}
+
+/**
+ * @description Creates a popup that asks the user to confirm assignment deletion
+ * @param {*} id the id of the assignment that is being deleted
+ */
+async function deleteConfirm(id) {
+  let parent = document.getElementById("confirmDiv");
+  //display the popup
+  parent.style.display = "block";
+  //draw the background overlay
+  let overlay = document.createElement("div");
+  overlay.setAttribute("class", "darken-overlay");
+  overlay.setAttribute("id", "deleteOverlay");
+  //draw the contents of the popup
+  let containerDiv = document.createElement("div");
+  containerDiv.setAttribute("id", "confirmContainer");
+  containerDiv.setAttribute("class", "confirm-container");
+
+  let btnText = document.createElement("p");
+  btnText.setAttribute("id", "deleteBtnTxt");
+  btnText.setAttribute("class", "deleteBtnTxt");
+  btnText.innerHTML = "Are you sure you want to delete this assignment?";
+
+  let yesBtn = document.createElement("button");
+  yesBtn.setAttribute("id", "deleteYes");
+  yesBtn.setAttribute("class", "general-btn confirm-yes")
+  yesBtn.setAttribute("onclick", "confirmDelete(" + id + ")");
+  yesBtn.innerHTML = "Yes";
+
+  let noBtn = document.createElement("button");
+  noBtn.setAttribute("id", "deleteNo");
+  noBtn.setAttribute("class", "general-btn confirm-no")
+  noBtn.setAttribute("onclick", "cancelDelete()");
+  noBtn.innerHTML = "No";
+  //append to confirmDiv
+  parent.append(overlay);
+  parent.append(containerDiv);
+  containerDiv.append(btnText);
+  containerDiv.append(yesBtn);
+  containerDiv.append(noBtn);
+
+}
+
+/**
  * @description display the details of the assignment on the page
  * @param {*} id of the assignment to be displayed
  */
