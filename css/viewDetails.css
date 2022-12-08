@@ -1,168 +1,169 @@
 /*Formatting for assignment name in details view*/
 .details-assignment-name {
-    font-size: 20px;
-    text-align: left;
-    display: flex;
-    float: right;
-  }
-  
-  /* Formatting for task window */
-  .details-tasks-window {
-    height: 150px;
-    width: 550px;
-    position: relative;
-    bottom: 8%;
-    border-color: #042e38;
-    margin-left: 5%;
-    overflow: auto;
-  }
-  
-  /* Formatting for title div */
-  .details-title {
-    font-size: 30px;
-    font-weight: bold;
-    text-align: left;
-    display: flex;
-    justify-content: flex-start;
-  }
-  
-  /* Formatting for details points */
-  .details-points {
-    font-size: 20px;
-    margin-top: 4%;
-    display: flex;
-    float: right;
-  }
-  
-  /* Formatting for details due tasks */
-  .details-due-tasks {
-    display: flex;
-    justify-content: flex-start;
-    font-size: 15px;
-  }
-  
-  /* Formatting for details due date */
-  .details-due-date {
-    font-size: 15px;
-    font-weight: bold;
-    text-align: left;
-    text-indent: 5%;
-  }
-  
-  /* Formatting for details decription */
-  .details-desc {
-    text-align: left;
-    max-width: 70%;
-    margin-top: 2%;
-    max-height: 75px;
-    height: 75px;
-    overflow-y: auto;
-    font-size: 15px;
-  }
-  
-  /* Formatting for edit button in details */
-  .edit-button {
-    margin-left: 3%;
-    font-size: 25px;
-    font-weight: bold;
-    height: 45px;
-    width: 45px;
-    cursor: pointer;
-    background-color: #7ec4d1;
-    border: solid;
-    border-radius: 25%;
-    color: #000;
-    justify-content: flex-end;
-    top: 0px;
-    float: right;
-    text-align: center;
-  }
-  
-  .edit-button:focus {
-    outline: none;
-  }
-  
-  /* Formatting for close buttons in details view */
-  .close-button {
-    position: relative;
-    top: 18%;
-    right: 4%;
-    font-size: 80px;
-    font-weight: bold;
-    background-color: transparent;
-    color: #000;
-    cursor: pointer;
-    height: 35px;
-    width: 20px;
-    justify-content: flex-start;
-    float: left;
-    border: none;
-    text-align: right;
-  }
-  
-  .close-button:focus {
-    outline: none;
-  }
-  
-  /* Formatting for delete button in detial view */
-  .delete-button {
-    font-size: 25px;
-    font-weight: bold;
-    height: 45px;
-    width: 45px;
-    cursor: pointer;
-    background-color: #7ec4d1;
-    border: solid;
-    border-radius: 25%;
-    color: #000;
-    justify-content: flex-end;
-    top: 0px;
-    float: right;
-    text-align: center;
-  }
-  
-  .delete-button:focus {
-    outline: none;
-  }
-  
-  /* Formatting for checkbox in detail view */
-  .detailsCheckBox {
-    border: 5px;
-    cursor: pointer;
-    margin-right: 2%;
-    margin-left: 2%;
-    margin-top: 3%;
-    float: right;
-    height: 40px;
-    width: 40px;
-    font-size: 25px;
-    display: flex;
-    justify-content: flex-end;
-  }
-  /* Formatting for popup details div in the viewport */
-  div#assignmentDiv {
-    height: 100%;
-    width: 100%;
-  }
-  
-  div#containerDiv {
-    position: relative;
-    padding: 5%;
-    padding-top: 3%;
-    height: 100%;
-    width: 100%;
-    background-color: #b9fff0;
-    border: solid;
-    border-color: black;
-  }
-  
-  #details {
-    height: 100%;
-    width: 100%;
-  }
+  font-size: 20px;
+  text-align: left;
+  display: flex;
+  float: right;
+}
 
-  .taskAssign {
-    float: left;
-    margin-top: 95px;
-    margin-left: -5px;
-  }
+/* Formatting for task window */
+.details-tasks-window {
+  height: 150px;
+  width: 550px;
+  position: relative;
+  bottom: 8%;
+  border-color: #042e38;
+  margin-left: 5%;
+  overflow: auto;
+}
+
+/* Formatting for title div */
+.details-title {
+  font-size: 30px;
+  font-weight: bold;
+  text-align: left;
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* Formatting for details points */
+.details-points {
+  font-size: 20px;
+  margin-top: 4%;
+  display: flex;
+  float: right;
+}
+
+/* Formatting for details due tasks */
+.details-due-tasks {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 15px;
+}
+
+/* Formatting for details due date */
+.details-due-date {
+  font-size: 15px;
+  font-weight: bold;
+  text-align: left;
+  text-indent: 5%;
+}
+
+/* Formatting for details decription */
+.details-desc {
+  text-align: left;
+  max-width: 70%;
+  margin-top: 2%;
+  max-height: 75px;
+  height: 75px;
+  overflow-y: auto;
+  font-size: 15px;
+}
+
+/* Formatting for edit button in details */
+.edit-button {
+  margin-left: 10px;
+  font-size: 25px;
+  font-weight: bold;
+  height: 45px;
+  width: 45px;
+  cursor: pointer;
+  background-color: #7ec4d1;
+  border: solid;
+  border-radius: 25%;
+  color: #000;
+  justify-content: flex-end;
+  top: 0px;
+  float: right;
+  text-align: center;
+}
+
+.edit-button:focus {
+  outline: none;
+}
+
+/* Formatting for close buttons in details view */
+.close-button {
+  position: relative;
+  top: 18%;
+  right: 4%;
+  font-size: 80px;
+  font-weight: bold;
+  background-color: transparent;
+  color: #000;
+  cursor: pointer;
+  height: 35px;
+  width: 20px;
+  justify-content: flex-start;
+  float: left;
+  border: none;
+  text-align: right;
+}
+
+.close-button:focus {
+  outline: none;
+}
+
+/* Formatting for delete button in detial view */
+.delete-button {
+  font-size: 25px;
+  font-weight: bold;
+  height: 45px;
+  width: 45px;
+  cursor: pointer;
+  background-color: #7ec4d1;
+  border: solid;
+  border-radius: 25%;
+  color: #000;
+  justify-content: flex-end;
+  top: 0px;
+  float: right;
+  text-align: center;
+}
+
+.delete-button:focus {
+  outline: none;
+}
+
+/* Formatting for checkbox in detail view */
+.detailsCheckBox {
+  border: 5px;
+  cursor: pointer;
+  margin-right: 2%;
+  margin-left: 2%;
+  margin-top: 3%;
+  float: right;
+  height: 40px;
+  width: 40px;
+  font-size: 25px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Formatting for popup details div in the viewport */
+div#assignmentDiv {
+  height: 100%;
+  width: 100%;
+}
+
+div#containerDiv {
+  position: relative;
+  padding: 5%;
+  padding-top: 3%;
+  height: 100%;
+  width: 100%;
+  background-color: #b9fff0;
+  border: solid;
+  border-color: black;
+}
+
+#details {
+  height: 100%;
+  width: 100%;
+}
+
+.taskAssign {
+  float: left;
+  margin-top: 95px;
+  margin-left: -5px;
+}
