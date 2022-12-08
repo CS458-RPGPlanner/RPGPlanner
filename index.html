@@ -134,7 +134,7 @@
 							<button type="button" class="btn cancel" onclick="closeTaskForm()">
 								x
 							</button>
-							<button type="button" class="btn save" onclick="saveTask()">
+							<button type="button" class="btn save" id="formT-save" onclick="saveTask()">
 								Save
 							</button>
 						</div>
@@ -143,10 +143,11 @@
 						<div>
 							<label for="name"></label>
 							<input type="text" class="createTitle" placeholder="Enter Title" name="nameT" maxlength="50"
-								required />
+								id="formT-name" required />
 
 							<label for="points"><b>Points</b></label>
-							<input type="number" class="enterPoints" placeholder="Enter Points" name="pointsT" required>
+							<input type="number" class="enterPoints" placeholder="Enter Points" name="pointsT"
+								id="formT-points" required>
 
 							<div class="checkBox-createDiv">
 								<label for="complete" class="checkBox-text"><b>Complete:</b></label>
@@ -156,10 +157,10 @@
 
 						<label for="description"></label>
 						<textarea class="createDesc" placeholder="Enter Description" name="descriptionT" maxlength="450"
-							required></textarea>
+							id="formT-desc" required></textarea>
 
 						<label for="date"><b>Due Date:</b></label>
-						<input type="date" placeholder="Enter Date" name="dateT" required />
+						<input type="date" placeholder="Enter Date" name="dateT" id="formT-date" required />
 					</div>
 				</form>
 			</div>
