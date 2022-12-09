@@ -608,7 +608,7 @@ async function deleteTaskPopup(id) {
   let yesBtn = document.createElement("button");
   yesBtn.setAttribute("id", "deleteYes");
   yesBtn.setAttribute("class", "general-btn confirm-yes");
-  yesBtn.setAttribute("onclick", "confirmAssignmentDelete(" + id + ")");
+  yesBtn.setAttribute("onclick", "confirmTaskDelete(" + id + ")");
   yesBtn.innerHTML = "Yes";
 
   let noBtn = document.createElement("button");
