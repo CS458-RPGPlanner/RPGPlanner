@@ -1,6 +1,6 @@
 /**
  * @file JSON.js is the main file for the listeners and the html injection and manipulation
- * @author Pierce Heeschen, Max Lampa, and Tiernan
+ * @author Pierce Heeschen, Max Lampa, and Tiernan Meyer
  */
 const { ipcRenderer } = require("electron");
 const { doc } = require("prettier");
@@ -435,6 +435,148 @@ async function saveEditTask(id) {
 
   closeTaskForm();
 }
+/**
+ * @description unhides assignment creation form with pre-loaded data from the clicked assignment
+ * @param {*} id of the assignment to be edited
+ */
+async function openEditForm(id) {
+  // get assignment
+  let assnToEdit = await getAssignment(id);
+  // get current stored data
+  let points = assnToEdit.points;
+  let name = assnToEdit.name;
+  let date = assnToEdit.date;
+  let desc = assnToEdit.description;
+  // set form values to stored data
+  document.getElementById("form-points").value = points;
+  document.getElementById("form-name").value = name;
+  document.getElementById("form-date").value = date;
+  document.getElementById("form-desc").value = desc;
+  document.getElementById("form-save").setAttribute("onclick", "saveEditAssignment(" + id + ")");
+  // unhide form
+  document.getElementById("myForm").style.display = "block";
+}
+
+/**
+ * @description unhides task creation form with pre-loaded data from the clicked task
+ * @param {*} id of the task to be edited
+ */
+async function openEditFormT(id) {
+  // get task to edit
+  let allTasks = await getAllTasks();
+  let taskToEdit = allTasks[0];
+  for (let i = 0; i < allTasks.length; ++i) {
+    if (allTasks[i].id == id) {
+      taskToEdit = allTasks[i];
+    }
+  }
+  // get current stored values
+  let points = taskToEdit.points;
+  let name = taskToEdit.name;
+  let date = taskToEdit.date;
+  let desc = taskToEdit.description;
+  // set form values to stored vaules
+  document.getElementById("formT-points").value = points;
+  document.getElementById("formT-name").value = name;
+  document.getElementById("formT-date").value = date;
+  document.getElementById("formT-desc").value = desc;
+  document.getElementById("formT-save").setAttribute("onclick", "saveEditTask(" + id + ");");
+  // unhide form
+  document.getElementById("myTaskForm").style.display = "block";
+}
+
+/**
+ * @description overwrites assignment data in JSON with newly submitted data
+ * @param {*} id of the assignment to be overwritten
+ */
+async function saveEditAssignment(id) {
+  //get assignment
+  let assnToEdit = await getAssignment(id);
+  // declare assignment fields for html form
+  let points = document.getElementsByName("points")[0].value;
+  let name = document.getElementsByName("name")[0].value;
+  let date = document.getElementsByName("date")[0].value;
+  let description = document.getElementsByName("description")[0].value;
+
+  // validation checks to see if fields have data
+  if (points == null || points == "") {
+    alert("Points can't be blank");
+    return false;
+  }
+  if (name == null || name == "") {
+    alert("Name can't be blank");
+    return false;
+  }
+  if (date == null || date == "") {
+    alert("Date can't be blank");
+    return false;
+  }
+  if (description == null || description == "") {
+    alert("Description can't be blank");
+    return false;
+  }
+
+  assnToEdit.points = points;
+  assnToEdit.name = name;
+  assnToEdit.date = date;
+  assnToEdit.description = description;
+
+  editAssignment(assnToEdit);
+
+  location.reload();
+
+  closeForm();
+}
+
+/**
+ * @description overwrites task data in JSON with newly submitted data
+ * @param {*} id of the task to be overwritten
+ */
+async function saveEditTask(id) {
+  // find the task to edit
+  let allTasks = await getAllTasks();
+  let taskToEdit = allTasks[0];
+  for (let i = 0; i < allTasks.length; ++i) {
+    if (allTasks[i].id == id) {
+      taskToEdit = allTasks[i];
+    }
+  }
+  // declare assignment fields for html form
+  let points = document.getElementsByName("pointsT")[0].value;
+  let name = document.getElementsByName("nameT")[0].value;
+  let date = document.getElementsByName("dateT")[0].value;
+  let description = document.getElementsByName("descriptionT")[0].value;
+
+  // validation checks to see if fields have data
+  if (points == null || points == "") {
+    alert("Points can't be blank");
+    return false;
+  }
+  if (name == null || name == "") {
+    alert("Name can't be blank");
+    return false;
+  }
+  if (date == null || date == "") {
+    alert("Date can't be blank");
+    return false;
+  }
+  if (description == null || description == "") {
+    alert("Description can't be blank");
+    return false;
+  }
+
+  //update the task with values inputed from form
+  taskToEdit.points = points;
+  taskToEdit.name = name;
+  taskToEdit.date = date;
+  taskToEdit.description = description;
+  //edit task in JSON
+  editTask(taskToEdit);
+
+  location.reload();
+
+  closeTaskForm();
+}
 
 /**
  * @description display assignments in the ui
@@ -696,6 +838,18 @@ async function displayTasks() {
 
     parent.insertBefore(taskHeader, parent.lastChild);
   }
+}
+
+function refreshDisplayList() {
+  const assignments = document.querySelectorAll('.card')
+  assignments.forEach(assign => {
+    assign.remove();
+  })
+
+  let createCard = document.getElementById("createCard");
+  createCard.remove();
+
+  displayAssignments();
 }
 
 /**
@@ -1017,6 +1171,68 @@ async function deleteTaskPopup(id) {
   containerDiv.append(btnText);
   containerDiv.append(yesBtn);
   containerDiv.append(noBtn);
+}
+
+/**
+ * @description Deletes the selected assignment when user clicks "yes"
+ * @param {*} id the id of the assignment to be deleted
+ */
+function confirmDelete(id) {
+  deleteAssignmentClicked(id);
+  document.getElementById("confirmDiv").style.display = "none";
+  document.getElementById("confirmContainer").remove();
+  document.getElementById("deleteOverlay").remove();
+}
+
+/**
+ * @description Cancels assignment deletion when the user clicks "no"
+ */
+function cancelDelete() {
+  document.getElementById("confirmDiv").style.display = "none";
+  document.getElementById("confirmContainer").remove();
+  document.getElementById("deleteOverlay").remove();
+}
+
+/**
+ * @description Creates a popup that asks the user to confirm assignment deletion
+ * @param {*} id the id of the assignment that is being deleted
+ */
+async function deleteConfirm(id) {
+  let parent = document.getElementById("confirmDiv");
+  //display the popup
+  parent.style.display = "block";
+  //draw the background overlay
+  let overlay = document.createElement("div");
+  overlay.setAttribute("class", "darken-overlay");
+  overlay.setAttribute("id", "deleteOverlay");
+  //draw the contents of the popup
+  let containerDiv = document.createElement("div");
+  containerDiv.setAttribute("id", "confirmContainer");
+  containerDiv.setAttribute("class", "confirm-container");
+
+  let btnText = document.createElement("p");
+  btnText.setAttribute("id", "deleteBtnTxt");
+  btnText.setAttribute("class", "deleteBtnTxt");
+  btnText.innerHTML = "Are you sure you want to delete this assignment?";
+
+  let yesBtn = document.createElement("button");
+  yesBtn.setAttribute("id", "deleteYes");
+  yesBtn.setAttribute("class", "general-btn confirm-yes")
+  yesBtn.setAttribute("onclick", "confirmDelete(" + id + ")");
+  yesBtn.innerHTML = "Yes";
+
+  let noBtn = document.createElement("button");
+  noBtn.setAttribute("id", "deleteNo");
+  noBtn.setAttribute("class", "general-btn confirm-no")
+  noBtn.setAttribute("onclick", "cancelDelete()");
+  noBtn.innerHTML = "No";
+  //append to confirmDiv
+  parent.append(overlay);
+  parent.append(containerDiv);
+  containerDiv.append(btnText);
+  containerDiv.append(yesBtn);
+  containerDiv.append(noBtn);
+
 }
 
 /**
