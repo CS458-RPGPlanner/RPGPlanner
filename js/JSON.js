@@ -68,6 +68,15 @@ async function deleteAssignment(id) {
   return result;
 }
 
+async function editAssignment(obj) {
+  let result = await ipcRenderer.invoke("editAssignment", obj);
+  return result;
+}
+
+async function editTask(obj) {
+  let result = await ipcRenderer.invoke("editTask", obj);
+  }
+
 async function deleteAssignmentTasks(id) {
   // return promise value after waiting
   let result = await ipcRenderer.invoke("deleteAssignmentTasks", id);
@@ -84,6 +93,7 @@ async function deleteTask(id) {
  * @description opens html create assignment form
  */
 function openForm() {
+  document.getElementById("form-save").setAttribute("onclick", "saveAssignment()");
   document.getElementById("myForm").style.display = "block";
 }
 
@@ -91,6 +101,7 @@ function openForm() {
  * @description opens html create task form
  */
 function openTaskForm() {
+  document.getElementById("formT-save").setAttribute("onclick", "saveTask()")
   document.getElementById("myTaskForm").style.display = "block";
 }
 
@@ -220,6 +231,148 @@ async function saveTask() {
   createTask(newTask);
 
   // close the form of the new assignment
+  closeTaskForm();
+}
+/**
+ * @description unhides assignment creation form with pre-loaded data from the clicked assignment
+ * @param {*} id of the assignment to be edited
+ */
+async function openEditForm(id) {
+  // get assignment
+  let assnToEdit = await getAssignment(id);
+  // get current stored data
+  let points = assnToEdit.points;
+  let name = assnToEdit.name;
+  let date = assnToEdit.date;
+  let desc = assnToEdit.description;
+  // set form values to stored data
+  document.getElementById("form-points").value = points;
+  document.getElementById("form-name").value = name;
+  document.getElementById("form-date").value = date;
+  document.getElementById("form-desc").value = desc;
+  document.getElementById("form-save").setAttribute("onclick", "saveEditAssignment(" + id + ")");
+  // unhide form
+  document.getElementById("myForm").style.display = "block";
+}
+
+/**
+ * @description unhides task creation form with pre-loaded data from the clicked task
+ * @param {*} id of the task to be edited
+ */
+async function openEditFormT(id) {
+  // get task to edit
+  let allTasks = await getAllTasks();
+  let taskToEdit = allTasks[0];
+  for (let i = 0; i < allTasks.length; ++i) {
+    if (allTasks[i].id == id) {
+      taskToEdit = allTasks[i];
+    }
+  }
+  // get current stored values
+  let points = taskToEdit.points;
+  let name = taskToEdit.name;
+  let date = taskToEdit.date;
+  let desc = taskToEdit.description;
+  // set form values to stored vaules
+  document.getElementById("formT-points").value = points;
+  document.getElementById("formT-name").value = name;
+  document.getElementById("formT-date").value = date;
+  document.getElementById("formT-desc").value = desc;
+  document.getElementById("formT-save").setAttribute("onclick", "saveEditTask(" + id + ");");
+  // unhide form
+  document.getElementById("myTaskForm").style.display = "block";
+}
+
+/**
+ * @description overwrites assignment data in JSON with newly submitted data
+ * @param {*} id of the assignment to be overwritten
+ */
+async function saveEditAssignment(id) {
+  //get assignment
+  let assnToEdit = await getAssignment(id);
+  // declare assignment fields for html form
+  let points = document.getElementsByName("points")[0].value;
+  let name = document.getElementsByName("name")[0].value;
+  let date = document.getElementsByName("date")[0].value;
+  let description = document.getElementsByName("description")[0].value;
+
+  // validation checks to see if fields have data
+  if (points == null || points == "") {
+    alert("Points can't be blank");
+    return false;
+  }
+  if (name == null || name == "") {
+    alert("Name can't be blank");
+    return false;
+  }
+  if (date == null || date == "") {
+    alert("Date can't be blank");
+    return false;
+  }
+  if (description == null || description == "") {
+    alert("Description can't be blank");
+    return false;
+  }
+
+  assnToEdit.points = points;
+  assnToEdit.name = name;
+  assnToEdit.date = date;
+  assnToEdit.description = description;
+
+  editAssignment(assnToEdit);
+
+  location.reload();
+
+  closeForm();
+}
+
+/**
+ * @description overwrites task data in JSON with newly submitted data
+ * @param {*} id of the task to be overwritten
+ */
+async function saveEditTask(id) {
+  // find the task to edit
+  let allTasks = await getAllTasks();
+  let taskToEdit = allTasks[0];
+  for (let i = 0; i < allTasks.length; ++i) {
+    if (allTasks[i].id == id) {
+      taskToEdit = allTasks[i];
+    }
+  }
+  // declare assignment fields for html form
+  let points = document.getElementsByName("pointsT")[0].value;
+  let name = document.getElementsByName("nameT")[0].value;
+  let date = document.getElementsByName("dateT")[0].value;
+  let description = document.getElementsByName("descriptionT")[0].value;
+
+  // validation checks to see if fields have data
+  if (points == null || points == "") {
+    alert("Points can't be blank");
+    return false;
+  }
+  if (name == null || name == "") {
+    alert("Name can't be blank");
+    return false;
+  }
+  if (date == null || date == "") {
+    alert("Date can't be blank");
+    return false;
+  }
+  if (description == null || description == "") {
+    alert("Description can't be blank");
+    return false;
+  }
+
+  //update the task with values inputed from form
+  taskToEdit.points = points;
+  taskToEdit.name = name;
+  taskToEdit.date = date;
+  taskToEdit.description = description;
+  //edit task in JSON
+  editTask(taskToEdit);
+
+  location.reload();
+
   closeTaskForm();
 }
 
@@ -593,7 +746,7 @@ async function deleteAssignmentClicked(id) {
  * @description delete the task that was clicked
  * @param {*} id the id of the task that is being deleted
  */
- async function deleteTaskClicked(id) {
+async function deleteTaskClicked(id) {
   let taskDiv = document.getElementById("taskHeader-" + id);
 
   if (taskDiv) {
@@ -618,7 +771,7 @@ function confirmAssignmentDelete(id) {
  * @description Deletes the selected task when user clicks "yes"
  * @param {*} id the id of the task to be deleted
  */
- function confirmTaskDelete(id) {
+function confirmTaskDelete(id) {
   deleteTaskClicked(id);
   document.getElementById("confirmDiv").style.display = "none";
   document.getElementById("confirmContainer").remove();
@@ -653,15 +806,18 @@ async function deleteAssignmentPopup(id) {
 
   let btnText = document.createElement("p");
   btnText.setAttribute("id", "deleteBtnTxt");
+  btnText.setAttribute("class", "deleteBtnTxt");
   btnText.innerHTML = "Are you sure you want to delete this assignment?";
 
   let yesBtn = document.createElement("button");
   yesBtn.setAttribute("id", "deleteYes");
+  yesBtn.setAttribute("class", "general-btn confirm-yes");
   yesBtn.setAttribute("onclick", "confirmAssignmentDelete(" + id + ")");
   yesBtn.innerHTML = "Yes";
 
   let noBtn = document.createElement("button");
   noBtn.setAttribute("id", "deleteNo");
+  noBtn.setAttribute("class", "general-btn confirm-no");
   noBtn.setAttribute("onclick", "cancelDelete()");
   noBtn.innerHTML = "No";
   //append to confirmDiv
@@ -677,7 +833,7 @@ async function deleteAssignmentPopup(id) {
  * @description Creates a popup that asks the user to confirm task deletion
  * @param {*} id the id of the task that is being deleted
  */
- async function deleteTaskPopup(id) {
+async function deleteTaskPopup(id) {
   let parent = document.getElementById("confirmDiv");
   //display the popup
   parent.style.display = "block";
@@ -696,11 +852,13 @@ async function deleteAssignmentPopup(id) {
 
   let yesBtn = document.createElement("button");
   yesBtn.setAttribute("id", "deleteYes");
+  yesBtn.setAttribute("class", "general-btn confirm-yes");
   yesBtn.setAttribute("onclick", "confirmTaskDelete(" + id + ")");
   yesBtn.innerHTML = "Yes";
 
   let noBtn = document.createElement("button");
   noBtn.setAttribute("id", "deleteNo");
+  noBtn.setAttribute("class", "general-btn confirm-no");
   noBtn.setAttribute("onclick", "cancelDelete()");
   noBtn.innerHTML = "No";
   //append to confirmDiv
@@ -709,6 +867,68 @@ async function deleteAssignmentPopup(id) {
   containerDiv.append(btnText);
   containerDiv.append(yesBtn);
   containerDiv.append(noBtn);
+}
+
+/**
+ * @description Deletes the selected assignment when user clicks "yes"
+ * @param {*} id the id of the assignment to be deleted
+ */
+function confirmDelete(id) {
+  deleteAssignmentClicked(id);
+  document.getElementById("confirmDiv").style.display = "none";
+  document.getElementById("confirmContainer").remove();
+  document.getElementById("deleteOverlay").remove();
+}
+
+/**
+ * @description Cancels assignment deletion when the user clicks "no"
+ */
+function cancelDelete() {
+  document.getElementById("confirmDiv").style.display = "none";
+  document.getElementById("confirmContainer").remove();
+  document.getElementById("deleteOverlay").remove();
+}
+
+/**
+ * @description Creates a popup that asks the user to confirm assignment deletion
+ * @param {*} id the id of the assignment that is being deleted
+ */
+async function deleteConfirm(id) {
+  let parent = document.getElementById("confirmDiv");
+  //display the popup
+  parent.style.display = "block";
+  //draw the background overlay
+  let overlay = document.createElement("div");
+  overlay.setAttribute("class", "darken-overlay");
+  overlay.setAttribute("id", "deleteOverlay");
+  //draw the contents of the popup
+  let containerDiv = document.createElement("div");
+  containerDiv.setAttribute("id", "confirmContainer");
+  containerDiv.setAttribute("class", "confirm-container");
+
+  let btnText = document.createElement("p");
+  btnText.setAttribute("id", "deleteBtnTxt");
+  btnText.setAttribute("class", "deleteBtnTxt");
+  btnText.innerHTML = "Are you sure you want to delete this assignment?";
+
+  let yesBtn = document.createElement("button");
+  yesBtn.setAttribute("id", "deleteYes");
+  yesBtn.setAttribute("class", "general-btn confirm-yes")
+  yesBtn.setAttribute("onclick", "confirmDelete(" + id + ")");
+  yesBtn.innerHTML = "Yes";
+
+  let noBtn = document.createElement("button");
+  noBtn.setAttribute("id", "deleteNo");
+  noBtn.setAttribute("class", "general-btn confirm-no")
+  noBtn.setAttribute("onclick", "cancelDelete()");
+  noBtn.innerHTML = "No";
+  //append to confirmDiv
+  parent.append(overlay);
+  parent.append(containerDiv);
+  containerDiv.append(btnText);
+  containerDiv.append(yesBtn);
+  containerDiv.append(noBtn);
+
 }
 
 /**
@@ -861,6 +1081,7 @@ async function displayDetails(id) {
   let editBtn = document.createElement("button");
   editBtn.setAttribute("class", "edit-button");
   editBtn.setAttribute("id", "editBtn");
+  editBtn.setAttribute("onclick", "openEditForm(" + id + ");")
   editBtn.innerHTML = "<i class='fas fa-pencil-alt'></i>";
 
   let deleteBtn = document.createElement("button");
@@ -904,73 +1125,78 @@ async function displayDetails(id) {
   taskwind.setAttribute("class", "details-tasks-window");
 
   let createCard = document.createElement("div");
-        createCard.setAttribute("class", "createTaskBtnDiv");
-        createCard.setAttribute("id", "addTasksAssign-" + assignment.id);
+  createCard.setAttribute("class", "createTaskBtnDiv");
+  createCard.setAttribute("id", "addTasksAssign-" + assignment.id);
 
-        let createHeader = document.createElement("div");
-        createHeader.setAttribute("id", "createHeader)");
+  let createHeader = document.createElement("div");
+  createHeader.setAttribute("id", "createHeader)");
 
-        let createButton = document.createElement("button");
-        createButton.setAttribute("id", "createAssignmentList");
-        createButton.setAttribute("class", "defaultBtn add details");
 
-        let createName = document.createElement("p");
-        createName.setAttribute("class", "createPlus");
-        createName.innerHTML = "+";
+  let createButton = document.createElement("button");
+  createButton.setAttribute("id", "createAssignmentList");
+  createButton.setAttribute("class", "defaultBtn add details");
 
-        createButton.appendChild(createName);
+  let createName = document.createElement("p");
+  createName.setAttribute("class", "createPlus");
+  createName.innerHTML = "+";
 
-        createHeader.appendChild(createButton);
+  createButton.appendChild(createName);
 
-        createCard.appendChild(createHeader);
+  createHeader.appendChild(createButton);
 
-        taskwind.appendChild(createCard);
-      
+  createCard.appendChild(createHeader);
+
+  taskwind.appendChild(createCard);
+
   for (let i = 0; i < tasks.length; i++) {
-    if(tasks[i].assignmentId === assignment.id)
-    {
-    //let parent = document.getElementById("description-" + tasks[i].assignmentId);
+    if (tasks[i].assignmentId === assignment.id) {
+      //let parent = document.getElementById("description-" + tasks[i].assignmentId);
 
-    let taskHeader = document.createElement("div");
-    taskHeader.setAttribute("id", "taskHeader-" + tasks[i].id);
-    taskHeader.setAttribute("class", "card-header");
-    let task = document.createElement("button");
-    task.setAttribute("class", "defaultBtn task");
-    task.setAttribute("id", "taskBtn-" + tasks[i].id);
-    task.setAttribute("data-toggle", "collapse");
+      let taskHeader = document.createElement("div");
+      taskHeader.setAttribute("id", "taskHeader-" + tasks[i].id);
+      taskHeader.setAttribute("class", "card-header");
 
-    let taskName = document.createElement("p");
-    taskName.setAttribute("class", "assignment-name");
-    taskName.innerHTML = tasks[i].name;
+      let task = document.createElement("button");
+      task.setAttribute("class", "defaultBtn task");
+      task.setAttribute("id", "taskBtn-" + tasks[i].id);
+      task.setAttribute("data-toggle", "collapse");
 
-    let due = document.createElement("div");
-    due.setAttribute("class", "due-tasks");
-    due.innerHTML = "Due Date: " + tasks[i].date;
+      let taskName = document.createElement("p");
+      taskName.setAttribute("class", "assignment-name");
+      taskName.innerHTML = tasks[i].name;
 
-    let check = document.createElement("div");
-    check.setAttribute("class", "check");
+      let due = document.createElement("div");
+      due.setAttribute("class", "due-tasks");
+      due.innerHTML = "Due Date: " + tasks[i].date;
 
-    let taskPoints = document.createElement("p");
-    taskPoints.setAttribute("class", "assignment-points");
-    taskPoints.innerHTML = tasks[i].points + " points";
+      let check = document.createElement("div");
+      check.setAttribute("class", "check");
 
-    let checkbox = document.createElement("input");
-    checkbox.setAttribute("type", "checkbox");
-    checkbox.setAttribute("class", "checkBox");
+      let taskPoints = document.createElement("p");
+      taskPoints.setAttribute("class", "assignment-points");
+      taskPoints.innerHTML = tasks[i].points + " points";
 
-    check.appendChild(taskPoints);
-    check.appendChild(checkbox);
+      let checkbox = document.createElement("input");
+      checkbox.setAttribute("type", "checkbox");
+      checkbox.setAttribute("class", "checkBox");
 
-    task.appendChild(taskName);
-    task.appendChild(due);
+      check.appendChild(taskPoints);
+      check.appendChild(checkbox);
 
-    taskHeader.appendChild(task);
-    taskHeader.appendChild(check);
+      task.appendChild(taskName);
+      task.appendChild(due);
 
-    taskwind.appendChild(taskHeader);
+      taskHeader.appendChild(task);
+      taskHeader.appendChild(check);
+
+      taskwind.appendChild(taskHeader);
+
+
+
+
     }
   }
-  
+
   parent.append(containerDiv);
 
   containerDiv.append(controlBtns);
@@ -1016,6 +1242,7 @@ async function displayTaskDetails(id) {
       let editBtn = document.createElement("button");
       editBtn.setAttribute("class", "edit-button");
       editBtn.setAttribute("id", "editBtn");
+      editBtn.setAttribute("onclick", "openEditFormT(" + id + ")");
       editBtn.innerHTML = "<i class='fas fa-pencil-alt'></i>";
 
       let deleteBtn = document.createElement("button");
