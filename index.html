@@ -148,7 +148,7 @@
 								required />
 
 							<label for="points"><b>Points</b></label>
-							<input type="number" id="formT-points" class="enterPoints" placeholder="Enter Points" min = "1" name="pointsT" required>
+							<input type="number" id="formT-points" class="enterPoints" placeholder="Enter Points" min="1" oninput = "this.value = Math.abs(this.value)" name="pointsT" required>
 
 							<div class="checkBox-createDiv">
 								<label for="complete" class="checkBox-text"><b>Complete:</b></label>
