@@ -810,14 +810,22 @@ async function displayAssignments() {
     }
     checkbox.addEventListener("click", async function () {
       let points = Number(assignments[i].points);
+      let updateAssignment = assignments[i];
 
       if (!this.checked) {
         points *= -1;
       }
+      if (updateAssignment.isComplete) {
+        updateAssignment.isComplete = false;
+      } else {
+        updateAssignment.isComplete = true;
+      }
+
       addUserPoints(Number(points));
       let userPointsBar = document.getElementById("totalPoints");
       let userPoints = userPointsBar.innerText;
       userPointsBar.innerText = Number(userPoints) + Number(points);
+      editAssignment(updateAssignment);
     });
 
     check.appendChild(assignPoints);
