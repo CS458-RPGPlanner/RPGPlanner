@@ -3,6 +3,7 @@
  * @author Pierce Heeschen, Max Lampa, and Tiernan Meyer
  */
 const { ipcRenderer } = require("electron");
+const { getAll } = require("electron-json-storage");
 const { doc } = require("prettier");
 
 // Function to delete an assignment based on the id of the assignment
@@ -1203,13 +1204,35 @@ async function deleteAssignmentClicked(id) {
  * @param {*} id the id of the task that is being deleted
  */
 async function deleteTaskClicked(id) {
+  let tasks = await getAllTasks();
+  let task;
+  for (let i = 0; i < tasks.length; i++) {
+    if (tasks[i].id == id) {
+      task = tasks[i];
+    }
+  }
+
+  let assignmentId = task.assignmentId;
+  deleteTask(id);
+
+  let last = true;
+  for (let i = 0; i < tasks.length; i++) {
+    if (tasks[i].assignmentId == assignmentId && tasks[i].id != id) {
+      last = false;
+    }
+  }
+
   let taskDiv = document.getElementById("taskHeader-" + id);
 
   if (taskDiv) {
     taskDiv.remove();
   }
+
+  if (last == true) {
+    document.getElementById("addTasksAssign-" + assignmentId).remove();
+    document.getElementById("arrow-" + assignmentId).setAttribute("class", "fa fa-minus")
+  }
   closeDetail();
-  deleteTask(id);
 }
 
 /**
