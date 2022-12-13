@@ -68,6 +68,15 @@ async function deleteAssignment(id) {
   return result;
 }
 
+async function editAssignment(obj) {
+  let result = await ipcRenderer.invoke("editAssignment", obj);
+  return result;
+}
+
+async function editTask(obj) {
+  let result = await ipcRenderer.invoke("editTask", obj);
+  }
+
 async function deleteAssignmentTasks(id) {
   // return promise value after waiting
   let result = await ipcRenderer.invoke("deleteAssignmentTasks", id);
@@ -84,6 +93,7 @@ async function deleteTask(id) {
  * @description opens html create assignment form
  */
 function openForm() {
+  document.getElementById("form-save").setAttribute("onclick", "saveAssignment()");
   document.getElementById("myForm").style.display = "block";
 }
 
@@ -91,6 +101,7 @@ function openForm() {
  * @description opens html create task form
  */
 function openTaskForm() {
+  document.getElementById("formT-save").setAttribute("onclick", "saveTask()")
   document.getElementById("myTaskForm").style.display = "block";
 }
 
@@ -204,6 +215,148 @@ function saveTask() {
   //SAVE TASKS
 
   // close the form of the new assignment
+  closeTaskForm();
+}
+/**
+ * @description unhides assignment creation form with pre-loaded data from the clicked assignment
+ * @param {*} id of the assignment to be edited
+ */
+async function openEditForm(id) {
+  // get assignment
+  let assnToEdit = await getAssignment(id);
+  // get current stored data
+  let points = assnToEdit.points;
+  let name = assnToEdit.name;
+  let date = assnToEdit.date;
+  let desc = assnToEdit.description;
+  // set form values to stored data
+  document.getElementById("form-points").value = points;
+  document.getElementById("form-name").value = name;
+  document.getElementById("form-date").value = date;
+  document.getElementById("form-desc").value = desc;
+  document.getElementById("form-save").setAttribute("onclick", "saveEditAssignment(" + id + ")");
+  // unhide form
+  document.getElementById("myForm").style.display = "block";
+}
+
+/**
+ * @description unhides task creation form with pre-loaded data from the clicked task
+ * @param {*} id of the task to be edited
+ */
+async function openEditFormT(id) {
+  // get task to edit
+  let allTasks = await getAllTasks();
+  let taskToEdit = allTasks[0];
+  for (let i = 0; i < allTasks.length; ++i) {
+    if (allTasks[i].id == id) {
+      taskToEdit = allTasks[i];
+    }
+  }
+  // get current stored values
+  let points = taskToEdit.points;
+  let name = taskToEdit.name;
+  let date = taskToEdit.date;
+  let desc = taskToEdit.description;
+  // set form values to stored vaules
+  document.getElementById("formT-points").value = points;
+  document.getElementById("formT-name").value = name;
+  document.getElementById("formT-date").value = date;
+  document.getElementById("formT-desc").value = desc;
+  document.getElementById("formT-save").setAttribute("onclick", "saveEditTask(" + id + ");");
+  // unhide form
+  document.getElementById("myTaskForm").style.display = "block";
+}
+
+/**
+ * @description overwrites assignment data in JSON with newly submitted data
+ * @param {*} id of the assignment to be overwritten
+ */
+async function saveEditAssignment(id) {
+  //get assignment
+  let assnToEdit = await getAssignment(id);
+  // declare assignment fields for html form
+  let points = document.getElementsByName("points")[0].value;
+  let name = document.getElementsByName("name")[0].value;
+  let date = document.getElementsByName("date")[0].value;
+  let description = document.getElementsByName("description")[0].value;
+
+  // validation checks to see if fields have data
+  if (points == null || points == "") {
+    alert("Points can't be blank");
+    return false;
+  }
+  if (name == null || name == "") {
+    alert("Name can't be blank");
+    return false;
+  }
+  if (date == null || date == "") {
+    alert("Date can't be blank");
+    return false;
+  }
+  if (description == null || description == "") {
+    alert("Description can't be blank");
+    return false;
+  }
+
+  assnToEdit.points = points;
+  assnToEdit.name = name;
+  assnToEdit.date = date;
+  assnToEdit.description = description;
+
+  editAssignment(assnToEdit);
+
+  location.reload();
+
+  closeForm();
+}
+
+/**
+ * @description overwrites task data in JSON with newly submitted data
+ * @param {*} id of the task to be overwritten
+ */
+async function saveEditTask(id) {
+  // find the task to edit
+  let allTasks = await getAllTasks();
+  let taskToEdit = allTasks[0];
+  for (let i = 0; i < allTasks.length; ++i) {
+    if (allTasks[i].id == id) {
+      taskToEdit = allTasks[i];
+    }
+  }
+  // declare assignment fields for html form
+  let points = document.getElementsByName("pointsT")[0].value;
+  let name = document.getElementsByName("nameT")[0].value;
+  let date = document.getElementsByName("dateT")[0].value;
+  let description = document.getElementsByName("descriptionT")[0].value;
+
+  // validation checks to see if fields have data
+  if (points == null || points == "") {
+    alert("Points can't be blank");
+    return false;
+  }
+  if (name == null || name == "") {
+    alert("Name can't be blank");
+    return false;
+  }
+  if (date == null || date == "") {
+    alert("Date can't be blank");
+    return false;
+  }
+  if (description == null || description == "") {
+    alert("Description can't be blank");
+    return false;
+  }
+
+  //update the task with values inputed from form
+  taskToEdit.points = points;
+  taskToEdit.name = name;
+  taskToEdit.date = date;
+  taskToEdit.description = description;
+  //edit task in JSON
+  editTask(taskToEdit);
+
+  location.reload();
+
   closeTaskForm();
 }
 
@@ -771,6 +924,7 @@ async function displayDetails(id) {
   let editBtn = document.createElement("button");
   editBtn.setAttribute("class", "edit-button");
   editBtn.setAttribute("id", "editBtn");
+  editBtn.setAttribute("onclick", "openEditForm(" + id + ");")
   editBtn.innerHTML = "<i class='fas fa-pencil-alt'></i>";
 
   let deleteBtn = document.createElement("button");
@@ -820,6 +974,7 @@ async function displayDetails(id) {
   let createHeader = document.createElement("div");
   createHeader.setAttribute("id", "createHeader)");
 
+
   let createButton = document.createElement("button");
   createButton.setAttribute("id", "createAssignmentList");
   createButton.setAttribute("class", "defaultBtn add details");
@@ -843,6 +998,7 @@ async function displayDetails(id) {
       let taskHeader = document.createElement("div");
       taskHeader.setAttribute("id", "taskHeader-" + tasks[i].id);
       taskHeader.setAttribute("class", "card-header");
+
       let task = document.createElement("button");
       task.setAttribute("class", "defaultBtn task");
       task.setAttribute("id", "taskBtn-" + tasks[i].id);
@@ -929,6 +1085,7 @@ async function displayTaskDetails(id) {
       let editBtn = document.createElement("button");
       editBtn.setAttribute("class", "edit-button");
       editBtn.setAttribute("id", "editBtn");
+      editBtn.setAttribute("onclick", "openEditFormT(" + id + ")");
       editBtn.innerHTML = "<i class='fas fa-pencil-alt'></i>";
 
       let deleteBtn = document.createElement("button");

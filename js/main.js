@@ -15,7 +15,7 @@ const { resolve, format } = require("path");
 //catch so that the electron reloader works without issue
 try {
   require("electron-reloader")(module);
-} catch {}
+} catch { }
 
 /**
  * @description default electron window creation
@@ -87,6 +87,12 @@ ipcMain.handle("editAssignment", async (event, obj) => {
 // ipc of createAssignment for renderer
 ipcMain.handle("createTask", async (event, obj) => {
   const result = await createTask(obj);
+  return result;
+});
+
+// ipc of editTask for renderer
+ipcMain.handle("editTask", async (event, obj) => {
+  const result = await editTask(obj);
   return result;
 });
 
