@@ -15,7 +15,7 @@ const { resolve, format } = require("path");
 //catch so that the electron reloader works without issue
 try {
   require("electron-reloader")(module);
-} catch {}
+} catch { }
 
 /**
  * @description default electron window creation
@@ -90,6 +90,12 @@ ipcMain.handle("createTask", async (event, obj) => {
   return result;
 });
 
+// ipc of editTask for renderer
+ipcMain.handle("editTask", async (event, obj) => {
+  const result = await editTask(obj);
+  return result;
+});
+
 // ipc of getAllAssignments for renderer
 ipcMain.handle("getAllTasks", async (event) => {
   const result = await getAllTasks();
@@ -99,6 +105,18 @@ ipcMain.handle("getAllTasks", async (event) => {
 // ipc of deleteAssignment for renderer
 ipcMain.handle("deleteAssignment", async (event, id) => {
   const result = await deleteAssignment(id);
+  return result;
+});
+
+// ipc of deleteAssignmentTasks for renderer
+ipcMain.handle("deleteAssignmentTasks", async (event, id) => {
+  const result = await deleteAssignmentTasks(id);
+  return result;
+});
+
+// ipc of deleteTask for renderer
+ipcMain.handle("deleteTask", async (event, id) => {
+  const result = await deleteTask(id);
   return result;
 });
 
@@ -277,6 +295,42 @@ function deleteAssignment(id) {
     });
   });
 }
+
+function deleteAssignmentTasks(id) {
+  let key = "Tasks";
+  storage.get(key, function (error, data) {
+    // iterate throughout the task array
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].assignmentId == id) {
+        // delete selected task by id
+        data.splice(i, 1);
+        i--;
+      }
+    }
+    //set the new data set with the new task name for the task by id
+    storage.set(key, data, function (error) {
+      if (error) throw error;
+    });
+  });
+}
+
+function deleteTask(id) {
+  let key = "Tasks";
+  storage.get(key, function (error, data) {
+    // iterate throughout the task array
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].id == id) {
+        // delete selected task by id
+        data.splice(i, 1);
+      }
+    }
+    //set the new data set with the new task name for the task by id
+    storage.set(key, data, function (error) {
+      if (error) throw error;
+    });
+  });
+}
+
 /**
  * @todo testing to make sure everything works
  * @description edits a task by the object passed in

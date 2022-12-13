@@ -190,11 +190,15 @@ div .form-container .save:hover {
 }
 
 .createTask {
-  color: black;
+  color: white;
+  background-color: #076275;
   padding: 10px 20px;
-  border: none;
+  border: solid;
+  border-color: black;
+  border-width: 5px;
+  border-radius: 15px;
   cursor: pointer;
-  width: 15%;
+  width: 300px;
   margin-top: .5%;
   margin-bottom: .5%;
 }
@@ -204,8 +208,7 @@ div .form-container .save:hover {
 }
 
 .createTask:hover {
-
-  background-color: lightgrey !important;
+  background-color: #033b46 !important;
   transition: linear 0.1s;
 }
 

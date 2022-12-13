@@ -84,10 +84,10 @@
 					<div class="create-header">
 						<div class="create">
 							Create Assignment
-							<button type="button" class="btn cancel" onclick="closeForm()">
+							<button type="button" class="btn cancel" onclick="closeForm('X')">
 								x
 							</button>
-							<button type="button" class="btn save" onclick="saveAssignment()">
+							<button type="button" class="btn save" id="form-save" onclick="saveAssignment()">
 								Save
 							</button>
 						</div>
@@ -113,7 +113,7 @@
 							required></textarea>
 
 						<label for="date"><b>Due Date:</b></label>
-						<input type="date" placeholder="Enter Date" name="date" required />
+						<input type="date" placeholder="Enter Date" name="date" id="form-date" required />
 						<div>
 							<button type="button" class="createTask" onclick="openTaskForm()">Create Task</button>
 						</div>
@@ -136,7 +136,7 @@
 							<button type="button" class="btn cancel" onclick="closeTaskForm()">
 								x
 							</button>
-							<button type="button" class="btn save" onclick="saveTask()">
+							<button type="button" class="btn save" id="formT-save" onclick="saveTask()">
 								Save
 							</button>
 						</div>
@@ -161,7 +161,7 @@
 							required></textarea>
 
 						<label for="date"><b>Due Date:</b></label>
-						<input type="date" placeholder="Enter Date" name="dateT" required />
+						<input type="date" placeholder="Enter Date" name="dateT" id="formT-date" required />
 					</div>
 				</form>
 			</div>
@@ -201,7 +201,7 @@
 			let dDiv = document.getElementById("details");
 			let assignmentDiv = document.getElementById("assignmentDiv");
 			let containerDiv = document.getElementById("containerDiv");
-			
+
 			if (containerDiv) {
 				let currentId = assnId;
 				currentClass = containerDiv.getAttribute("class");
