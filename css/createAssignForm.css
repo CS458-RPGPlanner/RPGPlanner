@@ -208,7 +208,6 @@ div .form-container .save:hover {
 }
 
 .createTask:hover {
-
   background-color: #033b46 !important;
   transition: linear 0.1s;
 }
