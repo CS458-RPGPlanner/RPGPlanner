@@ -39,7 +39,6 @@
 
 <body class="body">
 
-	<div id="alertDiv"></div>
 	<!--Nav Tabs-->
 	<div id="mySidenav" class="sidenav">
 		<a href="#" id="RPG">RPG</a>
@@ -97,11 +96,11 @@
 						
 						<div>
 							<label for="name"></label>
-							<input type="text" class="createTitle" placeholder="Enter Title" name="name" maxlength="50"
+							<input type="text" class="createTitle" placeholder="Enter Title" onkeypress="return blockSpecChar(event)" name="name" maxlength="50"
 								required />
 
 							<label for="points"><b>Points</b></label>
-							<input type="number" class="enterPoints" placeholder="Enter Points" name="points" required>
+							<input type="number" class="enterPoints" placeholder="Enter Points" min="1" oninput = "this.value = Math.abs(this.value)" name="points" required>
 
 							<div class="checkBox-createDiv">
 								<label for="complete" class="checkBox-text"><b>Complete:</b></label>
@@ -110,7 +109,7 @@
 						</div>
 
 						<label for="description"></label>
-						<textarea class="createDesc" placeholder="Enter Description" name="description" maxlength="450"
+						<textarea class="createDesc" placeholder="Enter Description" onkeypress="return blockSpecChar(event)" name="description" maxlength="450"
 							required></textarea>
 
 						<label for="date"><b>Due Date:</b></label>
@@ -145,11 +144,11 @@
 					<div class="create-form">
 						<div>
 							<label for="name"></label>
-							<input type="text" class="createTitle" placeholder="Enter Title" name="nameT" maxlength="50"
+							<input type="text" class="createTitle" placeholder="Enter Title" onkeypress="return blockSpecChar(event)" name="nameT" maxlength="50"
 								required />
 
 							<label for="points"><b>Points</b></label>
-							<input type="number" class="enterPoints" placeholder="Enter Points" name="pointsT" required>
+							<input type="number" class="enterPoints" placeholder="Enter Points" min = "1" name="pointsT" required>
 
 							<div class="checkBox-createDiv">
 								<label for="complete" class="checkBox-text"><b>Complete:</b></label>
@@ -158,14 +157,13 @@
 						</div>
 
 						<label for="description"></label>
-						<textarea class="createDesc" placeholder="Enter Description" name="descriptionT" maxlength="450"
+						<textarea class="createDesc" placeholder="Enter Description" onkeypress="return blockSpecChar(event)" name="descriptionT" maxlength="450"
 							required></textarea>
 
 						<label for="date"><b>Due Date:</b></label>
 						<input type="date" placeholder="Enter Date" name="dateT" required />
 					</div>
 				</form>
-				<div class="delete-confirm" id="alertDiv"></div>
 			</div>
 			
 
@@ -180,6 +178,12 @@
 		</div>
 	</div>
 	<script>
+		
+		function blockSpecChar(e)
+		{
+			var k = e.keyCode;
+			return (k != 34);
+		}
 		async function toggleButton(clickedID) {
 			//get div that holds both create assignment and details div and parse the clickedID for the assignment ID
 			let assnId;

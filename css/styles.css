@@ -281,7 +281,7 @@
   right: 10%;
   left: 10%;
   bottom: 250px;
-  z-index: -1;
+  z-index: 9;
 }
 
 .confirm-container {

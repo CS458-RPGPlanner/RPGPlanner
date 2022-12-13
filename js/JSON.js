@@ -116,17 +116,25 @@ function saveAssignment() {
   let description = document.getElementsByName("description")[0].value;
 
   // validation checks to see if fields have data
-  if (points == null || points == "" || name == null || name == "") {
-    ValidationAlert();
+  if(name == null || name == "")
+  {
+    ValidationAlert("Title Required!");
+    return false;
+  }
+  if (points == null || points == "") {
+    ValidationAlert("Points Required!");
+    return false;
+  }
+  if (description == null || description == "") {
+    ValidationAlert("Description Required!");
     return false;
   }
   
-  if (date == null) {
-    date = "";
+  if (date == null ||  date == "") {
+    ValidationAlert("Date Required!");
+    return false;
   }
-  if (description == null) {
-    description = "";
-  }
+  
 
   // new assignment to be created in the json
   newAssignment = {
@@ -158,20 +166,22 @@ function saveTask() {
   let description = document.getElementsByName("descriptionT")[0].value;
 
   // validation checks to see if fields have data
+  if(name == null || name == "")
+  {
+    ValidationAlert("Title Required!");
+    return false;
+  }
   if (points == null || points == "") {
-    alert("Points can't be blank");
-    return false;
-  }
-  if (name == null || name == "") {
-    alert("Name can't be blank");
-    return false;
-  }
-  if (date == null || date == "") {
-    alert("Date can't be blank");
+    ValidationAlert("Points Required!");
     return false;
   }
   if (description == null || description == "") {
-    alert("Description can't be blank");
+    ValidationAlert("Description Required!");
+    return false;
+  }
+  
+  if (date == null ||  date == "") {
+    ValidationAlert("Date Required!");
     return false;
   }
 
@@ -484,7 +494,14 @@ function cancelDelete() {
   document.getElementById("confirmContainer").remove();
   document.getElementById("deleteOverlay").remove();
 }
- function ValidationAlert()
+function exitAlert()
+{
+  document.getElementById("alertDiv").style.display = "none";
+  document.getElementById("alertContainer").remove();
+  document.getElementById("alertOverlay").remove();
+}
+
+ function ValidationAlert(alrt)
 {
   let parent = document.getElementById("alertDiv");
   //display the popup
@@ -501,12 +518,19 @@ function cancelDelete() {
   let btnText = document.createElement("p");
   btnText.setAttribute("id", "deleteBtnTxt");
   btnText.setAttribute("class", "deleteBtnTxt");
-  btnText.innerHTML = "Are you sure you want to delete this assignment?";
+  btnText.innerHTML =  alrt;
+
+  let exitBtn = document.createElement("button");
+  exitBtn.setAttribute("id", "exitAlert");
+  exitBtn.setAttribute("class", "general-btn confirm-no")
+ exitBtn.setAttribute("onclick", "exitAlert()");
+  exitBtn.innerHTML = "X";
 
   //append to confirmDiv
   parent.append(overlay);
   parent.append(containerDiv);
   containerDiv.append(btnText);
+  containerDiv.append(exitBtn);
   
 }
 /**
