@@ -1918,5 +1918,3 @@ async function refreshUserPoints() {
 async function addPoints(points) {
   addUserPoints(points);
 }
-
-addUserPoints(10);
