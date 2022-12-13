@@ -106,21 +106,26 @@ function openTaskForm() {
 }
 
 function openNewTaskForm(id) {
-  document.getElementById("formT-save").setAttribute("onclick", "saveTask()")
+  let assignmentId = id.substring(14);
+  
+  document.getElementById("formT-save").setAttribute("onclick", "saveNewTask(" + assignmentId + ")");
   document.getElementById("myTaskForm").style.display = "block";
 }
 
 /**
  * @description clears data from create assignment form after submit or cancel
+ *
  */
-async function closeForm() {
-  //check if tasks saved for a canceled assignments creation exists
-  let assignments = await getAssignments();
-  let assignmentId = assignments[assignments.length - 1].id + 1;
-  let tasks = await getAllTasks();
-  for (let i = 0; i < tasks.length; i++) {
-    if (tasks[i].assignmentId == assignmentId) {
-      deleteTask(tasks[i].id);
+async function closeForm(source) {
+  if (source == 'X') {
+    //check if tasks saved for a canceled assignments creation exists
+    let assignments = await getAssignments();
+    let assignmentId = assignments[assignments.length - 1].id + 1;
+    let tasks = await getAllTasks();
+    for (let i = 0; i < tasks.length; i++) {
+      if (tasks[i].assignmentId == assignmentId) {
+        deleteTask(tasks[i].id);
+      }
     }
   }
 
@@ -187,7 +192,7 @@ function saveAssignment() {
   displayNewAssignment(newAssignment);
 
   // close the form of the new assignment
-  closeForm();
+  closeForm("save");
 }
 
 /**
@@ -238,6 +243,56 @@ async function saveTask() {
   // close the form of the new assignment
   closeTaskForm();
 }
+
+/**
+ * @description submits task data and calls createTask function
+ * @returns false if everything is not filled out correctly in the form
+ * @param {*} id of the assignment task will be saved to
+ */
+async function saveNewTask(assignmentId) {
+  // declare task fields for html form
+  let points = document.getElementsByName("pointsT")[0].value;
+  let name = document.getElementsByName("nameT")[0].value;
+  let date = document.getElementsByName("dateT")[0].value;
+  let description = document.getElementsByName("descriptionT")[0].value;
+
+  // validation checks to see if fields have data
+  if (points == null || points == "") {
+    alert("Points can't be blank");
+    return false;
+  }
+  if (name == null || name == "") {
+    alert("Name can't be blank");
+    return false;
+  }
+  if (date == null || date == "") {
+    alert("Date can't be blank");
+    return false;
+  }
+  if (description == null || description == "") {
+    alert("Description can't be blank");
+    return false;
+  }
+
+  // new task to be created in the json
+  newTask = {
+    points,
+    date,
+    name,
+    description,
+    assignmentId
+  };
+
+  //SAVE TASKS
+  createTask(newTask);
+
+  // displays the new task
+  displayNewTask(newTask);
+
+  // close the form of the new assignment
+  closeTaskForm();
+}
+
 /**
  * @description unhides assignment creation form with pre-loaded data from the clicked assignment
  * @param {*} id of the assignment to be edited
@@ -328,7 +383,7 @@ async function saveEditAssignment(id) {
 
   location.reload();
 
-  closeForm();
+  closeForm("edit");
 }
 
 /**
@@ -429,11 +484,7 @@ async function displayAssignments() {
     }
     dueTasks.innerHTML =
       "Due Date: " +
-      assignments[i].date +
-      "&emsp;Tasks: " +
-      taskCounter +
-      "/" +
-      taskCounter;
+      assignments[i].date;
 
     let check = document.createElement("div");
     check.setAttribute("class", "check");
@@ -530,7 +581,7 @@ async function displayNewAssignment(newAssignment) {
 
   let dueTasks = document.createElement("div");
   dueTasks.setAttribute("class", "due-tasks");
-  dueTasks.innerHTML = "Due Date: " + newAssignment.date + "&emsp;Tasks: ";
+  dueTasks.innerHTML = "Due Date: " + newAssignment.date;
 
   let check = document.createElement("div");
   check.setAttribute("class", "check");
@@ -623,11 +674,12 @@ async function displayTasks() {
       createCard.setAttribute("id", "addTasksAssign-" + tasks[i].assignmentId);
 
       let createHeader = document.createElement("div");
-      createHeader.setAttribute("id", "createHeader)");
+      createHeader.setAttribute("id", "createHeader");
 
       let createButton = document.createElement("button");
-      createButton.setAttribute("id", "createAssignmentList");
+      createButton.setAttribute("id", "createTaskBtn-" + tasks[i].assignmentId);
       createButton.setAttribute("class", "defaultBtn add");
+      createButton.setAttribute("onclick", "openNewTaskForm(this.id)");
 
       let createName = document.createElement("p");
       createName.setAttribute("class", "createPlus");
@@ -657,7 +709,7 @@ async function displayNewTask(newTask) {
   let parent = document.getElementById("description-" + newTask.assignmentId);
 
   let arrow = document.getElementById("arrow-" + newTask.assignmentId);
-  arrow.setAttribute("class", "fa fa-chevron-up");
+  arrow.setAttribute("class", "fa fa-chevron-down");
 
   let taskHeader = document.createElement("div");
   taskHeader.setAttribute("id", "taskHeader-" + id);
@@ -697,40 +749,45 @@ async function displayNewTask(newTask) {
   taskHeader.appendChild(task);
   taskHeader.appendChild(check);
 
-  let addExists = document.getElementById("addTasksAssign-" + tasks[i].assignmentId);
+  let addExists = document.getElementById("addTasksAssign-" + newTask.assignmentId);
   if (typeof addExists == "undefined" || addExists == null) {
     let createCard = document.createElement("div");
     createCard.setAttribute("class", "createCard");
-    createCard.setAttribute("id", "addTasksAssign-" + tasks[i].assignmentId);
-
+    createCard.setAttribute("id", "addTasksAssign-" + newTask.assignmentId);
+    
     let createHeader = document.createElement("div");
-    createHeader.setAttribute("id", "createHeader)");
-
+    createHeader.setAttribute("id", "createHeader");
+    
     let createButton = document.createElement("button");
-    createButton.setAttribute("id", "createAssignmentList");
+    createButton.setAttribute("id", "createTaskBtn-" + newTask.assignmentId);
     createButton.setAttribute("class", "defaultBtn add");
-
+    createButton.setAttribute("onclick", "openNewTaskForm(this.id)");
+    
     let createName = document.createElement("p");
     createName.setAttribute("class", "createPlus");
     createName.innerHTML = "+";
-
+    
     createButton.append(createName);
-
+    
     createHeader.append(createButton);
-
+    
     createCard.append(createHeader);
-
+   
     parent.append(createCard);
   }
 
   parent.insertBefore(taskHeader, parent.lastChild);
 }
 
+/**
+ * @description displays a newly created task
+ * @param {*} assignmentId id of the assignment that the tasks will be added to
+ */
 async function displayNewTasks(assignmentId) {
   let tasks = await getAllTasks();
 
   for (let i = 0; i < tasks.length; i++) {
-    if (tasks[i].assignmentId = assignmentId) {
+    if (tasks[i].assignmentId == assignmentId) {
 
       let parent = document.getElementById("description-" + assignmentId);
     
@@ -782,11 +839,12 @@ async function displayNewTasks(assignmentId) {
         createCard.setAttribute("id", "addTasksAssign-" + tasks[i].assignmentId);
     
         let createHeader = document.createElement("div");
-        createHeader.setAttribute("id", "createHeader)");
+        createHeader.setAttribute("id", "createHeader");
     
         let createButton = document.createElement("button");
-        createButton.setAttribute("id", "createAssignmentList");
+        createButton.setAttribute("id", "createTaskBtn-" + tasks[i].assignmentId);
         createButton.setAttribute("class", "defaultBtn add");
+        createButton.setAttribute("onclick", "openNewTaskForm(this.id)");
     
         let createName = document.createElement("p");
         createName.setAttribute("class", "createPlus");
@@ -1218,15 +1276,16 @@ async function displayDetails(id) {
 
   let createCard = document.createElement("div");
   createCard.setAttribute("class", "createTaskBtnDiv");
-  createCard.setAttribute("id", "addTasksAssign-" + assignment.id);
+  createCard.setAttribute("id", "addTasks-" + assignment.id);
 
   let createHeader = document.createElement("div");
-  createHeader.setAttribute("id", "createHeader)");
+  createHeader.setAttribute("id", "createHeader");
 
 
   let createButton = document.createElement("button");
-  createButton.setAttribute("id", "createAssignmentList");
+  createButton.setAttribute("id", "createTaskBtn-" + assignment.id);
   createButton.setAttribute("class", "defaultBtn add details");
+  createButton.setAttribute("onclick", "openNewTaskForm(this.id)");
 
   let createName = document.createElement("p");
   createName.setAttribute("class", "createPlus");
