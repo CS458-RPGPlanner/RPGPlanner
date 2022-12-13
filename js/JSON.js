@@ -215,20 +215,22 @@ async function saveTask() {
   let description = document.getElementsByName("descriptionT")[0].value;
 
   // validation checks to see if fields have data
+  if(name == null || name == "")
+  {
+    ValidationAlert("Title Required!");
+    return false;
+  }
   if (points == null || points == "") {
-    alert("Points can't be blank");
-    return false;
-  }
-  if (name == null || name == "") {
-    alert("Name can't be blank");
-    return false;
-  }
-  if (date == null || date == "") {
-    alert("Date can't be blank");
+    ValidationAlert("Points Required!");
     return false;
   }
   if (description == null || description == "") {
-    alert("Description can't be blank");
+    ValidationAlert("Description Required!");
+    return false;
+  }
+  
+  if (date == null ||  date == "") {
+    ValidationAlert("Date Required!");
     return false;
   }
 
@@ -261,20 +263,22 @@ async function saveNewTask(assignmentId) {
   let description = document.getElementsByName("descriptionT")[0].value;
 
   // validation checks to see if fields have data
+  if(name == null || name == "")
+  {
+    ValidationAlert("Title Required!");
+    return false;
+  }
   if (points == null || points == "") {
-    alert("Points can't be blank");
-    return false;
-  }
-  if (name == null || name == "") {
-    alert("Name can't be blank");
-    return false;
-  }
-  if (date == null || date == "") {
-    alert("Date can't be blank");
+    ValidationAlert("Points Required!");
     return false;
   }
   if (description == null || description == "") {
-    alert("Description can't be blank");
+    ValidationAlert("Description Required!");
+    return false;
+  }
+  
+  if (date == null ||  date == "") {
+    ValidationAlert("Date Required!");
     return false;
   }
 
@@ -360,20 +364,22 @@ async function saveEditAssignment(id) {
   let description = document.getElementsByName("description")[0].value;
 
   // validation checks to see if fields have data
+  if(name == null || name == "")
+  {
+    ValidationAlert("Title Required!");
+    return false;
+  }
   if (points == null || points == "") {
-    alert("Points can't be blank");
-    return false;
-  }
-  if (name == null || name == "") {
-    alert("Name can't be blank");
-    return false;
-  }
-  if (date == null || date == "") {
-    alert("Date can't be blank");
+    ValidationAlert("Points Required!");
     return false;
   }
   if (description == null || description == "") {
-    alert("Description can't be blank");
+    ValidationAlert("Description Required!");
+    return false;
+  }
+  
+  if (date == null ||  date == "") {
+    ValidationAlert("Date Required!");
     return false;
   }
 
@@ -505,20 +511,22 @@ async function saveEditAssignment(id) {
   let description = document.getElementsByName("description")[0].value;
 
   // validation checks to see if fields have data
+  if(name == null || name == "")
+  {
+    ValidationAlert("Title Required!");
+    return false;
+  }
   if (points == null || points == "") {
-    alert("Points can't be blank");
-    return false;
-  }
-  if (name == null || name == "") {
-    alert("Name can't be blank");
-    return false;
-  }
-  if (date == null || date == "") {
-    alert("Date can't be blank");
+    ValidationAlert("Points Required!");
     return false;
   }
   if (description == null || description == "") {
-    alert("Description can't be blank");
+    ValidationAlert("Description Required!");
+    return false;
+  }
+  
+  if (date == null ||  date == "") {
+    ValidationAlert("Date Required!");
     return false;
   }
 
@@ -554,20 +562,22 @@ async function saveEditTask(id) {
   let description = document.getElementsByName("descriptionT")[0].value;
 
   // validation checks to see if fields have data
+  if(name == null || name == "")
+  {
+    ValidationAlert("Title Required!");
+    return false;
+  }
   if (points == null || points == "") {
-    alert("Points can't be blank");
-    return false;
-  }
-  if (name == null || name == "") {
-    alert("Name can't be blank");
-    return false;
-  }
-  if (date == null || date == "") {
-    alert("Date can't be blank");
+    ValidationAlert("Points Required!");
     return false;
   }
   if (description == null || description == "") {
-    alert("Description can't be blank");
+    ValidationAlert("Description Required!");
+    return false;
+  }
+  
+  if (date == null ||  date == "") {
+    ValidationAlert("Date Required!");
     return false;
   }
 
@@ -647,20 +657,22 @@ async function saveEditAssignment(id) {
   let description = document.getElementsByName("description")[0].value;
 
   // validation checks to see if fields have data
+  if(name == null || name == "")
+  {
+    ValidationAlert("Title Required!");
+    return false;
+  }
   if (points == null || points == "") {
-    alert("Points can't be blank");
-    return false;
-  }
-  if (name == null || name == "") {
-    alert("Name can't be blank");
-    return false;
-  }
-  if (date == null || date == "") {
-    alert("Date can't be blank");
+    ValidationAlert("Points Required!");
     return false;
   }
   if (description == null || description == "") {
-    alert("Description can't be blank");
+    ValidationAlert("Description Required!");
+    return false;
+  }
+  
+  if (date == null ||  date == "") {
+    ValidationAlert("Date Required!");
     return false;
   }
 
@@ -696,20 +708,22 @@ async function saveEditTask(id) {
   let description = document.getElementsByName("descriptionT")[0].value;
 
   // validation checks to see if fields have data
+  if(name == null || name == "")
+  {
+    ValidationAlert("Title Required!");
+    return false;
+  }
   if (points == null || points == "") {
-    alert("Points can't be blank");
-    return false;
-  }
-  if (name == null || name == "") {
-    alert("Name can't be blank");
-    return false;
-  }
-  if (date == null || date == "") {
-    alert("Date can't be blank");
+    ValidationAlert("Points Required!");
     return false;
   }
   if (description == null || description == "") {
-    alert("Description can't be blank");
+    ValidationAlert("Description Required!");
+    return false;
+  }
+  
+  if (date == null ||  date == "") {
+    ValidationAlert("Date Required!");
     return false;
   }
 

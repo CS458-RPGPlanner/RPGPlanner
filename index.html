@@ -96,11 +96,11 @@
 						
 						<div>
 							<label for="name"></label>
-							<input type="text" class="createTitle" placeholder="Enter Title" onkeypress="return blockSpecChar(event)" name="name" maxlength="50"
+							<input type="text" id="form-name" class="createTitle" placeholder="Enter Title" onkeypress="return blockSpecChar(event)" name="name" maxlength="50"
 								required />
 
 							<label for="points"><b>Points</b></label>
-							<input type="number" class="enterPoints" placeholder="Enter Points" min="1" oninput = "this.value = Math.abs(this.value)" name="points" required>
+							<input type="number" id="form-points" class="enterPoints" placeholder="Enter Points" min="1" oninput = "this.value = Math.abs(this.value)" name="points" required>
 
 							<div class="checkBox-createDiv">
 								<label for="complete" class="checkBox-text"><b>Complete:</b></label>
@@ -109,7 +109,7 @@
 						</div>
 
 						<label for="description"></label>
-						<textarea class="createDesc" placeholder="Enter Description" onkeypress="return blockSpecChar(event)" name="description" maxlength="450"
+						<textarea class="createDesc" id="form-desc" placeholder="Enter Description" onkeypress="return blockSpecChar(event)" name="description" maxlength="450"
 							required></textarea>
 
 						<label for="date"><b>Due Date:</b></label>
@@ -144,11 +144,11 @@
 					<div class="create-form">
 						<div>
 							<label for="name"></label>
-							<input type="text" class="createTitle" placeholder="Enter Title" onkeypress="return blockSpecChar(event)" name="nameT" maxlength="50"
+							<input type="text" id="formT-name" class="createTitle" placeholder="Enter Title" onkeypress="return blockSpecChar(event)" name="nameT" maxlength="50"
 								required />
 
 							<label for="points"><b>Points</b></label>
-							<input type="number" class="enterPoints" placeholder="Enter Points" min = "1" name="pointsT" required>
+							<input type="number" id="formT-points" class="enterPoints" placeholder="Enter Points" min = "1" name="pointsT" required>
 
 							<div class="checkBox-createDiv">
 								<label for="complete" class="checkBox-text"><b>Complete:</b></label>
@@ -157,11 +157,11 @@
 						</div>
 
 						<label for="description"></label>
-						<textarea class="createDesc" placeholder="Enter Description" onkeypress="return blockSpecChar(event)" name="descriptionT" maxlength="450"
+						<textarea class="createDesc" id="formT-desc" placeholder="Enter Description" onkeypress="return blockSpecChar(event)" name="descriptionT" maxlength="450"
 							required></textarea>
 
 						<label for="date"><b>Due Date:</b></label>
-						<input type="date" placeholder="Enter Date" name="dateT" id="formT-date" required />
+						<input type="date"  placeholder="Enter Date" name="dateT" id="formT-date" required />
 					</div>
 				</form>
 			</div>
@@ -178,7 +178,7 @@
 		</div>
 	</div>
 	<script>
-		
+
 		function blockSpecChar(e)
 		{
 			var k = e.keyCode;
