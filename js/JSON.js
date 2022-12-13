@@ -224,6 +224,7 @@ async function saveTask() {
   let name = document.getElementsByName("nameT")[0].value;
   let date = document.getElementsByName("dateT")[0].value;
   let description = document.getElementsByName("descriptionT")[0].value;
+  let isComplete = false;
 
   // validation checks to see if fields have data
   if (points == null || points == "") {
@@ -250,6 +251,7 @@ async function saveTask() {
     name,
     description,
     assignmentId,
+    isComplete,
   };
 
   //SAVE TASKS
@@ -270,6 +272,7 @@ async function saveNewTask(assignmentId) {
   let name = document.getElementsByName("nameT")[0].value;
   let date = document.getElementsByName("dateT")[0].value;
   let description = document.getElementsByName("descriptionT")[0].value;
+  let isComplete = false;
 
   // validation checks to see if fields have data
   if (points == null || points == "") {
@@ -296,6 +299,7 @@ async function saveNewTask(assignmentId) {
     name,
     description,
     assignmentId,
+    isComplete,
   };
 
   //SAVE TASKS
@@ -805,6 +809,7 @@ async function displayAssignments() {
     let checkbox = document.createElement("input");
     checkbox.setAttribute("type", "checkbox");
     checkbox.setAttribute("class", "checkBox");
+
     if (assignments[i].isComplete) {
       checkbox.setAttribute("checked", true);
     }
@@ -990,6 +995,29 @@ async function displayTasks() {
     let checkbox = document.createElement("input");
     checkbox.setAttribute("type", "checkbox");
     checkbox.setAttribute("class", "checkBox");
+
+    if (tasks[i].isComplete) {
+      checkbox.setAttribute("checked", true);
+    }
+    checkbox.addEventListener("click", async function () {
+      let points = Number(tasks[i].points);
+      let updateTask = tasks[i];
+
+      if (!this.checked) {
+        points *= -1;
+      }
+      if (updateTask.isComplete) {
+        updateTask.isComplete = false;
+      } else {
+        updateTask.isComplete = true;
+      }
+
+      addUserPoints(Number(points));
+      let userPointsBar = document.getElementById("totalPoints");
+      let userPoints = userPointsBar.innerText;
+      userPointsBar.innerText = Number(userPoints) + Number(points);
+      editTask(updateTask);
+    });
 
     check.appendChild(taskPoints);
     check.appendChild(checkbox);
