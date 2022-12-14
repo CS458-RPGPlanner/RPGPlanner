@@ -173,22 +173,25 @@ function saveAssignment() {
   let isComplete = false;
 
   // validation checks to see if fields have data
+  if(name == null || name == "")
+  {
+    ValidationAlert("Title Required!");
+    return false;
+  }
   if (points == null || points == "") {
-    alert("Points can't be blank");
-    return false;
-  }
-  if (name == null || name == "") {
-    alert("Name can't be blank");
-    return false;
-  }
-  if (date == null || date == "") {
-    alert("Date can't be blank");
+    ValidationAlert("Points Required!");
     return false;
   }
   if (description == null || description == "") {
-    alert("Description can't be blank");
+    ValidationAlert("Description Required!");
     return false;
   }
+  
+  if (date == null ||  date == "") {
+    ValidationAlert("Date Required!");
+    return false;
+  }
+  
 
   // new assignment to be created in the json
   newAssignment = {
@@ -227,20 +230,22 @@ async function saveTask() {
   let isComplete = false;
 
   // validation checks to see if fields have data
+  if(name == null || name == "")
+  {
+    ValidationAlert("Title Required!");
+    return false;
+  }
   if (points == null || points == "") {
-    alert("Points can't be blank");
-    return false;
-  }
-  if (name == null || name == "") {
-    alert("Name can't be blank");
-    return false;
-  }
-  if (date == null || date == "") {
-    alert("Date can't be blank");
+    ValidationAlert("Points Required!");
     return false;
   }
   if (description == null || description == "") {
-    alert("Description can't be blank");
+    ValidationAlert("Description Required!");
+    return false;
+  }
+  
+  if (date == null ||  date == "") {
+    ValidationAlert("Date Required!");
     return false;
   }
 
@@ -275,20 +280,22 @@ async function saveNewTask(assignmentId) {
   let isComplete = false;
 
   // validation checks to see if fields have data
+  if(name == null || name == "")
+  {
+    ValidationAlert("Title Required!");
+    return false;
+  }
   if (points == null || points == "") {
-    alert("Points can't be blank");
-    return false;
-  }
-  if (name == null || name == "") {
-    alert("Name can't be blank");
-    return false;
-  }
-  if (date == null || date == "") {
-    alert("Date can't be blank");
+    ValidationAlert("Points Required!");
     return false;
   }
   if (description == null || description == "") {
-    alert("Description can't be blank");
+    ValidationAlert("Description Required!");
+    return false;
+  }
+  
+  if (date == null ||  date == "") {
+    ValidationAlert("Date Required!");
     return false;
   }
 
@@ -379,20 +386,22 @@ async function saveEditAssignment(id) {
   let description = document.getElementsByName("description")[0].value;
 
   // validation checks to see if fields have data
+  if(name == null || name == "")
+  {
+    ValidationAlert("Title Required!");
+    return false;
+  }
   if (points == null || points == "") {
-    alert("Points can't be blank");
-    return false;
-  }
-  if (name == null || name == "") {
-    alert("Name can't be blank");
-    return false;
-  }
-  if (date == null || date == "") {
-    alert("Date can't be blank");
+    ValidationAlert("Points Required!");
     return false;
   }
   if (description == null || description == "") {
-    alert("Description can't be blank");
+    ValidationAlert("Description Required!");
+    return false;
+  }
+  
+  if (date == null ||  date == "") {
+    ValidationAlert("Date Required!");
     return false;
   }
 
@@ -428,20 +437,22 @@ async function saveEditTask(id) {
   let description = document.getElementsByName("descriptionT")[0].value;
 
   // validation checks to see if fields have data
+  if(name == null || name == "")
+  {
+    ValidationAlert("Title Required!");
+    return false;
+  }
   if (points == null || points == "") {
-    alert("Points can't be blank");
-    return false;
-  }
-  if (name == null || name == "") {
-    alert("Name can't be blank");
-    return false;
-  }
-  if (date == null || date == "") {
-    alert("Date can't be blank");
+    ValidationAlert("Points Required!");
     return false;
   }
   if (description == null || description == "") {
-    alert("Description can't be blank");
+    ValidationAlert("Description Required!");
+    return false;
+  }
+  
+  if (date == null ||  date == "") {
+    ValidationAlert("Date Required!");
     return false;
   }
 
@@ -526,20 +537,22 @@ async function saveEditAssignment(id) {
   let description = document.getElementsByName("description")[0].value;
 
   // validation checks to see if fields have data
+  if(name == null || name == "")
+  {
+    ValidationAlert("Title Required!");
+    return false;
+  }
   if (points == null || points == "") {
-    alert("Points can't be blank");
-    return false;
-  }
-  if (name == null || name == "") {
-    alert("Name can't be blank");
-    return false;
-  }
-  if (date == null || date == "") {
-    alert("Date can't be blank");
+    ValidationAlert("Points Required!");
     return false;
   }
   if (description == null || description == "") {
-    alert("Description can't be blank");
+    ValidationAlert("Description Required!");
+    return false;
+  }
+  
+  if (date == null ||  date == "") {
+    ValidationAlert("Date Required!");
     return false;
   }
 
@@ -575,20 +588,22 @@ async function saveEditTask(id) {
   let description = document.getElementsByName("descriptionT")[0].value;
 
   // validation checks to see if fields have data
+  if(name == null || name == "")
+  {
+    ValidationAlert("Title Required!");
+    return false;
+  }
   if (points == null || points == "") {
-    alert("Points can't be blank");
-    return false;
-  }
-  if (name == null || name == "") {
-    alert("Name can't be blank");
-    return false;
-  }
-  if (date == null || date == "") {
-    alert("Date can't be blank");
+    ValidationAlert("Points Required!");
     return false;
   }
   if (description == null || description == "") {
-    alert("Description can't be blank");
+    ValidationAlert("Description Required!");
+    return false;
+  }
+  
+  if (date == null ||  date == "") {
+    ValidationAlert("Date Required!");
     return false;
   }
 
@@ -672,20 +687,22 @@ async function saveEditAssignment(id) {
   let description = document.getElementsByName("description")[0].value;
 
   // validation checks to see if fields have data
+  if(name == null || name == "")
+  {
+    ValidationAlert("Title Required!");
+    return false;
+  }
   if (points == null || points == "") {
-    alert("Points can't be blank");
-    return false;
-  }
-  if (name == null || name == "") {
-    alert("Name can't be blank");
-    return false;
-  }
-  if (date == null || date == "") {
-    alert("Date can't be blank");
+    ValidationAlert("Points Required!");
     return false;
   }
   if (description == null || description == "") {
-    alert("Description can't be blank");
+    ValidationAlert("Description Required!");
+    return false;
+  }
+  
+  if (date == null ||  date == "") {
+    ValidationAlert("Date Required!");
     return false;
   }
 
@@ -721,20 +738,22 @@ async function saveEditTask(id) {
   let description = document.getElementsByName("descriptionT")[0].value;
 
   // validation checks to see if fields have data
+  if(name == null || name == "")
+  {
+    ValidationAlert("Title Required!");
+    return false;
+  }
   if (points == null || points == "") {
-    alert("Points can't be blank");
-    return false;
-  }
-  if (name == null || name == "") {
-    alert("Name can't be blank");
-    return false;
-  }
-  if (date == null || date == "") {
-    alert("Date can't be blank");
+    ValidationAlert("Points Required!");
     return false;
   }
   if (description == null || description == "") {
-    alert("Description can't be blank");
+    ValidationAlert("Description Required!");
+    return false;
+  }
+  
+  if (date == null ||  date == "") {
+    ValidationAlert("Date Required!");
     return false;
   }
 
@@ -1635,7 +1654,45 @@ function cancelDelete() {
   document.getElementById("confirmContainer").remove();
   document.getElementById("deleteOverlay").remove();
 }
+function exitAlert()
+{
+  document.getElementById("alertDiv").style.display = "none";
+  document.getElementById("alertContainer").remove();
+  document.getElementById("alertOverlay").remove();
+}
 
+ function ValidationAlert(alrt)
+{
+  let parent = document.getElementById("alertDiv");
+  //display the popup
+  parent.style.display = "block";
+  //draw the background overlay
+  let overlay = document.createElement("div");
+  overlay.setAttribute("class", "darken-overlay");
+  overlay.setAttribute("id", "alertOverlay");
+  //draw the contents of the popup
+  let containerDiv = document.createElement("div");
+  containerDiv.setAttribute("id", "alertContainer");
+  containerDiv.setAttribute("class", "confirm-container");
+
+  let btnText = document.createElement("p");
+  btnText.setAttribute("id", "deleteBtnTxt");
+  btnText.setAttribute("class", "deleteBtnTxt");
+  btnText.innerHTML =  alrt;
+
+  let exitBtn = document.createElement("button");
+  exitBtn.setAttribute("id", "exitAlert");
+  exitBtn.setAttribute("class", "general-btn confirm-no")
+ exitBtn.setAttribute("onclick", "exitAlert()");
+  exitBtn.innerHTML = "X";
+
+  //append to confirmDiv
+  parent.append(overlay);
+  parent.append(containerDiv);
+  containerDiv.append(btnText);
+  containerDiv.append(exitBtn);
+  
+}
 /**
  * @description Creates a popup that asks the user to confirm assignment deletion
  * @param {*} id the id of the assignment that is being deleted
