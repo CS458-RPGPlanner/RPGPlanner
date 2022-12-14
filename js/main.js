@@ -15,7 +15,7 @@ const { resolve, format } = require("path");
 //catch so that the electron reloader works without issue
 try {
   require("electron-reloader")(module);
-} catch { }
+} catch {}
 
 /**
  * @description default electron window creation
@@ -118,6 +118,14 @@ ipcMain.handle("deleteAssignmentTasks", async (event, id) => {
 ipcMain.handle("deleteTask", async (event, id) => {
   const result = await deleteTask(id);
   return result;
+});
+
+ipcMain.handle("getUser", async (event) => {
+  return await getUser();
+});
+
+ipcMain.handle("addUserPoints", async (event, points) => {
+  addUserPoints(points);
 });
 
 /**
@@ -362,5 +370,31 @@ function editTask(obj) {
     }
     //not able to get the assignment
     return null;
+  });
+}
+
+/**
+ * @description gets points json object
+ * @param none
+ * @returns json object of points
+ */
+// function to get assignment using the id of the assignment
+function getUser() {
+  //grab the json information from the json with the key
+  return (tempObj = storage.getSync("User"));
+}
+
+function addUserPoints(points) {
+  let userJson = getUser();
+  let key = "User";
+
+  if (typeof userJson.points == "undefined") {
+    userJson = { points: 0 };
+  }
+
+  userJson.points = userJson.points + points;
+
+  storage.set(key, userJson, function (error) {
+    if (error) throw error;
   });
 }

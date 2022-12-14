@@ -90,11 +90,21 @@ async function deleteTask(id) {
   return result;
 }
 
+async function getUser() {
+  return await ipcRenderer.invoke("getUser");
+}
+
+async function addUserPoints(points) {
+  return await ipcRenderer.invoke("addUserPoints", points);
+}
+
 /**
  * @description opens html create assignment form
  */
 function openForm() {
-  document.getElementById("form-save").setAttribute("onclick", "saveAssignment()");
+  document
+    .getElementById("form-save")
+    .setAttribute("onclick", "saveAssignment()");
   document.getElementById("myForm").style.display = "block";
 }
 
@@ -102,14 +112,16 @@ function openForm() {
  * @description opens html create task form
  */
 function openTaskForm() {
-  document.getElementById("formT-save").setAttribute("onclick", "saveTask()")
+  document.getElementById("formT-save").setAttribute("onclick", "saveTask()");
   document.getElementById("myTaskForm").style.display = "block";
 }
 
 function openNewTaskForm(id) {
   let assignmentId = id.substring(14);
 
-  document.getElementById("formT-save").setAttribute("onclick", "saveNewTask(" + assignmentId + ")");
+  document
+    .getElementById("formT-save")
+    .setAttribute("onclick", "saveNewTask(" + assignmentId + ")");
   document.getElementById("myTaskForm").style.display = "block";
 }
 
@@ -118,7 +130,7 @@ function openNewTaskForm(id) {
  *
  */
 async function closeForm(source) {
-  if (source == 'X') {
+  if (source == "X") {
     //check if tasks saved for a canceled assignments creation exists
     let assignments = await getAssignments();
     let assignmentId = assignments[assignments.length - 1].id + 1;
@@ -158,6 +170,7 @@ function saveAssignment() {
   let name = document.getElementsByName("name")[0].value;
   let date = document.getElementsByName("date")[0].value;
   let description = document.getElementsByName("description")[0].value;
+  let isComplete = false;
 
   // validation checks to see if fields have data
   if(name == null || name == "")
@@ -186,6 +199,7 @@ function saveAssignment() {
     date,
     name,
     description,
+    isComplete,
   };
 
   // create the actual assignment with the ipc
@@ -213,6 +227,7 @@ async function saveTask() {
   let name = document.getElementsByName("nameT")[0].value;
   let date = document.getElementsByName("dateT")[0].value;
   let description = document.getElementsByName("descriptionT")[0].value;
+  let isComplete = false;
 
   // validation checks to see if fields have data
   if(name == null || name == "")
@@ -240,7 +255,8 @@ async function saveTask() {
     date,
     name,
     description,
-    assignmentId
+    assignmentId,
+    isComplete,
   };
 
   //SAVE TASKS
@@ -261,6 +277,7 @@ async function saveNewTask(assignmentId) {
   let name = document.getElementsByName("nameT")[0].value;
   let date = document.getElementsByName("dateT")[0].value;
   let description = document.getElementsByName("descriptionT")[0].value;
+  let isComplete = false;
 
   // validation checks to see if fields have data
   if(name == null || name == "")
@@ -288,7 +305,8 @@ async function saveNewTask(assignmentId) {
     date,
     name,
     description,
-    assignmentId
+    assignmentId,
+    isComplete,
   };
 
   //SAVE TASKS
@@ -317,7 +335,9 @@ async function openEditForm(id) {
   document.getElementById("form-name").value = name;
   document.getElementById("form-date").value = date;
   document.getElementById("form-desc").value = desc;
-  document.getElementById("form-save").setAttribute("onclick", "saveEditAssignment(" + id + ")");
+  document
+    .getElementById("form-save")
+    .setAttribute("onclick", "saveEditAssignment(" + id + ")");
   // unhide form
   document.getElementById("myForm").style.display = "block";
 }
@@ -345,7 +365,9 @@ async function openEditFormT(id) {
   document.getElementById("formT-name").value = name;
   document.getElementById("formT-date").value = date;
   document.getElementById("formT-desc").value = desc;
-  document.getElementById("formT-save").setAttribute("onclick", "saveEditTask(" + id + ");");
+  document
+    .getElementById("formT-save")
+    .setAttribute("onclick", "saveEditTask(" + id + ");");
   // unhide form
   document.getElementById("myTaskForm").style.display = "block";
 }
@@ -464,7 +486,9 @@ async function openEditForm(id) {
   document.getElementById("form-name").value = name;
   document.getElementById("form-date").value = date;
   document.getElementById("form-desc").value = desc;
-  document.getElementById("form-save").setAttribute("onclick", "saveEditAssignment(" + id + ")");
+  document
+    .getElementById("form-save")
+    .setAttribute("onclick", "saveEditAssignment(" + id + ")");
   // unhide form
   document.getElementById("myForm").style.display = "block";
 }
@@ -492,7 +516,9 @@ async function openEditFormT(id) {
   document.getElementById("formT-name").value = name;
   document.getElementById("formT-date").value = date;
   document.getElementById("formT-desc").value = desc;
-  document.getElementById("formT-save").setAttribute("onclick", "saveEditTask(" + id + ");");
+  document
+    .getElementById("formT-save")
+    .setAttribute("onclick", "saveEditTask(" + id + ");");
   // unhide form
   document.getElementById("myTaskForm").style.display = "block";
 }
@@ -610,7 +636,9 @@ async function openEditForm(id) {
   document.getElementById("form-name").value = name;
   document.getElementById("form-date").value = date;
   document.getElementById("form-desc").value = desc;
-  document.getElementById("form-save").setAttribute("onclick", "saveEditAssignment(" + id + ")");
+  document
+    .getElementById("form-save")
+    .setAttribute("onclick", "saveEditAssignment(" + id + ")");
   // unhide form
   document.getElementById("myForm").style.display = "block";
 }
@@ -638,7 +666,9 @@ async function openEditFormT(id) {
   document.getElementById("formT-name").value = name;
   document.getElementById("formT-date").value = date;
   document.getElementById("formT-desc").value = desc;
-  document.getElementById("formT-save").setAttribute("onclick", "saveEditTask(" + id + ");");
+  document
+    .getElementById("formT-save")
+    .setAttribute("onclick", "saveEditTask(" + id + ");");
   // unhide form
   document.getElementById("myTaskForm").style.display = "block";
 }
@@ -786,9 +816,7 @@ async function displayAssignments() {
         taskCounter++;
       }
     }
-    dueTasks.innerHTML =
-      "Due Date: " +
-      assignments[i].date;
+    dueTasks.innerHTML = "Due Date: " + assignments[i].date;
 
     let check = document.createElement("div");
     check.setAttribute("class", "check");
@@ -800,6 +828,29 @@ async function displayAssignments() {
     let checkbox = document.createElement("input");
     checkbox.setAttribute("type", "checkbox");
     checkbox.setAttribute("class", "checkBox");
+
+    if (assignments[i].isComplete) {
+      checkbox.setAttribute("checked", true);
+    }
+    checkbox.addEventListener("click", async function () {
+      let points = Number(assignments[i].points);
+      let updateAssignment = assignments[i];
+
+      if (!this.checked) {
+        points *= -1;
+      }
+      if (updateAssignment.isComplete) {
+        updateAssignment.isComplete = false;
+      } else {
+        updateAssignment.isComplete = true;
+      }
+
+      addUserPoints(Number(points));
+      let userPointsBar = document.getElementById("totalPoints");
+      let userPoints = userPointsBar.innerText;
+      userPointsBar.innerText = Number(userPoints) + Number(points);
+      editAssignment(updateAssignment);
+    });
 
     check.appendChild(assignPoints);
     check.appendChild(checkbox);
@@ -928,7 +979,9 @@ async function displayTasks() {
   let tasks = await getAllTasks();
 
   for (let i = 0; i < tasks.length; i++) {
-    let parent = document.getElementById("description-" + tasks[i].assignmentId);
+    let parent = document.getElementById(
+      "description-" + tasks[i].assignmentId
+    );
 
     let arrow = document.getElementById("arrow-" + tasks[i].assignmentId);
     arrow.setAttribute("class", "fa fa-chevron-up");
@@ -962,6 +1015,29 @@ async function displayTasks() {
     checkbox.setAttribute("type", "checkbox");
     checkbox.setAttribute("class", "checkBox");
 
+    if (tasks[i].isComplete) {
+      checkbox.setAttribute("checked", true);
+    }
+    checkbox.addEventListener("click", async function () {
+      let points = Number(tasks[i].points);
+      let updateTask = tasks[i];
+
+      if (!this.checked) {
+        points *= -1;
+      }
+      if (updateTask.isComplete) {
+        updateTask.isComplete = false;
+      } else {
+        updateTask.isComplete = true;
+      }
+
+      addUserPoints(Number(points));
+      let userPointsBar = document.getElementById("totalPoints");
+      let userPoints = userPointsBar.innerText;
+      userPointsBar.innerText = Number(userPoints) + Number(points);
+      editTask(updateTask);
+    });
+
     check.appendChild(taskPoints);
     check.appendChild(checkbox);
 
@@ -971,7 +1047,9 @@ async function displayTasks() {
     taskHeader.appendChild(task);
     taskHeader.appendChild(check);
 
-    let addExists = document.getElementById("addTasksAssign-" + tasks[i].assignmentId);
+    let addExists = document.getElementById(
+      "addTasksAssign-" + tasks[i].assignmentId
+    );
     if (typeof addExists == "undefined" || addExists == null) {
       let createCard = document.createElement("div");
       createCard.setAttribute("class", "createCard");
@@ -1003,10 +1081,10 @@ async function displayTasks() {
 }
 
 function refreshDisplayList() {
-  const assignments = document.querySelectorAll('.card')
-  assignments.forEach(assign => {
+  const assignments = document.querySelectorAll(".card");
+  assignments.forEach((assign) => {
     assign.remove();
-  })
+  });
 
   let createCard = document.getElementById("createCard");
   createCard.remove();
@@ -1068,7 +1146,9 @@ async function displayNewTask(newTask) {
     taskHeader.appendChild(task);
     taskHeader.appendChild(check);
 
-    let addExists = document.getElementById("addTasksAssign-" + newTask.assignmentId);
+    let addExists = document.getElementById(
+      "addTasksAssign-" + newTask.assignmentId
+    );
     if (typeof addExists == "undefined" || addExists == null) {
       let createCard = document.createElement("div");
       createCard.setAttribute("class", "createCard");
@@ -1097,12 +1177,10 @@ async function displayNewTask(newTask) {
 
     if (loop == 0) {
       detailsWindow.appendChild(taskHeader);
-    }
-    else if (loop == 1) {
+    } else if (loop == 1) {
       parent.insertBefore(taskHeader, parent.lastChild);
     }
   }
-
 }
 
 /**
@@ -1114,7 +1192,6 @@ async function displayNewTasks(assignmentId) {
 
   for (let i = 0; i < tasks.length; i++) {
     if (tasks[i].assignmentId == assignmentId) {
-
       let parent = document.getElementById("description-" + assignmentId);
 
       let arrow = document.getElementById("arrow-" + assignmentId);
@@ -1158,17 +1235,25 @@ async function displayNewTasks(assignmentId) {
       taskHeader.appendChild(task);
       taskHeader.appendChild(check);
 
-      let addExists = document.getElementById("addTasksAssign-" + tasks[i].assignmentId);
+      let addExists = document.getElementById(
+        "addTasksAssign-" + tasks[i].assignmentId
+      );
       if (typeof addExists == "undefined" || addExists == null) {
         let createCard = document.createElement("div");
         createCard.setAttribute("class", "createCard");
-        createCard.setAttribute("id", "addTasksAssign-" + tasks[i].assignmentId);
+        createCard.setAttribute(
+          "id",
+          "addTasksAssign-" + tasks[i].assignmentId
+        );
 
         let createHeader = document.createElement("div");
         createHeader.setAttribute("id", "createHeader");
 
         let createButton = document.createElement("button");
-        createButton.setAttribute("id", "createTaskBtn-" + tasks[i].assignmentId);
+        createButton.setAttribute(
+          "id",
+          "createTaskBtn-" + tasks[i].assignmentId
+        );
         createButton.setAttribute("class", "defaultBtn add");
         createButton.setAttribute("onclick", "openNewTaskForm(this.id)");
 
@@ -1186,16 +1271,15 @@ async function displayNewTasks(assignmentId) {
       }
 
       parent.insertBefore(taskHeader, parent.lastChild);
-
     }
   }
 }
 
 function refreshDisplayList() {
-  const assignments = document.querySelectorAll('.card')
-  assignments.forEach(assign => {
+  const assignments = document.querySelectorAll(".card");
+  assignments.forEach((assign) => {
     assign.remove();
-  })
+  });
 
   let createCard = document.getElementById("createCard");
   createCard.remove();
@@ -1249,7 +1333,9 @@ async function deleteTaskClicked(id) {
 
   if (last == true) {
     document.getElementById("addTasksAssign-" + assignmentId).remove();
-    document.getElementById("arrow-" + assignmentId).setAttribute("class", "fa fa-minus")
+    document
+      .getElementById("arrow-" + assignmentId)
+      .setAttribute("class", "fa fa-minus");
   }
   closeDetail();
 }
@@ -1324,7 +1410,6 @@ async function deleteAssignmentPopup(id) {
   containerDiv.append(btnText);
   containerDiv.append(yesBtn);
   containerDiv.append(noBtn);
-
 }
 
 /**
@@ -1411,13 +1496,13 @@ async function deleteConfirm(id) {
 
   let yesBtn = document.createElement("button");
   yesBtn.setAttribute("id", "deleteYes");
-  yesBtn.setAttribute("class", "general-btn confirm-yes")
+  yesBtn.setAttribute("class", "general-btn confirm-yes");
   yesBtn.setAttribute("onclick", "confirmDelete(" + id + ")");
   yesBtn.innerHTML = "Yes";
 
   let noBtn = document.createElement("button");
   noBtn.setAttribute("id", "deleteNo");
-  noBtn.setAttribute("class", "general-btn confirm-no")
+  noBtn.setAttribute("class", "general-btn confirm-no");
   noBtn.setAttribute("onclick", "cancelDelete()");
   noBtn.innerHTML = "No";
   //append to confirmDiv
@@ -1426,7 +1511,6 @@ async function deleteConfirm(id) {
   containerDiv.append(btnText);
   containerDiv.append(yesBtn);
   containerDiv.append(noBtn);
-
 }
 
 /**
@@ -1473,13 +1557,13 @@ async function deleteConfirm(id) {
 
   let yesBtn = document.createElement("button");
   yesBtn.setAttribute("id", "deleteYes");
-  yesBtn.setAttribute("class", "general-btn confirm-yes")
+  yesBtn.setAttribute("class", "general-btn confirm-yes");
   yesBtn.setAttribute("onclick", "confirmDelete(" + id + ")");
   yesBtn.innerHTML = "Yes";
 
   let noBtn = document.createElement("button");
   noBtn.setAttribute("id", "deleteNo");
-  noBtn.setAttribute("class", "general-btn confirm-no")
+  noBtn.setAttribute("class", "general-btn confirm-no");
   noBtn.setAttribute("onclick", "cancelDelete()");
   noBtn.innerHTML = "No";
   //append to confirmDiv
@@ -1488,7 +1572,6 @@ async function deleteConfirm(id) {
   containerDiv.append(btnText);
   containerDiv.append(yesBtn);
   containerDiv.append(noBtn);
-
 }
 
 /**
@@ -1535,13 +1618,13 @@ async function deleteConfirm(id) {
 
   let yesBtn = document.createElement("button");
   yesBtn.setAttribute("id", "deleteYes");
-  yesBtn.setAttribute("class", "general-btn confirm-yes")
+  yesBtn.setAttribute("class", "general-btn confirm-yes");
   yesBtn.setAttribute("onclick", "confirmDelete(" + id + ")");
   yesBtn.innerHTML = "Yes";
 
   let noBtn = document.createElement("button");
   noBtn.setAttribute("id", "deleteNo");
-  noBtn.setAttribute("class", "general-btn confirm-no")
+  noBtn.setAttribute("class", "general-btn confirm-no");
   noBtn.setAttribute("onclick", "cancelDelete()");
   noBtn.innerHTML = "No";
   //append to confirmDiv
@@ -1550,7 +1633,6 @@ async function deleteConfirm(id) {
   containerDiv.append(btnText);
   containerDiv.append(yesBtn);
   containerDiv.append(noBtn);
-
 }
 
 /**
@@ -1635,13 +1717,13 @@ async function deleteConfirm(id) {
 
   let yesBtn = document.createElement("button");
   yesBtn.setAttribute("id", "deleteYes");
-  yesBtn.setAttribute("class", "general-btn confirm-yes")
+  yesBtn.setAttribute("class", "general-btn confirm-yes");
   yesBtn.setAttribute("onclick", "confirmDelete(" + id + ")");
   yesBtn.innerHTML = "Yes";
 
   let noBtn = document.createElement("button");
   noBtn.setAttribute("id", "deleteNo");
-  noBtn.setAttribute("class", "general-btn confirm-no")
+  noBtn.setAttribute("class", "general-btn confirm-no");
   noBtn.setAttribute("onclick", "cancelDelete()");
   noBtn.innerHTML = "No";
   //append to confirmDiv
@@ -1650,7 +1732,6 @@ async function deleteConfirm(id) {
   containerDiv.append(btnText);
   containerDiv.append(yesBtn);
   containerDiv.append(noBtn);
-
 }
 
 /**
@@ -1679,16 +1760,13 @@ async function displayDetails(id) {
   let editBtn = document.createElement("button");
   editBtn.setAttribute("class", "edit-button");
   editBtn.setAttribute("id", "editBtn");
-  editBtn.setAttribute("onclick", "openEditForm(" + id + ");")
+  editBtn.setAttribute("onclick", "openEditForm(" + id + ");");
   editBtn.innerHTML = "<i class='fas fa-pencil-alt'></i>";
 
   let deleteBtn = document.createElement("button");
   deleteBtn.setAttribute("class", "delete-button");
   deleteBtn.setAttribute("id", "deleteBtn");
-  deleteBtn.setAttribute(
-    "onclick",
-    "deleteAssignmentPopup(" + id + ");"
-  );
+  deleteBtn.setAttribute("onclick", "deleteAssignmentPopup(" + id + ");");
   deleteBtn.innerHTML = "<i class='far fa-trash-alt'></i>";
 
   let closeBtn = document.createElement("button");
@@ -1729,7 +1807,6 @@ async function displayDetails(id) {
 
   let createHeader = document.createElement("div");
   createHeader.setAttribute("id", "createHeader");
-
 
   let createButton = document.createElement("button");
   createButton.setAttribute("id", "createTaskBtn-" + assignment.id);
@@ -1790,10 +1867,6 @@ async function displayDetails(id) {
       taskHeader.appendChild(check);
 
       taskwind.appendChild(taskHeader);
-
-
-
-
     }
   }
 
@@ -1848,10 +1921,7 @@ async function displayTaskDetails(id) {
       let deleteBtn = document.createElement("button");
       deleteBtn.setAttribute("class", "delete-button");
       deleteBtn.setAttribute("id", "deleteBtn");
-      deleteBtn.setAttribute(
-        "onclick",
-        "deleteTaskPopup(" + id + ");"
-      );
+      deleteBtn.setAttribute("onclick", "deleteTaskPopup(" + id + ");");
       deleteBtn.innerHTML = "<i class='far fa-trash-alt'></i>";
 
       let closeBtn = document.createElement("button");
@@ -1936,4 +2006,18 @@ async function updateArrows() {
         .removeClass("fa-chevron-down")
         .addClass("fa-chevron-up");
     });
+}
+
+async function refreshUserPoints() {
+  let userPointsBar = document.getElementById("totalPoints");
+  let user = await getUser();
+  if (typeof user.points == "undefined") {
+    userPointsBar.innerHTML = 0;
+  } else {
+    userPointsBar.innerHTML = user.points;
+  }
+}
+
+async function addPoints(points) {
+  addUserPoints(points);
 }
