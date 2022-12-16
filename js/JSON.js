@@ -109,13 +109,16 @@ function openForm() {
 }
 
 /**
- * @description opens html create task form
+ * @description opens html create task form for a new task for a not yet existing assignment
  */
 function openTaskForm() {
   document.getElementById("formT-save").setAttribute("onclick", "saveTask()");
   document.getElementById("myTaskForm").style.display = "block";
 }
 
+/**
+ * @description opens html create task form for a new task for an existing assignment
+ */
 function openNewTaskForm(id) {
   let assignmentId = id.substring(14);
 
@@ -131,7 +134,7 @@ function openNewTaskForm(id) {
  */
 async function closeForm(source) {
   if (source == "X") {
-    //check if tasks saved for a canceled assignments creation exists
+    //check if tasks saved for a canceled assignments creation exists and deltes them if they do
     let assignments = await getAssignments();
     let assignmentId = assignments[assignments.length - 1].id + 1;
     let tasks = await getAllTasks();
@@ -214,7 +217,7 @@ function saveAssignment() {
 }
 
 /**
- * @description submits task data and calls createTask function
+ * @description submits task data and calls the createTask function for tasks made on a not yet created assignment
  * @returns false if everything is not filled out correctly in the form
  */
 async function saveTask() {
@@ -267,7 +270,7 @@ async function saveTask() {
 }
 
 /**
- * @description submits task data and calls createTask function
+ * @description submits task data for a task being created on an existing assignment and calls createTask function
  * @returns false if everything is not filled out correctly in the form
  * @param {*} id of the assignment task will be saved to
  */
